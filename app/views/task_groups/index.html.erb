@@ -1,0 +1,55 @@
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-8">
+			<h2>タスクリスト一覧</h2>
+			<div class="close-modal hide">
+				<i class="fa fa-2x fa-times">閉じる</i>
+			</div>
+			<% @task_groups.each do |task| %>
+				<div class="task-group">
+					<%= task.title %>
+					<%= task.contents %>
+					<div class="edit-show">編集
+						<div class="edit-modal">
+						    <h2>タスクリスト編集</h2>
+							<%= form_for task, url: task_group_path(task.id)  do |f| %>
+							<div class="field row">
+							  	<%= f.label :title %><br />
+							  	<%= f.text_field :title %>
+							</div>
+							<div class="field row">
+								<%= f.label :contents %><br />
+								<%= f.text_area :contents %>
+							</div>
+							<div class="actions row">
+							  	<%= f.submit '更新', class: "btn btn-primary" %>
+							</div>
+							<% end %>
+						</div>
+					</div>
+				</div>
+			<% end %>
+		</div>
+
+		<div class="col-lg-4">
+			<h2>タスクリスト作成</h2>
+			<%= form_for(@task_group_new) do |f| %>
+
+			<div class="field row">
+			  <%= f.label :title %><br />
+			  <%= f.text_field :title %>
+			</div>
+
+			<div class="field row">
+			  <%= f.label :contents %><br />
+			  <%= f.text_area :contents %>
+			</div>
+
+			<div class="actions row">
+			  <%= f.submit '作成', class: "btn btn-primary" %>
+			</div>
+			<% end %>
+		</div>
+	</div>
+</div>

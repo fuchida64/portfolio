@@ -18,5 +18,7 @@ Rails.application.routes.draw do
   #管理者
   resources :admins
   get 'admin/users' => 'admins#user_index', as:'admin_users'
+  #タスクグループ
+  resources :task_groups
 
 end
