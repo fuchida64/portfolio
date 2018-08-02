@@ -5,15 +5,15 @@ class ApplicationController < ActionController::Base
 	protected
 
 	def configure_permitted_parameters
-		devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :profile_image_id])
+		devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :profile_image_id, :admin_name, :admin_image_id])
 	end
 
 	def after_sign_in_path_for(resource)
 		case resource
 		when User
-    		homes_path
+    		user_path(current_user.id)
   		when Admin
-   			homes_path
+   			admins_path
   		end
 	end
 
