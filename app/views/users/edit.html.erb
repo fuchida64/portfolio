@@ -1,0 +1,36 @@
+
+<div class="container">
+	<div class="row">
+		<h2>プロフィール編集</h2>
+		<div class="link">
+			<%= link_to "詳細", user_path(current_user.id), class: "btn" %>
+		</div>
+	</div>
+	<div class="row">
+		<%= form_for(@user) do |f| %>
+		 	<div class="col-lg-6">
+				<table class='table'>
+					<tr>
+				    	<th><%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', id: "fallback1", fallback: "/images/no_image.jpg" %></th>
+				  	</tr>
+				  	<tr>
+				   	 	<th><%= f.label :profile_image %></th>
+				    	<th><%= f.attachment_field :profile_image %></th>
+				  	</tr>
+				  	<tr>
+				    	<th><%= f.label :name, "お名前" %></th>
+				    	<th><%= f.text_field :name %></th>
+				  	</tr>
+
+				  	<tr>
+				    	<th><%= f.label :email %></th>
+				    	<th><%= f.email_field :email %></th>
+				  	</tr>
+				</table>
+			<%= f.submit "保存", class: 'btn' %>
+			</div>
+		<% end %>
+	</div>
+</div>
+
+

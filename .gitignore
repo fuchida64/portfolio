@@ -32,3 +32,5 @@
 /config/environments/development.rb
 
 /log
+
+.DS_Store

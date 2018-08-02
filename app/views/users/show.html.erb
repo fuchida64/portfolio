@@ -1,0 +1,24 @@
+
+<div class="container">
+	<div class="row">
+		<h2>マイページ</h2>
+		<div class="link">
+			<%= link_to "編集", edit_user_path(current_user.id), class: "btn" %>
+		</div>
+	</div>
+	<div class="row">
+	 	<div class="col-lg-6">
+			<table class='table'>
+				<tr>
+			    	<th><%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', id: "fallback1", fallback: "/images/no_image.jpg" %></th>
+			  	</tr>
+			  	<tr>
+			    	<th><%= @user.name %></th>
+			  	</tr>
+			  	<tr>
+			    	<th><%= @user.email %></th>
+			  	</tr>
+			</table>
+		</div>
+	</div>
+</div>
