@@ -1,0 +1,27 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <h2>ユーザー 一覧</h2>
+      <table class='table'>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>登録日時</th>
+              <th>氏名</th>
+            </tr>
+          </thead>
+          <% @users.each do |user| %>
+          <tbody>
+            <tr>
+              <td><%= user.id %></td>
+              <td><%= user.created_at.to_s(:db) %></td>
+              <td><%= user.name %></td>
+            </tr>
+          </tbody>
+          <% end %>
+      </table>
+    </div>
+  </div>
+</div>
+
