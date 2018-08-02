@@ -16,6 +16,7 @@
     <% if admin_signed_in? %>
       <%= link_to '管理者ログアウト', destroy_admin_session_path, method: :delete, "data-confirm" => "本当にログアウトしますか？", class: "" %>
     <% elsif user_signed_in? %>
+      <%= link_to 'マイページ', user_path(current_user.id), class: "" %>
       <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, "data-confirm" => "本当にログアウトしますか？", class: "" %>
     <% else %>
       <%= link_to 'ログイン', new_user_session_path, class: "" %>
