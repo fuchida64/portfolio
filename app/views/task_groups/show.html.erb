@@ -3,63 +3,106 @@
 <div class="container">
 	<div class="row">
 		<h2><%= @task_group.title %></h2>
-		<div class="modal-open"><h2>タスク作成</h2></div>
+		<p><a href="#create-modal" class="modalOpen">＋</a></p>
 	</div>
-	<div class="row box">
-		<div class="col-lg-3 status">
+
+	<div class="row task-list">
+		<div class="col-lg-4 status-box">
+			<h3>リスト</h3>
 			<% @tasks.where(status: 1).each do |task| %>
 				<div class="task-group">
 					<%= task.title %>
-				</div>
-				<div class="edit-open">編集
-
-					<div class="edit-modal">
-
-						<%= form_for task, url: task_path(task.id) do |f|%>
-						  <%= f.text_field :title %>
-						  <%= f.number_field :status %>
-						  <%= f.submit '更新' %>
-						<div class="edit-close">閉じる</div>
-						<% end %>
+					<p><a href="#modal<%= task.id %>" class="modalOpen">＊</a></p>
+					<div class="modal" id="modal<%= task.id %>">
+				    	<div class="overLay modalClose"></div>
+				    	<div class="inner">
+				    		<div class="modal-form">
+					    		<%= form_for task, url: task_path(task.id) do |f|%>
+								  	<%= f.text_field :title %>
+								  	<%= f.number_field :status %>
+								  	<%= f.submit '更新' %>
+								<% end %>
+							</div>
+				    		<a href="" class="modalClose"><p class="close-mark">×</p></a>
+				    	</div>
 					</div>
-
+					<%= link_to "delete", task_path(task.id), method: :delete, class: 'btn', "data-confirm" => "本当に削除しますか?" %>
 				</div>
 			<% end %>
 		</div>
-		<div class="col-lg-3 status">
+		<div class="col-lg-4 status-box">
+			<h3>実行中</h3>
 			<% @tasks.where(status: 2).each do |task| %>
 				<div class="task-group">
 					<%= task.title %>
+					<p><a href="#modal<%= task.id %>" class="modalOpen">＊</a></p>
+					<div class="modal" id="modal<%= task.id %>">
+				    	<div class="overLay modalClose"></div>
+				    	<div class="inner">
+				    		<div class="modal-form">
+					    		<%= form_for task, url: task_path(task.id) do |f|%>
+								  	<%= f.text_field :title %>
+								  	<%= f.number_field :status %>
+								  	<%= f.submit '更新' %>
+								<% end %>
+							</div>
+				    		<a href="" class="modalClose"><p class="close-mark">×</p></a>
+				    	</div>
+					</div>
+					<%= link_to "delete", task_path(task.id), method: :delete, class: 'btn', "data-confirm" => "本当に削除しますか?" %>
 				</div>
 			<% end %>
 		</div>
-		<div class="col-lg-3 status">
+		<div class="col-lg-4 status-box">
+			<h3>完了</h3>
 			<% @tasks.where(status: 3).each do |task| %>
 				<div class="task-group">
 					<%= task.title %>
+					<p><a href="#modal<%= task.id %>" class="modalOpen">＊</a></p>
+					<div class="modal" id="modal<%= task.id %>">
+				    	<div class="overLay modalClose"></div>
+				    	<div class="inner">
+				    		<div class="modal-form">
+					    		<%= form_for task, url: task_path(task.id) do |f|%>
+								  	<%= f.text_field :title %>
+								  	<%= f.number_field :status %>
+								  	<%= f.submit '更新' %>
+								<% end %>
+							</div>
+				    		<a href="" class="modalClose"><p class="close-mark">×</p></a>
+				    	</div>
+					</div>
+					<%= link_to "delete", task_path(task.id), method: :delete, class: 'btn', "data-confirm" => "本当に削除しますか?" %>
 				</div>
 			<% end %>
 		</div>
 	</div>
 </div>
 
-<div class="modal-content">
-	<div class="new-content">
-			<%= form_for @task_new, url: tasks_path(group_id: @task_group.id) do |f| %>
-		<div class="field">
-		  	<%= f.label :title %><br />
-		  	<%= f.text_field :title %>
+
+<div class="modal" id="create-modal">
+	<div class="overLay modalClose"></div>
+	<div class="inner">
+	    <div class="modal-form">
+	    	<%= form_for @task_new, url: tasks_path(group_id: @task_group.id) do |f| %>
+				<div class="field">
+				  	<%= f.label :title %><br />
+				  	<%= f.text_field :title %>
+				</div>
+				<div class="field">
+				  	<%= f.label :status %><br />
+				  	<%= f.number_field :status, value: 1 %>
+				</div>
+				<div class="actions">
+				  <%= f.submit '作成', class: "btn btn-primary" %>
+				</div>
+			<% end %>
 		</div>
-		<div class="field">
-		  	<%= f.label :status %><br />
-		  	<%= f.number_field :status %>
-		</div>
-		<div class="actions">
-		  <%= f.submit '作成', class: "btn btn-primary" %>
-		</div>
-	<% end %>
-	<div class="modal-close">閉じる</div>
+		<a href="" class="modalClose"><p class="close-mark">×</p></a>
 	</div>
 </div>
 
+
+
 <%= javascript_include_tag "task_group.js" %>
+
