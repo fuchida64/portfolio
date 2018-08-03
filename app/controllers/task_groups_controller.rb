@@ -3,6 +3,7 @@ class TaskGroupsController < ApplicationController
 	def index
 		@task_groups = current_user.task_groups
 		@task_group_new = TaskGroup.new
+		@tasks = Task.all
 	end
 
 	def create
@@ -27,6 +28,14 @@ class TaskGroupsController < ApplicationController
 			redirect_to task_groups_path
 		else
 			render 'index'
+		end
+	end
+
+	def destroy
+		@task_group = TaskGroup.find(params[:id])
+		if @task_group.destroy
+		  redirect_to task_groups_path
+		  flash[:notice] = "削除されました"
 		end
 	end
 
