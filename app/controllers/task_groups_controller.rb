@@ -15,6 +15,12 @@ class TaskGroupsController < ApplicationController
 		end
 	end
 
+	def show
+		@task_group = TaskGroup.find(params[:id])
+		@tasks = @task_group.tasks
+		@task_new = Task.new
+	end
+
 	def update
 		@task_group = TaskGroup.find(params[:id])
 		if @task_group.update(task_group_params)

@@ -17,16 +17,3 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
-$(function() {
-
-  $('.edit-show').click(function() {
-    $(this).children('.edit-modal').fadeIn();
-    $(".close-modal").removeClass('hide');
-  });
-
-  $('.close-modal').click(function() {
-    $('.edit-modal').fadeOut();
-    $(".close-modal").addClass('hide');
-  });
-});
-

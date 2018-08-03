@@ -10,6 +10,7 @@
 				<div class="task-group">
 					<%= task.title %>
 					<%= task.contents %>
+					<%= link_to 'タスク', task_group_path(task.id), class: "" %>
 					<div class="edit-show">編集
 						<div class="edit-modal">
 						    <h2>タスクリスト編集</h2>
