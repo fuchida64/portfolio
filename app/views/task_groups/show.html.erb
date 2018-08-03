@@ -1,0 +1,65 @@
+
+
+<div class="container">
+	<div class="row">
+		<h2><%= @task_group.title %></h2>
+		<div class="modal-open"><h2>タスク作成</h2></div>
+	</div>
+	<div class="row box">
+		<div class="col-lg-3 status">
+			<% @tasks.where(status: 1).each do |task| %>
+				<div class="task-group">
+					<%= task.title %>
+				</div>
+				<div class="edit-open">編集
+
+					<div class="edit-modal">
+
+						<%= form_for task, url: task_path(task.id) do |f|%>
+						  <%= f.text_field :title %>
+						  <%= f.number_field :status %>
+						  <%= f.submit '更新' %>
+						<div class="edit-close">閉じる</div>
+						<% end %>
+					</div>
+
+				</div>
+			<% end %>
+		</div>
+		<div class="col-lg-3 status">
+			<% @tasks.where(status: 2).each do |task| %>
+				<div class="task-group">
+					<%= task.title %>
+				</div>
+			<% end %>
+		</div>
+		<div class="col-lg-3 status">
+			<% @tasks.where(status: 3).each do |task| %>
+				<div class="task-group">
+					<%= task.title %>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+<div class="modal-content">
+	<div class="new-content">
+			<%= form_for @task_new, url: tasks_path(group_id: @task_group.id) do |f| %>
+		<div class="field">
+		  	<%= f.label :title %><br />
+		  	<%= f.text_field :title %>
+		</div>
+		<div class="field">
+		  	<%= f.label :status %><br />
+		  	<%= f.number_field :status %>
+		</div>
+		<div class="actions">
+		  <%= f.submit '作成', class: "btn btn-primary" %>
+		</div>
+	<% end %>
+	<div class="modal-close">閉じる</div>
+	</div>
+</div>
+
+<%= javascript_include_tag "task_group.js" %>

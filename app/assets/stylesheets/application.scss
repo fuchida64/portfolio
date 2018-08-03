@@ -16,6 +16,14 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
- .edit-modal {
-  display: none;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+	width: 100% ;
+	height: 500px ;
+	padding: 0;
 }
