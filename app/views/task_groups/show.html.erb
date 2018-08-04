@@ -12,6 +12,7 @@
 			<% @tasks.where(status: 1).each do |task| %>
 				<div class="task-group">
 					<%= task.title %>
+					<input type="checkbox" name="checkbox" class="checkbox" value="/tasks/<%= task.id %>/clear" />
 					<p><a href="#modal<%= task.id %>" class="modalOpen">＊</a></p>
 					<div class="modal" id="modal<%= task.id %>">
 				    	<div class="overLay modalClose"></div>
@@ -35,6 +36,7 @@
 			<% @tasks.where(status: 2).each do |task| %>
 				<div class="task-group">
 					<%= task.title %>
+					<input type="checkbox" name="checkbox" class="checkbox" value="/tasks/<%= task.id %>/clear" />
 					<p><a href="#modal<%= task.id %>" class="modalOpen">＊</a></p>
 					<div class="modal" id="modal<%= task.id %>">
 				    	<div class="overLay modalClose"></div>
@@ -78,7 +80,6 @@
 		</div>
 	</div>
 </div>
-
 
 <div class="modal" id="create-modal">
 	<div class="overLay modalClose"></div>

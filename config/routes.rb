@@ -22,5 +22,6 @@ Rails.application.routes.draw do
   resources :task_groups
   #タスク
   resources :tasks
+  get 'tasks/:id/clear' => 'tasks#check'
 
 end

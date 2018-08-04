@@ -15,6 +15,13 @@ class TasksController < ApplicationController
 		end
 	end
 
+	def check
+		@task = Task.find(params[:id])
+		if @task.update(:status => @task.status + 1)
+			redirect_to task_group_path(@task.task_group_id)
+		end
+	end
+
 	def destroy
 		@task = Task.find(params[:id])
 		if @task.destroy
