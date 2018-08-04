@@ -22,3 +22,11 @@ $(function(){
 
 });
 
+$(function(){
+	$("input.checkbox[type=checkbox]").click(function(){
+
+    	var browser = $(this).attr("value");
+    	location.href = browser
+	});
+});
+
