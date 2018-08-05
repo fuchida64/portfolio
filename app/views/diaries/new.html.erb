@@ -1,0 +1,29 @@
+
+
+<h2>new diary</h2>
+<%= form_for (@diary) do |f| %>
+
+  <div class="field">
+      <%= f.label :title %><br />
+      <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :contents %><br />
+    <%= f.text_area :contents %>
+  </div>
+
+  <div class="field">
+    <div class="pretty p-switch p-fill">
+        <%= f.check_box :public,:as => :boolean %>
+        <div class="state p-success">
+            <label>公開</label>
+        </div>
+    </div>
+  </div>
+
+  <div class="actions">
+      <%= f.submit '更新', class: "btn btn-primary" %>
+  </div>
+
+<% end %>

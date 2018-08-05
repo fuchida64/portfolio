@@ -17,7 +17,11 @@ class TasksController < ApplicationController
 
 	def check
 		@task = Task.find(params[:id])
-		if @task.update(:status => @task.status + 1)
+		if  @task.status < 3
+			@task.update(:status => @task.status + 1)
+			redirect_to task_group_path(@task.task_group_id)
+		else
+			@task.update(:status => @task.status - 1)
 			redirect_to task_group_path(@task.task_group_id)
 		end
 	end
