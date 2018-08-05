@@ -1,0 +1,13 @@
+
+<%= link_to 'new', new_diary_path, class: "" %>
+
+<h4>一覧</h4>
+<table class="table table2">
+	<% @diaries.each do |d| %>
+	<tr>
+		<th><%= d.title %></th>
+		<th><%= d.contents %></th>
+		<th><%= d.public %></th>
+	</tr>
+	<% end %>
+</table>

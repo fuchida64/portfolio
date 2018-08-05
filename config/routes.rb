@@ -11,19 +11,26 @@ Rails.application.routes.draw do
 	}
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  #共通ページ
+  #common
   resources :homes, only: [:index]
-  #ユーザー
+
+  #user
   resources :users
   get 'users/:id/password/edit' => 'users#password_edit', as: 'edit_password'
   patch 'users/:id/password' => 'users#password_update'
-  #管理者
+
+  #admin
   resources :admins
   get 'admin/users' => 'admins#user_index', as:'admin_users'
-  #タスクグループ
+
+  #task_group
   resources :task_groups
-  #タスク
+
+  #task
   resources :tasks
   get 'tasks/:id/clear' => 'tasks#check'
+
+  #diary
+  resources :diaries
 
 end

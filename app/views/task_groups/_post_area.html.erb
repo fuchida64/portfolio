@@ -1,24 +1,11 @@
-
-<%= stylesheet_link_tag "task_groups/show", :media => "all" %>
-
-<div class="container">
-	<div class="row">
-		<ul class="nav group-list">
-				<li><h2><%= @task_group.title %></h2></li>
-			<% @task_groups.each do |group| %>
-				<li class="other-group"><%= link_to group.title, task_group_path(group.id) %></li>
-			<% end %>
-		</ul>
-		<p class="pulus-mark"><a href="#create-modal" class="modalOpen">＋</a></p>
-	</div>
-
-	<div class="row task-list">
-		<div class="col-lg-4 status-box">
+<div class="col-lg-4 status-box">
 			<h3>InBox</h3>
-			<% @tasks.where(status: 1).each do |task| %>
+			<% tasks.where(status: 1).each do |task| %>
 				<div class="task-group">
 					<%= task.title %>
-					<input type="checkbox" name="checkbox" class="checkbox" value="/tasks/<%= task.id %>/clear" />
+					<%= form_for task, url: check_path(task.id), remote: true do |t|%>
+  						<%= t.check_box :status, {:onclick => 'this.form.submit()', :checked => false} %>
+					<% end %>
 					<p><a href="#modal<%= task.id %>" class="modalOpen">＊</a></p>
 					<div class="modal" id="modal<%= task.id %>">
 				    	<div class="overLay modalClose"></div>
@@ -39,10 +26,13 @@
 		</div>
 		<div class="col-lg-4 status-box">
 			<h3>OnGoing</h3>
-			<% @tasks.where(status: 2).each do |task| %>
+			<% tasks.where(status: 2).each do |task| %>
 				<div class="task-group">
 					<%= task.title %>
-					<input type="checkbox" name="checkbox" class="checkbox" value="/tasks/<%= task.id %>/clear" />
+										<%= task.title %>
+					<%= form_for task, url: check_path(task.id), remote: true do |t|%>
+  						<%= t.check_box :status, {:onclick => 'this.form.submit()', :checked => false} %>
+					<% end %>
 					<p><a href="#modal<%= task.id %>" class="modalOpen">＊</a></p>
 					<div class="modal" id="modal<%= task.id %>">
 				    	<div class="overLay modalClose"></div>
@@ -66,10 +56,9 @@
 				<h3>Done</h3>
 				<%= link_to "clear", task_group_path(@task_group.id, status: 3), method: :delete, class: 'clear', "data-confirm" => "本当に削除しますか?" %>
 			</div>
-			<% @tasks.where(status: 3).each do |task| %>
+			<% tasks.where(status: 3).each do |task| %>
 				<div class="task-group">
 					<%= task.title %>
-					<input type="checkbox" name="checkbox" class="checkbox" value="/tasks/<%= task.id %>/clear" checked />
 					<p><a href="#modal<%= task.id %>" class="modalOpen">＊</a></p>
 					<div class="modal" id="modal<%= task.id %>">
 				    	<div class="overLay modalClose"></div>
@@ -88,32 +77,3 @@
 				</div>
 			<% end %>
 		</div>
-	</div>
-</div>
-
-<div class="modal" id="create-modal">
-	<div class="overLay modalClose"></div>
-	<div class="inner">
-	    <div class="modal-form">
-	    	<%= form_for @task_new, url: tasks_path(group_id: @task_group.id) do |f| %>
-				<div class="field">
-				  	<%= f.label :title %><br />
-				  	<%= f.text_field :title %>
-				</div>
-				<div class="field">
-				  	<%= f.label :status %><br />
-				  	<%= f.number_field :status, value: 1 %>
-				</div>
-				<div class="actions">
-				  <%= f.submit '作成', class: "btn btn-primary" %>
-				</div>
-			<% end %>
-		</div>
-		<a href="" class="modalClose"><p class="close-mark">×</p></a>
-	</div>
-</div>
-
-
-
-<%= javascript_include_tag "task_group.js" %>
-
