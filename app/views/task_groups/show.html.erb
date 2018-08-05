@@ -1,14 +1,20 @@
-
+  
+<%= stylesheet_link_tag "task_groups/show", :media => "all" %>
 
 <div class="container">
 	<div class="row">
-		<h2><%= @task_group.title %></h2>
-		<p><a href="#create-modal" class="modalOpen">＋</a></p>
+		<ul class="nav group-list">
+				<li><h2><%= @task_group.title %></h2></li>
+			<% @task_groups.each do |group| %>
+				<li class="other-group"><%= link_to group.title, task_group_path(group.id) %></li>
+			<% end %>
+		</ul>
+		<p class="pulus-mark"><a href="#create-modal" class="modalOpen">＋</a></p>
 	</div>
 
 	<div class="row task-list">
 		<div class="col-lg-4 status-box">
-			<h3>リスト</h3>
+			<h3>InBox</h3>
 			<% @tasks.where(status: 1).each do |task| %>
 				<div class="task-group">
 					<%= task.title %>
@@ -32,7 +38,7 @@
 			<% end %>
 		</div>
 		<div class="col-lg-4 status-box">
-			<h3>実行中</h3>
+			<h3>OnGoing</h3>
 			<% @tasks.where(status: 2).each do |task| %>
 				<div class="task-group">
 					<%= task.title %>
@@ -56,7 +62,10 @@
 			<% end %>
 		</div>
 		<div class="col-lg-4 status-box">
-			<h3>完了</h3>
+			<div class="done">
+				<h3>Done</h3>
+				<%= link_to "clear", task_group_path(@task_group.id, status: 3), method: :delete, class: 'clear', "data-confirm" => "本当に削除しますか?" %>
+			</div>
 			<% @tasks.where(status: 3).each do |task| %>
 				<div class="task-group">
 					<%= task.title %>

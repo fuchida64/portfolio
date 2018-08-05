@@ -19,7 +19,7 @@ body {
 }
 /* オーバーレイのスタイル */
 .overLay {
-  position:absolute;
+  position:absolute; 
   top:0;
   left:0;
   background-color: rgba( 0,0,0, 0.2 ) ;
@@ -44,7 +44,9 @@ body {
 .close-mark {
 	font-size: 30px;
 }
-
+.pulus-mark {
+  font-size: 24px;
+}
 .task-list {
 	display: -webkit-flex;
     display: flex;
@@ -76,7 +78,10 @@ body {
 	background-color: white;
 	box-shadow: 2px 2px 4px gray;
 }
-
+.status-box h3 {
+  font-weight: 400;
+  font-size: 20px;
+}
 
 
 
