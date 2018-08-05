@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   resources :homes, only: [:index]
   #ユーザー
   resources :users
+  get 'users/:id/password/edit' => 'users#password_edit', as: 'edit_password'
+  patch 'users/:id/password' => 'users#password_update'
   #管理者
   resources :admins
   get 'admin/users' => 'admins#user_index', as:'admin_users'

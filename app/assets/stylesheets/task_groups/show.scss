@@ -1,0 +1,25 @@
+
+
+.group-list li:first-child {
+    margin-right: auto;
+}
+.other-group {
+	padding-top: 20px;
+}
+.group-list {
+	height: 60px;
+	width: 50%;
+	display: -webkit-flex;
+	display: flex;
+	align-items: right;
+}
+.done {
+	width: 100%;
+	display: -webkit-flex;
+	display: flex;
+}
+.clear {
+	line-height: 52px;
+	text-align: right;
+	width: 100%;
+}
