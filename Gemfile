@@ -69,5 +69,6 @@ gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
 gem 'bootstrap-sass'
 gem 'jquery-rails'
+gem 'nested_form_fields'
 
 

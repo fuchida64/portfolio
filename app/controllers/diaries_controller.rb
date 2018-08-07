@@ -2,10 +2,12 @@ class DiariesController < ApplicationController
 
 	def index
 		@diaries = Diary.all
+		@diary_images = DiaryImage.all
 	end
 
 	def new
 		@diary = Diary.new
+		4.times{@diary.diary_images.build}
 	end
 
 	def create
@@ -18,6 +20,9 @@ class DiariesController < ApplicationController
 	private
 
 	def diary_params
-		params.require(:diary).permit(:title, :contents, :user_id, :public)
+		params.require(:diary).permit(
+			:title, :content, :user_id, :inform_status,
+			diary_images_attributes: [:id, :diary_id, :diary_image, :_destroy]
+			)
 	end
 end

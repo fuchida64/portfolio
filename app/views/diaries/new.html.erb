@@ -1,7 +1,37 @@
 
+<%= stylesheet_link_tag "diaries/new", :media => "all" %>
 
 <h2>new diary</h2>
-<%= form_for (@diary) do |f| %>
+
+  <label class="ok" for="diary_diary_images_attributes_0_diary_image">
+    <div class="no">
+      <img class="preview0" >
+    </div>
+  </label>
+
+  <label class="ok" for="diary_diary_images_attributes_1_diary_image">
+    <div class="no">
+        <img class="preview1" >
+      </div>
+  </label>
+
+  <label class="ok" for="diary_diary_images_attributes_2_diary_image">
+    <div class="no">
+        <img class="preview2" >
+      </div>
+  </label>
+
+  <label class="ok" for="diary_diary_images_attributes_3_diary_image">
+    <div class="no">
+        <img class="preview3" >
+      </div>
+  </label>
+
+<%= form_for @diary do |f| %>
+
+  <%= f.fields_for :diary_images do |i| %>
+    <%= i.attachment_field :diary_image %>
+  <% end %>
 
   <div class="field">
       <%= f.label :title %><br />
@@ -9,15 +39,25 @@
   </div>
 
   <div class="field">
-    <%= f.label :contents %><br />
-    <%= f.text_area :contents %>
+    <%= f.label :content %><br />
+    <%= f.text_area :content %>
   </div>
 
   <div class="field">
     <div class="pretty p-switch p-fill">
-        <%= f.check_box :public,:as => :boolean %>
+      <% if current_user.public_setting == 1 %>
+        <%= f.check_box :inform_status, {:checked => true, :id => 'public-id'}, "公開", "非公開" %>
+      <% else %>
+        <%= f.check_box :inform_status, {:id => 'private-id'}, "公開", "非公開" %>
+      <% end %>
         <div class="state p-success">
-            <label>公開</label>
+            <label>
+              <% if current_user.public_setting == 1 %>
+                <i class="public">公開する</i><i class="private hide">非公開にする</i>
+              <% else %>
+                <i class="public hide">公開する</i><i class="private">非公開にする</i>
+              <% end %>
+            </label>
         </div>
     </div>
   </div>
@@ -27,3 +67,7 @@
   </div>
 
 <% end %>
+
+
+
+<%= javascript_include_tag "diary.js" %>

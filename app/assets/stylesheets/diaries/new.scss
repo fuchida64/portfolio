@@ -1,0 +1,52 @@
+
+img {
+	max-width: 200px;
+	max-height: 200px;
+	background-color: white;
+position: absolute;
+top: 50%;
+left: 50%;
+-ms-transform: translate(-50%,-50%);
+-webkit-transform : translate(-50%,-50%);
+transform : translate(-50%,-50%);
+text-align: center;  }
+.no {
+	width: 200px;
+	height: 200px;
+	background-color: white;
+	text-align: center;
+	position:relative;
+}
+input[type="file"] {
+display: none;
+}
+
+.ok {
+    border: 1px solid #f0b8bf;
+    border-radius: 5px;
+    padding: 10px;
+    position: relative;
+}
+.ok:before{
+    background-color: rgba(255,255,255,0.7);
+    border-radius: 5px;
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 5px;
+    z-index: -1;
+}
+.ok:after{
+    background: repeating-linear-gradient(-45deg, #f5d5da, #f5d5da 5px, #fcf0f1 0, #fcf0f1 10px);
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -2;
+}

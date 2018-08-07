@@ -2,12 +2,17 @@
 <%= link_to 'new', new_diary_path, class: "" %>
 
 <h4>一覧</h4>
-<table class="table table2">
+<table class="table">
 	<% @diaries.each do |d| %>
 	<tr>
 		<th><%= d.title %></th>
-		<th><%= d.contents %></th>
-		<th><%= d.public %></th>
+		<th><%= d.content %></th>
+		<th><%= d.inform_status %></th>
+
+		<% d.diary_images.each do |g| %>
+        <th><%= g.id %></th>
+        <th><%= attachment_image_tag g, :diary_image, :fill, 80, 80, format: 'jpeg' %></th>
+        <% end %>
 	</tr>
 	<% end %>
 </table>
