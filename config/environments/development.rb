@@ -71,4 +71,6 @@ Rails.application.configure do
     :password => "owtesjenkxuqivzg",
     :authentication => 'login',
   }
+
+  config.action_controller.action_on_unpermitted_parameters = :raise
 end

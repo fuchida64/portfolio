@@ -49,6 +49,6 @@ class TaskGroupsController < ApplicationController
 	private
 
 	def task_group_params
-		params.require(:task_group).permit(:title, :contents, :user_id)
+		params.require(:task_group).permit(:title, :content, :user_id)
 	end
 end

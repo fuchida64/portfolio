@@ -2,7 +2,8 @@ class UsersController < ApplicationController
 
 	# マイページ表示
 	def show
-	  	@user = User.find(current_user.id)
+	  	@user = User.find(params[:id])
+	  	@diaries = @user.diaries
 	end
 
 	# マイページ編集
@@ -40,7 +41,7 @@ class UsersController < ApplicationController
 	private
 
 	def user_params
-	    params.require(:user).permit(:email, :name, :profile_image, :email, :password, :password_confirmation, :current_password)
+	    params.require(:user).permit(:email, :name, :profile_image, :email, :password, :password_confirmation, :current_password, :public_setting)
 	end
 
 end

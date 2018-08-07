@@ -7,4 +7,8 @@ class User < ApplicationRecord
   attachment :profile_image
 
   has_many :task_groups
+  has_many :diaries
+  has_many :followers
+  has_many :diary_comments
+  has_many :favorites
 end

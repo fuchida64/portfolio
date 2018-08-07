@@ -8,7 +8,7 @@
 			<% @task_groups.each do |task| %>
 				<div class="task-group">
 					<h4><%= link_to task.title, task_group_path(task.id), class: "" %></h4>
-					<%= task.contents %>
+					<%= task.content %>
 
 					<p><a href="#modal<%= task.id %>" class="modalOpen">＊</a></p>
 					<div class="modal" id="modal<%= task.id %>">
@@ -22,8 +22,8 @@
 									  	<%= f.text_field :title %>
 									</div>
 									<div class="field">
-										<%= f.label :contents %><br />
-										<%= f.text_area :contents %>
+										<%= f.label :content %><br />
+										<%= f.text_area :content %>
 									</div>
 									<div class="actions">
 									  	<%= f.submit '更新', class: "btn btn-primary" %>
@@ -48,8 +48,8 @@
 			</div>
 
 			<div class="field row">
-			  <%= f.label :contents %><br />
-			  <%= f.text_area :contents %>
+			  <%= f.label :content %><br />
+			  <%= f.text_area :content %>
 			</div>
 
 			<div class="actions row">

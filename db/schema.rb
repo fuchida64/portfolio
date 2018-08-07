@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 2018_08_05_192942) do
   create_table "diaries", force: :cascade do |t|
     t.integer "user_id"
     t.text "title"
-    t.text "contents"
-    t.integer "public"
+    t.text "content"
+    t.string "inform_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 2018_08_05_192942) do
 
   create_table "task_groups", force: :cascade do |t|
     t.text "title"
-    t.text "contents"
+    t.text "content"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 2018_08_05_192942) do
     t.string "unconfirmed_email"
     t.string "name"
     t.string "profile_image_id"
+    t.integer "public_setting", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

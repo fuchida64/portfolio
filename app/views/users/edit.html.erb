@@ -26,6 +26,16 @@
 				    	<th><%= f.label :email %></th>
 				    	<th><%= f.email_field :email %></th>
 				  	</tr>
+				  	<tr>
+				    	<th>
+				    		<div class="pretty p-switch p-fill">
+        						<%= f.check_box :public_setting %>
+        							<div class="state p-success">
+            							<label><i class="public">投稿を公開</i><i class="private">投稿を非公開</i></label>
+        							</div>
+    						</div>
+				    	</th>
+				  	</tr>
 				</table>
 				<%= f.submit "保存", class: 'btn' %>
 			</div>
@@ -33,4 +43,4 @@
 	</div>
 </div>
 
-
+<%= javascript_include_tag "user.js" %>
