@@ -15,7 +15,12 @@ Rails.application.routes.draw do
   resources :homes, only: [:index]
 
   #user
-  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
+  resources :relationships,       only: [:create, :destroy]
   get 'users/:id/password/edit' => 'users#password_edit', as: 'edit_password'
   patch 'users/:id/password' => 'users#password_update'
 
