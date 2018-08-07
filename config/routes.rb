@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   get 'tasks/:id/clear' => 'tasks#check'
 
   #diary
-  resources :diaries
+  resources :diaries do
+    resource :diary_comments
+    resource :favorites
+  end
 
 end
