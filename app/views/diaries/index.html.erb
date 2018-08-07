@@ -8,6 +8,7 @@
 		<th><%= d.title %></th>
 		<th><%= d.content %></th>
 		<th><%= d.inform_status %></th>
+		<th><%= link_to 'show', diary_path(d.id), class: "btn" %></th>
 
 		<% d.diary_images.each do |g| %>
         <th><%= g.id %></th>

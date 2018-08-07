@@ -1,0 +1,40 @@
+
+
+<table class='table'>
+	<tr>
+		<% @diary.diary_images.each do |g| %>
+        <td><%= attachment_image_tag g, :diary_image, :fill, 80, 80, format: 'jpeg' %></td>
+        <% end %>
+	</tr>
+	<tr>
+	  <td><%= @diary.user.name %></td>
+	</tr>
+	<tr>
+	  <td><%= @diary.title %></td>
+	</tr>
+	<tr>
+	  <td><%= @diary.content %></td>
+	</tr>
+</table>
+
+<% if @diary.favorited_by?(current_user) %>
+    <%= link_to diary_favorites_path(@diary), method: :delete do %>
+      <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+      <%= @diary.favorites.count %> いいね
+    <% end %>
+<% else %>
+    <%= link_to diary_favorites_path(@diary), method: :post do %>
+      <i class="fa fa-heart" aria-hidden="true"></i>
+      <%= @diary.favorites.count %> いいね
+    <% end %>
+<% end %>
+
+<%= form_for [@diary,@diary_comment] do |f| %>
+	<%= f.text_field :comment, placeholder: "コメントする" %>
+  	<%= f.submit %>
+<% end %>
+
+<% @diary.diary_comments.each do |d| %>
+	<%= d.comment %><br>
+<% end %>
+

@@ -17,6 +17,11 @@ class DiariesController < ApplicationController
 		redirect_to diaries_path
 	end
 
+	def show
+		@diary = Diary.find(params[:id])
+		@diary_comment = DiaryComment.new
+	end
+
 	private
 
 	def diary_params
