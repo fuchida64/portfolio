@@ -1,3 +1,52 @@
 
 <%= @memory_group.title %>
 <%= @memory_group.content%>
+
+<h2>memory作成</h2>
+
+<%= form_for [@memory_group,@memory] do |f| %>
+
+	<%= f.fields_for :problem do |problem| %>
+		<div class="field">
+			<%= problem.label :problem_content %><br />
+			<%= problem.text_field :problem_content %>
+		</div>
+	<% end %>
+
+	<%= f.fields_for :problem_image do |p_image| %>
+		<div class="field">
+			<%= p_image.label :problem_image %><br />
+			<%= p_image.attachment_field :problem_image %>
+		</div>
+	<% end %>
+
+	<%= f.fields_for :answer do |answer| %>
+		<div class="field">
+			<%= answer.label :answer_content %><br />
+			<%= answer.text_field :answer_content %>
+		</div>
+	<% end %>
+
+	<%= f.fields_for :answer_image do |a_image| %>
+		<div class="field">
+			<%= a_image.label :answer_image %><br />
+			<%= a_image.attachment_field :answer_image %>
+		</div>
+	<% end %>
+
+	<div class="actions">
+		<%= f.submit '作成', class: "btn btn-primary" %>
+	</div>
+<% end %>
+
+<table class='table'>
+	<% @memory_group.memories.each do |m| %>
+		<tr>
+			<td><%= m.stage %></td>
+	        <td><%= attachment_image_tag m.problem_image, :problem_image, :fill, 80, 80, format: 'jpeg' %></td>
+	        <td><%= m.problem.problem_content %></td>
+	        <td><%= attachment_image_tag m.answer_image, :answer_image, :fill, 80, 80, format: 'jpeg' %></td>
+	        <td><%= m.answer.answer_content %></td>
+		</tr>
+	 <% end %>
+</table>

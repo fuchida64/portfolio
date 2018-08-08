@@ -17,6 +17,11 @@ class MemoryGroupsController < ApplicationController
 
 	def show
 		@memory_group = MemoryGroup.find(params[:id])
+		@memory = Memory.new
+		@memory.build_problem
+		@memory.build_problem_image
+		@memory.build_answer
+		@memory.build_answer_image
 	end
 
 	private

@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2018_08_08_110327) do
   end
 
   create_table "memories", force: :cascade do |t|
-    t.integer "stage"
+    t.integer "stage", default: 1
     t.date "execution_date"
     t.integer "memory_group_id"
     t.datetime "created_at", null: false
