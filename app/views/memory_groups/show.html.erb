@@ -1,6 +1,14 @@
 
+
+<%= Time.zone.now.strftime("%Y-%m-%d") %>
+<%= Date.today %>
+<%= Date.current %>
 <%= @memory_group.title %>
 <%= @memory_group.content%>
+<br>
+<%= link_to "All Stage", memory_group_memories_path(@memory_group.id, stage: "all") %>
+<%= link_to "Stage1", memory_group_memories_path(@memory_group.id, stage: 1) %>
+<%= link_to "Complete", memory_group_memories_path(@memory_group.id, stage: 0) %>
 
 <h2>memory作成</h2>
 
@@ -43,6 +51,7 @@
 	<% @memory_group.memories.each do |m| %>
 		<tr>
 			<td><%= m.stage %></td>
+			<td><%= m.execution_date %></td>
 	        <td><%= attachment_image_tag m.problem_image, :problem_image, :fill, 80, 80, format: 'jpeg' %></td>
 	        <td><%= m.problem.problem_content %></td>
 	        <td><%= attachment_image_tag m.answer_image, :answer_image, :fill, 80, 80, format: 'jpeg' %></td>
