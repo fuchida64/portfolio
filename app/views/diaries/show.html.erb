@@ -7,7 +7,7 @@
         <% end %>
 	</tr>
 	<tr>
-	  <td><%= @diary.user.name %></td>
+	  <td><%= @user.name %></td>
 	</tr>
 	<tr>
 	  <td><%= @diary.title %></td>
@@ -16,6 +16,8 @@
 	  <td><%= @diary.content %></td>
 	</tr>
 </table>
+
+<%= render 'users/follow_form' %>
 
 <% if @diary.favorited_by?(current_user) %>
     <%= link_to diary_favorites_path(@diary), method: :delete do %>

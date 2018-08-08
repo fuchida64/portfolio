@@ -41,4 +41,7 @@ Rails.application.routes.draw do
     resource :favorites
   end
 
+  #memory_group
+  resources :memory_groups
+
 end
