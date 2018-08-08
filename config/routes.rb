@@ -42,6 +42,8 @@ Rails.application.routes.draw do
   end
 
   #memory_group
-  resources :memory_groups
+  resources :memory_groups do
+    resource :memories
+  end
 
 end
