@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :followers
   has_many :diary_comments
   has_many :favorites
+  has_many :memory_groups
+  has_many :memory_stages
 
   has_many :following_relationships, foreign_key: "follower_id", class_name: "Relationship", dependent: :destroy
   has_many :followings, through: :following_relationships

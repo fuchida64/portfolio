@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_07_194111) do
+ActiveRecord::Schema.define(version: 2018_08_08_110327) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -29,6 +29,20 @@ ActiveRecord::Schema.define(version: 2018_08_07_194111) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "answer_images", force: :cascade do |t|
+    t.string "answer_image_id"
+    t.integer "memory_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.text "answer_content"
+    t.integer "memory_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "diaries", force: :cascade do |t|
@@ -62,9 +76,40 @@ ActiveRecord::Schema.define(version: 2018_08_07_194111) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "followers", force: :cascade do |t|
+  create_table "memories", force: :cascade do |t|
+    t.integer "stage"
+    t.date "execution_date"
+    t.integer "memory_group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "memory_groups", force: :cascade do |t|
+    t.text "title"
+    t.text "content"
     t.integer "user_id"
-    t.integer "followed_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "memory_stages", force: :cascade do |t|
+    t.integer "stage"
+    t.integer "period"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "problem_images", force: :cascade do |t|
+    t.string "problem_image_id"
+    t.integer "memory_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "problems", force: :cascade do |t|
+    t.text "problem_content"
+    t.integer "memory_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

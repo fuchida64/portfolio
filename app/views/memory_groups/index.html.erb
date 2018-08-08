@@ -1,0 +1,38 @@
+
+<h2>Memory Groups</h2>
+<table class='table'>
+	<thead>
+		<tr>
+			<th>title</th>
+			<th>content</th>
+		</tr>
+	</thead>
+	<% @memory_groups.each do |memory_group| %>
+		<tbody>
+			<tr>
+				<td><%= link_to memory_group.title, memory_group_path(memory_group) %></td>
+				<td><%= memory_group.content %></td>
+			</tr>
+		</tbody>
+	<% end %>
+</table>
+
+<h2>Memory Group作成</h2>
+<%= form_for(@memory_group) do |f| %>
+
+	<div class="field row">
+		<%= f.label :title %><br />
+		<%= f.text_field :title %>
+	</div>
+
+	<div class="field row">
+		<%= f.label :content %><br />
+		<%= f.text_area :content %>
+	</div>
+
+	<div class="actions row">
+		<%= f.submit '作成', class: "btn btn-primary" %>
+	</div>
+<% end %>
+
+
