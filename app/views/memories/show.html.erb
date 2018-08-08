@@ -1,0 +1,18 @@
+
+<%= link_to "一覧へ", memory_group_path(@memory_group) %>
+
+<table class='table'>
+	<% @memories.each do |m| %>
+		<tr>
+			<td><%= m.stage %></td>
+	        <td><%= attachment_image_tag m.problem_image, :problem_image, :fill, 80, 80, format: 'jpeg' %></td>
+	        <td><%= m.problem.problem_content %></td>
+	        <td><%= attachment_image_tag m.answer_image, :answer_image, :fill, 80, 80, format: 'jpeg' %></td>
+	        <td><%= m.answer.answer_content %></td>
+	        <% if @stage != '0' %>
+		        <td><%= link_to "◯", correct_path(m.id) %></td>
+		        <td><%= link_to "×", wrong_path(m.id, stage: @stage) %></td>
+	        <% end %>
+		</tr>
+	 <% end %>
+</table>

@@ -46,4 +46,8 @@ Rails.application.routes.draw do
     resource :memories
   end
 
+  #memory
+  get 'memories/:id/correct' => 'memories#correct', as: 'correct'
+  get 'memories/:id/wrong' => 'memories#wrong', as: 'wrong'
+
 end
