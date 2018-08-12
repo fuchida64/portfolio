@@ -3,6 +3,7 @@ class MemoryGroupsController < ApplicationController
 	def index
 		@memory_groups = current_user.memory_groups
 		@memory_group = MemoryGroup.new
+		@memory_stage = current_user.memory_stages.new
 	end
 
 	def create

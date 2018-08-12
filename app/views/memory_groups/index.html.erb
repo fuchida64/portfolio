@@ -35,4 +35,30 @@
 	</div>
 <% end %>
 
+<h2><%= current_user.memory_stages.length + 1 %>Stage作成</h2>
+<%= form_for @memory_stage, url: memory_stages_path do |s| %>
 
+	<div class="field row">
+		<%= s.label :period %><br />
+		<%= s.number_field :period %>
+	</div>
+
+	<div class="actions row">
+		<%= s.submit '作成', class: "btn btn-primary" %>
+	</div>
+<% end %>
+
+
+<table class="table">
+	<tr>
+		<td>stage1</td>
+		<td>today</td>
+	</tr>
+
+	<% current_user.memory_stages.where.not(stage: nil).each do |memory_stage| %>
+		<tr>
+			<td>stage<%= memory_stage.stage %></td>
+			<td><%= memory_stage.period %></td>
+		</tr>
+	<% end %>
+</table>

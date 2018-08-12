@@ -1,4 +1,4 @@
-
+// チェックボックス初期表示
 $( document ).ready(function() {
 
     if($('#user_public_setting').prop('checked')){

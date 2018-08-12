@@ -2,13 +2,30 @@
 
 <%= Time.zone.now.strftime("%Y-%m-%d") %>
 <%= Date.today %>
-<%= Date.current %>
+<%= Date.current.next_day(1) %>
 <%= @memory_group.title %>
 <%= @memory_group.content%>
 <br>
-<%= link_to "All Stage", memory_group_memories_path(@memory_group.id, stage: "all") %>
-<%= link_to "Stage1", memory_group_memories_path(@memory_group.id, stage: 1) %>
-<%= link_to "Complete", memory_group_memories_path(@memory_group.id, stage: 0) %>
+
+<table class="table">
+	<tr>
+		<td><%= link_to "All Stage", memory_group_memories_path(@memory_group.id, stage: "all") %></td>
+	</tr>
+	<tr>
+		<td><%= link_to "Stage1", memory_group_memories_path(@memory_group.id, stage: 1) %></td>
+	</tr>
+	<% current_user.memory_stages.where.not(stage: nil).each do |n| %>
+		<tr>
+			<td><%= link_to memory_group_memories_path(@memory_group.id, stage: n.stage) do %>
+				Stage<%= n.stage %>
+				<% end %></td>
+			<td><%= n.period %></td>
+		</tr>
+	<% end %>
+	<tr>
+		<td><%= link_to "Complete", memory_group_memories_path(@memory_group.id, stage: 0) %></td>
+	</tr>
+</table>
 
 <h2>memory作成</h2>
 
@@ -56,6 +73,7 @@
 	        <td><%= m.problem.problem_content %></td>
 	        <td><%= attachment_image_tag m.answer_image, :answer_image, :fill, 80, 80, format: 'jpeg' %></td>
 	        <td><%= m.answer.answer_content %></td>
+	        <td><%= link_to "edit", edit_memory_path(m.id) %></td>
 		</tr>
 	 <% end %>
 </table>
