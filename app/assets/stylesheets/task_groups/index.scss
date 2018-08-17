@@ -64,7 +64,7 @@ h4 {
 .group2 {
   text-align: center;
   line-height: 270px;
-  border: dashed 1px #AAAAAA;
+  border: dashed 1.5px #AAAAAA;
   box-shadow: none;
 
   .plus-mark {
@@ -105,11 +105,11 @@ h4 {
 	z-index: 2;
 
   h4 {
-    margin: 50px 0px 0px 50px;
+    margin: 50px 0px 0px 70px;
   }
   .field {
     margin-top: 20px;
-    margin-left: 55px;
+    margin-left: 75px;
   }
   .edit-btn {
       display: inline-block;
@@ -121,7 +121,7 @@ h4 {
       border-radius: 3px;
       transition: .4s;
       position: absolute;
-      left: 60px;
+      left: 80px;
       bottom: 60px;
   }
   .edit-btn:hover {
@@ -138,11 +138,11 @@ h4 {
       border-radius: 3px;
       transition: .4s;
       position: absolute;
-      left: 140px;
+      left: 160px;
       bottom: 60px;
   }
   .delete-btn:hover {
-      background: #cbedff;
+      background: #FFDDFF;
       color: #FFF;
   }
   .close-mark {
@@ -176,4 +176,6 @@ input[type="text"]:focus, textarea:focus {
   box-shadow: 0 0 7px 0 rgba(255,153,0,1);
   outline: 0;
 }
-
+.label-content {
+  margin-left: 3px;
+}
