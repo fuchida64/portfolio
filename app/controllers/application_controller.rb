@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
 	def configure_permitted_parameters
 		devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :profile_image_id, :admin_name, :admin_image_id])
+		devise_parameter_sanitizer.permit(:sign_in, keys: [:login, :name, :email, :password])
 	end
 
 	def after_sign_in_path_for(resource)
@@ -26,3 +27,4 @@ class ApplicationController < ActionController::Base
   	end
 
 end
+

@@ -1,15 +1,14 @@
 
 <%= stylesheet_link_tag "task_groups/show", :media => "all" %>
 
-<div class="container">
-	<div class="row">
+	<div class="row ok">
 		<ul class="nav group-list">
 				<li><h2><%= @task_group.title %></h2></li>
 			<% @task_groups.each do |group| %>
 				<li class="other-group"><%= link_to group.title, task_group_path(group.id) %></li>
 			<% end %>
 		</ul>
-		<p class="pulus-mark"><a href="#create-modal" class="modalOpen">＋</a></p>
+		<p class="plus-mark"><a href="#create-modal" class="modalOpen">＋</a></p>
 	</div>
 
 	<div class="row task-list">
@@ -89,7 +88,6 @@
 			<% end %>
 		</div>
 	</div>
-</div>
 
 <div class="modal" id="create-modal">
 	<div class="overLay modalClose"></div>
