@@ -40,9 +40,8 @@ class TaskGroupsController < ApplicationController
 			redirect_to task_group_path(@task_group.id)
 		  	flash[:notice] = "削除されました"
 		else
-			@task_group.destroy
 			redirect_to task_groups_path
-			flash[:notice] = "削除されました"
+			flash[:notice] = "エラーが発生しました"
 		end
 	end
 

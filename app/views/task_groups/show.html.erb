@@ -12,10 +12,10 @@
 	</div>
 
 	<div class="row task-list">
-		<div class="col-lg-4 status-box">
+		<div class="col-lg-4 status-box status1" >
 			<h3>InBox</h3>
 			<% @tasks.where(status: 1).each do |task| %>
-				<div class="task-group">
+				<div id="<%= task.id %>" class="task-group">
 					<%= task.title %>
 					<input type="checkbox" name="checkbox" class="checkbox" value="/tasks/<%= task.id %>/clear" />
 					<p><a href="#modal<%= task.id %>" class="modalOpen">＊</a></p>
@@ -36,10 +36,10 @@
 				</div>
 			<% end %>
 		</div>
-		<div class="col-lg-4 status-box">
+		<div class="col-lg-4 status-box status2" >
 			<h3>OnGoing</h3>
 			<% @tasks.where(status: 2).each do |task| %>
-				<div class="task-group">
+				<div id="<%= task.id %>" class="task-group">
 					<%= task.title %>
 					<input type="checkbox" name="checkbox" class="checkbox" value="/tasks/<%= task.id %>/clear" />
 					<p><a href="#modal<%= task.id %>" class="modalOpen">＊</a></p>
@@ -60,13 +60,13 @@
 				</div>
 			<% end %>
 		</div>
-		<div class="col-lg-4 status-box">
+		<div class="col-lg-4 status-box status3" >
 			<div class="done">
 				<h3>Done</h3>
 				<%= link_to "clear", task_group_path(@task_group.id, status: 3), method: :delete, class: 'clear', "data-confirm" => "本当に削除しますか?" %>
 			</div>
 			<% @tasks.where(status: 3).each do |task| %>
-				<div class="task-group">
+				<div id="<%= task.id %>" class="task-group">
 					<%= task.title %>
 					<input type="checkbox" name="checkbox" class="checkbox" value="/tasks/<%= task.id %>/clear" checked />
 					<p><a href="#modal<%= task.id %>" class="modalOpen">＊</a></p>
@@ -111,7 +111,12 @@
 	</div>
 </div>
 
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
+
+<p>並び順１　<span id="result1"></span></p>
+<p>並び順２　<span id="result2"></span></p>
+<p>並び順３　<span id="result3"></span></p>
 
 <%= javascript_include_tag "task_group.js" %>
 

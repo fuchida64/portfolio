@@ -30,3 +30,25 @@ $(function(){
 	});
 });
 
+$(function () {
+    $('.status-box').sortable({
+        connectWith: ".status-box",
+        helper: "clone",
+        appendTo: ".task-list",
+        scroll: false,
+
+        update: function (ev, ui) {
+            var result1 = $(".status1").sortable("toArray");
+            console.log(result1);  //  例)  [object Array]["item1", "item2", "item3", "item4", "item5"]
+            $("#result1").html(result1.join(','));
+
+            var result2 = $(".status2").sortable("toArray");
+            console.log(result2);  //  例)  [object Array]["item1", "item2", "item3", "item4", "item5"]
+            $("#result2").html(result2.join(','));
+
+            var result3 = $(".status3").sortable("toArray");
+            console.log(result3);  //  例)  [object Array]["item1", "item2", "item3", "item4", "item5"]
+            $("#result3").html(result3.join(','));
+        }
+    });
+});
