@@ -2,6 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+body {
+	background-color: #f9fbfe;
+}
 
 
 
@@ -96,13 +99,13 @@ body {
   overflow:auto;
 }
 .status-box:nth-child(1) {
-	background-color: #EEEEEE;
+	background-color: white;
 }
 .status-box:nth-child(2) {
-	background-color: #EEEEEE;
+	background-color: white;
 }
 .status-box:nth-child(3) {
-	background-color: #EEEEEE;
+	background-color: white;
 }
 .task-group {
 	border: 1px solid;

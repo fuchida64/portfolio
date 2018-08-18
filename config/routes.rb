@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   #task
   resources :tasks
   get 'tasks/:id/clear' => 'tasks#check'
+  post 'tasks/position' => 'tasks#position_update'
 
   #diary
   resources :diaries do

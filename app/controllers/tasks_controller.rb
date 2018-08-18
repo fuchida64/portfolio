@@ -34,9 +34,17 @@ class TasksController < ApplicationController
 		end
 	end
 
+	def position_update
+		position2 = params[:position2]
+		position2.each do |u|
+			@task = Task.find(u.to_i)
+			@task.update(:status => 2)
+		end
+	end
+
 	private
 
 	def task_params
-		params.require(:task).permit(:title, :status, :task_group_id)
+		params.require(:task).permit(:title, :status, :position, :task_group_id)
 	end
 end
