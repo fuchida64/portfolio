@@ -5,7 +5,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <script src="jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" >
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -22,7 +22,12 @@
             <li><%= link_to 'Admins', admins_path, class: "" %></li>
             <li><%= link_to 'logout', destroy_admin_session_path, method: :delete, "data-confirm" => "本当にログアウトしますか？", class: "" %></li>
           <% elsif user_signed_in? %>
-            <li><%= link_to 'to_do', task_groups_path, class: "" %></li>
+            <li><%= link_to 'to_do', task_groups_path, class: "" %>
+              <ul>
+                <li><%= link_to 'to_do', task_groups_path, class: "" %></li>
+                <li><%= link_to 'to_do', task_groups_path, class: "" %></li>
+              </ul>
+            </li>
             <li><%= link_to 'memory', memory_groups_path, class: "" %></li>
             <li><%= link_to 'diary', diaries_path, class: "" %></li>
             <li><%= link_to 'my page', user_path(current_user.id), class: "" %></li>

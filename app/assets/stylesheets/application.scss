@@ -14,7 +14,9 @@
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
-
+a {
+	text-decoration: none;
+}
 *{
   margin: 0;
   padding: 0;
@@ -61,8 +63,29 @@ header h3 {
 	}
 }
 
+.nav li ul {
+	display: none;
+	position: absolute;
+	list-style: none;
+	width: 120px;
+
+	li {
+		color: olive;
+		background: #afc6e2;
+	}
+	li:last-child {
+	  	margin-right: 0px
+	}
+	li a {
+	  	border-top: 1px solid #eee;
+	}
+}
+
 // body
 body {
 	width: 100% ;
 	min-height: 600px ;
 }
+
+
+
