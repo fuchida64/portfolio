@@ -18,3 +18,12 @@
 //= require bootstrap-sprockets
 //= require nested_form_fields
 
+$(function() {
+	var nav = $('.nav');
+	$('li', nav).mouseover(function(e) {
+		$('ul', this).stop().slideDown();
+	})
+	.mouseout(function(e) {
+		$('ul', this).stop().slideUp();
+	});
+});
