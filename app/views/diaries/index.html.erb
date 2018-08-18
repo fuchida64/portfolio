@@ -1,19 +1,19 @@
+<div class="row">
+	<h4>一覧</h4>
+	<table class="table">
+		<% @diaries.each do |d| %>
+		<tr>
+			<th><%= d.title %></th>
+			<th><%= d.content %></th>
+			<th><%= d.inform_status %></th>
+			<th><%= link_to 'show', diary_path(d.id), class: "btn" %></th>
 
-<%= link_to 'new', new_diary_path, class: "" %>
-
-<h4>一覧</h4>
-<table class="table">
-	<% @diaries.each do |d| %>
-	<tr>
-		<th><%= d.title %></th>
-		<th><%= d.content %></th>
-		<th><%= d.inform_status %></th>
-		<th><%= link_to 'show', diary_path(d.id), class: "btn" %></th>
-
-		<% d.diary_images.each do |g| %>
-        <th><%= g.id %></th>
-        <th><%= attachment_image_tag g, :diary_image, :fill, 80, 80, format: 'jpeg' %></th>
-        <% end %>
-	</tr>
-	<% end %>
-</table>
+			<% d.diary_images.each do |g| %>
+	        <th><%= g.id %></th>
+	        <th><%= attachment_image_tag g, :diary_image, :fill, 80, 80, format: 'jpeg' %></th>
+	        <% end %>
+		</tr>
+		<% end %>
+	</table>
+	<%= link_to 'new', new_diary_path, class: "" %>
+</div>
