@@ -44,6 +44,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :diary_date %><br />
+    <%= f.date_field :diary_date, value: Date.current %>
+  </div>
+
+  <div class="field">
     <div class="pretty p-switch p-fill">
       <% if current_user.public_setting == 1 %>
         <%= f.check_box :inform_status, {:checked => true, :id => 'public-id'}, "公開", "非公開" %>
