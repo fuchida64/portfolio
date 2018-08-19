@@ -35,11 +35,28 @@ class TasksController < ApplicationController
 	end
 
 	def position_update
-		position2 = params[:position2]
-		position2.each do |u|
-			@task = Task.find(u.to_i)
-			@task.update(:status => 2)
+
+		result1 = params[:result1]
+		position1 = result1.split(',')
+		position1.each.with_index(1) do |result, i|
+			@task = Task.find(result)
+			@task.update(:status => 1, :position => i)
 		end
+
+		result2 = params[:result2]
+		position2 = result2.split(',')
+		position2.each.with_index(1) do |result, i|
+			@task = Task.find(result)
+			@task.update(:status => 2, :position => i)
+		end
+
+		result3 = params[:result3]
+		position3 = result3.split(',')
+		position3.each.with_index(1) do |result, i|
+			@task = Task.find(result)
+			@task.update(:status => 3, :position => i)
+		end
+		redirect_back(fallback_location: homes_path)
 	end
 
 	private

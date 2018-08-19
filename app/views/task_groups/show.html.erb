@@ -12,9 +12,10 @@
 	</div>
 
 	<div class="row task-list">
-		<div class="col-lg-4 status-box status1" >
+		<div class="col-lg-4 status-box" >
 			<h3>InBox</h3>
-			<% @tasks.where(status: 1).each do |task| %>
+			<div class="status-field status1">
+				<% @tasks.where(status: 1).order(position: :asc).each do |task| %>
 				<div id="<%= task.id %>" class="task-group">
 					<%= task.title %>
 					<input type="checkbox" name="checkbox" class="checkbox" value="/tasks/<%= task.id %>/clear" />
@@ -35,10 +36,12 @@
 					<%= link_to "delete", task_path(task.id), method: :delete, class: 'btn', "data-confirm" => "本当に削除しますか?" %>
 				</div>
 			<% end %>
+			</div>
 		</div>
-		<div class="col-lg-4 status-box status2" >
+		<div class="col-lg-4 status-box" >
 			<h3>OnGoing</h3>
-			<% @tasks.where(status: 2).each do |task| %>
+			<div class="status-field status2">
+				<% @tasks.where(status: 2).order(position: :asc).each do |task| %>
 				<div id="<%= task.id %>" class="task-group">
 					<%= task.title %>
 					<input type="checkbox" name="checkbox" class="checkbox" value="/tasks/<%= task.id %>/clear" />
@@ -59,13 +62,15 @@
 					<%= link_to "delete", task_path(task.id), method: :delete, class: 'btn', "data-confirm" => "本当に削除しますか?" %>
 				</div>
 			<% end %>
+			</div>
 		</div>
-		<div class="col-lg-4 status-box status3" >
+		<div class="col-lg-4 status-box" >
 			<div class="done">
 				<h3>Done</h3>
 				<%= link_to "clear", task_group_path(@task_group.id, status: 3), method: :delete, class: 'clear', "data-confirm" => "本当に削除しますか?" %>
 			</div>
-			<% @tasks.where(status: 3).each do |task| %>
+			<div class="status-field status3">
+				<% @tasks.where(status: 3).order(position: :asc).each do |task| %>
 				<div id="<%= task.id %>" class="task-group">
 					<%= task.title %>
 					<input type="checkbox" name="checkbox" class="checkbox" value="/tasks/<%= task.id %>/clear" checked />
@@ -86,6 +91,7 @@
 					<%= link_to "delete", task_path(task.id), method: :delete, class: 'btn', "data-confirm" => "本当に削除しますか?" %>
 				</div>
 			<% end %>
+			</div>
 		</div>
 	</div>
 
@@ -113,10 +119,10 @@
 
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
-
-<p>並び順１　<span id="result1"></span></p>
-<p>並び順２　<span id="result2"></span></p>
-<p>並び順３　<span id="result3"></span></p>
-
 <%= javascript_include_tag "task_group.js" %>
 
+<%= form_tag position_update_path, :method => 'post', id: "position" do %>
+    <input type="hidden" id="result1" name="result1" />
+    <input type="hidden" id="result2" name="result2" />
+    <input type="hidden" id="result3" name="result3" />
+<% end %>

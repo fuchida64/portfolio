@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(version: 2018_08_08_110327) do
   create_table "tasks", force: :cascade do |t|
     t.text "title"
     t.integer "status"
+    t.integer "position"
     t.integer "task_group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -161,7 +162,6 @@ ActiveRecord::Schema.define(version: 2018_08_08_110327) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["name"], name: "index_users_on_name", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
