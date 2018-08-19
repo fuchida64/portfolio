@@ -41,12 +41,7 @@
 		</div>
 	</div>
 
-
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
-<%= javascript_include_tag "task_group.js" %>
-
-<%= form_tag position_update_path, :method => 'post', id: "position" do %>
+<%= form_tag update_position_path, :method => 'post', id: "position" do %>
     <input type="hidden" id="result1" name="result1" />
     <input type="hidden" id="result2" name="result2" />
     <input type="hidden" id="result3" name="result3" />
@@ -93,5 +88,8 @@
 		<% end %>
 	</div>
 </div>
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<%= javascript_include_tag "task_group.js" %>
 
 

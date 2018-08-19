@@ -34,9 +34,10 @@ Rails.application.routes.draw do
   #task
   resources :tasks
   get 'tasks/:id/clear' => 'tasks#check'
-  post 'tasks/position' => 'tasks#position_update', as: 'position_update'
+  post 'tasks/position' => 'tasks#position_update', as: 'update_position'
 
   #diary
+  get 'diaries/search' => 'diaries#search', as:'search_diaries'
   resources :diaries do
     resource :diary_comments
     resource :favorites

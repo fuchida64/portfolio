@@ -31,8 +31,9 @@
           <% elsif user_signed_in? %>
             <li><%= link_to 'to_do', task_groups_path, class: "" %>
               <ul>
-                <li><%= link_to 'to_do', task_groups_path, class: "" %></li>
-                <li><%= link_to 'memory', memory_groups_path, class: "" %></li>
+                <% current_user.task_groups.each do |task| %>
+                  <li><%= link_to task.title, task_group_path(task.id), class: "" %></li>
+                <% end %>
               </ul>
             </li>
             <li><%= link_to 'memory', memory_groups_path, class: "" %></li>
