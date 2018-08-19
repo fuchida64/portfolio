@@ -30,7 +30,6 @@ class TasksController < ApplicationController
 		@task = Task.find(params[:id])
 		if @task.destroy
 		  redirect_to task_group_path(@task.task_group_id)
-		  flash[:notice] = "削除されました"
 		end
 	end
 
