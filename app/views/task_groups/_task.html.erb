@@ -1,0 +1,17 @@
+
+<div id="<%= task.id %>" class="task-group">
+	<%= task.title %>
+	<input type="checkbox" name="checkbox" class="checkbox" value="/tasks/<%= task.id %>/clear" <% if task.status == 3 %> checked <% end %> />
+	<p><a href="#modal<%= task.id %>" data-lity="data-lity">＊</a></p>
+	<div id="modal<%= task.id %>" class="lity-hide">
+		<div class="tasks-show">
+			<%= form_for task, url: task_path(task.id) do |f|%>
+			  	<%= f.text_field :title %>
+			  	<%= f.number_field :status %>
+			  	<%= f.submit '更新' %>
+			<% end %>
+			<%= link_to "delete", task_path(task.id), method: :delete, class: 'btn', "data-confirm" => "本当に削除しますか?" %>
+		</div>
+	</div>
+</div>
+
