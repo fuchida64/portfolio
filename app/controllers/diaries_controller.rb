@@ -31,7 +31,7 @@ class DiariesController < ApplicationController
 
 	def diary_params
 		params.require(:diary).permit(
-			:title, :content, :user_id, :inform_status,
+			:title, :content, :diary_date, :user_id, :inform_status,
 			diary_images_attributes: [:id, :diary_id, :diary_image, :_destroy]
 			)
 	end

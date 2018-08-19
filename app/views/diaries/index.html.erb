@@ -3,6 +3,7 @@
 	<table class="table">
 		<% @diaries.each do |d| %>
 		<tr>
+			<th><%= d.diary_date %></th>
 			<th><%= d.title %></th>
 			<th><%= d.content %></th>
 			<th><%= d.inform_status %></th>

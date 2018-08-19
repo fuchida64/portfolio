@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2018_08_08_110327) do
     t.integer "user_id"
     t.text "title"
     t.text "content"
+    t.date "diary_date"
     t.string "inform_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
