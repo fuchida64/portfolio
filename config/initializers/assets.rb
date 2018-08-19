@@ -16,6 +16,7 @@ Rails.application.config.assets.precompile += %w( task_group.js )
 Rails.application.config.assets.precompile += %w( diary.js )
 Rails.application.config.assets.precompile += %w( user.js )
 Rails.application.config.assets.precompile += %w( slick.min.js )
+Rails.application.config.assets.precompile += %w( lity.js )
 
 # task
 Rails.application.config.assets.precompile += %w( task_groups/index.scss )
@@ -25,5 +26,5 @@ Rails.application.config.assets.precompile += %w( diaries/new.scss )
 Rails.application.config.assets.precompile += %w( diaries/show.scss )
 Rails.application.config.assets.precompile += %w( slick.css )
 Rails.application.config.assets.precompile += %w( slick-theme.css )
-
+Rails.application.config.assets.precompile += %w( lity.css )
 
