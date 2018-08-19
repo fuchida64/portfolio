@@ -5,7 +5,7 @@
 		<tr>
 			<ul class="slider">
 				<% @diary.diary_images.each do |g| %>
-					<li><%= attachment_image_tag g, :diary_image, :fill, 80, 80, format: 'jpeg' %></li>
+					<li><%= attachment_image_tag g, :diary_image, format: 'jpeg' %></li>
 				<% end %>
 			</ul>
 		</tr>
