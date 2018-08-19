@@ -96,7 +96,7 @@ body {
 	height: 550px;
 	margin: 15px;
 	padding: 5px;
-  overflow:auto;
+  	overflow:auto;
 }
 .status-box:nth-child(1) {
 	background-color: white;
@@ -106,6 +106,10 @@ body {
 }
 .status-box:nth-child(3) {
 	background-color: white;
+}
+.status-field {
+	height: 480px;
+	overflow:auto;
 }
 .task-group {
 	border: 1px solid;

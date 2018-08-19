@@ -31,24 +31,23 @@ $(function(){
 });
 
 $(function () {
-    $('.status-box').sortable({
-        connectWith: ".status-box",
+    $('.status-field').sortable({
+        connectWith: ".status-field",
         helper: "clone",
         appendTo: ".task-list",
         scroll: false,
 
         update: function (ev, ui) {
             var result1 = $(".status1").sortable("toArray");
-            console.log(result1);  //  例)  [object Array]["item1", "item2", "item3", "item4", "item5"]
-            $("#result1").html(result1.join(','));
+            $("#result1").val(result1);
 
             var result2 = $(".status2").sortable("toArray");
-            console.log(result2);  //  例)  [object Array]["item1", "item2", "item3", "item4", "item5"]
-            $("#result2").html(result2.join(','));
+            $("#result2").val(result2);
 
             var result3 = $(".status3").sortable("toArray");
-            console.log(result3);  //  例)  [object Array]["item1", "item2", "item3", "item4", "item5"]
-            $("#result3").html(result3.join(','));
+            $("#result3").val(result3);
+
+            $("#position").submit();
         }
     });
 });
