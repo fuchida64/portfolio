@@ -23,6 +23,10 @@ class DiariesController < ApplicationController
 		@diary_comment = DiaryComment.new
 	end
 
+	def search
+		@diaries = Diary.search(params[:search])
+	end
+
 	private
 
 	def diary_params

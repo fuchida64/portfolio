@@ -16,4 +16,12 @@ class Diary < ApplicationRecord
 		favorites.where(user_id: user.id).exists?
 	end
 
+	def self.search(search)
+		if search
+			Diary.where(['(title LIKE ?) OR (content LIKE ?)', "%#{search}%", "%#{search}%"])
+		else
+			Diary.all
+		end
+	end
+
 end

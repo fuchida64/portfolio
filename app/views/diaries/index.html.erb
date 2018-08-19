@@ -17,3 +17,8 @@
 	</table>
 	<%= link_to 'new', new_diary_path, class: "" %>
 </div>
+
+<%= form_tag search_diaries_path, :method => 'get' do %>
+	<%= text_field_tag :search, params[:search] %>
+	<%= submit_tag "検索", :title => nil, :content => nil %>
+<% end %>
