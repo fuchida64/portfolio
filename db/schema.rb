@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_20_060032) do
+ActiveRecord::Schema.define(version: 2018_08_20_181944) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -133,6 +133,15 @@ ActiveRecord::Schema.define(version: 2018_08_20_060032) do
     t.index ["follower_id", "following_id"], name: "index_relationships_on_follower_id_and_following_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
     t.index ["following_id"], name: "index_relationships_on_following_id"
+  end
+
+  create_table "task_details", force: :cascade do |t|
+    t.date "deadline"
+    t.time "time_required"
+    t.time "time_limit"
+    t.integer "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "task_groups", force: :cascade do |t|

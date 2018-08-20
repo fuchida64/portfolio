@@ -34,7 +34,6 @@ class TasksController < ApplicationController
 	end
 
 	def position_update
-
 		result1 = params[:result1]
 		position1 = result1.split(',')
 		position1.each.with_index(1) do |result, i|
@@ -61,6 +60,9 @@ class TasksController < ApplicationController
 	private
 
 	def task_params
-		params.require(:task).permit(:title, :status, :position, :task_group_id)
+		params.require(:task).permit(
+		  :title, :status, :position, :task_group_id,
+		  task_detail_attributes: [:id, :deadline, :time_required, :time_limit, :task_id, :_destroy]
+		)
 	end
 end

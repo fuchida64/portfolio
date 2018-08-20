@@ -1,6 +1,7 @@
 
 <div id="<%= task.id %>" class="task-group">
 	<%= task.title %>
+		<%= task.task_detail.deadline %>
 	<input type="checkbox" name="checkbox" class="checkbox" value="/tasks/<%= task.id %>/clear" <% if task.status == 3 %> checked <% end %> />
 	<p><a href="#modal<%= task.id %>" data-lity="data-lity">＊</a></p>
 	<div id="modal<%= task.id %>" class="lity-hide">
