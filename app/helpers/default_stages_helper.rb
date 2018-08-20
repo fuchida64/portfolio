@@ -1,0 +1,2 @@
+module DefaultStagesHelper
+end

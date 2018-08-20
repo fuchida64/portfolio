@@ -35,8 +35,8 @@
 	</div>
 <% end %>
 
-<h2><%= current_user.memory_stages.length + 1 %>Stage作成</h2>
-<%= form_for @memory_stage, url: memory_stages_path do |s| %>
+<h2>Stage<%= current_user.default_stages.maximum(:stage) + 1 %>作成</h2>
+<%= form_for @default_stage, url: default_stages_path do |s| %>
 
 	<div class="field row">
 		<%= s.label :period %><br />
@@ -52,13 +52,13 @@
 <table class="table">
 	<tr>
 		<td>stage1</td>
-		<td>today</td>
+		<td>1日</td>
 	</tr>
 
-	<% current_user.memory_stages.where.not(stage: nil).each do |memory_stage| %>
+	<% current_user.default_stages.where.not(stage: nil).each do |default_stage| %>
 		<tr>
-			<td>stage<%= memory_stage.stage %></td>
-			<td><%= memory_stage.period %></td>
+			<td>stage<%= default_stage.stage %></td>
+			<td><%= default_stage.period %>日</td>
 		</tr>
 	<% end %>
 </table>

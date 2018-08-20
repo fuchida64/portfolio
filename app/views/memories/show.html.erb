@@ -1,5 +1,5 @@
 
-<%= link_to "一覧へ", memory_group_path(@memory_group) %>
+
 
 <table class='table'>
 	<% @memories.each do |m| %>
@@ -15,4 +15,5 @@
 	        <% end %>
 		</tr>
 	 <% end %>
+	 <%= link_to "一覧へ", memory_group_path(@memory_group) %>
 </table>

@@ -36,7 +36,13 @@
                 <% end %>
               </ul>
             </li>
-            <li><%= link_to 'memory', memory_groups_path, class: "" %></li>
+            <li><%= link_to 'memory', memory_groups_path, class: "" %>
+              <ul>
+                <% current_user.memory_groups.each do |memory| %>
+                  <li><%= link_to memory.title, memory_group_path(memory.id), class: "" %></li>
+                <% end %>
+              </ul>
+            </li>
             <li><%= link_to 'diary', diaries_path, class: "" %></li>
             <li><%= link_to 'my page', user_path(current_user.id), class: "" %></li>
             <li><%= link_to 'logout', destroy_user_session_path, method: :delete, "data-confirm" => "本当にログアウトしますか？", class: "" %></li>

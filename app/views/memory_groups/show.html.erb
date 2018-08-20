@@ -7,23 +7,28 @@
 <%= @memory_group.content%>
 <br>
 
+<h2>今日のmemory</h2>
+
 <table class="table">
 	<tr>
 		<td><%= link_to "All Stage", memory_group_memories_path(@memory_group.id, stage: "all") %></td>
+		<td><%= @memory_group.memories.where.not(stage: 0).where("execution_date <= ?", Date.current).length %>個</td>
 	</tr>
 	<tr>
 		<td><%= link_to "Stage1", memory_group_memories_path(@memory_group.id, stage: 1) %></td>
+		<td><%= @memory_group.memories.where(stage: 1).where("execution_date <= ?", Date.current).length %>個</td>
 	</tr>
-	<% current_user.memory_stages.where.not(stage: nil).each do |n| %>
+	<% @memory_group.memory_stages.where.not(stage: nil).each do |n| %>
 		<tr>
 			<td><%= link_to memory_group_memories_path(@memory_group.id, stage: n.stage) do %>
 				Stage<%= n.stage %>
 				<% end %></td>
-			<td><%= n.period %></td>
+			<td><%= @memory_group.memories.where(stage: n.stage).where("execution_date <= ?", Date.current).length %>個</td>
 		</tr>
 	<% end %>
 	<tr>
 		<td><%= link_to "Complete", memory_group_memories_path(@memory_group.id, stage: 0) %></td>
+		<td><%= @memory_group.memories.where(stage: 0).length %>個</td>
 	</tr>
 </table>
 
@@ -64,6 +69,8 @@
 	</div>
 <% end %>
 
+<h2>memory一覧</h2>
+
 <table class='table'>
 	<% @memory_group.memories.each do |m| %>
 		<tr>
@@ -73,7 +80,37 @@
 	        <td><%= m.problem.problem_content %></td>
 	        <td><%= attachment_image_tag m.answer_image, :answer_image, :fill, 80, 80, format: 'jpeg' %></td>
 	        <td><%= m.answer.answer_content %></td>
+	        <td><%= m.correct_num %></td>
+	        <td><%= m.wrong_num %></td>
 	        <td><%= link_to "edit", edit_memory_path(m.id) %></td>
 		</tr>
 	 <% end %>
+</table>
+
+<h2>Stage<%= @memory_group.memory_stages.maximum(:stage) + 1 %>作成</h2>
+<%= form_for @memory_stage, url: memory_group_memory_stages_path(@memory_group) do |s| %>
+
+	<div class="field row">
+		<%= s.label :period %><br />
+		<%= s.number_field :period %>
+	</div>
+
+	<div class="actions row">
+		<%= s.submit '作成', class: "btn btn-primary" %>
+	</div>
+<% end %>
+
+
+<table class="table">
+	<tr>
+		<td>stage1</td>
+		<td>1日</td>
+	</tr>
+
+	<% @memory_group.memory_stages.where.not(stage: nil).each do |memory_stage| %>
+		<tr>
+			<td>stage<%= memory_stage.stage %></td>
+			<td><%= memory_stage.period %>日</td>
+		</tr>
+	<% end %>
 </table>
