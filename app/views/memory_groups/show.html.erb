@@ -2,8 +2,9 @@
 
 <%= Time.zone.now.strftime("%Y-%m-%d") %>
 <%= Date.today %>
-<%= Date.current.next_day(1) %>
-<%= @memory_group.title %>
+<%= Date.current %>
+
+<h2><%= @memory_group.title %></h2>
 <%= @memory_group.content%>
 <br>
 

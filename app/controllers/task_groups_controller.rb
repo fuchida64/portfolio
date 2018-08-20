@@ -2,14 +2,14 @@ class TaskGroupsController < ApplicationController
 
 	def index
 		@task_groups = current_user.task_groups
-		@task_group_new = TaskGroup.new
+		@task_group = TaskGroup.new
 		@tasks = Task.all
 	end
 
 	def create
-		@task_group_new = TaskGroup.new(task_group_params)
-		@task_group_new.user_id = current_user.id
-		if @task_group_new.save
+		@task_group = TaskGroup.new(task_group_params)
+		@task_group.user_id = current_user.id
+		if @task_group.save
 			redirect_to task_groups_path
 		else
 			render 'index'
@@ -20,7 +20,8 @@ class TaskGroupsController < ApplicationController
 		@task_group = TaskGroup.find(params[:id])
 		@task_groups = TaskGroup.where.not(id: @task_group.id)
 		@tasks = @task_group.tasks
-		@task_new = Task.new
+		@task = Task.new
+		@task.build_task_detail
 	end
 
 	def update

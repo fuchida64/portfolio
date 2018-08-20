@@ -73,7 +73,7 @@
 
 <div id="create-modal" class="lity-hide">
 	<div class="tasks-show">
-		<%= form_for @task_new, url: tasks_path(group_id: @task_group.id) do |f| %>
+		<%= form_for @task, url: tasks_path(group_id: @task_group.id) do |f| %>
 			<div class="field">
 			  	<%= f.label :title %><br />
 			  	<%= f.text_field :title %>
@@ -82,6 +82,18 @@
 			  	<%= f.label :status %><br />
 			  	<%= f.number_field :status, value: 1 %>
 			</div>
+
+			<%= f.fields_for :task_detail do |d| %>
+				<div class="field">
+					<%= d.label :deadline %><br />
+					<%= d.date_field :deadline %>
+				</div>
+				<div class="field">
+					<%= d.label :time_required %><br />
+					<%= d.time_field :time_required %>
+				</div>
+			<% end %>
+
 			<div class="actions">
 			  <%= f.submit '作成', class: "btn btn-primary" %>
 			</div>
