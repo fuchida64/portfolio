@@ -46,6 +46,7 @@ Rails.application.routes.draw do
   #memory_group
   resources :memory_groups do
     resource :memories, only: [:create, :show]
+    resource :memory_stages, only: [:create]
   end
 
   #memory
@@ -53,7 +54,7 @@ Rails.application.routes.draw do
   get 'memories/:id/correct' => 'memories#correct', as: 'correct'
   get 'memories/:id/wrong' => 'memories#wrong', as: 'wrong'
 
-  #memory_stage
-  resources :memory_stages
+  #default_stage
+  resources :default_stages
 
 end

@@ -21,20 +21,22 @@ class MemoriesController < ApplicationController
 
 	def correct
 		@memory = Memory.find(params[:id])
-		if current_user.memory_stages.exists? && (current_user.memory_stages.maximum(:stage) != params[:stage].to_i)
+		correct_num = @memory.correct_num + 1
+		if @memory.memory_group.memory_stages.exists? && (@memory.memory_group.memory_stages.maximum(:stage) != params[:stage].to_i)
 			next_stage = (params[:stage].to_i + 1)
-			@memory_stage = current_user.memory_stages.find_by(stage: next_stage)
-			@memory.update(:stage => next_stage, :execution_date => Date.current.next_day(@memory_stage.period))
+			@memory_stage = @memory.memory_group.memory_stages.find_by(stage: next_stage)
+			@memory.update(:stage => next_stage, :correct_num => correct_num, :execution_date => Date.current.next_day(@memory_stage.period))
 			redirect_back(fallback_location: homes_path)
 		else
-			@memory.update(:stage => 0)
+			@memory.update(:stage => 0, :correct_num => correct_num)
 			redirect_back(fallback_location: homes_path)
 		end
 	end
 
 	def wrong
 		@memory = Memory.find(params[:id])
-		@memory.update(:stage => 1, :execution_date => Date.tomorrow)
+		wrong_num = @memory.wrong_num + 1
+		@memory.update(:stage => 1, :wrong_num => wrong_num, :execution_date => Date.tomorrow)
 		redirect_back(fallback_location: homes_path)
 	end
 
@@ -45,14 +47,14 @@ class MemoriesController < ApplicationController
 	def update
 		@memory = Memory.find(params[:id])
 		@memory.update(memory_params)
-		redirect_back(fallback_location: homes_path)
+		redirect_to memory_group_path(@memory.memory_group)
 	end
 
 	private
 
 	def memory_params
 		params.require(:memory).permit(
-		  :stage,:execution_date,:memory_group_id,
+		  :stage, :execution_date, :correct_num, :wrong_num, :memory_group_id,
 		  problem_attributes: [:id, :problem_content, :memory_id, :_destroy],
 		  problem_image_attributes: [:id, :problem_image, :memory_id, :_destroy],
 		  answer_attributes: [:id, :answer_content, :memory_id, :_destroy],

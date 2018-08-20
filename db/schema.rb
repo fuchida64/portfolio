@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_08_110327) do
+ActiveRecord::Schema.define(version: 2018_08_20_060032) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -41,6 +41,14 @@ ActiveRecord::Schema.define(version: 2018_08_08_110327) do
   create_table "answers", force: :cascade do |t|
     t.text "answer_content"
     t.integer "memory_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "default_stages", force: :cascade do |t|
+    t.integer "stage"
+    t.integer "period"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -79,6 +87,8 @@ ActiveRecord::Schema.define(version: 2018_08_08_110327) do
 
   create_table "memories", force: :cascade do |t|
     t.integer "stage", default: 1
+    t.integer "correct_num", default: 0
+    t.integer "wrong_num", default: 0
     t.date "execution_date"
     t.integer "memory_group_id"
     t.datetime "created_at", null: false
@@ -96,7 +106,7 @@ ActiveRecord::Schema.define(version: 2018_08_08_110327) do
   create_table "memory_stages", force: :cascade do |t|
     t.integer "stage"
     t.integer "period"
-    t.integer "user_id"
+    t.integer "memory_group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -163,6 +173,7 @@ ActiveRecord::Schema.define(version: 2018_08_08_110327) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["name"], name: "index_users_on_name", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

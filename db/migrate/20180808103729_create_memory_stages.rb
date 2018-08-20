@@ -3,7 +3,7 @@ class CreateMemoryStages < ActiveRecord::Migration[5.2]
     create_table :memory_stages do |t|
       t.integer :stage
       t.integer :period
-      t.integer :user_id
+      t.integer :memory_group_id
 
       t.timestamps
     end

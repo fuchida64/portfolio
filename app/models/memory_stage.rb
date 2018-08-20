@@ -1,3 +1,3 @@
 class MemoryStage < ApplicationRecord
-	belongs_to :user
+	belongs_to :memory_group
 end
