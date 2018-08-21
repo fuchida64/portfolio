@@ -137,8 +137,8 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
 
   create_table "task_details", force: :cascade do |t|
     t.date "deadline"
-    t.time "time_required"
-    t.time "time_limit"
+    t.integer "time_required"
+    t.integer "time_limit"
     t.integer "task_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

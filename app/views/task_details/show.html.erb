@@ -1,0 +1,127 @@
+
+<%= @task.title %><br>
+<%= @task.task_detail.deadline %><br>
+<%= @task.task_detail.time_required %><br>
+<%= @task.task_detail.time_limit %>
+
+<form name="timer">
+<input type="text" value="<%= @task.task_detail.time_limit/3600 %>">
+<input type="text" value="<%= @task.task_detail.time_limit/60%60 %>">
+<input type="text" value="<%= @task.task_detail.time_limit%60 %>"><br>
+<input type="button" value="スタート" onclick="cntStart()">
+<input type="button" value="ストップ" onclick="cntStop()">
+</form>
+
+<div id="countDownWrap">
+<% min = @task.task_detail.time_limit/60%60 %>
+<% sec = @task.task_detail.time_limit%60 %>
+   <div class="countDown">
+     <span id="countDown_hr"><%= @task.task_detail.time_limit/3600 %></span>：
+     <span id="countDown_min"><% if min.to_s.length <= 1 %>0<%= min %><% else %><%= min %><% end %></span>：
+     <span id="countDown_sec"><% if sec.to_s.length <= 1 %>0<%= sec %><% else %><%= sec %><% end %></span>
+   </div>
+</div>
+
+<%= form_tag update_limit_path(@task.id), :method => 'patch', id: "update_time_limit" do %>
+    <input type="hidden" id="update_limit" name="update_limit" />
+<% end %>
+
+<script>
+
+var timer1; //タイマーを格納する変数（タイマーID）の宣言
+
+//カウントダウン関数を1000ミリ秒毎に呼び出す関数
+function cntStart()
+{
+  document.timer.elements[3].disabled=true;
+  timer1=setInterval("countDown()",1000);
+}
+
+//タイマー停止関数
+function cntStop()
+{
+  document.timer.elements[3].disabled=false;
+  clearInterval(timer1);
+  var hr=document.timer.elements[0].value;
+      hr=parseInt(hr);
+  var min=document.timer.elements[1].value;
+      min=parseInt(min);
+  var sec=document.timer.elements[2].value;
+      sec=parseInt(sec);
+  $("#update_limit").val(hr*3600+min*60+sec);
+  $("#update_time_limit").submit();
+}
+
+//カウントダウン関数
+function countDown()
+{
+  var hr=document.timer.elements[0].value;
+  var min=document.timer.elements[1].value;
+  var sec=document.timer.elements[2].value;
+
+  if( (min=="") && (sec=="") )
+  {
+    alert("時刻を設定してください！");
+    reSet();
+  }
+  else
+  {
+    if (hr=="") hr=0;
+    hr=parseInt(hr);
+
+    if (min=="") min=0;
+    min=parseInt(min);
+
+    if (sec=="") sec=0;
+    sec=parseInt(sec);
+
+    tmWrite(hr*3600+min*60+sec-1);
+  }
+}
+
+//残り時間を書き出す関数
+function tmWrite(int)
+{
+  int=parseInt(int);
+
+  if (int<=0)
+  {
+    reSet();
+    $("#countDown_sec").text("0");
+    alert("時間です！");
+    $("#update_limit").val(0);
+    $("#update_time_limit").submit();
+  }
+  else
+  {
+    document.timer.elements[0].value = Math.floor(int/3600);
+    //残り分数はintを60で割って切り捨てる
+    document.timer.elements[1].value=Math.floor(int/60%60);
+    //残り秒数はintを60で割った余り
+    document.timer.elements[2].value=int % 60;
+    $("#countDown_hr").text(Math.floor(int/3600));
+
+    if (String(Math.floor(int/60%60)).length<=1) {
+      $("#countDown_min").text("0"+Math.floor(int/60%60));
+    } else {
+      $("#countDown_min").text(Math.floor(int/60%60));
+    }
+    if (String((int%60)).length<=1) {
+      $("#countDown_sec").text("0"+(int%60));
+    } else {
+      $("#countDown_sec").text((int%60));
+    }
+  }
+}
+
+//フォームを初期状態に戻す（リセット）関数
+function reSet()
+{
+  document.timer.elements[0].value="0";
+  document.timer.elements[1].value="0";
+  document.timer.elements[2].value="0";
+  document.timer.elements[3].disabled=false;
+  clearInterval(timer1);
+}
+
+</script>
