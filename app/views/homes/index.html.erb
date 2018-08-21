@@ -1,1 +1,35 @@
 <h1>TOPページ</h1>
+再生1
+<a href="javascript:void(0);" onclick="PlaySound();" class="school_song_on"><span>ON</span></a>
+<a href="javascript:void(0);" onclick="StopSound();" class="school_song_off"><span>OFF</span></a>
+
+再生2
+<a href="javascript:void(0);" onclick="PlaySound2();" class="school_song_on"><span>ON</span></a>
+<a href="javascript:void(0);" onclick="StopSound2();" class="school_song_off"><span>OFF</span></a>
+<script>
+	var audioElem;
+var audioElem2;
+
+function PlaySound() {
+  audioElem = new Audio();
+  audioElem.loop = true;
+  audioElem.src = "/assets/warning1-ff1c16910dc5c2c2172d7f18073838daa230fadf9b38a4136cf8ec121fff32e1.mp3";
+  audioElem.play();
+}
+function StopSound(){
+  audioElem.pause();
+}
+function PlaySound2() {
+  audioElem2 = new Audio();
+  audioElem2.src = "http://www.hypertrombones.jp/sample/7-2.mp3";
+  audioElem2.loup();
+}
+function StopSound2(){
+  audioElem2.pause();
+}
+</script>
+<audio src="audios/warning1.mp3" controls>
+  <p><a src="audios/warning1.mp3">音声ファイルをダウンロード</a></p>
+</audio>
+<%= audio_tag("warning1.mp3") %>
+<%= audio_tag("warning1.mp3", :autoplay => true, :controls => true) %>
