@@ -62,7 +62,7 @@ function time_required() {
 
     if (totalSec===0) {
         document.task_form.task_task_detail_attributes_time_required.value="";
-        document.task_form.task_task_detail_attributes_time_limit.value=totalSec;
+        document.task_form.task_task_detail_attributes_time_limit.value="";
     } else {
         document.task_form.task_task_detail_attributes_time_required.value=totalSec;
         document.task_form.task_task_detail_attributes_time_limit.value=totalSec;
