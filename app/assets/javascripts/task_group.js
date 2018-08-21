@@ -22,6 +22,7 @@ $(function(){
 
 });
 
+// checkbox
 $(function(){
 	$("input.checkbox[type=checkbox]").click(function(){
 
@@ -30,6 +31,7 @@ $(function(){
 	});
 });
 
+// drag & drop
 $(function () {
     $('.status-field').sortable({
         connectWith: ".status-field",
@@ -51,3 +53,19 @@ $(function () {
         }
     });
 });
+
+// time transfer
+function time_required() {
+    var hr = document.task_form.time_required_hr.value;
+    var min = document.task_form.time_required_min.value;
+    var totalSec = hr*3600+min*60;
+
+    if (totalSec===0) {
+        document.task_form.task_task_detail_attributes_time_required.value="";
+        document.task_form.task_task_detail_attributes_time_limit.value="";
+    } else {
+        document.task_form.task_task_detail_attributes_time_required.value=totalSec;
+        document.task_form.task_task_detail_attributes_time_limit.value=totalSec;
+    }
+}
+

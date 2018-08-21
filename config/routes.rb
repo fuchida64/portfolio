@@ -32,9 +32,12 @@ Rails.application.routes.draw do
   resources :task_groups
 
   #task
-  resources :tasks
+  resources :tasks do
+    resource :task_details, only: [:show]
+  end
   get 'tasks/:id/clear' => 'tasks#check'
-  post 'tasks/position' => 'tasks#position_update', as: 'update_position'
+  patch 'tasks/position' => 'tasks#position_update', as: 'update_position'
+  patch 'tasks/:task_id/task_details' => 'task_details#update', as: 'update_limit'
 
   #diary
   get 'diaries/search' => 'diaries#search', as:'search_diaries'

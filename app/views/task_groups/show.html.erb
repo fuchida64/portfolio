@@ -41,7 +41,7 @@
 		</div>
 	</div>
 
-<%= form_tag update_position_path, :method => 'post', id: "position" do %>
+<%= form_tag update_position_path, :method => 'patch', id: "position" do %>
     <input type="hidden" id="result1" name="result1" />
     <input type="hidden" id="result2" name="result2" />
     <input type="hidden" id="result3" name="result3" />
@@ -73,7 +73,7 @@
 
 <div id="create-modal" class="lity-hide">
 	<div class="tasks-show">
-		<%= form_for @task, url: tasks_path(group_id: @task_group.id) do |f| %>
+		<%= form_for @task, url: tasks_path(group_id: @task_group.id),  html: {name: 'task_form'} do |f| %>
 			<div class="field">
 			  	<%= f.label :title %><br />
 			  	<%= f.text_field :title %>
@@ -89,9 +89,11 @@
 					<%= d.date_field :deadline %>
 				</div>
 				<div class="field">
-					<%= d.label :time_required %><br />
-					<%= d.time_field :time_required %>
+					<%= select_tag 'time_required_hr', options_for_select((0..23).to_a,0), name: 'time_required_hr', onchange: "time_required()" %>時間
+					<%= select_tag 'time_required_min',options_for_select([0,5,10,15,20,25,30,35,40,45,50,55],0), name: 'time_required_min', onchange: "time_required()" %>
 				</div>
+				<%= d.text_field :time_required, class: 'changetime_required' %>
+				<%= d.hidden_field :time_limit, class: 'changetime_required' %>
 			<% end %>
 
 			<div class="actions">

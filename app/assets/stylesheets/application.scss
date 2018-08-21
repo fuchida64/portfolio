@@ -93,3 +93,21 @@ a:hover, a:focus {
 :focus {
     outline: -webkit-focus-ring-color auto 0px !important;
 }
+
+// timer
+#countDownWrap {
+   margin:50px auto;
+   width:1000px;
+   text-align:center;
+}
+.countDown {
+   margin:0 0 15px;
+   font-size:150px;
+   line-height:1;
+   text-align:center;
+   font-family: 'Oswald', sans-serif;
+}
+
+ul {
+	list-style: none;
+}

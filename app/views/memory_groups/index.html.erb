@@ -34,8 +34,11 @@
 		<%= f.submit '作成', class: "btn btn-primary" %>
 	</div>
 <% end %>
-
-<h2>Stage<%= current_user.default_stages.maximum(:stage) + 1 %>作成</h2>
+<% if current_user.default_stages.maximum(:stage).nil? %>
+	<h2>Stage2作成</h2>
+<% else %>
+	<h2>Stage<%= current_user.default_stages.maximum(:stage) + 1 %>作成</h2>
+<% end %>
 <%= form_for @default_stage, url: default_stages_path do |s| %>
 
 	<div class="field row">
