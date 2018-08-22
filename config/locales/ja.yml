@@ -1,0 +1,6 @@
+
+ja:
+  activerecord:
+    attributes:
+      user:
+        current_password: "現在のパスワード"

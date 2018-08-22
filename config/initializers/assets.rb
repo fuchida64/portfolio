@@ -24,6 +24,10 @@ Rails.application.config.assets.precompile += %w( homes.css )
 # users
 Rails.application.config.assets.precompile += %w( users/registrations/new.scss )
 Rails.application.config.assets.precompile += %w( users/sessions/new.scss )
+Rails.application.config.assets.precompile += %w( users/passwords/new.scss )
+Rails.application.config.assets.precompile += %w( users/passwords/edit.scss )
+Rails.application.config.assets.precompile += %w( users/password_edit.scss )
+Rails.application.config.assets.precompile += %w( users/confirmations/new.scss )
 
 # tasks
 Rails.application.config.assets.precompile += %w( task_groups/index.scss )

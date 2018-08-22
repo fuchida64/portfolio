@@ -47,7 +47,7 @@
    width: 100%;
    float: left;
    line-height: 46px;
-   font-size: 34px;
+   font-size: 28px;
    font-weight: 700;
    letter-spacing: 2px;
    color: #ED2553;
@@ -166,7 +166,7 @@
    background-color: transparent;
    border: 3px solid rgba(0, 0, 0, 0.1);
    font-weight: 900;
-   font-size: 18px;
+   font-size: 14px;
    color: rgba(0, 0, 0, 0.2);
 }
 
@@ -239,7 +239,6 @@
    color: rgba(0, 0, 0, 0.4);
    font-size: 18px;
    margin: 5px 0;
-
 }
 
 .click-efect {
@@ -250,21 +249,26 @@
    border-radius: 50%;
 }
 
+
 main {
    background-image: url(/images/wood.jpg);
    background-position: center;
    background-size: cover;
    background-repeat: no-repeat;
-   min-height: 115vh;
+   min-height: 100vh;
    margin-top: 3px;
 }
 
+main,
+html {
+   overflow: hidden;
+}
 
 .materialContainer {
    width: 100%;
    max-width: 460px;
    position: absolute;
-   top: 55%;
+   top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
    -webkit-transform: translate(-50%, -50%);
@@ -298,5 +302,5 @@ main {
 .field_with_errors {
    input, textarea {
       position: relative;
-  }
+   }
 }

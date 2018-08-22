@@ -23,6 +23,7 @@
             <%= f.label :password %><br />
             <%= f.password_field :password, autocomplete: "off" %>
             <span class="spin"></span>
+            <i class="password-length">パスワードの長さは最低 6文字です。</i>
           </div>
 
           <div class="input">
@@ -90,5 +91,11 @@
       }, 600);
       $("button", this).addClass('active');
    })
+  });
+  $( document ).ready(function() {
+    if($('div').hasClass('field_with_errors')){
+        $(this).css('color','red');
+        $('.password-length').addClass('hide');
+    }
   });
 </script>
