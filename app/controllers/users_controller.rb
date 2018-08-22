@@ -33,8 +33,7 @@ class UsersController < ApplicationController
 			flash[:notice] = "パスワードを変更しました"
 			redirect_to user_path(@user.id)
 	    else
-	        flash[:notice] = "パスワードが正しく設定されていません"
-	        redirect_to edit_password_path
+	        render 'password_edit'
 	    end
 	end
 

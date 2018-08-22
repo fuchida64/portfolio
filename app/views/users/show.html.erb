@@ -5,7 +5,7 @@
 		<div class="link">
 			<% if current_user?(@user) %>
 				<%= link_to "編集", edit_user_path(current_user.id), class: "btn" %>
-				<%= link_to "パスワード変更はこちら", edit_password_path(current_user.id), class: "btn" %>
+				<%= link_to "パスワード変更はこちら", edit_password_user_path(current_user.id), class: "btn" %>
 			<% end %>
 		</div>
 	</div>

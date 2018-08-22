@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 	devise_for :users, controllers: {
 	  sessions:      'users/sessions',
 	  passwords:     'users/passwords',
-	  registrations: 'users/registrations'
+	  registrations: 'users/registrations',
+    confirmations: 'users/confirmations',
+    mailer:        'users/mailer'
 	}
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
@@ -21,7 +23,7 @@ Rails.application.routes.draw do
     end
   end
   resources :relationships,       only: [:create, :destroy]
-  get 'users/:id/password/edit' => 'users#password_edit', as: 'edit_password'
+  get 'users/:id/password/edit' => 'users#password_edit', as: 'edit_password_user'
   patch 'users/:id/password' => 'users#password_update'
 
   #admin
