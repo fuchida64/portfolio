@@ -18,6 +18,8 @@ Rails.application.config.assets.precompile += %w( user.js )
 Rails.application.config.assets.precompile += %w( slick.min.js )
 Rails.application.config.assets.precompile += %w( lity.js )
 
+# home
+Rails.application.config.assets.precompile += %w( homes.css )
 # task
 Rails.application.config.assets.precompile += %w( task_groups/index.scss )
 Rails.application.config.assets.precompile += %w( task_groups/show.scss )

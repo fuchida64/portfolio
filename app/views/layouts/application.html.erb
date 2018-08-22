@@ -17,46 +17,66 @@
     <%= javascript_include_tag 'application' %>
     <%= javascript_include_tag 'slick.min' %>
     <%= javascript_include_tag 'lity' %>
+
   </head>
 
   <body>
-    <header>
-      <nav>
-        <ul class="nav navbar-nav navbar-right">
-            <li><h3><%= link_to '●Rec' + ' change', homes_path, class: "" %></h3></li>
-          <% if admin_signed_in? %>
-            <li><%= link_to 'Users', admin_users_path, class: "" %></li>
-            <li><%= link_to 'Admins', admins_path, class: "" %></li>
-            <li><%= link_to 'logout', destroy_admin_session_path, method: :delete, "data-confirm" => "本当にログアウトしますか？", class: "" %></li>
-          <% elsif user_signed_in? %>
-            <li><%= link_to 'to_do', task_groups_path, class: "" %>
-              <ul>
-                <% current_user.task_groups.each do |task| %>
-                  <li><%= link_to task.title, task_group_path(task.id), class: "" %></li>
-                <% end %>
-              </ul>
-            </li>
-            <li><%= link_to 'memory', memory_groups_path, class: "" %>
-              <ul>
-                <% current_user.memory_groups.each do |memory| %>
-                  <li><%= link_to memory.title, memory_group_path(memory.id), class: "" %></li>
-                <% end %>
-              </ul>
-            </li>
-            <li><%= link_to 'diary', diaries_path, class: "" %></li>
-            <li><%= link_to 'my page', user_path(current_user.id), class: "" %></li>
-            <li><%= link_to 'logout', destroy_user_session_path, method: :delete, "data-confirm" => "本当にログアウトしますか？", class: "" %></li>
-          <% else %>
-            <li><%= link_to 'login', new_user_session_path, class: "" %></li>
-            <li><%= link_to 'sign up', new_user_registration_path, class: "" %></li>
-            <li><%= link_to 'admin login', new_admin_session_path, class: "" %></li>
-            <li><%= link_to 'admin sign up', new_admin_registration_path, class: "" %></li>
-          <% end %>
-        </ul>
-      </nav>
-    </header>
 
-    <div class="container">
+      <% if @header_flag != true %>
+
+        <header class="header1">
+          <nav>
+            <ul>
+              <p class="home-li">
+                <%= link_to homes_path, class: "home1" do %>
+                  <%= image_tag('logo.jpg', :size => "40x40", :alt => "アイコン") %>
+                  <span class="app-title1">ec change</span>
+                <% end %>
+              </p>
+              <% if admin_signed_in? %>
+                <li><%= link_to 'Users', admin_users_path, class: "" %></li>
+                <li><%= link_to 'Admins', admins_path, class: "" %></li>
+                <li><%= link_to 'logout', destroy_admin_session_path, method: :delete, "data-confirm" => "本当にログアウトしますか？", class: "" %></li>
+              <% elsif user_signed_in? %>
+                <li><%= link_to 'to_do', task_groups_path, class: "" %>
+                  <ul>
+                    <% current_user.task_groups.each do |task| %>
+                      <li><%= link_to task.title, task_group_path(task.id), class: "" %></li>
+                    <% end %>
+                  </ul>
+                </li>
+                <li><%= link_to 'memory', memory_groups_path, class: "" %>
+                  <ul>
+                    <% current_user.memory_groups.each do |memory| %>
+                      <li><%= link_to memory.title, memory_group_path(memory.id), class: "" %></li>
+                    <% end %>
+                  </ul>
+                </li>
+                <li><%= link_to 'diary', diaries_path, class: "" %></li>
+                <li><%= link_to 'my page', user_path(current_user.id), class: "" %></li>
+                <li><%= link_to 'logout', destroy_user_session_path, method: :delete, "data-confirm" => "本当にログアウトしますか？", class: "" %></li>
+              <% else %>
+                <li><%= link_to 'login', new_user_session_path, class: "" %></li>
+                <li><%= link_to 'sign up', new_user_registration_path, class: "" %></li>
+              <% end %>
+            </ul>
+          </nav>
+        </header>
+
+      <% else %>
+
+        <header>
+          <div class="row header-box">
+            <div class="title-box">
+              <%= link_to homes_path, class: "" do %>
+                <%= image_tag('logo.jpg', :size => "50x50", :alt => "アイコン") %>
+                <span class="app-title">ec change</span>
+              <% end %>
+            </div>
+          </div>
+        </header>
+
+      <% end %>
 
       <% if alert %>
         <div class="alert alert-danger">
@@ -74,7 +94,7 @@
 
       <%= yield %>
 
-    </div>
+
 
   </body>
 </html>
