@@ -7,7 +7,6 @@
 
         <div class="title">SIGN UP</div>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <%= devise_error_messages! %>
           <div class="input">
             <%= f.label :name, "ユーザー名"%><br />
             <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
@@ -21,9 +20,7 @@
           </div>
 
           <div class="input">
-            <label for="user_password">パスワード
-              <i>(6文字以上)</i>
-            </label>
+            <%= f.label :password %><br />
             <%= f.password_field :password, autocomplete: "off" %>
             <span class="spin"></span>
           </div>

@@ -264,7 +264,7 @@ main {
    width: 100%;
    max-width: 460px;
    position: absolute;
-   top: 60%;
+   top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
    -webkit-transform: translate(-50%, -50%);
@@ -288,4 +288,15 @@ main {
 }
 .fas {
   font-size: 30px;
+}
+.devise-alert{
+   position: absolute;
+   color: red;
+   width: 300px;
+   top: 75px;
+}
+.field_with_errors {
+   input, textarea {
+      position: relative;
+  }
 }
