@@ -1,1 +1,55 @@
-<h1>TOPページ</h1>
+
+<%= stylesheet_link_tag "homes", :media => "all" %>
+
+<ul class="home-slider">
+	<li>
+		<div class="text-field">
+			<h3 class="home-title">Let's make today</h3>
+			<p class="home-subtitle">
+				<%= link_to 'login', new_user_session_path, class: "" %>
+				<%= link_to 'sign up', new_user_registration_path, class: "" %>
+			</p>
+		</div>
+		<%= image_tag('home4.jpg', :alt => "アイコン") %>
+	</li>
+	<li>
+		<div class="text-field">
+			<h3 class="home-title">Let's task controll</h3>
+			<p class="home-subtitle">
+				頑張ろう
+			</p>
+		</div>
+		<%= image_tag('home3.jpg', :alt => "アイコン") %>
+	</li>
+	<li>
+		<div class="text-field">
+			<h3 class="home-title">Let's memory</h3>
+			<p class="home-subtitle">
+				頑張ろう
+			</p>
+		</div>
+		<%= image_tag('home1.jpg', :alt => "アイコン") %>
+	</li>
+	<li>
+		<div class="text-field">
+			<h3 class="home-title">Let's diary</h3>
+			<p class="home-subtitle">
+				頑張ろう
+			</p>
+		</div>
+		<%= image_tag('home3.jpg', :alt => "アイコン") %>
+	</li>
+</ul>
+
+<script>
+	$('.home-slider').slick({
+		dots: true,
+		infinite: true,
+		arrows: false,
+		autoplay: true,
+  		autoplaySpeed: 2000,
+		fade: true,
+		speed: 2000,
+	});
+</script>
+
