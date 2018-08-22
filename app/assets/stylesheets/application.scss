@@ -53,7 +53,7 @@ ul {
 
 // default header
 .header1 {
-	box-shadow: 0 0 3px rgba(160,166,179,0.3);
+	box-shadow: 0 0 5px rgba(0,0,0,0.5);
 	height: 50px;
 }
 nav {
@@ -76,7 +76,7 @@ nav {
 			.app-title1 {
 				position:absolute;
 				width: 100px;
-				top: 5px;
+				top: 3px;
 				left: 30px;
 				font-size: 20px;
 				color: #555555;
@@ -85,7 +85,7 @@ nav {
 		li {
 			font-size: 17px;
 			margin: 0 15px;
-			padding-top: 13px;
+			padding-top: 15px;
 			position:relative;
 			min-width: 70px;
 			text-align: center;
@@ -95,7 +95,7 @@ nav {
 		}
 		li:before, li:after{
 		  position: absolute;
-		  top: 35px;
+		  top: 39px;
 		  content: "";
 		  display: inline-block;
 		  width: 0;
