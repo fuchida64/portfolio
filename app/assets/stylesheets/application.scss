@@ -15,6 +15,10 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
+@font-face{
+   font-family: "azuki";
+   src: font-url('azukiB.ttf') format('truetype');
+ }
 *{
   margin: 0;
   padding: 0;
@@ -54,8 +58,8 @@ ul {
 
 // default header
 .header1 {
-	box-shadow: 0 0 5px rgba(0,0,0,0.5);
-	height: 50px;
+	box-shadow: 0 0 5px rgba(0,0,0,0.8);
+	height: 55px;
 }
 nav {
 	height: 50px;
@@ -74,22 +78,36 @@ nav {
 
 		.home1 {
 			position:relative;
+			.logo1 {
+				position:absolute;
+				top: -21px;
+				left: 4px;
+			}
+			.logo2 {
+				position:absolute;
+				top: -18px;
+				left: 20px;
+			}
 			.app-title1 {
 				position:absolute;
 				width: 100px;
-				top: 3px;
-				left: 30px;
+				top: -5px;
+				left: 35px;
 				font-size: 20px;
-				color: #555555;
+				color: #444444;
+			}
+			.app-title1:hover {
+				color: #444444;
 			}
 		}
 		li {
 			font-size: 17px;
 			margin: 0 15px;
-			padding-top: 15px;
+			padding-top: 18px;
 			position:relative;
-			min-width: 70px;
+			min-width: 100px;
 			text-align: center;
+			color: #444444;
 		}
 		li:last-child {
 		  	margin-right: 40px
@@ -113,12 +131,44 @@ nav {
 		li:hover:before,li:hover:after{
 		  width: 50%;
 		}
+		li ul {
+			display: none;
+			position: absolute;
+			list-style: none;
+			width: 260px;
+			z-index: 10;
+			right: 0.1px;
+			text-align: center;
+			background: rgba(0,0,0,0.3);
+			border-radius: 0 0 15px 15px;
+			margin-top: 3px;
+
+			li {
+				height: 50px;
+				margin: 0px auto;
+				width: 180px;
+				text-align: center;
+			}
+			li:first-child {
+			  	margin-top: 5px;
+			  	border-top-left-radius: 15px;
+			}
+			li:last-child {
+			  	border-radius: 0 0 15px 15px;
+			  	margin-bottom: 10px;
+			}
+			li a {
+			  	border-bottom: 1px solid #eee;
+			  	color: white;
+			}
+		}
 	}
 	a {
-		color: #555555;
+		color: black;
 	}
 	a:hover {
 		text-decoration: none;
+		color: white;
 	}
 }
 // header h3 {
@@ -146,26 +196,7 @@ nav {
 // 	}
 // }
 
-// .nav li ul {
-// 	display: none;
-// 	position: absolute;
-// 	list-style: none;
-// 	width: 200px;
-// 	z-index: 10;
-// 	right: 1px;
-// 	text-align: center;
 
-// 	li {
-// 		color: olive;
-// 		background: #afc6e2;
-// 	}
-// 	li:last-child {
-// 	  	margin-right: 0px
-// 	}
-// 	li a {
-// 	  	border-top: 1px solid #eee;
-// 	}
-// }
 
 // body
 body {
@@ -175,8 +206,9 @@ body {
 .alert {
 	position: absolute;
 	top: 80px;
-	right: 20px;
+	right: -100vw;
 	text-align: center;
+	z-index: 1000;
 }
 // a:hover, a:focus {
 //     text-decoration: none;

@@ -29,7 +29,8 @@
             <ul>
               <p class="home-li">
                 <%= link_to homes_path, class: "home1" do %>
-                  <%= image_tag('logo.jpg', :size => "40x40", :alt => "アイコン") %>
+                  <%= image_tag('logo1.jpg', :size => '15x15', :alt => 'アイコン', class: 'logo1') %>
+                  <%= image_tag('logo2.jpg', :size => '25x40', :alt => 'アイコン', class: 'logo2') %>
                   <span class="app-title1">ec change</span>
                 <% end %>
               </p>
@@ -38,12 +39,18 @@
                 <li><%= link_to 'Admins', admins_path, class: "" %></li>
                 <li><%= link_to 'logout', destroy_admin_session_path, method: :delete, "data-confirm" => "本当にログアウトしますか？", class: "" %></li>
               <% elsif user_signed_in? %>
-                <li><%= link_to 'to_do', task_groups_path, class: "" %>
-                  <ul>
-                    <% current_user.task_groups.each do |task| %>
-                      <li><%= link_to task.title, task_group_path(task.id), class: "" %></li>
-                    <% end %>
-                  </ul>
+                <li><%= link_to 'to_do', task_groups_path, class: "menu" %>
+                  <% if current_user.task_groups.exists? %>
+                    <ul>
+                      <% current_user.task_groups.each do |task| %>
+                        <% if task.title.length >= 10 %>
+                          <li><%= link_to task.title[0,9]+'...', task_group_path(task.id), class: "" %></li>
+                        <% else %>
+                          <li><%= link_to task.title, task_group_path(task.id), class: "" %></li>
+                        <% end %>
+                      <% end %>
+                    </ul>
+                  <% end %>
                 </li>
                 <li><%= link_to 'memory', memory_groups_path, class: "" %>
                   <ul>
@@ -80,14 +87,12 @@
 
       <% if alert %>
         <div class="alert alert-danger">
-          <a class="close" data-dismiss="alert">×</a>
           <%= alert %>
         </div>
       <% end %>
 
       <% if notice %>
         <div class="alert alert-success">
-          <a class="close" data-dismiss="alert">×</a>
           <%= notice %>
         </div>
       <% end %>

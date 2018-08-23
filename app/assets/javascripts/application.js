@@ -19,12 +19,22 @@
 //= require nested_form_fields
 
 $(function() {
-	var nav = $('.nav');
+	var nav = $('nav');
 	$('li', nav).mouseover(function(e) {
-		$('ul', this).stop().slideDown();
+		$('ul', this).stop().slideDown('fast');
+		$("ul", this).children("li").css({
+            "padding-top": "17px",
+         })
 	})
 	.mouseout(function(e) {
 		$('ul', this).stop().slideUp();
 	});
 });
 
+$( document ).ready(function() {
+	$('.alert').animate({'marginRight':'103vw'},1000);
+	setTimeout("slideOut()", 8000);
+});
+function slideOut(){
+  	$('.alert').animate({'marginRight':'-105vw'},1000);
+}
