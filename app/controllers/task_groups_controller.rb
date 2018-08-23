@@ -35,7 +35,17 @@ class TaskGroupsController < ApplicationController
 
 	def destroy
 		@task_group = TaskGroup.find(params[:id])
-		if params[:status] == '3'
+		if  @task_group.destroy
+		  	flash[:notice] = "削除されました"
+		else
+			flash[:alert] = "エラーが発生しました"
+		end
+		redirect_to task_groups_path
+	end
+
+	def destroy_all
+		@task_group = TaskGroup.find(params[:id])
+		if  params[:status] == '3'
 			@tasks = @task_group.tasks.where(status: 3)
 			@tasks.destroy_all
 			redirect_to task_group_path(@task_group.id)
