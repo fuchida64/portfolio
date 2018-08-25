@@ -18,6 +18,8 @@ Rails.application.config.assets.precompile += %w( user.js )
 Rails.application.config.assets.precompile += %w( slick.min.js )
 Rails.application.config.assets.precompile += %w( lity.js )
 
+# admins
+Rails.application.config.assets.precompile += %w( admins.scss )
 # homes
 Rails.application.config.assets.precompile += %w( homes.css )
 

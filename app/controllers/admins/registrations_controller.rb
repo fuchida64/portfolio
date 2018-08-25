@@ -5,9 +5,17 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    if user_signed_in?
+      if current_user.id == 1
+        super
+      else
+        redirect_back(fallback_location: homes_path)
+      end
+    else
+      redirect_back(fallback_location: homes_path)
+    end
+  end
 
   # POST /resource
   # def create

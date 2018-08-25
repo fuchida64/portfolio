@@ -1,15 +1,12 @@
 class AdminsController < ApplicationController
+	before_action :authenticate_admin!
 
 	def user_index
-		@users = User.all
+		@users = User.all.order(id: :desc)
 	end
 
 	def index
-		@admins = Admin.all
-	end
-
-	def show
-		@admin = Admin.find(params[:id])
+		@admins = Admin.all.order(id: :desc)
 	end
 
 	def edit
@@ -19,7 +16,7 @@ class AdminsController < ApplicationController
 	def update
 		@admin = Admin.find(params[:id])
 	    if @admin.update(admin_params)
-	    	redirect_to admin_path(@admin.id)
+	    	redirect_to admins_path
 	    else
 	    	render 'edit'
 	    end

@@ -1,3 +1,95 @@
 // Place all the styles related to the admins controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// common
+nav a:hover {
+    color: black;
+}
+a:active, a:hover {
+    text-decoration: none;
+}
+.admin_form {
+	width: 300px;
+	margin: 60px;
+
+	.field, .actions {
+		margin-top: 10px;
+	}
+	.actions {
+		margin-bottom: 10px;
+	}
+}
+// edit
+.edit-page {
+	h2 {
+		margin-top: 40px;
+	}
+	.preview {
+		width: 150px;
+	}
+	.create-btn{
+	    display: inline-block;
+	    padding: 0.5em 1em;
+	    text-decoration: none;
+	    color: #999999;
+	    border: dashed 1px #999999;
+	    background: #EEEEEE;
+	    border-radius: 3px;
+	    transition: .4s;
+	}
+
+	.create-btn:hover {
+	    background: #cbedff;
+	    color: #FFF;
+	}
+	label {
+		width: 150px;
+	}
+}
+// index
+.index-page {
+	.table {
+		width: 500px;
+	}
+	margin-left: 10px;
+
+	.id-th {
+		width: 40px;
+	}
+	.date-th {
+		width: 100px;
+	}
+	.image-th {
+		width: 50px;
+	}
+	.admin-name-th {
+		width: 150px;
+	}
+	img {
+		width: 30px;
+		height: 30px;
+	}
+}
+// user-index
+.user-index {
+	margin-left: 10px;
+
+	.table {
+		width: 400px;
+
+		.id-th {
+			width: 40px;
+		}
+		.date-th {
+			width: 150px;
+		}
+	}
+}
+@media screen and (max-width: 425px) {
+	.index-page {
+		.table {
+			width: 400px;
+		}
+	}
+}
