@@ -1,36 +1,41 @@
 
-<div class="container">
-	<div class="row">
-		<h2>管理者情報編集</h2>
-		<div class="link">
-			<%= link_to "詳細", admin_path(@admin.id), class: "btn" %>
-		</div>
-	</div>
-	<div class="row">
-		<%= form_for(@admin) do |f| %>
-		 	<div class="col-lg-6">
-				<table class='table'>
-					<tr>
-				    	<th><%= attachment_image_tag @admin, :admin_image, :fill, 100, 100, format: 'jpeg', fallback: "/images/no_image.jpg" %></th>
-				  	</tr>
-				  	<tr>
-				   	 	<th><%= f.label :admin_image %></th>
-				    	<th><%= f.attachment_field :admin_image %></th>
-				  	</tr>
-				  	<tr>
-				    	<th><%= f.label :admin_name, "名前" %></th>
-				    	<th><%= f.text_field :admin_name %></th>
-				  	</tr>
+<%= stylesheet_link_tag 'admins', media: 'all' %>
 
-				  	<tr>
-				    	<th><%= f.label :email %></th>
-				    	<th><%= f.email_field :email %></th>
-				  	</tr>
-				</table>
-			<%= f.submit "保存", class: 'btn' %>
-			</div>
-		<% end %>
+<div class="edit-page">
+	<div class="container">
+		<div class="row">
+			<h2>管理者情報 編集</h2>
+		</div>
+		<div class="row">
+			<%= form_for(@admin) do |f| %>
+			 	<div class="col-lg-6">
+					<table class='table'>
+						<tr>
+					    	<th><%= attachment_image_tag @admin, :admin_image, format: 'jpeg', fallback: "/images/no_image.jpg", class: "preview" %></th>
+					  	</tr>
+					  	<tr>
+					    	<th><%= f.attachment_field :admin_image %></th>
+					  	</tr>
+					  	<tr>
+					    	<th><%= f.label :admin_name, "名前" %><%= f.text_field :admin_name %></th>
+					  	</tr>
+					  	<tr>
+					    	<th><%= f.label :email %><%= f.email_field :email %></th>
+					  	</tr>
+					</table>
+				<%= f.submit "保存", class: 'create-btn' %>
+				</div>
+			<% end %>
+		</div>
 	</div>
 </div>
 
-
+<script>
+	$('input[type=file]').on('change', function (e) {
+	    var reader = new FileReader();
+	    reader.onload = function (e) {
+	        $(".preview" ).attr('src', e.target.result);
+	    }
+	    reader.readAsDataURL(e.target.files[0]);
+	});
+</script>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :admins, controllers: {
 	  sessions:      'admins/sessions',
 	  passwords:     'admins/passwords',
@@ -11,7 +12,12 @@ Rails.application.routes.draw do
     confirmations: 'users/confirmations',
     mailer:        'users/mailer'
 	}
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  #admin
+  resources :admins, except: [:create, :show]
+  get 'admin/users' => 'admins#user_index', as:'admin_users'
 
   #common
   resources :homes, only: [:index]
@@ -22,13 +28,9 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-  resources :relationships,       only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
   get 'users/:id/password/edit' => 'users#password_edit', as: 'edit_password_user'
   patch 'users/:id/password' => 'users#password_update'
-
-  #admin
-  resources :admins
-  get 'admin/users' => 'admins#user_index', as:'admin_users'
 
   #task_group
   resources :task_groups
