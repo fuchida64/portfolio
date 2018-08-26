@@ -1,17 +1,119 @@
 
-.slider {
+nav a:hover {
+	text-decoration: none;
+	color: black;
+}
+.diary-main {
 	width: 800px;
-	height: 500px;
-}
-body {
-	background-color: #3498db;
-}
-.slider img {
-    border: 5px solid #fff;
-    display: block;
-    width: 100%;
-    height: 100%;
+	margin: 0 auto;
+
+	h2 {
+		margin-top: 50px;
+	}
+	.slider {
+		width: 800px;
+		height: 500px;
+		position:relative;
+
+		img {
+		    border: 5px solid #fff;
+		    display: block;
+		    max-width: 800px;
+		    height: 500px;
+		    text-align: center;
+		    position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%,-50%);
+            -webkit-transform : translate(-50%,-50%);
+            transform : translate(-50%,-50%);
+		}
+	}
+	.diary-content {
+		margin-top: 50px;
+		font-size: 15px;
+		p {
+			white-space: pre-line;
+   			word-wrap: break-word;
+		}
+	}
+	.detail {
+		text-align: right;
+		margin-bottom: 30px;
+		.favorite {
+			margin-right: 20px;
+		}
+	}
+	.user-info {
+		height: 40px;
+		border-top: 1px solid #D3D3D3;
+		border-bottom: 1px solid #D3D3D3;
+		.name {
+			margin: 10px;
+			margin-left: 30px;
+			float: left;
+		}
+		#follow_form {
+			width: 100px;
+			margin: 3px;
+			float: left;
+			.btn {
+				color: #00CCFF;
+			}
+			.btn1 {
+				color: #FF69A3;
+			}
+		}
+	}
+	.comment-form {
+		margin: 30px;
+		.comment-field {
+			width: 500px;
+			padding-left: 10px;
+			border: 0;
+			border-bottom: 2px solid #D3D3D3;
+			font-size: 15px;
+		}
+		button {
+			color:#0070be;
+			border: 0;
+			font-size: 15px;
+		}
+	}
+	.comment-li {
+		margin-bottom: 50px;
+		.comment {
+			border-bottom: 2px solid #D3D3D3;
+			margin-bottom: 30px;
+			margin-left: 10px;
+			white-space: pre-line;
+			word-wrap: break-word;
+		}
+	}
 }
 .slick-list, .slick-track {
     height: 100%;
 }
+
+@media screen and (max-width: 425px) {
+	.diary-main {
+		width: 100%;
+		.slider {
+			width: 100%;
+			img {
+			    min-height: 300px;
+	            object-fit: cover;
+			}
+		}
+		.comment-form {
+			.comment-field {
+				width: 90%;
+			}
+		}
+	}
+}
+
+
+
+
+

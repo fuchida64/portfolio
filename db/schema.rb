@@ -66,9 +66,9 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
   end
 
   create_table "diary_comments", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "diary_id"
-    t.text "comment"
+    t.integer "user_id", null: false
+    t.integer "diary_id", null: false
+    t.text "comment", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

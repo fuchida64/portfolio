@@ -1,48 +1,58 @@
 
 <%= stylesheet_link_tag "diaries/show", :media => "all" %>
-<div class="row">
-	<table class='table'>
-		<tr>
-			<ul class="slider">
-				<% @diary.diary_images.each do |g| %>
-					<li><%= attachment_image_tag g, :diary_image, format: 'jpeg' %></li>
+
+<div class="container">
+	<div class="row diary-main">
+		<h2><%= @diary.title %></h2>
+		<% if @diary.diary_images.exists? %>
+			<div class="img-box">
+				<ul class="slider">
+					<% @diary.diary_images.each do |g| %>
+						<li><%= attachment_image_tag g, :diary_image, format: 'jpeg' %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+		<div class="diary-content">
+			<p><%= @diary.content %></p>
+		</div>
+		<p class="detail">
+			<% if user_signed_in? %>
+				<% if @diary.favorited_by?(current_user) %>
+		    		<%= link_to diary_favorites_path(@diary), method: :delete, class: 'favorite' do %>
+		      			<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+		      			<%= @diary.favorites.count %> いいね
+		    		<% end %>
+				<% else %>
+		    		<%= link_to diary_favorites_path(@diary), method: :post, class: 'favorite' do %>
+		      			<i class="fa fa-heart" aria-hidden="true"></i>
+		      			<%= @diary.favorites.count %> いいね
+		    		<% end %>
 				<% end %>
-			</ul>
-		</tr>
-		<tr>
-		  <td><%= @user.name %></td>
-		</tr>
-		<tr>
-		  <td><%= @diary.title %></td>
-		</tr>
-		<tr>
-		  <td><%= @diary.content %></td>
-		</tr>
-	</table>
-
-	<%= render 'users/follow_form' %>
-
-	<% if @diary.favorited_by?(current_user) %>
-	    <%= link_to diary_favorites_path(@diary), method: :delete do %>
-	      <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-	      <%= @diary.favorites.count %> いいね
-	    <% end %>
-	<% else %>
-	    <%= link_to diary_favorites_path(@diary), method: :post do %>
-	      <i class="fa fa-heart" aria-hidden="true"></i>
-	      <%= @diary.favorites.count %> いいね
-	    <% end %>
-	<% end %>
-
-	<%= form_for [@diary,@diary_comment] do |f| %>
-		<%= f.text_field :comment, placeholder: "コメントする" %>
-	  	<%= f.submit %>
-	<% end %>
-
-	<% @diary.diary_comments.each do |d| %>
-		<%= d.comment %><br>
-	<% end %>
-
+			<% end %>
+			<%= @diary.diary_date.strftime("%Y.%m.%d") %>
+		</p>
+		<div class="user-info">
+			<p class="name"><%= @diary.user.name %></p>
+			<% if user_signed_in? %>
+				<%= render 'users/follow_form' %>
+			<% end %>
+		</div>
+		<div class="comment-form">
+			<% if user_signed_in? %>
+				<%= form_for [@diary,@diary_comment] do |f| %>
+					<%= f.text_field :comment, placeholder: "コメントする", class: "comment-field" %>
+		  			<button type="submit"><i class="fas fa-plus"></i></button>
+				<% end %>
+			<% end %>
+		</div>
+		<div class="comment-li">
+			<% @diary.diary_comments.each do |d| %>
+				<p class="name"><%= d.user.name %></p>
+				<p class="comment"><%= d.comment %></p>
+			<% end %>
+		</div>
+	</div>
 </div>
 
 <%= javascript_include_tag "diary.js" %>
