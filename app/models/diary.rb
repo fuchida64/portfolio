@@ -8,6 +8,11 @@ class Diary < ApplicationRecord
 	has_many :diary_comments
 	has_many :favorites
 
+	validates :title, presence: true
+	validates :content, presence: true
+	validates :diary_date, presence: true
+	validates :inform_status, presence: true
+
 	before_create do
 		diary_images.each{ |diary_image| diary_image.mark_for_destruction if diary_image.diary_image.blank? }
 	end

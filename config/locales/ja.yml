@@ -4,3 +4,6 @@ ja:
     attributes:
       user:
         current_password: "現在のパスワード"
+      diary:
+        title: "タイトル"
+        content: "コンテンツ"

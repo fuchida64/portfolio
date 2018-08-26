@@ -1,4 +1,5 @@
 class DiariesController < ApplicationController
+	before_action :authenticate_user!, except: [:index, :show, :search]
 
 	def index
 		@diaries = Diary.all.where(inform_status: '公開')
@@ -12,8 +13,11 @@ class DiariesController < ApplicationController
 	def create
 		@diary = Diary.new(diary_params)
 		@diary.user_id = current_user.id
-		@diary.save
-		redirect_to diaries_path
+		if 	@diary.save
+			redirect_to diaries_path
+		else
+			render 'new'
+		end
 	end
 
 	def show
