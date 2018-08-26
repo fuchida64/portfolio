@@ -23,7 +23,7 @@ class Diary < ApplicationRecord
 
 	def self.search(search)
 		if search
-			Diary.where(['(title LIKE ?) OR (content LIKE ?)', "%#{search}%", "%#{search}%"])
+			Diary.where(['(title LIKE ?) OR (content LIKE ?)', "%#{search}%", "%#{search}%"]).where(inform_status: '公開')
 		else
 			Diary.all
 		end

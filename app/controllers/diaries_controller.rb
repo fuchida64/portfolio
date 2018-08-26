@@ -2,7 +2,7 @@ class DiariesController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show, :search]
 
 	def index
-		@diaries = Diary.all.where(inform_status: '公開')
+		@diaries = Diary.all.where(inform_status: '公開').page(params[:page]).per(9)
 	end
 
 	def new
@@ -27,7 +27,7 @@ class DiariesController < ApplicationController
 	end
 
 	def search
-		@diaries = Diary.search(params[:search])
+		@diaries = Diary.search(params[:search]).order(id: :desc).page(params[:page]).per(9)
 	end
 
 	private
