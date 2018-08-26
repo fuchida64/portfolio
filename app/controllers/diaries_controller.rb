@@ -2,7 +2,7 @@ class DiariesController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show, :search]
 
 	def index
-		@diaries = Diary.all.where(inform_status: '公開').page(params[:page]).per(9)
+		@diaries = Diary.all.where(inform_status: '公開').order(id: :desc).page(params[:page]).per(9)
 	end
 
 	def new
@@ -23,7 +23,11 @@ class DiariesController < ApplicationController
 	def show
 		@diary = Diary.find(params[:id])
 		@user = @diary.user
-		@diary_comment = DiaryComment.new
+		if (@diary.inform_status == '非公開' && @user == current_user) || @diary.inform_status == '公開'
+			@diary_comment = DiaryComment.new
+		else
+			redirect_to diaries_path
+		end
 	end
 
 	def search

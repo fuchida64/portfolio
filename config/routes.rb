@@ -46,8 +46,8 @@ Rails.application.routes.draw do
   #diary
   get 'diaries/search' => 'diaries#search', as:'search_diaries'
   resources :diaries do
-    resource :diary_comments
-    resource :favorites
+    resource :diary_comments, only: [:create]
+    resource :favorites, only: [:create, :destroy]
   end
 
   #memory_group
