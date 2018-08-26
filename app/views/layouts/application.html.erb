@@ -61,7 +61,11 @@
                     <% end %>
                   </ul>
                 </li>
-                <li><%= link_to 'diary', diaries_path, class: "" %></li>
+                <li><%= link_to 'diary', diaries_path, class: "" %>
+                  <ul>
+                    <li><%= link_to 'new diary', new_diary_path, class: "" %></li>
+                  </ul>
+                </li>
                 <li><%= link_to 'my page', user_path(current_user.id), class: "" %></li>
                 <li><%= link_to 'logout', destroy_user_session_path, method: :delete, "data-confirm" => "本当にログアウトしますか？", class: "" %></li>
               <% else %>
