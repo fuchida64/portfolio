@@ -54,13 +54,15 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
   end
 
   create_table "diaries", force: :cascade do |t|
-    t.integer "user_id"
-    t.text "title"
-    t.text "content"
-    t.date "diary_date"
-    t.string "inform_status"
+    t.integer "user_id", null: false
+    t.text "title", null: false
+    t.text "content", null: false
+    t.date "diary_date", null: false
+    t.string "inform_status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["content"], name: "index_diaries_on_content"
+    t.index ["title"], name: "index_diaries_on_title"
   end
 
   create_table "diary_comments", force: :cascade do |t|

@@ -1,11 +1,12 @@
 class CreateDiaries < ActiveRecord::Migration[5.2]
   def change
     create_table :diaries do |t|
-      t.integer :user_id
-      t.text :title
-      t.text :content
-      t.date :diary_date
-      t.string :inform_status
+
+      t.integer :user_id, null: false
+      t.text :title, null: false, :index => true
+      t.text :content, null: false, :index => true
+      t.date :diary_date, null: false
+      t.string :inform_status, null: false
 
       t.timestamps
     end

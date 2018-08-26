@@ -1,78 +1,84 @@
 
 <%= stylesheet_link_tag "diaries/new", :media => "all" %>
 
-<h2>new diary</h2>
+<div class="container">
+  <div class="row diary-head">
+    <h2>new diary</h2>
 
-  <label class="ok" for="diary_diary_images_attributes_0_diary_image">
-    <div class="no">
-      <img class="preview0" >
-    </div>
-  </label>
+    <label class="label-box" for="diary_diary_images_attributes_0_diary_image">
+      <div class="img-box">
+        <img class="preview0" >
+        <i class="far fa-image"></i>
+      </div>
+    </label>
 
-  <label class="ok" for="diary_diary_images_attributes_1_diary_image">
-    <div class="no">
+    <label class="label-box" for="diary_diary_images_attributes_1_diary_image">
+      <div class="img-box">
         <img class="preview1" >
+        <i class="far fa-image"></i>
       </div>
-  </label>
+    </label>
 
-  <label class="ok" for="diary_diary_images_attributes_2_diary_image">
-    <div class="no">
+    <label class="label-box" for="diary_diary_images_attributes_2_diary_image">
+      <div class="img-box">
         <img class="preview2" >
+        <i class="far fa-image"></i>
       </div>
-  </label>
+    </label>
 
-  <label class="ok" for="diary_diary_images_attributes_3_diary_image">
-    <div class="no">
+    <label class="label-box" for="diary_diary_images_attributes_3_diary_image">
+      <div class="img-box">
         <img class="preview3" >
+        <i class="far fa-image"></i>
       </div>
-  </label>
-
-<%= form_for @diary do |f| %>
-
-  <%= f.fields_for :diary_images do |i| %>
-    <%= i.attachment_field :diary_image %>
-  <% end %>
-
-  <div class="field">
-      <%= f.label :title %><br />
-      <%= f.text_field :title %>
+    </label>
   </div>
+  <div class="row">
+    <%= form_for @diary do |f| %>
 
-  <div class="field">
-    <%= f.label :content %><br />
-    <%= f.text_area :content %>
-  </div>
-
-  <div class="field">
-    <%= f.label :diary_date %><br />
-    <%= f.date_field :diary_date, value: Date.current %>
-  </div>
-
-  <div class="field">
-    <div class="pretty p-switch p-fill">
-      <% if current_user.public_setting == 1 %>
-        <%= f.check_box :inform_status, {:checked => true, :id => 'public-id'}, "公開", "非公開" %>
-      <% else %>
-        <%= f.check_box :inform_status, {:id => 'private-id'}, "公開", "非公開" %>
+      <%= f.fields_for :diary_images do |i| %>
+        <%= i.attachment_field :diary_image %>
       <% end %>
-        <div class="state p-success">
-            <label>
-              <% if current_user.public_setting == 1 %>
-                <i class="public">公開する</i><i class="private hide">非公開にする</i>
-              <% else %>
-                <i class="public hide">公開する</i><i class="private">非公開にする</i>
-              <% end %>
-            </label>
+
+      <div class="field">
+          <%= f.label :title %><br />
+          <%= f.text_field :title, class: 'title_field' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :content %><br />
+        <%= f.text_area :content, class: 'content_field' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :diary_date, 'Date' %><br />
+        <%= f.date_field :diary_date, value: Date.current %>
+      </div>
+
+      <div class="field">
+        <div class="pretty p-switch p-fill">
+          <% if current_user.public_setting == 1 %>
+            <%= f.check_box :inform_status, {:checked => true, :id => 'public-id'}, "公開", "非公開" %>
+          <% else %>
+            <%= f.check_box :inform_status, {:id => 'private-id'}, "公開", "非公開" %>
+          <% end %>
+            <div class="state p-success">
+                <label>
+                  <% if current_user.public_setting == 1 %>
+                    <i class="public">公開する</i><i class="private hide">非公開にする</i>
+                  <% else %>
+                    <i class="public hide">公開する</i><i class="private">非公開にする</i>
+                  <% end %>
+                </label>
+            </div>
         </div>
-    </div>
+      </div>
+
+      <div class="actions">
+          <%= f.submit '作成', class: "create-btn" %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="actions">
-      <%= f.submit '更新', class: "btn btn-primary" %>
-  </div>
-
-<% end %>
-
-
+</div>
 
 <%= javascript_include_tag "diary.js" %>

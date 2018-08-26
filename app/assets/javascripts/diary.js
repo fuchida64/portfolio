@@ -1,4 +1,5 @@
 
+// new
 $('input[type=file]').on('change', function (e) {
 	var
       str = $(this).attr("id"),
@@ -32,7 +33,7 @@ $(function() {
 	    }
   	});
 });
-
+// show
 $('.slider').slick({
   dots: true,
   infinite: true,
