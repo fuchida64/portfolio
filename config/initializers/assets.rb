@@ -35,6 +35,7 @@ Rails.application.config.assets.precompile += %w( users/confirmations/new.scss )
 Rails.application.config.assets.precompile += %w( task_groups/index.scss )
 Rails.application.config.assets.precompile += %w( task_groups/show.scss )
 # diaries
+Rails.application.config.assets.precompile += %w( diaries/index.scss )
 Rails.application.config.assets.precompile += %w( diaries/new.scss )
 Rails.application.config.assets.precompile += %w( diaries/show.scss )
 Rails.application.config.assets.precompile += %w( slick.css )

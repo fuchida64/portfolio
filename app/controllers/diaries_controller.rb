@@ -1,8 +1,7 @@
 class DiariesController < ApplicationController
 
 	def index
-		@diaries = Diary.all
-		@diary_images = DiaryImage.all
+		@diaries = Diary.all.where(inform_status: '公開')
 	end
 
 	def new
