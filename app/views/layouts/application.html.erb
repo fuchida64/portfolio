@@ -36,10 +36,12 @@
                   <span class="app-title1">ec change</span>
                 <% end %>
               </p>
+
               <% if admin_signed_in? %>
                 <li><%= link_to 'Users', admin_users_path, class: "" %></li>
                 <li><%= link_to 'Admins', admins_path, class: "" %></li>
                 <li><%= link_to 'logout', destroy_admin_session_path, method: :delete, "data-confirm" => "本当にログアウトしますか？", class: "" %></li>
+
               <% elsif user_signed_in? %>
                 <li><%= link_to 'to_do', task_groups_path, class: "menu" %>
                   <% if current_user.task_groups.exists? %>
@@ -68,6 +70,7 @@
                 </li>
                 <li><%= link_to 'my page', user_path(current_user.id), class: "" %></li>
                 <li><%= link_to 'logout', destroy_user_session_path, method: :delete, "data-confirm" => "本当にログアウトしますか？", class: "" %></li>
+
               <% else %>
                 <li><%= link_to 'login', new_user_session_path, class: "" %></li>
                 <li><%= link_to 'sign up', new_user_registration_path, class: "" %></li>
@@ -75,6 +78,67 @@
             </ul>
           </nav>
         </header>
+
+        <div class="header2">
+          <p class="home-li">
+            <%= link_to homes_path, class: "home1" do %>
+              <%= image_tag('logo1.jpg', :size => '15x15', :alt => 'アイコン', class: 'logo1') %>
+              <%= image_tag('logo2.jpg', :size => '25x40', :alt => 'アイコン', class: 'logo2') %>
+              <span class="app-title1">ec change</span>
+            <% end %>
+          </p>
+          <div id="nav-drawer">
+            <input id="nav-input" type="checkbox" class="nav-unshown">
+            <label id="nav-open" for="nav-input"><span></span></label>
+            <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+            <div id="nav-content">
+              <ul>
+                <% if admin_signed_in? %>
+                  <li><%= link_to 'Users', admin_users_path, class: "" %></li>
+                  <li><%= link_to 'Admins', admins_path, class: "" %></li>
+                  <li><%= link_to 'logout', destroy_admin_session_path, method: :delete, "data-confirm" => "本当にログアウトしますか？", class: "" %></li>
+
+                <% elsif user_signed_in? %>
+                  <li><%= link_to 'to_do', task_groups_path, class: "menu" %>
+                    <% if current_user.task_groups.exists? %>
+                      <ul class="drop-ul">
+                        <% current_user.task_groups.each do |task| %>
+                          <% if task.title.length >= 9 %>
+                            <li><%= link_to task.title[0,8]+'...', task_group_path(task.id), class: "drop" %></li>
+                          <% else %>
+                            <li><%= link_to task.title, task_group_path(task.id), class: "drop" %></li>
+                          <% end %>
+                        <% end %>
+                      </ul>
+                    <% end %>
+                  </li>
+                  <li><%= link_to 'memory', memory_groups_path, class: "" %>
+                    <ul class="drop-ul">
+                      <% current_user.memory_groups.each do |memory| %>
+                        <% if memory.title.length >= 9 %>
+                          <li><%= link_to memory.title[0,8]+'...', memory_group_path(memory), class: "drop" %></li>
+                        <% else %>
+                          <li><%= link_to memory.title, memory_group_path(memory), class: "drop" %></li>
+                        <% end %>
+                      <% end %>
+                    </ul>
+                  </li>
+                  <li><%= link_to 'diary', diaries_path, class: "" %>
+                    <ul class="drop-ul">
+                      <li><%= link_to 'new diary', new_diary_path, class: "drop" %></li>
+                    </ul>
+                  </li>
+                  <li><%= link_to 'my page', user_path(current_user.id), class: "" %></li>
+                  <li><%= link_to 'logout', destroy_user_session_path, method: :delete, "data-confirm" => "本当にログアウトしますか？", class: "" %></li>
+
+                <% else %>
+                  <li><%= link_to 'login', new_user_session_path, class: "" %></li>
+                  <li><%= link_to 'sign up', new_user_registration_path, class: "" %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
 
       <% else %>
 

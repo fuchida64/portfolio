@@ -30,7 +30,7 @@ $(function() {
 		$('ul', this).stop().slideUp();
 	});
 });
-
+// flash
 $( document ).ready(function() {
 	$('.alert').animate({'marginRight':'103vw'},1000);
 	setTimeout("slideOut()", 8000);
