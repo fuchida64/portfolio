@@ -46,9 +46,9 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
   end
 
   create_table "default_stages", force: :cascade do |t|
-    t.integer "stage"
-    t.integer "period"
-    t.integer "user_id"
+    t.integer "stage", null: false
+    t.integer "period", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -98,9 +98,9 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
   end
 
   create_table "memory_groups", force: :cascade do |t|
-    t.text "title"
+    t.text "title", null: false
     t.text "content"
-    t.integer "user_id"
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

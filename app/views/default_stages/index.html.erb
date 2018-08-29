@@ -1,0 +1,84 @@
+
+<%= stylesheet_link_tag "default_stages/index", :media => "all" %>
+
+<main>
+	<div class="default-stage">
+		<h2>Default Stage list</h2>
+		<ul class="chart">
+			<li>
+				<span style="height:10%" title="step1" class="stage-bottom"><p class="stage-period">1日</p></span>
+			</li>
+			<% current_user.default_stages.where.not(stage: nil).each do |default| %>
+				<li>
+					<span style="height:<%= default.stage * 10 %>%" class="stage-bottom">
+						<a href="#stage-modal<%= default.id %>" class="step" data-lity="data-lity">step<%= default.stage %></a>
+
+						<div id="stage-modal<%= default.id %>" class="lity-hide">
+							<div class="modal-content">
+								<h3>step<%= default.stage %> edit</h3>
+								<hr>
+								<%= form_for default, url: default_stage_path(default) do |s| %>
+									<div class="field">
+										<%= s.number_field :period, class: "create-field" %> 日後
+										<%= s.submit '更新', class: "create-btn" %>
+										<% if default.stage == current_user.default_stages.maximum(:stage) %>
+											<%= link_to "delete", default_stage_path(default), method: :delete, class: 'delete-btn', "data-confirm" => "本当に削除しますか?" %>
+										<% end %>
+									</div>
+								<% end %>
+							</div>
+						</div>
+						<p class="stage-period"><%= default.period %>日</p>
+					</span>
+				</li>
+			<% end %>
+		</ul>
+		<% if current_user.default_stages.maximum(:stage).nil? || current_user.default_stages.maximum(:stage) < 10 %>
+			<div class="stage-field">
+				<% if current_user.default_stages.maximum(:stage).nil? %>
+					<h4>Step2</h4>
+				<% else %>
+					<h4>Step<%= current_user.default_stages.maximum(:stage) + 1 %></h4>
+				<% end %>
+				<%= form_for @default_stage, url: default_stages_path do |s| %>
+					<div class="field">
+						<%= s.number_field :period, class: "create-field" %> 日後
+						<%= s.submit '追加', class: "create-btn" %>
+					</div>
+				<% end %>
+			</div>
+		<% end %>
+	</div>
+</main>
+<div class="main2">
+	<h2>Default Stage list</h2>
+	<table class='table'>
+		<tbody>
+			<tr>
+				<td>step1</td>
+				<td>1日</td>
+			</tr>
+			<% current_user.default_stages.where.not(stage: nil).each do |default| %>
+				<tr>
+					<td><a href="#stage-modal<%= default.id %>" class="step" data-lity="data-lity">step<%= default.stage %></a></td>
+					<td><%= default.period %>日</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<% if current_user.default_stages.maximum(:stage).nil? || current_user.default_stages.maximum(:stage) < 10 %>
+		<div class="stage-field">
+			<% if current_user.default_stages.maximum(:stage).nil? %>
+				<h4>Step2</h4>
+			<% else %>
+				<h4>Step<%= current_user.default_stages.maximum(:stage) + 1 %></h4>
+			<% end %>
+			<%= form_for @default_stage, url: default_stages_path do |s| %>
+				<div class="field">
+					<%= s.number_field :period, class: "create-field" %> 日後
+					<%= s.submit '追加', class: "create-btn" %>
+				</div>
+			<% end %>
+		</div>
+	<% end %>
+</div>

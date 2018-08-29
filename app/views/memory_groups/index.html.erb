@@ -1,67 +1,73 @@
 
-<h2>Memory Groups</h2>
-<table class='table'>
-	<thead>
-		<tr>
-			<th>title</th>
-			<th>content</th>
-		</tr>
-	</thead>
-	<% @memory_groups.each do |memory_group| %>
-		<tbody>
-			<tr>
-				<td><%= link_to memory_group.title, memory_group_path(memory_group) %></td>
-				<td><%= memory_group.content %></td>
-			</tr>
-		</tbody>
-	<% end %>
-</table>
+<%= stylesheet_link_tag "memory_groups/index", :media => "all" %>
 
-<h2>Memory Group作成</h2>
-<%= form_for(@memory_group) do |f| %>
+<main>
+	<div class="container">
 
-	<div class="field row">
-		<%= f.label :title %><br />
-		<%= f.text_field :title %>
+		<div class="row headline">
+			<h2>Memory List</h2>
+			<%= link_to 'Default Stage', default_stages_path, class: "stage-link" %>
+		</div>
+		<% @memory_groups.each do |mg| %>
+			<div class="memory-group">
+				<h4><%= link_to mg.title.truncate(17), memory_group_path(mg), class: "memory-title" %></h4>
+				<hr>
+				<div class="memory-content">
+					<p class="memory-text"><%= mg.content %></p>
+				</div>
+				<div class="memory-info">
+					<p><a href="#edit-modal<%= mg.id %>" data-lity="data-lity">＊</a></p>
+				</div>
+
+				<div id="edit-modal<%= mg.id %>" class="lity-hide">
+					<div class="modal-content">
+						<div class="modal-form">
+						    <h3>Memory list</h3>
+						    <hr>
+							<%= form_for mg, url: memory_group_path(mg)  do |f| %>
+								<div class="field">
+								  	<%= f.label :title, "リスト名" %><br />
+								  	<%= f.text_field :title %>
+								</div>
+								<div class="field">
+									<%= f.label :content, "説明", class: "label-content" %><br />
+									<%= f.text_area :content %>
+								</div>
+								<div class="actions">
+								  	<%= f.submit '更新', class: "edit-btn" %>
+								</div>
+							<% end %>
+							<%= link_to "delete", memory_group_path(mg), method: :delete, class: 'delete-btn', "data-confirm" => "本当に削除しますか?" %>
+						</div>
+					</div>
+				</div>
+			</div>
+		<% end %>
+		<div class="memory-group group2">
+			<a href="#create-modal" class="plus-mark" data-lity="data-lity">＋</a>
+		</div>
+		<div id="create-modal" class="lity-hide">
+			<div class="modal-content">
+				<div class="modal-form">
+				    <h3>Memory list create</h3>
+				    <hr>
+					<%= form_for(@memory_group) do |f| %>
+						<div class="field">
+						  	<%= f.label :title, "リスト名" %><br />
+						  	<%= f.text_field :title %>
+						</div>
+						<div class="field">
+							<%= f.label :content, "説明", class: "label-content" %><br />
+							<%= f.text_area :content %>
+						</div>
+						<div class="actions">
+						  	<%= f.submit '作成', class: "edit-btn" %>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+
 	</div>
+</main>
 
-	<div class="field row">
-		<%= f.label :content %><br />
-		<%= f.text_area :content %>
-	</div>
-
-	<div class="actions row">
-		<%= f.submit '作成', class: "btn btn-primary" %>
-	</div>
-<% end %>
-<% if current_user.default_stages.maximum(:stage).nil? %>
-	<h2>Stage2作成</h2>
-<% else %>
-	<h2>Stage<%= current_user.default_stages.maximum(:stage) + 1 %>作成</h2>
-<% end %>
-<%= form_for @default_stage, url: default_stages_path do |s| %>
-
-	<div class="field row">
-		<%= s.label :period %><br />
-		<%= s.number_field :period %>
-	</div>
-
-	<div class="actions row">
-		<%= s.submit '作成', class: "btn btn-primary" %>
-	</div>
-<% end %>
-
-<h2>Default Stage一覧</h2>
-<table class="table">
-	<tr>
-		<td>stage1</td>
-		<td>1日</td>
-	</tr>
-
-	<% current_user.default_stages.where.not(stage: nil).each do |default_stage| %>
-		<tr>
-			<td>stage<%= default_stage.stage %></td>
-			<td><%= default_stage.period %>日</td>
-		</tr>
-	<% end %>
-</table>

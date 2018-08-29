@@ -36,5 +36,5 @@ $( document ).ready(function() {
 	setTimeout("slideOut()", 8000);
 });
 function slideOut(){
-  	$('.alert').animate({'marginRight':'-105vw'},1000);
+  	$('.alert').animate({'marginRight':'-105vw'},2000);
 }
