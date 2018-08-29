@@ -1,0 +1,216 @@
+
+body {
+  background: url(/images/task_memory.jpg);
+  background-size: cover;
+  background-position: center center;
+  width: 100vw;
+  height: 100vh;
+}
+h2 {
+  font-size: 50px;
+  font-weight: 300;
+  color: black;
+  letter-spacing: 10px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+.headline {
+  position: relative;
+  .stage-link {
+    position: absolute;
+    top: 65px;
+    left: 400px;
+    font-size: 20px;
+    color: #009900;
+    letter-spacing: 2px;
+  }
+}
+
+.memory-group {
+  width: 30%;
+  height: 200px;
+  padding: 5px;
+  margin: 15px;
+  margin-bottom: 50px;
+  color: #00BCD4;
+  background: white;
+  border-top: solid 12px #FF9872;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
+  float: left;
+
+  h4 {
+    margin-left: 10px;
+
+    .memory-title {
+      font-size: 20px;
+      padding-top: 12px;
+      color: #333333
+    }
+    .memory-title:hover {
+      color: #00BCD4;
+    }
+  }
+  hr {
+    width: 96%;
+    margin: 0 auto;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    border-top: 2px solid #eeeeee;
+  }
+  .memory-content {
+    height: 85px;
+    width: 90%;
+    margin: 0 auto;
+    white-space: pre-line;
+    word-wrap: break-word;
+    color: #696969;
+    overflow:auto;
+
+    .memory-text {
+      font-size: 15px;
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
+  .memory-info {
+    color: #777777;
+    font-size: 15px;
+    margin-top: 10px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+  }
+  .memory-info p:last-child {
+    margin-top: 1px;
+  }
+}
+.modal-content {
+  width: 440px;
+  height: 500px;
+  padding: 5px;
+  border-top: solid 20px #FF9872;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
+  background: white;
+}
+.modal-form {
+  width: 310px;
+  margin: 0 auto;
+  background-color: white;
+  position: relative;
+
+  h3 {
+    font-size: 40px;
+    font-weight: 300;
+  }
+  hr {
+    border-top: 2px solid #eeeeee;
+    margin-top: 15px;
+  }
+  .field {
+    margin-top: 20px;
+  }
+  input[type=text], textarea {
+    background-color: #fff;
+    height: 31px;
+    width: 300px;
+    padding: 3px 7px;
+    border-top-color: #949494;
+    border-radius: 3px;
+    outline: 0;
+    transition: all 100ms linear;
+    font-family: "Hiragino Kaku Gothic Pro W3","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+    line-height: 19px;
+    color: #111;
+    font-weight: 500;
+    border: 0;
+    box-shadow: 0 0 1px 0 rgba(0,0,0,0.5);
+    font-size: 15px;
+  }
+  textarea {
+    height: 180px;
+  }
+  input[type="text"]:focus, textarea:focus {
+    box-shadow: 0 0 7px 0 #1dc1d6;
+    outline: 0;
+  }
+  .label-content {
+    margin-left: 3px;
+  }
+  .edit-btn {
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    color: #67c5ff;
+    border: dashed 1px #67c5ff;
+    background: #f2fcff;
+    border-radius: 3px;
+    transition: .4s;
+    position: absolute;
+    left: 10px;
+    bottom: -60px;
+  }
+  .edit-btn:hover {
+      background: #cbedff;
+      color: #FFF;
+  }
+  .delete-btn {
+      display: inline-block;
+      padding: 0.5em 1em;
+      text-decoration: none;
+      color: #f65161;
+      border: dashed 1px #f65161;
+      background: #ffeff0;
+      border-radius: 3px;
+      transition: .4s;
+      position: absolute;
+      left: 90px;
+      bottom: -60px;
+  }
+  .delete-btn:hover {
+      background: #FFDDFF;
+      color: #FFF;
+  }
+}
+.group2 {
+  text-align: center;
+  line-height: 200px;
+  border: dashed 3px #AAAAAA;
+  box-shadow: none;
+  background: rgba(255, 255, 255, 0.5);
+  margin-bottom: 60px;
+
+  .plus-mark {
+    font-size: 80px;
+    color: #AAAAAA;
+    text-decoration: none;
+  }
+}
+.lity {
+    background: rgba(0, 0, 0, 0.5);
+}
+a:focus {
+  outline: 0 !important;
+  outline-offset: 0 !important;
+  text-decoration: none;
+}
+@media screen and (max-width: 425px) {
+  .headline {
+    h2 {
+      margin-left: 20px;
+    }
+    .stage-link {
+      position: unset;
+      margin-left: 40px;
+    }
+  }
+  .memory-group {
+    width: 90%;
+  }
+  .modal-content {
+    width: 90vw;
+  }
+}
+
+
+

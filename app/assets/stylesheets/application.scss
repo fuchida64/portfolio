@@ -18,7 +18,12 @@
 @font-face{
    font-family: "azuki";
    src: font-url('azukiB.ttf') format('truetype');
- }
+}
+@font-face{
+   font-family: "nagomi";
+   src: font-url('NagomiGokubosoGothic-ExtraLight.otf') format('truetype');
+}
+
 *{
   margin: 0;
   padding: 0;
@@ -273,7 +278,7 @@ a:hover, a:focus {
     text-decoration: none;
 }
 :focus {
-    outline: -webkit-focus-ring-color auto 0px;
+    outline: -webkit-focus-ring-color auto 0px !important;
 }
 
 // // timer

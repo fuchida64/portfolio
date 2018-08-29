@@ -1,9 +1,9 @@
 class MemoryGroupsController < ApplicationController
+	before_action :ensure_correct_user, except: [:index, :create]
 
 	def index
 		@memory_groups = current_user.memory_groups
 		@memory_group = MemoryGroup.new
-		@default_stage = current_user.default_stages.new
 	end
 
 	def create
@@ -17,10 +17,11 @@ class MemoryGroupsController < ApplicationController
 				@memory_stage.period = d.period
 				@memory_stage.save
 			end
-			redirect_back(fallback_location: homes_path)
+			flash[:notice] = "作成されました"
 		else
-			render 'index'
+			flash[:alert] = "入力エラーが発生しました。リスト名は1~20文字以内です。"
 		end
+		redirect_back(fallback_location: homes_path)
 	end
 
 	def show
@@ -33,6 +34,26 @@ class MemoryGroupsController < ApplicationController
 		@memory.build_answer_image
 	end
 
+	def update
+		@memory_group = MemoryGroup.find(params[:id])
+		if @memory_group.update(memory_group_params)
+			flash[:notice] = "更新されました"
+		else
+			flash[:alert] = "入力エラーが発生しました。リスト名は1~20文字以内です。"
+		end
+		redirect_back(fallback_location: homes_path)
+	end
+
+	def destroy
+		@memory_group = MemoryGroup.find(params[:id])
+		if  @memory_group.destroy
+		  	flash[:notice] = "削除されました"
+		else
+			flash[:alert] = "エラーが発生しました"
+		end
+		redirect_to memory_groups_path
+	end
+
 	private
 
 	def memory_group_params
@@ -41,4 +62,12 @@ class MemoryGroupsController < ApplicationController
 			memory_stages_attributes: [ :id, :stage, :period, :memory_group_id, :_destroy]
 		)
 	end
+
+	def ensure_correct_user
+		@memory_group = MemoryGroup.find_by(id: params[:id])
+        if current_user.id != @memory_group.user_id
+           flash[:alert] = "権限がありません"
+           redirect_to homes_path
+        end
+    end
 end
