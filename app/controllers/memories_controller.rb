@@ -8,6 +8,10 @@ class MemoriesController < ApplicationController
 		else
 			@memories = @memory_group.memories.where.not(stage: 0).where("execution_date <= ?", Date.current)
 		end
+		if @memories.empty?
+			redirect_to memory_group_path(@memory_group)
+		end
+		@memory = @memories.shuffle.first
 	end
 
 	def create
@@ -21,16 +25,24 @@ class MemoriesController < ApplicationController
 
 	def correct
 		@memory = Memory.find(params[:id])
+		@memory_stages = @memory.memory_group.memory_stages
 		correct_num = @memory.correct_num + 1
-		if @memory.memory_group.memory_stages.exists? && (@memory.memory_group.memory_stages.maximum(:stage) != params[:stage].to_i)
+		if @memory_stages.present? && (params[:stage] == "all")
+			if @memory.stage < @memory_stages.maximum(:stage)
+				next_stage = (@memory.stage + 1)
+				@memory_stage = @memory_stages.find_by(stage: next_stage)
+				@memory.update(:stage => next_stage, :correct_num => correct_num, :execution_date => Date.current.next_day(@memory_stage.period))
+			else
+				@memory.update(:stage => 0, :correct_num => correct_num)
+			end
+		elsif @memory_stages.present? && (@memory_stages.maximum(:stage) != params[:stage].to_i)
 			next_stage = (params[:stage].to_i + 1)
-			@memory_stage = @memory.memory_group.memory_stages.find_by(stage: next_stage)
+			@memory_stage = @memory_stages.find_by(stage: next_stage)
 			@memory.update(:stage => next_stage, :correct_num => correct_num, :execution_date => Date.current.next_day(@memory_stage.period))
-			redirect_back(fallback_location: homes_path)
 		else
 			@memory.update(:stage => 0, :correct_num => correct_num)
-			redirect_back(fallback_location: homes_path)
 		end
+		redirect_back(fallback_location: homes_path)
 	end
 
 	def wrong

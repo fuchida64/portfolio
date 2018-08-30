@@ -16,6 +16,7 @@
 					<p class="memory-text"><%= mg.content %></p>
 				</div>
 				<div class="memory-info">
+					<p>today：<%= mg.memories.where.not(stage: 0).where("execution_date <= ?", Date.current).length %> 個</p>
 					<p><a href="#edit-modal<%= mg.id %>" data-lity="data-lity">＊</a></p>
 				</div>
 
