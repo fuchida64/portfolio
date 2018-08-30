@@ -1,117 +1,129 @@
 
+<%= stylesheet_link_tag "memory_groups/show", :media => "all" %>
 
-<%= Time.zone.now.strftime("%Y-%m-%d") %>
-<%= Date.today %>
-<%= Date.current %>
+<style type="text/css" media="screen">
+	.today-box {
+ 	 	min-width: 50vw;
+ 	 	<% if @memory_group.memory_stages.present? %>
+ 	 		width: <%= (@memory_group.memory_stages.length) * 10 %>vw;
+ 	 	<% end %>
+	}
+</style>
 
-<h2><%= @memory_group.title %></h2>
-<%= @memory_group.content%>
-<br>
-
-<h2>今日のmemory</h2>
-
-<table class="table">
-	<tr>
-		<td><%= link_to "All Stage", memory_group_memories_path(@memory_group.id, stage: "all") %></td>
-		<td><%= @memory_group.memories.where.not(stage: 0).where("execution_date <= ?", Date.current).length %>個</td>
-	</tr>
-	<tr>
-		<td><%= link_to "Stage1", memory_group_memories_path(@memory_group.id, stage: 1) %></td>
-		<td><%= @memory_group.memories.where(stage: 1).where("execution_date <= ?", Date.current).length %>個</td>
-	</tr>
-	<% @memory_group.memory_stages.where.not(stage: nil).each do |n| %>
-		<tr>
-			<td><%= link_to memory_group_memories_path(@memory_group.id, stage: n.stage) do %>
-				Stage<%= n.stage %>
-				<% end %></td>
-			<td><%= @memory_group.memories.where(stage: n.stage).where("execution_date <= ?", Date.current).length %>個</td>
-		</tr>
-	<% end %>
-	<tr>
-		<td><%= link_to "Complete", memory_group_memories_path(@memory_group.id, stage: 0) %></td>
-		<td><%= @memory_group.memories.where(stage: 0).length %>個</td>
-	</tr>
-</table>
-
-<h2>memory作成</h2>
-
-<%= form_for [@memory_group,@memory] do |f| %>
-
-	<%= f.fields_for :problem do |problem| %>
-		<div class="field">
-			<%= problem.label :problem_content %><br />
-			<%= problem.text_field :problem_content %>
-		</div>
-	<% end %>
-
-	<%= f.fields_for :problem_image do |p_image| %>
-		<div class="field">
-			<%= p_image.label :problem_image %><br />
-			<%= p_image.attachment_field :problem_image %>
-		</div>
-	<% end %>
-
-	<%= f.fields_for :answer do |answer| %>
-		<div class="field">
-			<%= answer.label :answer_content %><br />
-			<%= answer.text_field :answer_content %>
-		</div>
-	<% end %>
-
-	<%= f.fields_for :answer_image do |a_image| %>
-		<div class="field">
-			<%= a_image.label :answer_image %><br />
-			<%= a_image.attachment_field :answer_image %>
-		</div>
-	<% end %>
-
-	<div class="actions">
-		<%= f.submit '作成', class: "btn btn-primary" %>
+<div class="container">
+	<div class="row headline">
+		<h2><%= @memory_group.title %></h2>
+		<p><%= @memory_group.content%></p>
+		<%= link_to 'Memory Stage', memory_group_memory_stages_path(@memory_group), class: "stage-link" %>
 	</div>
-<% end %>
+	<hr>
+	<div class="today-box">
+		<h3>List of today</h3>
+  		<div class="folder-tabs">
+  			<% if @today_memories.present? %>
+  				<div class="first-tab"><%= link_to "All Step", memory_group_memories_path(@memory_group.id, stage: "all") %></div>
+			    <% if @today_memories.where(stage: 1).present? %>
+			    	<div class="behind-tab"><%= link_to "Step1", memory_group_memories_path(@memory_group.id, stage: 1) %></div>
+			    <% end %>
+			    <% @memory_group.memory_stages.where.not(stage: nil).each do |n| %>
+		    		<% if @today_memories.where(stage: n.stage).present? %>
+			    		<div class="behind-tab">
+			    			<%= link_to memory_group_memories_path(@memory_group.id, stage: n.stage) do %>Step<%= n.stage %><% end %>
+			    		</div>
+			    	<% end %>
+			    <% end %>
+  			<% end %>
+  		</div>
+		<div class="folder-body">
+			<ul class="chart">
+				<li>
+					<span style="height:<% if @today_memories.empty? %>0
+						<% else %><%= (100 / @today_memories.length) * @today_memories.where(stage: 1).length %><% end %>%" title="step1">
+						<p class="stage-period">
+							<% if @today_memories.empty? %>0個
+							<% else %><%= @today_memories.where(stage: 1).length %>個<% end %></p>
+					</span>
+				</li>
+				<% @memory_group.memory_stages.where.not(stage: nil).each do |n| %>
+					<li>
+						<span style="height:<% if @today_memories.empty? %>0
+						<% else %><%= (100 / @today_memories.length) * @today_memories.where(stage: n.stage).length %><% end %>%" title="step<%= n.stage %>">
+							<p class="stage-period">
+								<% if @today_memories.empty? %>0個
+								<% else %><%= @today_memories.where(stage: n.stage).length %>個<% end %></p>
+						</span>
+					</li>
+				<% end %>
+			</ul>
+		</div>
+		<a href="#create-modal" class="new-memory" data-lity="data-lity"><h3>new memory</h3></a>
+		<div id="create-modal" class="lity-hide">
+			<div class="modal-content">
+				<div class="modal-form">
+				    <h3>Memory create</h3>
+				    <hr>
+				    <%= form_for [@memory_group,@memory] do |f| %>
+					    <div class="problem-box">
+					    	<%= f.fields_for :problem_image do |p_image| %>
+								<div class="field">
+									<label class="label-box" for="memory_problem_image_attributes_problem_image">
+								      <div class="img-box">
+								        <img class="preview_memory_problem_image_attributes_problem_image" >
+								        <i class="far fa-image"></i>
+								      </div>
+								    </label>
+									<%= p_image.attachment_field :problem_image %>
+								</div>
+							<% end %>
 
-<h2>memory一覧</h2>
+					    	<%= f.fields_for :problem do |problem| %>
+								<div class="field">
+									<%= problem.label :problem_content %><br />
+									<%= problem.text_area :problem_content %>
+								</div>
+							<% end %>
 
-<table class='table'>
-	<% @memory_group.memories.each do |m| %>
-		<tr>
-			<td><%= m.stage %></td>
-			<td><%= m.execution_date %></td>
-	        <td><%= attachment_image_tag m.problem_image, :problem_image, :fill, 80, 80, format: 'jpeg' %></td>
-	        <td><%= m.problem.problem_content %></td>
-	        <td><%= attachment_image_tag m.answer_image, :answer_image, :fill, 80, 80, format: 'jpeg' %></td>
-	        <td><%= m.answer.answer_content %></td>
-	        <td><%= m.correct_num %></td>
-	        <td><%= m.wrong_num %></td>
-	        <td><%= link_to "edit", edit_memory_path(m.id) %></td>
-		</tr>
-	 <% end %>
-</table>
+					    </div>
+					    <div class="answer-box">
+					    	<%= f.fields_for :answer_image do |a_image| %>
+								<div class="field">
+									<label class="label-box" for="memory_answer_image_attributes_answer_image">
+										<div class="img-box">
+											<img class="preview_memory_answer_image_attributes_answer_image" >
+											<i class="far fa-image"></i>
+										</div>
+									</label>
+									<%= a_image.attachment_field :answer_image %>
+								</div>
+							<% end %>
 
-<h2>Stage<%= @memory_group.memory_stages.maximum(:stage) + 1 %>作成</h2>
-<%= form_for @memory_stage, url: memory_group_memory_stages_path(@memory_group) do |s| %>
+					    	<%= f.fields_for :answer do |answer| %>
+								<div class="field">
+									<%= answer.label :answer_content %><br />
+									<%= answer.text_area :answer_content %>
+								</div>
+							<% end %>
 
-	<div class="field row">
-		<%= s.label :period %><br />
-		<%= s.number_field :period %>
+					    </div>
+
+						<div class="actions">
+							<%= f.submit '作成', class: "edit-btn" %>
+						</div>
+					<% end %>
+
+				</div>
+			</div>
+		</div>
 	</div>
+</div>
 
-	<div class="actions row">
-		<%= s.submit '作成', class: "btn btn-primary" %>
-	</div>
-<% end %>
-
-
-<table class="table">
-	<tr>
-		<td>stage1</td>
-		<td>1日</td>
-	</tr>
-
-	<% @memory_group.memory_stages.where.not(stage: nil).each do |memory_stage| %>
-		<tr>
-			<td>stage<%= memory_stage.stage %></td>
-			<td><%= memory_stage.period %>日</td>
-		</tr>
-	<% end %>
-</table>
+<script>
+	$('input[type=file]').on('change', function (e) {
+		var str = $(this).attr("id");
+	    var reader = new FileReader();
+	    reader.onload = function (e) {
+	        $(".preview_" + str).attr('src', e.target.result);
+	    }
+	    reader.readAsDataURL(e.target.files[0]);
+	});
+</script>

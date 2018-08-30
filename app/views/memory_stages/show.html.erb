@@ -1,0 +1,85 @@
+
+<%= stylesheet_link_tag "memory_stages/show", :media => "all" %>
+
+<main>
+	<div class="default-stage">
+		<h2><%= @memory_group.title %> Step list</h2>
+		<ul class="chart">
+			<li>
+				<span style="height:10%" title="step1" class="stage-bottom"><p class="stage-period">1日</p></span>
+			</li>
+			<% @memory_stages.where.not(stage: nil).each do |ms| %>
+				<li>
+					<span style="height:<%= ms.stage * 10 %>%" class="stage-bottom">
+						<a href="#stage-modal<%= ms.id %>" class="step" data-lity="data-lity">step<%= ms.stage %></a>
+
+						<div id="stage-modal<%= ms.id %>" class="lity-hide">
+							<div class="modal-content">
+								<h3>step<%= ms.stage %> edit</h3>
+								<hr>
+								<%= form_for ms, url: memory_stage_path(ms) do |s| %>
+									<div class="field">
+										<%= s.number_field :period, class: "create-field" %> 日後
+										<%= s.submit '更新', class: "create-btn" %>
+										<% if ms.stage == @memory_stages.maximum(:stage) %>
+											<%= link_to "delete", memory_stage_path(ms), method: :delete, class: 'delete-btn', "data-confirm" => "本当に削除しますか?" %>
+										<% end %>
+									</div>
+								<% end %>
+							</div>
+						</div>
+						<p class="stage-period"><%= ms.period %>日</p>
+					</span>
+				</li>
+			<% end %>
+		</ul>
+		<% if @memory_stages.maximum(:stage).nil? || @memory_stages.maximum(:stage) < 10 %>
+			<div class="stage-field">
+				<% if @memory_stages.maximum(:stage).nil? %>
+					<h4>Step2</h4>
+				<% else %>
+					<h4>Step<%= @memory_stages.maximum(:stage) + 1 %></h4>
+				<% end %>
+				<%= form_for @memory_stage, url: memory_stages_path(memory_group_id: @memory_group) do |s| %>
+					<div class="field">
+						step<%= @memory_stages.maximum(:stage) %> クリア後　<%= s.number_field :period, class: "create-field" %> 日後に復習する
+						<%= s.submit '追加', class: "create-btn" %>
+					</div>
+				<% end %>
+			</div>
+		<% end %>
+	</div>
+</main>
+
+<div class="main2">
+	<h2><%= @memory_group.title %> Step list</h2>
+	<table class='table'>
+		<tbody>
+			<tr>
+				<td>step1</td>
+				<td>1日</td>
+			</tr>
+			<% @memory_stages.where.not(stage: nil).each do |ms| %>
+				<tr>
+					<td><a href="#stage-modal<%= ms.id %>" class="step" data-lity="data-lity">step<%= ms.stage %></a></td>
+					<td><%= ms.period %>日</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<% if @memory_stages.maximum(:stage).nil? || @memory_stages.maximum(:stage) < 10 %>
+		<div class="stage-field">
+			<% if @memory_stages.maximum(:stage).nil? %>
+				<h4>Step2</h4>
+			<% else %>
+				<h4>Step<%= @memory_stages.maximum(:stage) + 1 %></h4>
+			<% end %>
+			<%= form_for @memory_stage, url: memory_stages_path(memory_group_id: @memory_group) do |s| %>
+				<div class="field">
+					クリア後　<%= s.number_field :period, class: "create-field" %> 日後に復習する
+					<%= s.submit '追加', class: "create-btn" %>
+				</div>
+			<% end %>
+		</div>
+	<% end %>
+</div>
