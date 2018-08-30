@@ -1,0 +1,112 @@
+
+body {
+  background: url(/images/task_memory.jpg);
+  background-size: cover;
+  background-position: center center;
+  width: 100vw;
+  min-height: 100vh;
+}
+.back-link {
+	margin-top: 20px;
+	font-size: 15px;
+}
+.memory-box {
+	width: 90vw;
+	min-height: 70vh;
+	background-color: white;
+	margin: 20px auto 60px;
+	flex-direction: row;
+	display:flex;
+	border-radius: 5px;
+}
+.problem-box {
+	width: 50%;
+	min-height: 75vh;
+	border-right: 1px dashed;
+}
+.answer-box {
+	width: 50%;
+	min-height: 75vh;
+}
+.p-img-box {
+	width: 96%;
+	height: 300px;
+	margin: 0 auto;
+	position: relative;
+	border-bottom: 1px solid;
+
+	img {
+		max-width: 90%;
+        height: 90%;
+	    border: 5px solid #fff;
+	    display: block;
+	    text-align: center;
+	    position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%,-50%);
+        -webkit-transform : translate(-50%,-50%);
+        transform : translate(-50%,-50%);
+	}
+}
+.p-text-box {
+	width: 90%;
+	margin: 40px auto;
+	background-color: white;
+	font-size: 24px;
+
+	p {
+		white-space: pre-line;
+		word-wrap: break-word;
+		margin-left: 30px;
+	}
+}
+.answer1{
+    text-align: center;
+    margin-top: 40%;
+    position: relative;
+    .correct-btn {
+    	font-size: 50px;
+    	position: absolute;
+    	left: 30%;
+    }
+    .wrong-btn {
+    	font-size: 100px;
+    	position: absolute;
+    	top: -48px;
+    }
+}
+.answer-btn {
+    height: 50px;
+    text-align: center;
+    margin-bottom: 90px;
+    position: relative;
+
+    .correct-btn1 {
+    	font-size: 40px;
+    	position: absolute;
+    	left: 35%;
+    	top: 50%;
+    }
+    .wrong-btn2 {
+    	font-size: 80px;
+    	position: absolute;
+    	top: -25%;
+    }
+}
+.preview {
+    text-align: center;
+    position:relative;
+
+    img {
+        max-width: 90vw;
+        height: 90vh;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%,-50%);
+        -webkit-transform : translate(-50%,-50%);
+        transform : translate(-50%,-50%);
+        text-align: center;
+    }
+}
