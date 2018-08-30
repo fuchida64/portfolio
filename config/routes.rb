@@ -34,13 +34,14 @@ Rails.application.routes.draw do
 
   # task_group
   resources :task_groups
+  delete 'task_groups/:id/clear' => 'task_groups#destroy_all', as: 'destroy_all'
 
   # task
   resources :tasks do
     resource :task_details, only: [:show]
   end
   get 'tasks/:id/clear' => 'tasks#check'
-  patch 'tasks/position' => 'tasks#position_update', as: 'update_position'
+  post 'tasks/position' => 'tasks#position_update', as: 'update_position'
   patch 'tasks/:task_id/task_details' => 'task_details#update', as: 'update_limit'
 
   # diary
