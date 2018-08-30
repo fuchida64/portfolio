@@ -26,7 +26,7 @@ class MemoryGroupsController < ApplicationController
 
 	def show
 		@memory_group = MemoryGroup.find(params[:id])
-		@memory_stage = MemoryStage.new
+		@today_memories = @memory_group.memories.where("execution_date <= ?", Date.current)
 		@memory = Memory.new
 		@memory.build_problem
 		@memory.build_problem_image

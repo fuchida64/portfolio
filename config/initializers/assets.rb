@@ -37,6 +37,8 @@ Rails.application.config.assets.precompile += %w( task_groups/show.scss )
 # memories
 Rails.application.config.assets.precompile += %w( memory_groups/index.scss )
 Rails.application.config.assets.precompile += %w( default_stages/index.scss )
+Rails.application.config.assets.precompile += %w( memory_groups/show.scss )
+Rails.application.config.assets.precompile += %w( memory_stages/show.scss )
 # diaries
 Rails.application.config.assets.precompile += %w( diaries/index.scss )
 Rails.application.config.assets.precompile += %w( diaries/new.scss )

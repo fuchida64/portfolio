@@ -1,0 +1,276 @@
+
+body {
+  background: url(/images/task_memory.jpg);
+  background-size: cover;
+  background-position: center center;
+  width: 100vw;
+  height: 100vh;
+}
+.headline {
+	font-family: "nagomi";
+	position: relative;
+	h2 {
+		font-size: 50px;
+		font-weight: 500;
+		color: black;
+		letter-spacing: 10px;
+		margin-top: 40px;
+		margin-bottom: 15px;
+	}
+	p {
+		white-space: pre-line;
+    	word-wrap: break-word;
+    	max-height: 60px;
+    	overflow: auto;
+    	font-size: 20px;
+    	font-weight: 600;
+    	margin-left: 15px;
+    	margin-bottom: 10px;
+    	max-width: 75%;
+	}
+	.stage-link {
+		position: absolute;
+		right: 200px;
+		font-size: 20px;
+		color: #009900;
+		letter-spacing: 2px;
+		font-weight: 700;
+	}
+}
+hr {
+    border-top: 1.5px solid #888888;
+    width: 96vw;
+    position: absolute;
+    left: 2vw;
+    margin-top: 0px;
+}
+.today-box {
+  width: 50vw;
+	max-width: 90vw;
+	margin-top: 30px;
+	h3 {
+		font-weight: 300;
+		font-size: 30px;
+	}
+}
+.chart{
+  display:table;
+  table-layout: fixed;
+  width:100%;
+  height:300px;
+  margin:20px auto 0;
+  background-image:linear-gradient(bottom, rgba(0, 0, 0, 0.1) 2%, transparent 2%);
+  background-size: 100% 50px;
+  background-position: left top;
+  border-bottom: 1px solid #AAAAAA;
+
+  li{
+    position:relative;
+    display:table-cell;
+    vertical-align:bottom;
+    height:300px;
+  }
+  span{
+    margin:0 1em;
+    display: block;
+    background: rgba(#d1ecfa, .75);
+    animation: draw 1s ease-in-out;
+    position: relative;
+
+    &:before{
+      position:absolute;
+      left:0;right:0;top:100%;
+      padding:5px 1em 0;
+      display:block;
+      text-align:center;
+      content:attr(title);
+      word-wrap: break-word;
+    }
+    .stage-period {
+      width: 50px;
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      -ms-transform: translate(-50%,-50%);
+      -webkit-transform : translate(-50%,-50%);
+      transform : translate(-50%,-50%);
+      text-align: center;
+    }
+  }
+}
+@keyframes draw{
+  0%{height:0;}
+}
+.modal-content {
+  width: 90vw;
+  height: 90vh;
+  padding: 5px;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
+  background: white;
+}
+
+.modal-form {
+  width: 80vw;
+  margin: 0 auto;
+  background-color: white;
+  position: relative;
+
+  h3 {
+    font-size: 40px;
+    font-weight: 300;
+    margin-top: 30px;
+  }
+  hr {
+    width: 80vw;
+    border-top: 2px solid #AAAAAA;
+    margin-top: 15px;
+    position: absolute;
+    left: 0;
+  }
+  .problem-box {
+    margin-top: 50px;
+    margin-left: 5%;
+    width: 45%;
+    height: 500px;
+    display: inline-block;
+    float: left;
+    border-right: 1px dashed;
+  }
+  .answer-box {
+    margin-top: 50px;
+    margin-left: 5%;
+    width: 45%;
+    height: 500px;
+    display: inline-block;
+    float: left;
+  }
+  .label-box {
+    border: 1px solid #f0b8bf;
+    border-radius: 5px;
+    padding: 10px;
+    position: relative;
+    margin-right: 10px;
+
+    .img-box {
+      width: 180px;
+      height: 180px;
+      background-color: white;
+      text-align: center;
+      position:relative;
+
+      img {
+        max-width: 180px;
+        max-height: 180px;
+        background-color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%,-50%);
+        -webkit-transform : translate(-50%,-50%);
+        transform : translate(-50%,-50%);
+        text-align: center;
+    }
+        i {
+        font-size: 20px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        color: rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+  .field {
+    margin-top: 20px;
+  }
+  input[type=text], textarea {
+    background-color: #fff;
+    height: 31px;
+    width: 90%;
+    padding: 3px 7px;
+    border-top-color: #949494;
+    border-radius: 3px;
+    outline: 0;
+    transition: all 100ms linear;
+    font-family: "Hiragino Kaku Gothic Pro W3","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+    line-height: 19px;
+    color: #111;
+    font-weight: 500;
+    border: 0;
+    box-shadow: 0 0 1px 0 rgba(0,0,0,0.5);
+    font-size: 15px;
+  }
+  textarea {
+    height: 200px;
+  }
+  input[type="text"]:focus, textarea:focus {
+    box-shadow: 0 0 7px 0 #1dc1d6;
+    outline: 0;
+  }
+  input[type="file"] {
+    display: none;
+  }
+  .edit-btn {
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    color: #67c5ff;
+    border: dashed 1px #67c5ff;
+    background: #f2fcff;
+    border-radius: 3px;
+    transition: .4s;
+    margin-top: 10px;
+    margin-left: 90%;
+  }
+  .edit-btn:hover {
+      background: #cbedff;
+      color: #FFF;
+  }
+}
+
+.folder-tabs {
+	margin-top: 20px;
+	position: relative;
+	vertical-align: middle;
+	height: 2em;
+	z-index: 1;
+	padding-left: 15px;
+}
+.folder-tabs > div { /* タブ本体 */
+  display:inline-block;
+  position: relative;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px 4px 0 0;
+  font-size: 1em;
+  line-height: 1em;
+  height: 2em;
+  float: left;
+  width: auto;
+  vertical-align: baseline;
+  background-color: white;
+  margin-left: 4px;
+  }
+.first-tab{ /* カレントのタブ */
+  border-color: #CCC #CCC #FFF #CCC;
+  }
+.behind-tab{ /* 背後のタブ */
+  border-color: #CCC;
+  margin-left: 0.2em;
+  }
+.folder-tabs > div > a{ /* タブのリンク文字 */
+  display: inline-block;
+  padding: 0.5em 1em 0;
+  }
+.folder-body {
+  height: 400px;
+	background-color: white;
+  border: 1px solid #CCC;
+  border-radius: 0 4px 4px 4px;
+  clear: both;
+  position: relative;
+  padding: 2em;
+  top: -1px;
+  box-shadow:rgba(0, 0, 0, .2) 2px 5px 10px -3px;
+  }
+
+
