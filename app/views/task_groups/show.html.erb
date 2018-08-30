@@ -1,18 +1,13 @@
 
 <%= stylesheet_link_tag "task_groups/show", :media => "all" %>
 
-	<div class="row ok">
-		<ul class="nav group-list">
-			<li><h2><%= @task_group.title %></h2></li>
-			<% @task_groups.each do |group| %>
-				<li class="other-group"><%= link_to group.title, task_group_path(group.id) %></li>
-			<% end %>
-		</ul>
+<div class="container">
+	<div class="row">
+		<h2><%= @task_group.title %></h2>
 		<p class="plus-mark"><a href="#create-modal" data-lity="data-lity">＋</a></p>
 	</div>
-
 	<div class="row task-list">
-		<div class="col-lg-4 status-box" >
+		<div class="status-box" >
 			<a href="#group1" data-lity="data-lity"><h3>InBox</h3></a>
 			<div class="status-field status1">
 				<% @tasks.where(status: 1).order(position: :asc).each do |task| %>
@@ -20,7 +15,7 @@
 				<% end %>
 			</div>
 		</div>
-		<div class="col-lg-4 status-box" >
+		<div class="status-box" >
 			<a href="#group2" data-lity="data-lity"><h3>OnGoing</h3></a>
 			<div class="status-field status2">
 				<% @tasks.where(status: 2).order(position: :asc).each do |task| %>
@@ -28,11 +23,9 @@
 				<% end %>
 			</div>
 		</div>
-		<div class="col-lg-4 status-box" >
-			<div class="done">
-				<a href="#group3" data-lity="data-lity"><h3>Done</h3></a>
-				<%= link_to "clear", task_group_path(@task_group.id, status: 3), method: :delete, class: 'clear', "data-confirm" => "本当に削除しますか?" %>
-			</div>
+		<div class="status-box" >
+			<a href="#group3" data-lity="data-lity"><h3>Done</h3></a>
+			<%= link_to "clear", destroy_all_path(@task_group, status: 3), method: :delete, class: 'clear', "data-confirm" => "本当に削除しますか?" %>
 			<div class="status-field status3">
 				<% @tasks.where(status: 3).order(position: :asc).each do |task| %>
 					<%= render 'task_groups/task', task: task %>
@@ -40,8 +33,9 @@
 			</div>
 		</div>
 	</div>
+</div>
 
-<%= form_tag update_position_path, :method => 'patch', id: "position" do %>
+<%= form_tag update_position_path, :method => 'post', id: "position" do %>
     <input type="hidden" id="result1" name="result1" />
     <input type="hidden" id="result2" name="result2" />
     <input type="hidden" id="result3" name="result3" />
@@ -72,38 +66,36 @@
 </div>
 
 <div id="create-modal" class="lity-hide">
-	<div class="tasks-show">
-		<%= form_for @task, url: tasks_path(group_id: @task_group.id),  html: {name: 'task_form'} do |f| %>
-			<div class="field">
-			  	<%= f.label :title %><br />
-			  	<%= f.text_field :title %>
-			</div>
-			<div class="field">
-			  	<%= f.label :status %><br />
-			  	<%= f.number_field :status, value: 1 %>
-			</div>
-
-			<%= f.fields_for :task_detail do |d| %>
+	<div class="modal-content content2">
+		<div class="modal-form">
+		    <h3>Task create</h3>
+		    <hr>
+			<%= form_for @task, url: tasks_path(group_id: @task_group.id),  html: {name: 'task_form'} do |f| %>
+				<%= f.hidden_field :status, value: 1 %>
 				<div class="field">
-					<%= d.label :deadline %><br />
-					<%= d.date_field :deadline %>
+				  	<%= f.label :title, "タスク名" %><br />
+				  	<%= f.text_field :title %>
 				</div>
-				<div class="field">
-					<%= select_tag 'time_required_hr', options_for_select((0..23).to_a,0), name: 'time_required_hr', onchange: "time_required()" %>時間
-					<%= select_tag 'time_required_min',options_for_select([0,5,10,15,20,25,30,35,40,45,50,55],0), name: 'time_required_min', onchange: "time_required()" %>
+				<%= f.fields_for :task_detail do |d| %>
+					<div class="field">
+						<%= d.label :deadline, "締め切り" %><br />
+						<%= d.date_field :deadline %>
+					</div>
+					<div class="field">
+						<%= select_tag 'time_required_hr', options_for_select((0..23).to_a,0), name: 'time_required_hr', onchange: "time_required()" %> 時間
+						<%= select_tag 'time_required_min',options_for_select([0,5,10,15,20,25,30,35,40,45,50,55],0), name: 'time_required_min', onchange: "time_required()" %> 分
+					</div>
+					<%= d.hidden_field :time_required, class: 'changetime_required' %>
+					<%= d.hidden_field :time_limit, class: 'changetime_required' %>
+				<% end %>
+				<div class="actions">
+				  	<%= f.submit '作成', class: "edit-btn" %>
 				</div>
-				<%= d.text_field :time_required, class: 'changetime_required' %>
-				<%= d.hidden_field :time_limit, class: 'changetime_required' %>
 			<% end %>
-
-			<div class="actions">
-			  <%= f.submit '作成', class: "btn btn-primary" %>
-			</div>
-		<% end %>
+		</div>
 	</div>
 </div>
 
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <%= javascript_include_tag "task_group.js" %>
-
 

@@ -38,6 +38,10 @@ $(function () {
         helper: "clone",
         appendTo: ".task-list",
         scroll: false,
+        cursorAt: {
+            left: 60,
+            bottom: 0
+        },
 
         update: function (ev, ui) {
             var result1 = $(".status1").sortable("toArray");
