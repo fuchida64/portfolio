@@ -59,7 +59,7 @@ nav a:hover {
 	width: 30%;
 	height: 460px;
 	margin-bottom: 60px;
-	margin-right: 30px;
+	margin-right: 3%;
 	float: left;
 	box-shadow: 5px 10px 20px rgba(0,0,0,0.25);
 	position: relative;
@@ -110,20 +110,14 @@ nav a:hover {
 		white-space: pre-line;
 	}
 }
-.paginate-box {
-	position: relative;
-
-	.pagination {
-		margin-bottom: 40px;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		-ms-transform: translate(-50%,-50%);
-		-webkit-transform : translate(-50%,-50%);
-		transform : translate(-50%,-50%);
+li.page-item {
+    margin-right: 0px !important;
+}
+@media screen and (max-width: 768px) {
+	.diary-list {
+		width: 45%;
 	}
 }
-
 @media screen and (max-width: 425px) {
 	.diary-list {
 		width: auto;
@@ -131,5 +125,17 @@ nav a:hover {
 	}
 	.search-h2 {
 		font-size: 30px !important;
+	}
+	li.page-item {
+	    margin: 0px;
+	}
+}
+@media screen and (max-width: 320px) {
+	.search {
+	    margin: 30px 10px 0;
+	    float: none;
+	}
+	.diary-main h2 {
+    	font-size: 40px;
 	}
 }

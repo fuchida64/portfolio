@@ -45,11 +45,12 @@ Rails.application.routes.draw do
   patch 'tasks/:task_id/task_details' => 'task_details#update', as: 'update_limit'
 
   # diary
-  get 'diaries/search' => 'diaries#search', as:'search_diaries'
+  # index
   resources :diaries do
     resource :diary_comments, only: [:create]
     resource :favorites, only: [:create, :destroy]
   end
+  get 'search/diaries' => 'diaries#search', as:'search_diaries'
 
   # memory_group
   resources :memory_groups, except: [:new, :edit] do
