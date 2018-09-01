@@ -7,4 +7,10 @@ ja:
       diary:
         title: "タイトル"
         content: "コンテンツ"
+    errors:
+      models:
+        memory_group:
+          attributes:
+            user:
+              required: "リクエスト"
 
