@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # admin
-  resources :admins, except: [:create, :show]
+  resources :admins, only: [:index, :edit, :update]
   get 'admin/users' => 'admins#user_index', as:'admin_users'
 
   # common
