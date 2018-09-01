@@ -27,24 +27,11 @@ a:active, a:hover {
 .edit-page {
 	h2 {
 		margin-top: 40px;
+		margin-left: 10px;
 	}
 	.preview {
 		width: 150px;
-	}
-	.create-btn{
-	    display: inline-block;
-	    padding: 0.5em 1em;
-	    text-decoration: none;
-	    color: #999999;
-	    border: dashed 1px #999999;
-	    background: #EEEEEE;
-	    border-radius: 3px;
-	    transition: .4s;
-	}
-
-	.create-btn:hover {
-	    background: #cbedff;
-	    color: #FFF;
+		height: 150px;
 	}
 	label {
 		width: 150px;

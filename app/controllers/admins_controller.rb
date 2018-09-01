@@ -16,6 +16,7 @@ class AdminsController < ApplicationController
 	def update
 		@admin = Admin.find(params[:id])
 	    if @admin.update(admin_params)
+	    	flash[:notice] = "更新されました。"
 	    	redirect_to admins_path
 	    else
 	    	render 'edit'
