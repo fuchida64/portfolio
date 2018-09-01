@@ -4,4 +4,7 @@ class ProblemImage < ApplicationRecord
 
 	attachment :problem_image
 
+	validates :problem_image, presence: true
+	validates :memory_id, presence: true
+
 end

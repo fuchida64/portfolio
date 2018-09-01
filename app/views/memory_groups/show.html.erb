@@ -14,7 +14,7 @@
 	<div class="row headline">
 		<h2><%= @memory_group.title %></h2>
 		<p><%= @memory_group.content%></p>
-		<%= link_to 'Memory Stage', memory_group_memory_stages_path(@memory_group), class: "stage-link" %>
+		<%= link_to 'Memory Step', memory_group_memory_stages_path(@memory_group), class: "stage-link" %>
 	</div>
 	<hr>
 	<div class="today-box">
@@ -75,14 +75,12 @@
 									<%= p_image.attachment_field :problem_image %>
 								</div>
 							<% end %>
-
 					    	<%= f.fields_for :problem do |problem| %>
 								<div class="field">
 									<%= problem.label :problem_content %><br />
 									<%= problem.text_area :problem_content %>
 								</div>
 							<% end %>
-
 					    </div>
 					    <div class="answer-box">
 					    	<%= f.fields_for :answer_image do |a_image| %>
@@ -96,27 +94,102 @@
 									<%= a_image.attachment_field :answer_image %>
 								</div>
 							<% end %>
-
 					    	<%= f.fields_for :answer do |answer| %>
 								<div class="field">
 									<%= answer.label :answer_content %><br />
 									<%= answer.text_area :answer_content %>
 								</div>
 							<% end %>
-
 					    </div>
-
 						<div class="actions">
 							<%= f.submit '作成', class: "edit-btn" %>
 						</div>
 					<% end %>
-
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="today-box2">
+		<h3>List of today</h3>
+		<table class='table'>
+			<tbody>
+				<% if @today_memories.present? %>
+					<tr>
+						<td><%= link_to "All Step", memory_group_memories_path(@memory_group, stage: "all") %></td>
+						<td><%= @today_memories.length %>個</td>
+					</tr>
+					<% @memory_group.memory_stages.where.not(stage: nil).each do |n| %>
+						<% if @today_memories.where(stage: n.stage).present? %>
+							<tr>
+								<td>
+									<%= link_to memory_group_memories_path(@memory_group, stage: n.stage) do %>
+										Step <%= n.stage %>
+									<% end %>
+								</td>
+								<td><%= @today_memories.where(stage: n.stage).length %>個</td>
+							</tr>
+						<% end %>
+					<% end %>
+				<% end %>
+			</tbody>
+		</table>
+		<div class="modal-form">
+		    <h3>Memory create</h3>
+		    <hr>
+		    <%= form_for [@memory_group,@memory] do |f| %>
+			    <div class="problem-box">
+			    	<%= f.fields_for :problem_image do |p_image| %>
+						<div class="field">
+							<label class="label-box" for="memory_problem_image_attributes_problem_image">
+						      <div class="img-box">
+						        <img class="preview_memory_problem_image_attributes_problem_image" >
+						        <i class="far fa-image"></i>
+						      </div>
+						    </label>
+							<%= p_image.attachment_field :problem_image %>
+						</div>
+					<% end %>
+			    	<%= f.fields_for :problem do |problem| %>
+						<div class="field">
+							<%= problem.label :problem_content %><br />
+							<%= problem.text_area :problem_content %>
+						</div>
+					<% end %>
+			    </div>
+			    <div class="answer-box">
+			    	<%= f.fields_for :answer_image do |a_image| %>
+						<div class="field">
+							<label class="label-box" for="memory_answer_image_attributes_answer_image">
+								<div class="img-box">
+									<img class="preview_memory_answer_image_attributes_answer_image" >
+									<i class="far fa-image"></i>
+								</div>
+							</label>
+							<%= a_image.attachment_field :answer_image %>
+						</div>
+					<% end %>
+			    	<%= f.fields_for :answer do |answer| %>
+						<div class="field">
+							<%= answer.label :answer_content %><br />
+							<%= answer.text_area :answer_content %>
+						</div>
+					<% end %>
+			    </div>
+				<div class="actions">
+					<%= f.submit '作成', class: "edit-btn" %>
+				</div>
+			<% end %>
+		</div>
+	</div>
 </div>
-
+p
+<% @memory_group.memories.each do |n| %>
+	<%= n.problem.id %>
+<% end %><br>
+p-i
+<% @memory_group.memories.each do |n| %>
+	<%= n.problem_image.id %>
+<% end %>
 <script>
 	$('input[type=file]').on('change', function (e) {
 		var str = $(this).attr("id");

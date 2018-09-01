@@ -4,8 +4,8 @@ class Admin < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :admin_name, presence: true
-  validates :email, presence: true
+  validates :admin_name, presence: true, length: { in: 1..20 }
 
   attachment :admin_image
+
 end

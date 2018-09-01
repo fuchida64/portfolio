@@ -4,7 +4,8 @@
 <ul class="home-slider">
 	<li>
 		<div class="text-field">
-			<h3 class="home-title">Let's make today</h3>
+			<h3 class="home-title">One day one step</h3>
+			<p class="subtitle">今日に小さな変化を</p>
 			<p class="home-subtitle">
 				<%= link_to 'login', new_user_session_path, class: "" %>
 				<%= link_to 'sign up', new_user_registration_path, class: "" %>
@@ -13,31 +14,49 @@
 		<%= image_tag('home4.jpg', :alt => "アイコン") %>
 	</li>
 	<li>
-		<div class="text-field">
-			<h3 class="home-title">Let's task controll</h3>
+		<div class="text-field2">
+			<h3 class="home-title">Let's controll task</h3>
+			<ul class="task-li">
+				<li>タスクリスト全体の進捗を一目で把握</li>
+				<li>ドラッグ&ドロップで直感的に操作</li>
+				<li>期限と所要時間でタスクのボリュームも管理</li>
+			</ul>
 			<p class="home-subtitle">
-				頑張ろう
+				<%= link_to 'login', new_user_session_path, class: "" %>
+				<%= link_to 'sign up', new_user_registration_path, class: "" %>
 			</p>
 		</div>
-		<%= image_tag('home3.jpg', :alt => "アイコン") %>
+		<%= image_tag('home-task.jpg', :alt => "アイコン") %>
 	</li>
 	<li>
 		<div class="text-field">
-			<h3 class="home-title">Let's memory</h3>
+			<h3 class="home-title">Let's memorize</h3>
+			<ul class="memory-li">
+				<li>覚えたいことを文字や画像で管理</li>
+				<li>復習の回数、間隔はあなたに合わせて</li>
+				<li>復習のタイミングが来たら自動で表示</li>
+			</ul>
+			<p class="subtitle">後は、あなたが答えるだけ</p>
 			<p class="home-subtitle">
-				頑張ろう
+				<%= link_to 'login', new_user_session_path, class: "" %>
+				<%= link_to 'sign up', new_user_registration_path, class: "" %>
 			</p>
 		</div>
-		<%= image_tag('home1.jpg', :alt => "アイコン") %>
+		<%= image_tag('home-memory.jpg', :alt => "アイコン") %>
 	</li>
 	<li>
-		<div class="text-field">
-			<h3 class="home-title">Let's diary</h3>
+		<div class="text-field2">
+			<h3 class="home-title">Let's write a diary</h3>
+			<ul class="task-li">
+				<li>写真と共にあなたの日記を</li>
+				<li>いろいろな人とその日の共有も</li>
+			</ul>
 			<p class="home-subtitle">
-				頑張ろう
+				<%= link_to 'login', new_user_session_path, class: "" %>
+				<%= link_to 'sign up', new_user_registration_path, class: "" %>
 			</p>
 		</div>
-		<%= image_tag('home3.jpg', :alt => "アイコン") %>
+		<%= image_tag('home-diary.jpg', :alt => "アイコン") %>
 	</li>
 </ul>
 
