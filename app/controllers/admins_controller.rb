@@ -6,7 +6,7 @@ class AdminsController < ApplicationController
 	end
 
 	def index
-		@admins = Admin.all.order(id: :desc)
+		@admins = Admin.all
 	end
 
 	def edit
