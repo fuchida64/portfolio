@@ -11,11 +11,11 @@ class Admins::RegistrationsController < Devise::RegistrationsController
         super
       else
         redirect_back(fallback_location: homes_path)
-        flash[:alert] = "権限がありません。"
+        flash[:alert] = "アクセス権限がありません。"
       end
     else
       redirect_back(fallback_location: homes_path)
-      flash[:alert] = "権限がありません。"
+      flash[:alert] = "アクセス権限がありません。"
     end
   end
 
