@@ -8,7 +8,7 @@ class Diary < ApplicationRecord
 	has_many :diary_comments
 	has_many :favorites
 
-	validates :title, presence: true
+	validates :title, presence: true, length: { maximum: 20 }
 	validates :content, presence: true
 	validates :diary_date, presence: true
 	validates :inform_status, presence: true

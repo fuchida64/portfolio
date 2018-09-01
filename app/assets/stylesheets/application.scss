@@ -38,6 +38,19 @@
 ul {
 	list-style: none;
 }
+.paginate-box {
+	position: relative;
+
+	.pagination {
+		margin-bottom: 40px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		-ms-transform: translate(-50%,-50%);
+		-webkit-transform : translate(-50%,-50%);
+		transform : translate(-50%,-50%);
+	}
+}
 // home header
 .header-box {
 	height: 80px;
