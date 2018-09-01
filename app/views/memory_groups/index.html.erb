@@ -1,4 +1,4 @@
-
+ 
 <%= stylesheet_link_tag "memory_groups/index", :media => "all" %>
 
 <main>
@@ -8,42 +8,44 @@
 			<h2>Memory List</h2>
 			<%= link_to 'Default Step', default_stages_path, class: "stage-link" %>
 		</div>
-		<% @memory_groups.each do |mg| %>
-			<div class="memory-group">
-				<h4><%= link_to mg.title.truncate(17), memory_group_path(mg), class: "memory-title" %></h4>
-				<hr>
-				<div class="memory-content">
-					<p class="memory-text"><%= mg.content %></p>
-				</div>
-				<div class="memory-info">
-					<p>today：<%= mg.memories.where.not(stage: 0).where("execution_date <= ?", Date.current).length %> 個</p>
-					<p><a href="#edit-modal<%= mg.id %>" data-lity="data-lity">＊</a></p>
-				</div>
+		<div class="group-status">
+			<% @memory_groups.each do |mg| %>
+				<div id="<%= mg.id %>" class="memory-group">
+					<h4><%= link_to mg.title.truncate(17), memory_group_path(mg), class: "memory-title" %></h4>
+					<hr>
+					<div class="memory-content">
+						<p class="memory-text"><%= mg.content %></p>
+					</div>
+					<div class="memory-info">
+						<p>today：<%= mg.memories.where.not(stage: 0).where("execution_date <= ?", Date.current).length %> 個</p>
+						<p><a href="#edit-modal<%= mg.id %>" data-lity="data-lity">＊</a></p>
+					</div>
 
-				<div id="edit-modal<%= mg.id %>" class="lity-hide">
-					<div class="modal-content">
-						<div class="modal-form">
-						    <h3>Memory list</h3>
-						    <hr>
-							<%= form_for mg, url: memory_group_path(mg)  do |f| %>
-								<div class="field">
-								  	<%= f.label :title, "リスト名" %><br />
-								  	<%= f.text_field :title %>
-								</div>
-								<div class="field">
-									<%= f.label :content, "説明", class: "label-content" %><br />
-									<%= f.text_area :content %>
-								</div>
-								<div class="actions">
-								  	<%= f.submit '更新', class: "edit-btn" %>
-								</div>
-							<% end %>
-							<%= link_to "delete", memory_group_path(mg), method: :delete, class: 'delete-btn', "data-confirm" => "本当に削除しますか?" %>
+					<div id="edit-modal<%= mg.id %>" class="lity-hide">
+						<div class="modal-content">
+							<div class="modal-form">
+							    <h3>Memory list</h3>
+							    <hr>
+								<%= form_for mg, url: memory_group_path(mg)  do |f| %>
+									<div class="field">
+									  	<%= f.label :title, "リスト名" %><br />
+									  	<%= f.text_field :title %>
+									</div>
+									<div class="field">
+										<%= f.label :content, "説明", class: "label-content" %><br />
+										<%= f.text_area :content %>
+									</div>
+									<div class="actions">
+									  	<%= f.submit '更新', class: "edit-btn" %>
+									</div>
+								<% end %>
+								<%= link_to "delete", memory_group_path(mg), method: :delete, class: 'delete-btn', "data-confirm" => "本当に削除しますか?" %>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		<% end %>
+			<% end %>
+		</div>
 		<div class="memory-group group2">
 			<a href="#create-modal" class="plus-mark" data-lity="data-lity">＋</a>
 		</div>
@@ -71,4 +73,7 @@
 
 	</div>
 </main>
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<%= javascript_include_tag "memory_group.js" %>
 

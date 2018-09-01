@@ -58,7 +58,7 @@
                 </li>
                 <li><%= link_to 'memory', memory_groups_path, class: "" %>
                   <ul>
-                    <% current_user.memory_groups.each do |memory| %>
+                    <% current_user.memory_groups.order(position_id: :asc).each do |memory| %>
                       <% if memory.title.length >= 16 %>
                         <li><%= link_to memory.title[0,15]+'...', memory_group_path(memory), class: "" %></li>
                       <% else %>
@@ -72,7 +72,7 @@
                     <li><%= link_to 'new diary', new_diary_path, class: "" %></li>
                   </ul>
                 </li>
-                <li><%= link_to 'my page', user_path(current_user.id), class: "" %></li>
+                <li><%= link_to 'my page', user_path(current_user), class: "" %></li>
                 <li><%= link_to 'logout', destroy_user_session_path, method: :delete, "data-confirm" => "本当にログアウトしますか？", class: "" %></li>
 
               <% else %>
@@ -132,7 +132,7 @@
                       <li><%= link_to 'new diary', new_diary_path, class: "drop" %></li>
                     </ul>
                   </li>
-                  <li><%= link_to 'my page', user_path(current_user.id), class: "" %></li>
+                  <li><%= link_to 'my page', user_path(current_user), class: "" %></li>
                   <li><%= link_to 'logout', destroy_user_session_path, method: :delete, "data-confirm" => "本当にログアウトしますか？", class: "" %></li>
 
                 <% else %>

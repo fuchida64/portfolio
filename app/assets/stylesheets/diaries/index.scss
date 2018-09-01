@@ -130,6 +130,11 @@ li.page-item {
 	    margin: 0px;
 	}
 }
+@media screen and (max-width: 375px) {
+	.search-h2 {
+		font-size: 20px !important;
+	}
+}
 @media screen and (max-width: 320px) {
 	.search {
 	    margin: 30px 10px 0;

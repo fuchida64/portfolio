@@ -30,7 +30,7 @@ h2 {
   width: 30%;
   height: 200px;
   padding: 5px;
-  margin: 15px;
+  margin-left: 3%;
   margin-bottom: 50px;
   color: #00BCD4;
   background: white;
@@ -199,11 +199,24 @@ a:focus {
   outline-offset: 0 !important;
   text-decoration: none;
 }
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 768px) {
   .headline {
     h2 {
       margin-left: 20px;
     }
+  }
+  .memory-group {
+    margin-bottom: 30px;
+    width: 40%;
+  }
+  .memory-group {
+    margin-left: 8%;
+  }
+}
+@media screen and (max-width: 425px) {
+  .headline {
+    margin-bottom: 30px;
+
     .stage-link {
       position: unset;
       margin-left: 40px;
@@ -215,7 +228,16 @@ a:focus {
   .modal-content {
     width: 90vw;
   }
+  .group2 {
+    margin-bottom: 50px;
+  }
 }
-
+@media screen and (max-width: 375px) {
+  .headline {
+    h2 {
+      font-size: 30px;
+    }
+  }
+}
 
 

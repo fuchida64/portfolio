@@ -1,8 +1,8 @@
 class MemoryGroupsController < ApplicationController
-	before_action :ensure_correct_user, except: [:index, :create]
+	before_action :ensure_correct_user, except: [:index, :create, :position_update]
 
 	def index
-		@memory_groups = current_user.memory_groups
+		@memory_groups = current_user.memory_groups.order(position_id: :asc)
 		@memory_group = MemoryGroup.new
 	end
 
@@ -54,12 +54,20 @@ class MemoryGroupsController < ApplicationController
 		redirect_to memory_groups_path
 	end
 
+	def position_update
+		result = params[:position]
+		result.each.with_index(1) do |id, i|
+			@memory_group = MemoryGroup.find(id)
+			@memory_group.update(:position_id => i)
+		end
+	end
+
 	private
 
 	def memory_group_params
 		params.require(:memory_group).permit(
 			:title, :content, :user_id,
-			memory_stages_attributes: [ :id, :stage, :period, :memory_group_id, :_destroy]
+			memory_stages_attributes: [ :id, :stage, :period, :memory_group_id, :position_id, :_destroy]
 		)
 	end
 

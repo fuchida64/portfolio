@@ -57,6 +57,7 @@ Rails.application.routes.draw do
     resource :memories, only: [:create, :show]
     resource :memory_stages, only: [:show]
   end
+  post 'memory_groups/position' => 'memory_groups#position_update'
 
   # memory
   resources :memories

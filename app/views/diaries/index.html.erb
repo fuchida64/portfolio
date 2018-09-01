@@ -22,7 +22,7 @@
 						<h4><%= d.title.truncate(18) %></h4>
 						<p><%= d.content.truncate(80) %></p>
 					</div>
-					<p class="date"><%= d.diary_date %></p>
+					<p class="date"><%= d.diary_date.strftime("%Y.%m.%d") %></p>
 					<%= link_to 'more', diary_path(d.id), class: "btn" %>
 				</div>
 			<% else %>
@@ -31,7 +31,7 @@
 						<h4><%= d.title.truncate(40) %></h4>
 						<p><%= d.content.truncate(300) %></p>
 					</div>
-					<p class="date"><%= d.diary_date %></p>
+					<p class="date"><%= d.diary_date.strftime("%Y.%m.%d") %></p>
 					<%= link_to 'more', diary_path(d.id), class: "btn" %>
 				</div>
 			<% end %>
