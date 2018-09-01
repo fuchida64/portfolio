@@ -4,7 +4,7 @@
 <div class="container">
 	<div class="row">
 		<p class="back-link"><%= link_to @memory_group.title, memory_group_path(@memory_group) %></p>
-		<p>残り <%= @memories.length %> 個</p>
+		<p>step <%= @stage %>　残り <%= @memories.length %> 個</p>
 		<div class="memory-box">
 
 			<div class="problem-box">
@@ -55,6 +55,7 @@
 					</div>
 				</div>
 			</div>
+			<p class="try-number">正答率　<%= @memory.correct_num %> / <%= @memory.correct_num + @memory.wrong_num %></p>
 		</div>
 	</div>
 </div>

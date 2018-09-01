@@ -34,6 +34,7 @@ Rails.application.config.assets.precompile += %w( users/confirmations/new.scss )
 # tasks
 Rails.application.config.assets.precompile += %w( task_groups/index.scss )
 Rails.application.config.assets.precompile += %w( task_groups/show.scss )
+Rails.application.config.assets.precompile += %w( task_details/show.scss )
 # memories
 Rails.application.config.assets.precompile += %w( memory_groups/index.scss )
 Rails.application.config.assets.precompile += %w( default_stages/index.scss )
@@ -47,4 +48,5 @@ Rails.application.config.assets.precompile += %w( diaries/show.scss )
 Rails.application.config.assets.precompile += %w( slick.css )
 Rails.application.config.assets.precompile += %w( slick-theme.css )
 Rails.application.config.assets.precompile += %w( lity.css )
+
 

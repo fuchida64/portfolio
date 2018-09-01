@@ -18,6 +18,12 @@ body {
 	flex-direction: row;
 	display:flex;
 	border-radius: 5px;
+    position: relative;
+    .try-number {
+        position: absolute;
+        bottom: 0;
+        right: 10px;
+    }
 }
 .problem-box {
 	width: 50%;
@@ -63,7 +69,7 @@ body {
 }
 .answer1{
     text-align: center;
-    margin-top: 40%;
+    margin-top: 45%;
     position: relative;
     .correct-btn {
     	font-size: 50px;

@@ -1,0 +1,57 @@
+
+nav a:hover {
+	text-decoration: none;
+	color: black;
+}
+h2 {
+	font-size: 50px;
+	font-weight: 300;
+	color: black;
+	letter-spacing: 10px;
+	margin: 70px 0 30px 10px;
+	a {
+		color: black;
+	}
+	 a:hover {
+	    color: #ff4747;
+	}
+}
+h3 {
+	font-size: 40px;
+	font-weight: 300;
+	color: black;
+	letter-spacing: 10px;
+	margin: 50px 0 30px 50px;
+}
+// timer
+#countDownWrap {
+   margin:50px auto;
+   text-align:center;
+}
+.countDown {
+   margin:0 0 15px;
+   font-size:150px;
+   line-height:1;
+   text-align:center;
+   font-family: 'Oswald', sans-serif;
+}
+.btn-area {
+	width: 400px;
+	margin: 0 auto;
+}
+#startBtn {
+	margin-bottom:15px;
+	width: 200px;
+	float:left;
+}
+#stopBtn {
+	margin-bottom:15px;
+	width: 200px;
+	float:right;
+}
+#sound {
+	margin-bottom:15px;
+	text-align: center;
+	margin-right: 90px;
+}
+

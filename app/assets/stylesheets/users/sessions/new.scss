@@ -1,7 +1,7 @@
 
 .box {
    position: relative;
-   top: 0;
+   top: 20px;
    opacity: 1;
    float: left;
    padding: 60px 50px 40px 50px;
@@ -249,14 +249,12 @@
    border-radius: 50%;
 }
 
-
-main {
-   background-image: url(/images/wood.jpg);
-   background-position: center;
-   background-size: cover;
-   background-repeat: no-repeat;
-   min-height: 100vh;
-   margin-top: 3px;
+body {
+  background: url(/images/home_back.jpg);
+  background-size: cover;
+  background-position: center center;
+  width: 100vw;
+  height: 100vh;
 }
 
 main,

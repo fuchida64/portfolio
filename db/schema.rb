@@ -23,10 +23,11 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.string "admin_name"
+    t.string "admin_name", null: false
     t.string "admin_image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["admin_name"], name: "index_admins_on_admin_name"
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
@@ -74,15 +75,15 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
   end
 
   create_table "diary_images", force: :cascade do |t|
-    t.integer "diary_id"
-    t.string "diary_image_id"
+    t.integer "diary_id", null: false
+    t.string "diary_image_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "diary_id"
+    t.integer "user_id", null: false
+    t.integer "diary_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -128,8 +129,8 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "following_id"
+    t.integer "follower_id", null: false
+    t.integer "following_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["follower_id", "following_id"], name: "index_relationships_on_follower_id_and_following_id", unique: true

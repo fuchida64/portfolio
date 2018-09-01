@@ -28,22 +28,14 @@
 			  	<tr>
 			    	<th><%= @user.email %></th>
 			  	</tr>
-			</table>
-		</div>
-		<div class="col-lg-9">
-			<table class="table">
-				<% @diaries.each do |d| %>
-				<tr>
-					<th><%= d.title %></th>
-					<th><%= d.content %></th>
-					<th><%= d.inform_status %></th>
-				</tr>
-				<% end %>
+			  	<tr>
+			    	<th><%= render 'follow_form' %> <%= render 'stats' %></th>
+			  	</tr>
 			</table>
 		</div>
 	</div>
 </div>
 
-<%= render 'follow_form' %>
-<%= render 'stats' %>
+
+
 

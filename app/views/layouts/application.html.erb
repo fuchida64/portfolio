@@ -9,6 +9,8 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" >
+    <!-- bootstrap4  -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= stylesheet_link_tag    'slick', media: 'all' %>
     <%= stylesheet_link_tag    'slick-theme', media: 'all' %>
@@ -16,6 +18,11 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <!-- bootstrap4 -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
     <%= javascript_include_tag 'application' %>
     <%= javascript_include_tag 'slick.min' %>
     <%= javascript_include_tag 'lity' %>
@@ -47,8 +54,8 @@
                   <% if current_user.task_groups.exists? %>
                     <ul>
                       <% current_user.task_groups.each do |task| %>
-                        <% if task.title.length >= 10 %>
-                          <li><%= link_to task.title[0,9]+'...', task_group_path(task), class: "" %></li>
+                        <% if task.title.length >= 16 %>
+                          <li><%= link_to task.title[0,15]+'...', task_group_path(task), class: "" %></li>
                         <% else %>
                           <li><%= link_to task.title, task_group_path(task), class: "" %></li>
                         <% end %>
@@ -59,8 +66,8 @@
                 <li><%= link_to 'memory', memory_groups_path, class: "" %>
                   <ul>
                     <% current_user.memory_groups.each do |memory| %>
-                      <% if memory.title.length >= 10 %>
-                        <li><%= link_to memory.title[0,9]+'...', memory_group_path(memory), class: "" %></li>
+                      <% if memory.title.length >= 16 %>
+                        <li><%= link_to memory.title[0,15]+'...', memory_group_path(memory), class: "" %></li>
                       <% else %>
                         <li><%= link_to memory.title, memory_group_path(memory), class: "" %></li>
                       <% end %>

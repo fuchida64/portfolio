@@ -1,34 +1,43 @@
 
-<%= @task.title %><br>
-<%= @task.task_detail.deadline %><br>
-<%= @task.task_detail.time_required %><br>
-<%= @task.task_detail.time_limit %>
+<%= stylesheet_link_tag "task_details/show", :media => "all" %>
 
-<form name="timer">
-<input type="text" value="<%= @task.task_detail.time_limit/3600 %>">
-<input type="text" value="<%= @task.task_detail.time_limit/60%60 %>">
-<input type="text" value="<%= @task.task_detail.time_limit%60 %>"><br>
-<input type="button" value="スタート" onclick="cntStart()">
-<input type="button" value="ストップ" onclick="cntStop()">
-</form>
-
-<div id="countDownWrap">
-<% min = @task.task_detail.time_limit/60%60 %>
-<% sec = @task.task_detail.time_limit%60 %>
-   <div class="countDown">
-     <span id="countDown_hr"><%= @task.task_detail.time_limit/3600 %></span>：
-     <span id="countDown_min"><% if min.to_s.length <= 1 %>0<%= min %><% else %><%= min %><% end %></span>：
-     <span id="countDown_sec"><% if sec.to_s.length <= 1 %>0<%= sec %><% else %><%= sec %><% end %></span>
-   </div>
+<div class="container">
+  <div class="row">
+    <h2><%= link_to @task.title, task_group_path(@task.task_group) %></h2>
+    <% if  @task.task_detail.deadline.present? %>
+      <h3><%= @task.task_detail.deadline.strftime("%Y.%m.%d") %></h3>
+    <% end %>
+    <div id="countDownWrap">
+      <% min = @task.task_detail.time_limit/60%60 %>
+      <% sec = @task.task_detail.time_limit%60 %>
+      <div class="countDown">
+        <span id="countDown_hr"><%= @task.task_detail.time_limit/3600 %></span>：
+        <span id="countDown_min"><% if min.to_s.length <= 1 %>0<%= min %><% else %><%= min %><% end %></span>：
+        <span id="countDown_sec"><% if sec.to_s.length <= 1 %>0<%= sec %><% else %><%= sec %><% end %></span>
+      </div>
+    </div>
+    <form name="timer">
+      <input type="hidden" value="<%= @task.task_detail.time_limit/3600 %>">
+      <input type="hidden" value="<%= @task.task_detail.time_limit/60%60 %>">
+      <input type="hidden" value="<%= @task.task_detail.time_limit%60 %>"><br>
+      <input type="hidden" value="スタート" >
+      <input type="hidden" value="ストップ" >
+      <ul class="btn-area">
+        <li id="startBtn">
+          <button type="button" onclick="cntStart()"><img src="/images/btn_start.png" alt="スタート"></button></li>
+        <li id="stopBtn">
+          <button type="button" onclick="cntStop()"><img src="/images/btn_stop.png" alt="ストップ"></button></li>
+        <li id="sound" class="hide">
+          <button type="button"><img src="/images/btn_stop.png" alt="ストップ"></button></li>
+      </ul>
+    </form>
+  </div>
 </div>
 
 <%= form_tag update_limit_path(@task.id), :method => 'patch', id: "update_time_limit" do %>
     <input type="hidden" id="update_limit" name="update_limit" />
 <% end %>
 
-<div id="sound" class="hide">
-  <input type="button" value="完了" onclick="cntStop()">
-</div>
 <script>
 
 var timer1; //タイマーを格納する変数（タイマーID）の宣言
@@ -95,6 +104,8 @@ function tmWrite(int)
     audioElem.loop = true;
     audioElem.src = "/assets/warning1-ff1c16910dc5c2c2172d7f18073838daa230fadf9b38a4136cf8ec121fff32e1.mp3";
     audioElem.play();
+    $("#startBtn").addClass("hide");
+    $("#stopBtn").addClass("hide");
     $("#sound").removeClass("hide");
   }
   else
