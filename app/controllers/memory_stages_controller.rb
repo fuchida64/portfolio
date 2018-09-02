@@ -1,4 +1,6 @@
 class MemoryStagesController < ApplicationController
+	before_action :ensure_correct_user, only: [:show, :create]
+	before_action :ensure_correct_user_stage, only: [:update, :destroy]
 
 	def show
 		@memory_group = MemoryGroup.find(params[:memory_group_id])
@@ -15,7 +17,7 @@ class MemoryStagesController < ApplicationController
 			@memory_stage.stage = @memory_group.memory_stages.maximum(:stage) + 1
 		end
 		if @memory_stage.save
-			flash[:notice] = "追加されました"
+			flash[:notice] = "追加されました。"
 		else
 			flash[:alert] = "入力エラーが発生しました。期間は1日以上に設定して下さい。"
 		end
@@ -35,9 +37,9 @@ class MemoryStagesController < ApplicationController
 	def destroy
 		@memory_stage = MemoryStage.find(params[:id])
 		if  @memory_stage.destroy
-		  	flash[:notice] = "削除されました"
+		  	flash[:notice] = "削除されました。"
 		else
-			flash[:alert] = "エラーが発生しました"
+			flash[:alert] = "エラーが発生しました。"
 		end
 		redirect_back(fallback_location: homes_path)
 	end
@@ -47,4 +49,20 @@ class MemoryStagesController < ApplicationController
 	def memory_stage_params
 		params.require(:memory_stage).permit(:stage, :period, :memory_group_id)
 	end
+
+	def ensure_correct_user
+		@memory_group = MemoryGroup.find_by(id: params[:memory_group_id])
+        if current_user.id != @memory_group.user_id
+           flash[:alert] = "アクセス権限がありません。"
+           redirect_back(fallback_location: homes_path)
+        end
+    end
+
+    def ensure_correct_user_stage
+		@memory_stage = MemoryStage.find_by(id: params[:id])
+        if current_user.id != @memory_stage.memory_group.user_id
+           flash[:alert] = "アクセス権限がありません。"
+           redirect_back(fallback_location: homes_path)
+        end
+    end
 end

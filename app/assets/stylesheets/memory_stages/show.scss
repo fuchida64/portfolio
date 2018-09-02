@@ -22,12 +22,18 @@ nav a:hover {
 	top: 5vh;
 	left: 15vw;
 }
+a:hover {
+	color: red;
+}
 h2 {
 	font-size: 40px;
 	font-weight: 300;
 	font-family: "nagomi";
 	color: black;
 	letter-spacing: 10px;
+	a {
+		color: black;
+	}
 }
 .chart{
   display:table;
@@ -206,7 +212,7 @@ input[type="number"]::-webkit-inner-spin-button {
 .loop-field {
 	margin-left: 98px;
 }
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 1024px) {
 	body {
 	  background: url(/images/task_memory.jpg);
 	  background-size: cover;
@@ -220,20 +226,54 @@ input[type="number"]::-webkit-inner-spin-button {
 	.main2 {
 		display: block;
 		width: 95%;
-		margin: 0 auto;
+		margin: 0 auto 40px;
 	}
 	h2 {
 	    font-size: 30px;
-	    margin-bottom: 20px;
-	    margin-left: 20px;
+	    margin-top: 30px;
+	    margin-bottom: 30px;
+	    text-align: center;
+	    font-weight: 900;
 	}
 	.table {
-    	width: 50%;
+	    width: 50%;
 	    text-align: center;
 	    margin: 0 auto;
+		td {
+			border-top: 1px solid black !important;
+			border-bottom: 1px solid;
+			width: 50%;
+		}
 	}
 	.modal-content {
     	width: 70vw;
+	}
+	.stage-field {
+	    text-align: center;
+	    margin-left: 0;
+	    margin-top: 30px;
+	    h4 {
+	    	float: none;
+	    	text-align: center;
+	    	display: inline-block;
+	    }
+	    form#new_memory_stage {
+		    display: inline-block;
+		}
+		form#edit_memory_group_2 {
+		    display: inline-block;
+		}
+		.loop-field {
+		    margin-left: 10px;
+		}
+		.btn2 {
+			margin-left: 0;
+		}
+	}
+}
+@media screen and (max-width: 1024px) {
+	h2 {
+	    font-size: 25px;
 	}
 }
 

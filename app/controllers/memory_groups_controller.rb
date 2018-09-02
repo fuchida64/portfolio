@@ -39,7 +39,11 @@ class MemoryGroupsController < ApplicationController
 		if @memory_group.update(memory_group_params)
 			flash[:notice] = "更新されました"
 		else
-			flash[:alert] = "入力エラーが発生しました。リスト名は1~20文字以内です。"
+			if params[:stage] == 'loop'
+				flash[:alert] = "入力エラーが発生しました。期間は1日以上に設定して下さい。"
+			else
+				flash[:alert] = "入力エラーが発生しました。リスト名は1~20文字以内です。"
+			end
 		end
 		redirect_back(fallback_location: homes_path)
 	end

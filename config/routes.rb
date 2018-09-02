@@ -53,7 +53,7 @@ Rails.application.routes.draw do
   get 'search/diaries' => 'diaries#search', as:'search_diaries'
 
   # memory_group
-  # show
+  # show update
   resources :memory_groups, except: [:new, :edit] do
     resource :memories, only: [:create, :show]
     resource :memory_stages, only: [:show]
@@ -72,6 +72,7 @@ Rails.application.routes.draw do
   resources :default_stages, except: [:new, :show, :edit]
 
   # memory_stage
+  # update destroy create
   resources :memory_stages, only: [:create, :update, :destroy]
 
 end
