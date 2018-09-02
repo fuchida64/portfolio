@@ -36,9 +36,9 @@
 		<% if @memory_stages.maximum(:stage).nil? || @memory_stages.maximum(:stage) < 10 %>
 			<div class="stage-field">
 				<% if @memory_stages.maximum(:stage).nil? %>
-					<h4>Step2</h4>
+					<h4>step2</h4>
 				<% else %>
-					<h4>Step<%= @memory_stages.maximum(:stage) + 1 %></h4>
+					<h4>step<%= @memory_stages.maximum(:stage) + 1 %></h4>
 				<% end %>
 				<%= form_for @memory_stage, url: memory_stages_path(memory_group_id: @memory_group) do |s| %>
 					<div class="field">
@@ -48,6 +48,26 @@
 				<% end %>
 			</div>
 		<% end %>
+		<div class="stage-field field2 <% if @memory_stages.maximum(:stage).nil? || @memory_stages.maximum(:stage) >= 10 %>field3<% end %>">
+			<h4>complete</h4>
+			<%= form_for @memory_group, url: memory_group_path(@memory_group) do |s| %>
+				<div class="field loop-field">
+					<%= s.number_field :period, class: "create-field" %> 日間隔でループ
+					<div class="pretty p-switch p-fill">
+						<% if @memory_group.loop == 1 %>
+							<%= s.check_box :loop, {:checked => true} %>
+						<% else %>
+							<%= s.check_box :loop, {} %>
+						<% end %>
+						<div class="state p-success">
+			                <label>する
+			                </label>
+			            </div>
+					</div>
+					<%= s.submit '更新', class: "create-btn" %>
+				</div>
+			<% end %>
+		</div>
 	</div>
 </main>
 
