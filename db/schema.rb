@@ -110,9 +110,9 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
   end
 
   create_table "memory_stages", force: :cascade do |t|
-    t.integer "stage"
-    t.integer "period"
-    t.integer "memory_group_id"
+    t.integer "stage", null: false
+    t.integer "period", null: false
+    t.integer "memory_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
