@@ -12,7 +12,7 @@
 
 <div class="container">
 	<div class="row headline">
-		<h2><%= @memory_group.title %></h2>
+		<h2><%= link_to memories_path(group: @memory_group) do %><%= @memory_group.title %><% end %></h2>
 		<p><%= @memory_group.content%></p>
 		<%= link_to 'Memory Step', memory_group_memory_stages_path(@memory_group), class: "stage-link" %>
 	</div>
@@ -140,13 +140,13 @@
 			    <div class="problem-box">
 			    	<%= f.fields_for :problem_image do |p_image| %>
 						<div class="field">
-							<label class="label-box" for="memory_problem_image_attributes_problem_image">
+							<label class="label-box" for="memory_problem_image_attributes_problem_image1">
 						      <div class="img-box">
-						        <img class="preview_memory_problem_image_attributes_problem_image" >
+						        <img class="preview_memory_problem_image_attributes_problem_image1" >
 						        <i class="far fa-image"></i>
 						      </div>
 						    </label>
-							<%= p_image.attachment_field :problem_image %>
+							<%= p_image.attachment_field :problem_image, id: 'memory_problem_image_attributes_problem_image1' %>
 						</div>
 					<% end %>
 			    	<%= f.fields_for :problem do |problem| %>
@@ -159,13 +159,13 @@
 			    <div class="answer-box">
 			    	<%= f.fields_for :answer_image do |a_image| %>
 						<div class="field">
-							<label class="label-box" for="memory_answer_image_attributes_answer_image">
+							<label class="label-box" for="memory_answer_image_attributes_answer_image1">
 								<div class="img-box">
-									<img class="preview_memory_answer_image_attributes_answer_image" >
+									<img class="preview_memory_answer_image_attributes_answer_image1" >
 									<i class="far fa-image"></i>
 								</div>
 							</label>
-							<%= a_image.attachment_field :answer_image %>
+							<%= a_image.attachment_field :answer_image, id: 'memory_answer_image_attributes_answer_image1' %>
 						</div>
 					<% end %>
 			    	<%= f.fields_for :answer do |answer| %>
@@ -184,12 +184,29 @@
 </div>
 p
 <% @memory_group.memories.each do |n| %>
-	<%= n.problem.id %>
+	<% if n.problem.present? %>
+		<%= n.problem.id %>
+	<% end %>
 <% end %><br>
 p-i
 <% @memory_group.memories.each do |n| %>
-	<%= n.problem_image.id %>
-<% end %>
+	<% if n.problem_image.present? %>
+		<%= n.problem_image.id %>
+	<% end %>
+<% end %><br>
+a
+<% @memory_group.memories.each do |n| %>
+	<% if n.answer.present? %>
+		<%= n.answer.id %>
+	<% end %>
+<% end %><br>
+a-i
+<% @memory_group.memories.each do |n| %>
+	<% if n.answer_image.present? %>
+		<%= n.answer_image.id %>
+	<% end %>
+<% end %><br>
+
 <script>
 	$('input[type=file]').on('change', function (e) {
 		var str = $(this).attr("id");

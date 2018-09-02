@@ -1,5 +1,14 @@
 class MemoriesController < ApplicationController
 
+	def index
+		@memory_group = MemoryGroup.find(params[:group])
+		@memories = @memory_group.memories
+	end
+
+	def step_index
+		
+	end
+
 	def show
 		@memory_group = MemoryGroup.find(params[:memory_group_id])
 		@stage = params[:stage]
@@ -19,7 +28,14 @@ class MemoriesController < ApplicationController
 		@memory = Memory.new(memory_params)
 		@memory.memory_group_id = @memory_group.id
 		@memory.execution_date = Date.current
-		@memory.save
+		if @memory.problem.nil? && @memory.problem_image.nil? && @memory.answer_content.nil? && @memory.answer_image.nil?
+			flash[:alert] = "入力エラーが発生しました。最低1項目の入力が必要です。"
+		elsif
+			@memory.save
+			flash[:notice] = "作成されました"
+		else
+			flash[:alert] = "入力エラーが発生しました。"
+		end
 		redirect_back(fallback_location: homes_path)
 	end
 

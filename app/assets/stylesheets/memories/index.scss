@@ -1,0 +1,144 @@
+
+body {
+  background: url(/images/task_memory.jpg);
+  background-size: cover;
+  background-position: center center;
+  width: 100vw;
+  height: 100vh;
+}
+.headline {
+    font-family: "nagomi";
+    position: relative;
+    a {
+      color: black;
+    }
+    a:hover {
+      color: red;
+    }
+    h2 {
+        font-size: 50px;
+        font-weight: 300;
+        color: black;
+        letter-spacing: 10px;
+        margin-top: 40px;
+        margin-bottom: 15px;
+        margin: 40px 0px 15px 20px;
+    }
+}
+hr {
+    border-top: 1.5px solid #888888;
+    width: 94vw;
+    position: absolute;
+    left: 3vw;
+    margin-top: 15px;
+}
+.memory-box {
+  width: 50vw;
+  max-width: 90vw;
+  margin-top: 80px;
+}
+.folder-tabs {
+  margin-top: 20px;
+  position: relative;
+  vertical-align: middle;
+  height: 2em;
+  z-index: 1;
+  padding-left: 15px;
+}
+.folder-tabs > div { /* タブ本体 */
+  display:inline-block;
+  position: relative;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px 4px 0 0;
+  font-size: 1em;
+  line-height: 1em;
+  height: 2em;
+  float: left;
+  width: auto;
+  vertical-align: baseline;
+  background-color: white;
+  margin-left: 4px;
+}
+.first-tab{ /* カレントのタブ */
+  border-color: #CCC #CCC #FFF #CCC;
+}
+.behind-tab{ /* 背後のタブ */
+  border-color: #CCC;
+  margin-left: 0.2em;
+}
+.folder-tabs > div > a, p { /* タブのリンク文字 */
+  display: inline-block;
+  padding: 0.5em 1em 0;
+}
+.folder-body {
+  height: 450px;
+  background-color: white;
+  border: 1px solid #CCC;
+  border-radius: 0 4px 4px 4px;
+  clear: both;
+  position: relative;
+  padding: 2em;
+  top: -1px;
+  box-shadow:rgba(0, 0, 0, .2) 2px 5px 10px -3px;
+}
+.chart{
+  display:table;
+  table-layout: fixed;
+  width:100%;
+  height:350px;
+  margin:20px auto 0;
+  background-image:linear-gradient(bottom, rgba(0, 0, 0, 0.1) 2%, transparent 2%);
+  background-size: 100% 50px;
+  background-position: left top;
+  border-bottom: 1px solid #AAAAAA;
+
+  li{
+    position:relative;
+    display:table-cell;
+    vertical-align:bottom;
+    height:350px;
+  }
+  span{
+    margin:0 1em;
+    display: block;
+    background: rgba(#d1ecfa, .75);
+    animation: draw 1s ease-in-out;
+    position: relative;
+    text-align: center;
+
+    &:before{
+      position:absolute;
+      left:0;right:0;top:100%;
+      padding:5px 0 0;
+      display:block;
+      text-align:center;
+      content:attr(title);
+      word-wrap: break-word;
+    }
+    .stage-period {
+      width: 50px;
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      -ms-transform: translate(-50%,-50%);
+      -webkit-transform : translate(-50%,-50%);
+      transform : translate(-50%,-50%);
+      text-align: center;
+      padding: 0;
+      width: 90%;
+    }
+    .period {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%,-50%);
+      -webkit-transform: translate(-50%,-50%);
+      transform: translate(-50%,-50%);
+      padding: 0;
+    }
+  }
+}
+@keyframes draw{
+  0%{height:0;}
+}
