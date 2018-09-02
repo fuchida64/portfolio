@@ -47,8 +47,8 @@
                   <% if current_user.task_groups.exists? %>
                     <ul>
                       <% current_user.task_groups.each do |task| %>
-                        <% if task.title.length >= 16 %>
-                          <li><%= link_to task.title[0,15]+'...', task_group_path(task), class: "" %></li>
+                        <% if task.title.length >= 10 %>
+                          <li><%= link_to task.title[0,9]+'...', task_group_path(task), class: "" %></li>
                         <% else %>
                           <li><%= link_to task.title, task_group_path(task), class: "" %></li>
                         <% end %>
@@ -59,8 +59,8 @@
                 <li><%= link_to 'memory', memory_groups_path, class: "" %>
                   <ul>
                     <% current_user.memory_groups.order(position_id: :asc).each do |memory| %>
-                      <% if memory.title.length >= 16 %>
-                        <li><%= link_to memory.title[0,15]+'...', memory_group_path(memory), class: "" %></li>
+                      <% if memory.title.length >= 10 %>
+                        <li><%= link_to memory.title[0,9]+'...', memory_group_path(memory), class: "" %></li>
                       <% else %>
                         <li><%= link_to memory.title, memory_group_path(memory), class: "" %></li>
                       <% end %>

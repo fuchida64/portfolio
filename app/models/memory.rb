@@ -12,4 +12,12 @@ class Memory < ApplicationRecord
 	accepts_nested_attributes_for :answer, allow_destroy: true
 	accepts_nested_attributes_for :answer_image, allow_destroy: true
 
+
+	before_create do
+		problem.mark_for_destruction if problem.problem_content.blank?
+		problem_image.mark_for_destruction if problem_image.problem_image.blank?
+		answer.mark_for_destruction if answer.answer_content.blank?
+		answer_image.mark_for_destruction if answer_image.answer_image.blank?
+	end
+
 end

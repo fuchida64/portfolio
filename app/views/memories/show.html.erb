@@ -8,7 +8,7 @@
 		<div class="memory-box">
 
 			<div class="problem-box">
-				<% if @memory.problem_image.problem_image.present? %>
+				<% if @memory.problem_image.present? %>
 					<div class="p-img-box">
 						<a href="#lity" data-lity="data-lity">
 			    			<%= attachment_image_tag @memory.problem_image, :problem_image, format: 'jpeg' %>
@@ -19,13 +19,15 @@
 					</div>
 				<% end %>
 				<div class="p-text-box">
-					<p><%= @memory.problem.problem_content %></p>
+					<% if @memory.problem.present? %>
+						<p><%= @memory.problem.problem_content %></p>
+					<% end %>
 				</div>
 			</div>
 
 			<div class="answer-box">
 				<div class="answer1">
-					<% if @memory.answer_image.answer_image.present? || @memory.answer.answer_content.present? %>
+					<% if @memory.answer_image.present? || @memory.answer.present? %>
 						<p class="open-answer2">答えを見る</p>
 			        <% else %>
 			        	<%= link_to correct_path(@memory, stage: @stage), class: 'correct-btn' do %>
@@ -36,7 +38,7 @@
 				</div>
 
 				<div class="answer2 hide">
-					<% if @memory.answer_image.answer_image.present? %>
+					<% if @memory.answer_image.present? %>
 						<div class="p-img-box">
 							<a href="#lity1" data-lity="data-lity">
 				    			<%= attachment_image_tag @memory.answer_image, :answer_image, format: 'jpeg' %>
@@ -47,7 +49,9 @@
 						</div>
 					<% end %>
 					<div class="p-text-box">
-						<p><%= @memory.answer.answer_content %></p>
+						<% if @memory.answer.present? %>
+							<p><%= @memory.answer.answer_content %></p>
+						<% end %>
 					</div>
 					<div class="answer-btn">
 						<%= link_to "◯", correct_path(@memory, stage: @stage), class: 'correct-btn1' %>

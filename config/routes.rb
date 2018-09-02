@@ -58,6 +58,7 @@ Rails.application.routes.draw do
     resource :memory_stages, only: [:show]
   end
   post 'memory_groups/position' => 'memory_groups#position_update'
+  get 'memory_groups/:memory_group_id/step/memories' => 'memories#step_index', as:'step_index'
 
   # memory
   resources :memories
