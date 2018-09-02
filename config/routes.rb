@@ -68,6 +68,7 @@ Rails.application.routes.draw do
   get 'memories/:id/wrong' => 'memories#wrong', as: 'wrong'
 
   # default_stage
+  # index create update destroy
   resources :default_stages, except: [:new, :show, :edit]
 
   # memory_stage
