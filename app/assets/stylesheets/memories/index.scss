@@ -12,9 +12,6 @@ body {
     a {
       color: black;
     }
-    a:hover {
-      color: red;
-    }
     h2 {
         font-size: 50px;
         font-weight: 300;
@@ -24,6 +21,9 @@ body {
         margin-bottom: 15px;
         margin: 40px 0px 15px 20px;
     }
+}
+a:hover {
+  color: red;
 }
 hr {
     border-top: 1.5px solid #888888;
@@ -36,6 +36,9 @@ hr {
   width: 50vw;
   max-width: 90vw;
   margin-top: 80px;
+}
+.memory-box2 {
+  display: none;
 }
 .folder-tabs {
   margin-top: 20px;
@@ -142,3 +145,39 @@ hr {
 @keyframes draw{
   0%{height:0;}
 }
+@media screen and (max-width: 1024px) {
+  .headline h2 {
+    font-size: 40px;
+    text-align: center;
+  }
+  .memory-box {
+    display: none;
+  }
+  .memory-box2 {
+    display: block;
+  }
+  hr {
+    display: none;
+  }
+  .table {
+    width: 50%;
+    text-align: center;
+    margin: 20px auto;
+    td {
+      border-top: 1px solid black !important;
+      border-bottom: 1px solid;
+      width: 50%;
+    }
+  }
+  a {
+    line-height: 36px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .table {
+    width: 80%;
+  }
+}
+
+
+

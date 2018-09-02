@@ -42,6 +42,13 @@
 		    			<% end %>
 		    		</div>
 			    <% end %>
+			    <div class="behind-tab">
+			    	<% if @memories.present? && @memories.where(stage: 0).present? %>
+			    		<%= link_to "Complete", step_index_path(@memory_group, stage: 0) %>
+			    	<% else %>
+			    		<p>Complete</p>
+			    	<% end %>
+			    </div>
   			</div>
 
   			<div class="folder-body">
@@ -69,6 +76,9 @@
 					<li>
 						<span style="height:<% if @memories.empty? %>0
 							<% else %><%= (100 / @memories.length) * @memories.where(stage: 0).length %><% end %>%" title="complete">
+							<% if @memory_group.loop == 1 %>
+								<p class="stage-period"><%= @memory_group.period %>日</p>
+							<% end %>
 							<% if @memories.present? && @memories.where(stage: 0).length > 0 %>
 								<p class="period"><%= @memories.where(stage: 0).length %>個</p>
 							<% end %>
@@ -77,5 +87,42 @@
 				</ul>
 			</div>
   		</div>
+  		<div class="memory-box2">
+		<table class='table'>
+			<tbody>
+				<tr>
+					<td>
+						<% if @memories.present? %>
+							<%= link_to "All memory", step_index_path(@memory_group, stage: "all") %>
+						<% else %>
+							<p>All memory</p>
+						<% end %>
+					</td>
+					<td><p><%= @memories.length %>個</p></td>
+				</tr>
+				<% @memory_group.memory_stages.where.not(stage: nil).each do |n| %>
+					<tr>
+						<td>
+							<% if @memories.present? && @memories.where(stage: n.stage).present? %>
+								<%= link_to step_index_path(@memory_group, stage: n.stage) do %>Step<%= n.stage%><% end %>
+		    				<% else %>
+		    					<p>Step<%= n.stage%></p>
+		    				<% end %>
+						</td>
+						<td><p><%= @memories.where(stage: n.stage).length %>個</p></td>
+					</tr>
+			    <% end %>
+			    <tr>
+					<td>
+						<% if @memories.present? && @memories.where(stage: 0).present? %>
+			    			<%= link_to "Complete", step_index_path(@memory_group, stage: 0) %>
+			    		<% else %>
+			    			<p>Complete</p>
+			    		<% end %>
+					</td>
+					<td><p><%= @memories.where(stage: 0).length %>個</p></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </div>

@@ -102,6 +102,8 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
     t.text "title", null: false
     t.text "content"
     t.integer "position_id"
+    t.integer "loop", default: 0
+    t.integer "period", default: 1
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

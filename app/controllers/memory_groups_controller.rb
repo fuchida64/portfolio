@@ -66,8 +66,8 @@ class MemoryGroupsController < ApplicationController
 
 	def memory_group_params
 		params.require(:memory_group).permit(
-			:title, :content, :user_id,
-			memory_stages_attributes: [ :id, :stage, :period, :memory_group_id, :position_id, :_destroy]
+			:title, :content, :loop, :period, :user_id,
+			memory_stages_attributes: [:id, :stage, :period, :memory_group_id, :position_id, :_destroy]
 		)
 	end
 

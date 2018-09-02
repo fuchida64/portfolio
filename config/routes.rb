@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   get 'search/diaries' => 'diaries#search', as:'search_diaries'
 
   # memory_group
+  # show
   resources :memory_groups, except: [:new, :edit] do
     resource :memories, only: [:create, :show]
     resource :memory_stages, only: [:show]
@@ -61,6 +62,7 @@ Rails.application.routes.draw do
   get 'memory_groups/:memory_group_id/step/memories' => 'memories#step_index', as:'step_index'
 
   # memory
+  # index
   resources :memories
   get 'memories/:id/correct' => 'memories#correct', as: 'correct'
   get 'memories/:id/wrong' => 'memories#wrong', as: 'wrong'

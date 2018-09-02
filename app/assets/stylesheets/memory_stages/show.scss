@@ -194,6 +194,18 @@ input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+.state:before {
+    background: white;
+}
+.field2 {
+	margin-top: 15px;
+}
+.field3 {
+	margin-top: 50px;
+}
+.loop-field {
+	margin-left: 98px;
+}
 @media screen and (max-width: 425px) {
 	body {
 	  background: url(/images/task_memory.jpg);

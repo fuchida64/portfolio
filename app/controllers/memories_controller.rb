@@ -2,11 +2,19 @@ class MemoriesController < ApplicationController
 
 	def index
 		@memory_group = MemoryGroup.find(params[:group])
-		@memories = @memory_group.memories
+		if user_signed_in?
+			if current_user.id != @memory_group.user_id
+				redirect_back(fallback_location: homes_path)
+				flash[:alert] = "アクセス権限がありません。"
+			end
+			@memories = @memory_group.memories
+		else
+			redirect_back(fallback_location: homes_path)
+			flash[:alert] = "アクセス権限がありません。"
+		end
 	end
 
 	def step_index
-		
 	end
 
 	def show
@@ -89,4 +97,5 @@ class MemoriesController < ApplicationController
 		  answer_image_attributes: [:id, :answer_image, :memory_id, :_destroy]
 		)
 	end
+
 end
