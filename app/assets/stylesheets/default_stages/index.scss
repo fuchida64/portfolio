@@ -216,7 +216,7 @@ input[type="number"]::-webkit-inner-spin-button {
 		margin: 0 auto;
 	}
 	h2 {
-	    font-size: 30px;
+	    font-size: 25px;
 	    margin-top: 30px;
 	    margin-bottom: 30px;
 	    text-align: center;
@@ -246,11 +246,6 @@ input[type="number"]::-webkit-inner-spin-button {
 	    form#new_default_stage {
 		    display: inline-block;
 		}
-	}
-}
-@media screen and (max-width: 1024px) {
-	h2 {
-	    font-size: 25px;
 	}
 }
 

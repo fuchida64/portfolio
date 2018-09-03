@@ -46,7 +46,7 @@
                 <li><%= link_to 'to_do', task_groups_path, class: "menu" %>
                   <% if current_user.task_groups.exists? %>
                     <ul>
-                      <% current_user.task_groups.each do |task| %>
+                      <% current_user.task_groups.order(position_id: :asc).each do |task| %>
                         <% if task.title.length >= 10 %>
                           <li><%= link_to task.title[0,9]+'...', task_group_path(task), class: "" %></li>
                         <% else %>
@@ -106,7 +106,7 @@
                   <li><%= link_to 'to_do', task_groups_path, class: "menu" %>
                     <% if current_user.task_groups.exists? %>
                       <ul class="drop-ul">
-                        <% current_user.task_groups.each do |task| %>
+                        <% current_user.task_groups.order(position_id: :asc).each do |task| %>
                           <% if task.title.length >= 9 %>
                             <li><%= link_to task.title[0,8]+'...', task_group_path(task), class: "drop" %></li>
                           <% else %>
@@ -118,7 +118,7 @@
                   </li>
                   <li><%= link_to 'memory', memory_groups_path, class: "" %>
                     <ul class="drop-ul">
-                      <% current_user.memory_groups.each do |memory| %>
+                      <% current_user.memory_groups.order(position_id: :asc).each do |memory| %>
                         <% if memory.title.length >= 9 %>
                           <li><%= link_to memory.title[0,8]+'...', memory_group_path(memory), class: "drop" %></li>
                         <% else %>

@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
   create_table "memory_groups", force: :cascade do |t|
     t.text "title", null: false
     t.text "content"
-    t.integer "position_id"
+    t.integer "position_id", default: 0
     t.integer "loop", default: 0
     t.integer "period", default: 1
     t.integer "user_id", null: false
@@ -151,9 +151,10 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
   end
 
   create_table "task_groups", force: :cascade do |t|
-    t.text "title"
+    t.text "title", null: false
     t.text "content"
-    t.integer "user_id"
+    t.integer "position_id", default: 0
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

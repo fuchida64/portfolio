@@ -229,7 +229,7 @@ input[type="number"]::-webkit-inner-spin-button {
 		margin: 0 auto 40px;
 	}
 	h2 {
-	    font-size: 30px;
+	    font-size: 25px;
 	    margin-top: 30px;
 	    margin-bottom: 30px;
 	    text-align: center;
@@ -269,11 +269,6 @@ input[type="number"]::-webkit-inner-spin-button {
 		.btn2 {
 			margin-left: 0;
 		}
-	}
-}
-@media screen and (max-width: 1024px) {
-	h2 {
-	    font-size: 25px;
 	}
 }
 

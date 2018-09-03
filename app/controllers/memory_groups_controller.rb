@@ -17,7 +17,7 @@ class MemoryGroupsController < ApplicationController
 				@memory_stage.period = d.period
 				@memory_stage.save
 			end
-			flash[:notice] = "作成されました"
+			flash[:notice] = "作成されました。"
 		else
 			flash[:alert] = "入力エラーが発生しました。リスト名は1~20文字以内です。"
 		end
@@ -37,7 +37,7 @@ class MemoryGroupsController < ApplicationController
 	def update
 		@memory_group = MemoryGroup.find(params[:id])
 		if @memory_group.update(memory_group_params)
-			flash[:notice] = "更新されました"
+			flash[:notice] = "更新されました。"
 		else
 			if params[:stage] == 'loop'
 				flash[:alert] = "入力エラーが発生しました。期間は1日以上に設定して下さい。"
@@ -51,9 +51,9 @@ class MemoryGroupsController < ApplicationController
 	def destroy
 		@memory_group = MemoryGroup.find(params[:id])
 		if  @memory_group.destroy
-		  	flash[:notice] = "削除されました"
+		  	flash[:notice] = "削除されました。"
 		else
-			flash[:alert] = "エラーが発生しました"
+			flash[:alert] = "エラーが発生しました。"
 		end
 		redirect_to memory_groups_path
 	end
@@ -78,7 +78,7 @@ class MemoryGroupsController < ApplicationController
 	def ensure_correct_user
 		@memory_group = MemoryGroup.find_by(id: params[:id])
         if current_user.id != @memory_group.user_id
-           flash[:alert] = "権限がありません"
+           flash[:alert] = "アクセス権限がありません。"
            redirect_to homes_path
         end
     end

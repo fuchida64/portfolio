@@ -33,7 +33,9 @@ Rails.application.routes.draw do
   patch 'users/:id/password' => 'users#password_update'
 
   # task_group
+  # index create update destroy
   resources :task_groups
+  post 'task_groups/position' => 'task_groups#position_update'
   delete 'task_groups/:id/clear' => 'task_groups#destroy_all', as: 'destroy_all'
 
   # task
