@@ -7,44 +7,46 @@
 		<div class="row headline">
 			<h2>Task list</h2>
 		</div>
-		<% @task_groups.each do |task| %>
-			<div class="task-group">
-				<h4><%= link_to task.title.truncate(17), task_group_path(task.id), class: "task-title" %></h4>
-				<hr>
-				<div class="task-content">
-					<p class="task-text"><%= task.content %></p>
-				</div>
-				<div class="task-info">
-					<p>InBox : <%= task.tasks.where(status: 1).count %></p>
-					<p>OnGoing : <%= task.tasks.where(status: 2).count %></p>
-					<p>Done : <%= task.tasks.where(status: 3).count %></p>
-					<p><a href="#edit-modal<%= task.id %>" data-lity="data-lity">＊</a></p>
-				</div>
+		<div class="group-status">
+			<% @task_groups.each do |task| %>
+				<div id="<%= task.id %>" class="task-group">
+					<h4><%= link_to task.title.truncate(17), task_group_path(task.id), class: "task-title" %></h4>
+					<hr>
+					<div class="task-content">
+						<p class="task-text"><%= task.content %></p>
+					</div>
+					<div class="task-info">
+						<p>InBox : <%= task.tasks.where(status: 1).count %></p>
+						<p>OnGoing : <%= task.tasks.where(status: 2).count %></p>
+						<p>Done : <%= task.tasks.where(status: 3).count %></p>
+						<p><a href="#edit-modal<%= task.id %>" data-lity="data-lity">＊</a></p>
+					</div>
 
-				<div id="edit-modal<%= task.id %>" class="lity-hide">
-					<div class="modal-content">
-						<div class="modal-form">
-						    <h3>Task list</h3>
-						    <hr>
-							<%= form_for task, url: task_group_path(task.id)  do |f| %>
-								<div class="field">
-								  	<%= f.label :title, "リスト名" %><br />
-								  	<%= f.text_field :title %>
-								</div>
-								<div class="field">
-									<%= f.label :content, "説明", class: "label-content" %><br />
-									<%= f.text_area :content %>
-								</div>
-								<div class="actions">
-								  	<%= f.submit '更新', class: "edit-btn" %>
-								</div>
-							<% end %>
-							<%= link_to "delete", task_group_path(task.id), method: :delete, class: 'delete-btn', "data-confirm" => "本当に削除しますか?" %>
+					<div id="edit-modal<%= task.id %>" class="lity-hide">
+						<div class="modal-content">
+							<div class="modal-form">
+							    <h3>Task list</h3>
+							    <hr>
+								<%= form_for task, url: task_group_path(task.id)  do |f| %>
+									<div class="field">
+									  	<%= f.label :title, "リスト名" %><br />
+									  	<%= f.text_field :title %>
+									</div>
+									<div class="field">
+										<%= f.label :content, "説明", class: "label-content" %><br />
+										<%= f.text_area :content %>
+									</div>
+									<div class="actions">
+									  	<%= f.submit '更新', class: "edit-btn" %>
+									</div>
+								<% end %>
+								<%= link_to "delete", task_group_path(task.id), method: :delete, class: 'delete-btn', "data-confirm" => "本当に削除しますか?" %>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		<% end %>
+			<% end %>
+		</div>
 		<div class="task-group group2">
 			<a href="#create-modal" class="plus-mark" data-lity="data-lity">＋</a>
 		</div>
@@ -73,5 +75,6 @@
 	</div>
 </main>
 
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <%= javascript_include_tag "task_group.js" %>
 

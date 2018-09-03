@@ -1,7 +1,9 @@
 class TaskGroupsController < ApplicationController
+	before_action :authenticate_user!
+	before_action :ensure_correct_user, only: [:show, :update, :destroy, :destroy_all]
 
 	def index
-		@task_groups = current_user.task_groups
+		@task_groups = current_user.task_groups.order(position_id: :asc)
 		@task_group = TaskGroup.new
 		@tasks = Task.all
 	end
@@ -10,10 +12,11 @@ class TaskGroupsController < ApplicationController
 		@task_group = TaskGroup.new(task_group_params)
 		@task_group.user_id = current_user.id
 		if @task_group.save
-			redirect_to task_groups_path
+			flash[:notice] = "作成されました。"
 		else
-			render 'index'
+			flash[:alert] = "入力エラーが発生しました。リスト名は1~20文字以内です。"
 		end
+		redirect_back(fallback_location: homes_path)
 	end
 
 	def show
@@ -27,20 +30,29 @@ class TaskGroupsController < ApplicationController
 	def update
 		@task_group = TaskGroup.find(params[:id])
 		if @task_group.update(task_group_params)
-			redirect_to task_groups_path
+			flash[:notice] = "更新されました。"
 		else
-			render 'index'
+			flash[:alert] = "入力エラーが発生しました。リスト名は1~20文字以内です。"
 		end
+		redirect_back(fallback_location: homes_path)
 	end
 
 	def destroy
 		@task_group = TaskGroup.find(params[:id])
 		if  @task_group.destroy
-		  	flash[:notice] = "削除されました"
+		  	flash[:notice] = "削除されました。"
 		else
-			flash[:alert] = "エラーが発生しました"
+			flash[:alert] = "エラーが発生しました。"
 		end
-		redirect_to task_groups_path
+		redirect_back(fallback_location: homes_path)
+	end
+
+	def position_update
+		result = params[:position]
+		result.each.with_index(1) do |id, i|
+			@task_group = TaskGroup.find(id)
+			@task_group.update(:position_id => i)
+		end
 	end
 
 	def destroy_all
@@ -58,6 +70,14 @@ class TaskGroupsController < ApplicationController
 	private
 
 	def task_group_params
-		params.require(:task_group).permit(:title, :content, :user_id)
+		params.require(:task_group).permit(:title, :content, :position_id, :user_id)
 	end
+
+	def ensure_correct_user
+		@task_group = TaskGroup.find_by(id: params[:id])
+        if current_user.id != @task_group.user_id
+           flash[:alert] = "アクセス権限がありません。"
+           redirect_back(fallback_location: homes_path)
+        end
+    end
 end

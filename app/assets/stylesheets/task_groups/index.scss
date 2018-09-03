@@ -22,7 +22,8 @@ h2 {
   width: 30%;
   height: 270px;
   padding: 5px;
-  margin: 15px; 
+  margin: 15px;
+  margin-bottom: 30px;
   color: #00BCD4;
   background: white;
   border-top: solid 12px #1dc1d6;
@@ -175,7 +176,6 @@ h2 {
     text-decoration: none;
   }
 }
-
 .lity {
     background: rgba(0, 0, 0, 0.5);
 }
@@ -183,4 +183,47 @@ a:focus {
   outline: 0 !important;
   outline-offset: 0 !important;
   text-decoration: none;
+}
+@media screen and (max-width: 1024px) {
+  h2 {
+    margin-left: 30px;
+  }
+  .task-group {
+    width: 40%;
+    margin: 15px 5% 30px;
+  }
+  .group2 {
+    margin-bottom: 60px !important;
+  }
+}
+@media screen and (max-width: 767px) {
+  h2 {
+    text-align: center;
+    margin-left: 0;
+  }
+  .task-group {
+    width: 70%;
+    float: none;
+    margin: 15px auto 45px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .modal-content {
+    width: 90vw;
+  }
+}
+@media screen and (max-width: 425px) {
+  .task-group {
+    width: 90%;
+  }
+  .modal-content {
+    width: 90vw;
+  }
+  .modal-form {
+    width: auto;
+    margin-left: 3%;
+  }
+  .modal-form input[type=text], .modal-form textarea {
+    width: 80vw;
+  }
 }

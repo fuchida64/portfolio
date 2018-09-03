@@ -1,25 +1,25 @@
 
-// modal
-$(function(){
 
-	// モーダルウィンドウが開くときの処理
-	$(".modalOpen").click(function(){
+// drag & drop
+$(function () {
+    $('.group-status').sortable({
+        helper: "clone",
+        scroll: true,
 
-    	var navClass = $(this).attr("class"),
-        	href = $(this).attr("href");
+        update: function(){
+            var result = $(this).sortable("toArray");
 
-        $(href).fadeIn();
-    	$(this).addClass("open");
-    	return false;
-	});
-
-	// モーダルウィンドウが閉じるときの処理
-	$(".modalClose").click(function(){
-	    $(this).parents(".modal").fadeOut();
-	    $(".modalOpen").removeClass("open");
-	    return false;
-	});
-
+            $.ajax({
+                url: "task_groups/position",
+                type:'POST',
+                dataType: 'json',
+                data : {position : result },
+                timeout:3000,
+            }).done(function(data) {
+            }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+            })
+        }
+    });
 });
 
 // checkbox
