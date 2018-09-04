@@ -60,9 +60,9 @@ class TaskGroupsController < ApplicationController
 		if  params[:status] == '3'
 			@tasks = @task_group.tasks.where(status: 3)
 			@tasks.destroy_all
-		  	flash[:notice] = "削除されました"
+		  	flash[:notice] = "削除されました。"
 		else
-			flash[:notice] = "エラーが発生しました"
+			flash[:notice] = "エラーが発生しました。"
 		end
 		redirect_back(fallback_location: homes_path)
 	end

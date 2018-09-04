@@ -4,7 +4,7 @@ class CreateTaskDetails < ActiveRecord::Migration[5.2]
       t.date :deadline
       t.integer :time_required
       t.integer :time_limit
-      t.integer :task_id
+      t.integer :task_id, null: false
 
       t.timestamps
     end

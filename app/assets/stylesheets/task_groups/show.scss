@@ -22,9 +22,9 @@ h2 {
 }
 .task-list {
 	display: -webkit-flex;
-    display: flex;
-    -webkit-justify-content: space-around;
-    justify-content: space-around;
+  display: flex;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
 }
 
 /* ホワイトボード風　タイトル　2*/
@@ -85,41 +85,44 @@ h2 {
 	border-radius: 5px;
 
 	.task-box {
-        display: flex;
-        .task-check {
-	        width: 20px;
-	        height: 100px;
-	        position: relative;
-	        .checkbox {
-	        	position: absolute;
-	        	top: 35%;
-	        	width: 30px;
-	        	height: 30px;
-	        }
-	    }
-	    .detail-box {
-	    	width: 100%;
-	    	color:  #555555;
-	    	.title {
-	    		margin: 15px 10px 5px;
-	    		height: 60%;
-	    		overflow: hidden;
-	    	}
-	    	a {
-	    		color: #555555;
-	    	}
-	    	a:hover {
-			    color: #ff4747;
-			}
-	    	.details {
-	    		margin-left: 10px;
-	    		font-weight: 400;
-	    		a {
-	    			float: right;
-	    		}
-	    	}
-	    }
+    display: flex;
+
+    .task-check {
+      width: 20px;
+      height: 92px;
+      position: relative;
+      .checkbox {
+        position: absolute;
+        top: 35%;
+        width: 30px;
+        height: 30px;
+      }
     }
+  }
+  .detail-box {
+  	width: 100%;
+  	color:  #555555;
+
+  	.title {
+  		margin: 15px 10px 5px;
+  		height: 58%;
+  		overflow: hidden;
+  	}
+  	a {
+  		color: #555555;
+  	}
+  	a:hover {
+	    color: #ff4747;
+    }
+  	.details {
+  		margin-left: 10px;
+  		font-weight: 400;
+      padding-bottom: 5px;
+  		a {
+  			float: right;
+  		}
+  	}
+  }
 }
 a.clear {
     float: right;
@@ -135,6 +138,7 @@ a.clear {
 .modal-form {
   width: 310px;
   margin: 0 auto;
+  margin-left: 40px;
   background-color: white;
   position: relative;
 
@@ -145,6 +149,7 @@ a.clear {
   hr {
     border-top: 2px solid #eeeeee;
     margin-top: 15px;
+    width: 90%;
   }
   .field {
     margin-top: 20px;
@@ -152,7 +157,7 @@ a.clear {
   input[type=text], input[type=date], textarea {
     background-color: #fff;
     height: 31px;
-    width: 300px;
+    width: 250px;
     padding: 3px 7px;
     border-top-color: #949494;
     border-radius: 3px;
@@ -213,5 +218,99 @@ a.clear {
 }
 .content2 {
 	height: 400px;
+}
+.tasks-index {
+  width: 80vw;
+  height: 80vh;
+  background: white;
+  border-radius: 10px;
+  overflow: auto;
+  h3 {
+    color: red;
+    padding: 30px 40px 10px;
+  }
+  .task-group {
+    width: 30vw;
+    height: 100px;
+    margin-left: 7%;
+    float: left;
+  }
+}
+.clear-text {
+  color: #FF5192;
+  margin-right: 20px;
+}
+@media screen and (max-width: 1200px) {
+  .task-list {
+    display: block;
+  }
+  .status-box {
+    width: 90%;
+    height: auto;
+    max-height: 550px;
+    margin: 30px auto;
+    .status-field {
+      height: auto;
+      min-height: 100px;
+      max-height: 450px;
+    }
+    .task-group {
+      width: 40%;
+      height: 98px;
+      margin-left: 7%;
+      float: left;
+    }
+    .title {
+      height: 56%;
+    }
+  }
+}
+@media screen and (max-width: 1024px) {
+  .details {
+    font-size: 12px;
+  }
+}
+@media screen and (max-width: 768px) {
+  h2 {
+    font-size: 40px;
+    margin-left: 4%;
+    margin-bottom: 20px;
+  }
+}
+@media screen and (max-width: 750px) {
+  .tasks-index {
+    .task-group {
+      width: 80%;
+      margin-left: 10%;
+    }
+  }
+}
+@media screen and (max-width: 680px) {
+  .status-box .task-group {
+    width: 80%;
+    margin-left: 10%;
+  }
+}
+@media screen and (max-width: 425px) {
+  .tasks-index {
+    width: 90vw;
+    height: 90vh;
+  }
+}
+@media screen and (max-width: 375px) {
+  .status-box .task-group {
+    width: 90%;
+    margin-left: 5%;
+  }
+  .modal-content {
+    width: 90vw;
+    .modal-form {
+      margin-left: 5vw;
+      width: auto;
+    }
+  }
+  .tasks-index {
+    width: 90vw;
+  }
 }
 

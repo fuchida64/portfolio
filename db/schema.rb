@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
   create_table "memory_groups", force: :cascade do |t|
     t.text "title", null: false
     t.text "content"
-    t.integer "position_id", default: 0
+    t.integer "position_id"
     t.integer "loop", default: 0
     t.integer "period", default: 1
     t.integer "user_id", null: false
@@ -145,7 +145,7 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
     t.date "deadline"
     t.integer "time_required"
     t.integer "time_limit"
-    t.integer "task_id"
+    t.integer "task_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -153,17 +153,17 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
   create_table "task_groups", force: :cascade do |t|
     t.text "title", null: false
     t.text "content"
-    t.integer "position_id", default: 0
+    t.integer "position_id"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.text "title"
+    t.text "title", null: false
     t.integer "status"
-    t.integer "position"
-    t.integer "task_group_id"
+    t.integer "position_id"
+    t.integer "task_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

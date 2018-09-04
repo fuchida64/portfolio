@@ -213,6 +213,11 @@ a:focus {
     margin-left: 8%;
   }
 }
+@media screen and (max-width: 500px) {
+  .modal-content {
+    width: 90vw;
+  }
+}
 @media screen and (max-width: 425px) {
   .headline {
     margin-bottom: 30px;
@@ -224,9 +229,6 @@ a:focus {
   }
   .memory-group {
     width: 90%;
-  }
-  .modal-content {
-    width: 90vw;
   }
   .group2 {
     margin-bottom: 50px;
