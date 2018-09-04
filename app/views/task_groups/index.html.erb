@@ -10,7 +10,7 @@
 		<div class="group-status">
 			<% @task_groups.each do |task| %>
 				<div id="<%= task.id %>" class="task-group">
-					<h4><%= link_to task.title.truncate(17), task_group_path(task.id), class: "task-title" %></h4>
+					<h4><%= link_to task.title.truncate(14), task_group_path(task.id), class: "task-title" %></h4>
 					<hr>
 					<div class="task-content">
 						<p class="task-text"><%= task.content %></p>
