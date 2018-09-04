@@ -10,7 +10,7 @@
 		<div class="status-box" >
 			<a href="#group1" data-lity="data-lity"><h3>InBox</h3></a>
 			<div class="status-field status1">
-				<% @tasks.where(status: 1).order(position: :asc).each do |task| %>
+				<% @tasks.where(status: 1).order(position_id: :asc).each do |task| %>
 					<%= render 'task_groups/task', task: task %>
 				<% end %>
 			</div>
@@ -18,7 +18,7 @@
 		<div class="status-box" >
 			<a href="#group2" data-lity="data-lity"><h3>OnGoing</h3></a>
 			<div class="status-field status2">
-				<% @tasks.where(status: 2).order(position: :asc).each do |task| %>
+				<% @tasks.where(status: 2).order(position_id: :asc).each do |task| %>
 				<%= render 'task_groups/task', task: task %>
 				<% end %>
 			</div>
@@ -27,7 +27,7 @@
 			<a href="#group3" data-lity="data-lity"><h3>Done</h3></a>
 			<%= link_to "clear", destroy_all_path(@task_group, status: 3), method: :delete, class: 'clear', "data-confirm" => "本当に削除しますか?" %>
 			<div class="status-field status3">
-				<% @tasks.where(status: 3).order(position: :asc).each do |task| %>
+				<% @tasks.where(status: 3).order(position_id: :asc).each do |task| %>
 					<%= render 'task_groups/task', task: task %>
 				<% end %>
 			</div>
@@ -42,24 +42,27 @@
 <% end %>
 
 <div id="group1" class="lity-hide">
-	<div class="tasks-show">
-		<% @tasks.where(status: 1).order(position: :asc).each do |task| %>
+	<div class="tasks-index">
+		<h3>InBox</h3>
+		<% @tasks.where(status: 1).order(position_id: :asc).each do |task| %>
 			<%= render 'task_groups/task', task: task %>
 		<% end %>
 	</div>
 </div>
 
 <div id="group2" class="lity-hide">
-	<div class="tasks-show">
-		<% @tasks.where(status: 2).order(position: :asc).each do |task| %>
+	<div class="tasks-index">
+		<h3>OnGoing</h3>
+		<% @tasks.where(status: 2).order(position_id: :asc).each do |task| %>
 			<%= render 'task_groups/task', task: task %>
 		<% end %>
 	</div>
 </div>
 
 <div id="group3" class="lity-hide">
-	<div class="tasks-show">
-		<% @tasks.where(status: 3).order(position: :asc).each do |task| %>
+	<div class="tasks-index">
+		<h3>Done</h3>
+		<% @tasks.where(status: 3).order(position_id: :asc).each do |task| %>
 			<%= render 'task_groups/task', task: task %>
 		<% end %>
 	</div>

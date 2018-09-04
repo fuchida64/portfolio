@@ -1,5 +1,4 @@
 
-
 // drag & drop
 $(function () {
     $('.group-status').sortable({
@@ -37,7 +36,7 @@ $(function () {
         connectWith: ".status-field",
         helper: "clone",
         appendTo: ".task-list",
-        scroll: false,
+        scroll: true,
         cursorAt: {
             left: 60,
             bottom: 0

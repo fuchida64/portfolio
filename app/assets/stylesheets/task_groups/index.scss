@@ -15,7 +15,7 @@ h2 {
   color: black;
   letter-spacing: 10px;
   margin-top: 40px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 .task-group {
@@ -215,9 +215,6 @@ a:focus {
 @media screen and (max-width: 425px) {
   .task-group {
     width: 90%;
-  }
-  .modal-content {
-    width: 90vw;
   }
   .modal-form {
     width: auto;

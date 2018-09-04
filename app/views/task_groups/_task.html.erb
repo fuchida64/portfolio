@@ -8,18 +8,22 @@
 			<% if task.task_detail.time_limit.nil? || task.task_detail.time_limit < 1 %>
 				<p class="title"><%= task.title %></p>
 			<% else %>
-				<p class="title"><%= link_to task.title, task_task_details_path(task.id) %></p>
+				<p class="title"><%= link_to task.title, task_task_details_path(task) %></p>
 			<% end %>
 			<p class="details">
 				<% if task.task_detail.deadline.present? %>
 					<%= task.task_detail.deadline.strftime("%Y.%m.%d") %>
 				<% end %>
-				<% if task.task_detail.time_limit.present? %>
+				<% if task.task_detail.time_limit.present? && task.status < 3 %>
 					<% hr = task.task_detail.time_limit/3600 %>
 					<% min = task.task_detail.time_limit/60%60 %>
 					　残り <%= hr %>時間 <%= min %>分
 				<% end %>
-				<a href="#modal<%= task.id %>" data-lity="data-lity">＊</a>
+				<% if task.status == 3 %>
+					<a href="#modal<%= task.id %>" data-lity="data-lity"><span class="clear-text">clear</span>＊</a>
+				<% else %>
+					<a href="#modal<%= task.id %>" data-lity="data-lity">＊</a>
+				<% end %>
 			</p>
 		</div>
 	</div>
