@@ -3,9 +3,11 @@
 
 <div class="container">
   <div class="row">
-    <h2><%= link_to @task.title, task_group_path(@task.task_group) %></h2>
-    <% if  @task.task_detail.deadline.present? %>
+    <% if @task.task_detail.deadline.present? %>
+      <h2><%= link_to @task.title, task_group_path(@task.task_group) %></h2>
       <h3><%= @task.task_detail.deadline.strftime("%Y.%m.%d") %></h3>
+    <% else %>
+      <h2 class="headline2"><%= link_to @task.title, task_group_path(@task.task_group) %></h2>
     <% end %>
     <div id="countDownWrap">
       <% min = @task.task_detail.time_limit/60%60 %>
@@ -24,21 +26,25 @@
       <input type="hidden" value="ストップ" >
       <ul class="btn-area">
         <li id="startBtn">
-          <button type="button" onclick="cntStart()"><img src="/images/btn_start.png" alt="スタート"></button></li>
+          <button type="button" onclick="cntStart()" class="start-btn time-btn">スタート</button></li>
         <li id="stopBtn">
-          <button type="button" onclick="cntStop()"><img src="/images/btn_stop.png" alt="ストップ"></button></li>
+          <button type="button" onclick="cntStop()" class="stop-btn time-btn">ストップ</button></li>
         <li id="sound" class="hide">
-          <button type="button"><img src="/images/btn_stop.png" alt="ストップ"></button></li>
+          <button type="button" class="stop-btn time-btn">ストップ</button></li>
       </ul>
     </form>
   </div>
 </div>
 
-<%= form_tag update_limit_path(@task.id), :method => 'patch', id: "update_time_limit" do %>
+<%= form_tag update_limit_path(@task), :method => 'patch', id: "update_time_limit" do %>
     <input type="hidden" id="update_limit" name="update_limit" />
 <% end %>
 
 <script>
+
+$( document ).ready(function() {
+  $(".stop-btn").prop("disabled", true);
+});
 
 var timer1; //タイマーを格納する変数（タイマーID）の宣言
 
@@ -46,6 +52,11 @@ var timer1; //タイマーを格納する変数（タイマーID）の宣言
 function cntStart()
 {
   document.timer.elements[3].disabled=true;
+  $(".start-btn").prop("disabled", true);
+  $(".stop-btn").prop("disabled", false);
+    audioElem = new Audio();
+    audioElem.src = "/assets/decision3-b93ac9ca0d5716ec841bc30a509e68048195f2252ef443832c7fce49afa0da1f.mp3";
+    audioElem.play();
   timer1=setInterval("countDown()",1000);
 }
 
@@ -53,6 +64,11 @@ function cntStart()
 function cntStop()
 {
   document.timer.elements[3].disabled=false;
+  $(".start-btn").prop("disabled", false);
+  $(".stop-btn").prop("disabled", true);
+    audioElem = new Audio();
+    audioElem.src = "/assets/decision3-b93ac9ca0d5716ec841bc30a509e68048195f2252ef443832c7fce49afa0da1f.mp3";
+    audioElem.play();
   clearInterval(timer1);
   var hr=document.timer.elements[0].value;
       hr=parseInt(hr);
@@ -100,10 +116,10 @@ function tmWrite(int)
   {
     reSet();
     $("#countDown_sec").text("00");
-    audioElem = new Audio();
-    audioElem.loop = true;
-    audioElem.src = "/assets/warning1-ff1c16910dc5c2c2172d7f18073838daa230fadf9b38a4136cf8ec121fff32e1.mp3";
-    audioElem.play();
+      audioElem = new Audio();
+      audioElem.loop = true;
+      audioElem.src = "/assets/warning1-ff1c16910dc5c2c2172d7f18073838daa230fadf9b38a4136cf8ec121fff32e1.mp3";
+      audioElem.play();
     $("#startBtn").addClass("hide");
     $("#stopBtn").addClass("hide");
     $("#sound").removeClass("hide");
