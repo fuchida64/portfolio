@@ -1,4 +1,5 @@
 class MemoryGroupsController < ApplicationController
+	before_action :authenticate_user!
 	before_action :ensure_correct_user, except: [:index, :create, :position_update]
 
 	def index
@@ -26,7 +27,8 @@ class MemoryGroupsController < ApplicationController
 
 	def show
 		@memory_group = MemoryGroup.find(params[:id])
-		@today_memories = @memory_group.memories.where("execution_date <= ?", Date.current)
+		@today_memories = @memory_group.memories.where.not(stage: 0).where("execution_date <= ?", Date.current)
+		@today_memories_loop = @memory_group.memories.where("execution_date <= ?", Date.current)
 		@memory = Memory.new
 		@memory.build_problem
 		@memory.build_problem_image
