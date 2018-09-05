@@ -1,4 +1,6 @@
 class MemoriesController < ApplicationController
+	before_action :authenticate_user!
+	before_action :ensure_correct_user, only: [:create]
 
 	def index
 		@memory_group = MemoryGroup.find(params[:group])
@@ -36,17 +38,14 @@ class MemoriesController < ApplicationController
 		@memory = Memory.new(memory_params)
 		@memory.memory_group_id = @memory_group.id
 		@memory.execution_date = Date.current
-		if @memory.problem.nil? && @memory.problem_image.nil? && @memory.answer_content.nil? && @memory.answer_image.nil?
-			flash[:alert] = "入力エラーが発生しました。最低1項目の入力が必要です。"
-		elsif
-			@memory.save
-			flash[:notice] = "作成されました"
+		if params[:memory][:problem_attributes][:problem_content].blank? && (params[:memory][:problem_image_attributes][:problem_image] == "{}")
+			flash[:alert] = "入力エラーが発生しました。problemフォームには、最低1項目の入力が必要です。"
 		else
-			flash[:alert] = "入力エラーが発生しました。"
+			@memory.save
+			flash[:notice] = "作成されました。"
 		end
 		redirect_back(fallback_location: homes_path)
 	end
-
 	def correct
 		@memory = Memory.find(params[:id])
 		@memory_stages = @memory.memory_group.memory_stages
@@ -97,5 +96,13 @@ class MemoriesController < ApplicationController
 		  answer_image_attributes: [:id, :answer_image, :memory_id, :_destroy]
 		)
 	end
+
+	def ensure_correct_user
+		@memory_group = MemoryGroup.find_by(id: params[:memory_group_id])
+        if current_user.id != @memory_group.user_id
+           flash[:alert] = "アクセス権限がありません。"
+           redirect_back(fallback_location: homes_path)
+        end
+    end
 
 end

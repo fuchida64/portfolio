@@ -6,12 +6,15 @@ body {
   width: 100vw;
   height: 100vh;
 }
+a:hover {
+  color: red;
+}
 .headline {
-	font-family: "nagomi";
 	position: relative;
 	h2 {
 		font-size: 50px;
 		font-weight: 500;
+    font-family: "nagomi";
 		color: black;
 		letter-spacing: 10px;
 		margin-top: 40px;
@@ -19,13 +22,11 @@ body {
     a {
       color: black;
     }
-    a:hover {
-      color: red;
-    }
 	}
 	p {
-		white-space: pre-line;
+		  white-space: pre-line;
     	word-wrap: break-word;
+      font-family: "nagomi";
     	max-height: 60px;
     	overflow: auto;
     	font-size: 20px;
@@ -36,12 +37,16 @@ body {
 	}
 	.stage-link {
 		position: absolute;
-		right: 200px;
+    top: 130px;
+		right: 250px;
 		font-size: 20px;
 		color: #009900;
 		letter-spacing: 2px;
-		font-weight: 700;
+		font-weight: 400;
 	}
+  .stage-link:hover {
+    color: red;
+  }
 }
 hr {
     border-top: 1.5px solid #888888;
@@ -58,6 +63,7 @@ hr {
 h3 {
     font-weight: 300;
     font-size: 30px;
+    margin-top: 25px;
   }
 .today-box2 {
   display: none;
@@ -66,7 +72,7 @@ h3 {
   display:table;
   table-layout: fixed;
   width:100%;
-  height:300px;
+  height:320px;
   margin:20px auto 0;
   background-image:linear-gradient(bottom, rgba(0, 0, 0, 0.1) 2%, transparent 2%);
   background-size: 100% 50px;
@@ -89,11 +95,10 @@ h3 {
     &:before{
       position:absolute;
       left:0;right:0;top:100%;
-      padding:5px 1em 0;
+      padding-top: 5px;
       display:block;
       text-align:center;
       content:attr(title);
-      word-wrap: break-word;
     }
     .stage-period {
       width: 50px;
@@ -271,7 +276,7 @@ h3 {
   padding: 0.5em 1em 0;
   }
 .folder-body {
-  height: 400px;
+  height: 420px;
 	background-color: white;
   border: 1px solid #CCC;
   border-radius: 0 4px 4px 4px;
@@ -290,19 +295,40 @@ h3 {
 .new-memory {
   letter-spacing: 2px;
 }
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 1000px) {
+  .container {
+    width: 90vw;
+    margin-left: 3vw;
+  }
+  .headline .stage-link {
+    right: 50px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .folder-tabs > div > a{
+    padding: 0.5em 5px 0;
+  }
+  .chart span {
+    margin: 0 5px;
+  }
+}
+@media screen and (max-width: 767px) {
   body {
     background: none;
   }
   .headline {
     h2 {
       font-size: 40px;
-      margin-top: 20px;
+      margin-top: 30px;
       margin-left: 20px;
     }
     .stage-link {
       right: 20px;
     }
+  }
+  h3 {
+    font-size: 40px;
+    margin: 30px 20px;
   }
   .today-box {
     display: none;
@@ -318,9 +344,14 @@ h3 {
     td {
       border-top: 1px solid black !important;
       border-bottom: 1px solid;
+      width: 50%;
     }
   }
   .modal-form {
+    h3 {
+      margin-left: 0;
+      margin-bottom: 10px;
+    }
     .problem-box {
       width: 100%;
       float: none;
@@ -335,5 +366,28 @@ h3 {
     .edit-btn {
       margin-left: 80%;
     }
+  }
+}
+@media screen and (max-width: 700px) {
+  .headline .stage-link {
+    font-size: 15px;
+    top: 150px;
+  }
+}
+@media screen and (max-width: 425px) {
+  .headline .stage-link {
+    top: 110px;
+    right: 0;
+  }
+}
+@media screen and (max-width: 375px) {
+  .table {
+    width: 80%;
+  }
+  .today-box2 h3 {
+    margin: 40px 20px 25px;font-size: 30px;
+  }
+  .modal-form h3 {
+    font-size: 30px;
   }
 }
