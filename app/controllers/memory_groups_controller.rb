@@ -30,10 +30,6 @@ class MemoryGroupsController < ApplicationController
 		@today_memories = @memory_group.memories.where.not(stage: 0).where("execution_date <= ?", Date.current)
 		@today_memories_loop = @memory_group.memories.where("execution_date <= ?", Date.current)
 		@memory = Memory.new
-		@memory.build_problem
-		@memory.build_problem_image
-		@memory.build_answer
-		@memory.build_answer_image
 	end
 
 	def update

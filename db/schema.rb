@@ -32,20 +32,6 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "answer_images", force: :cascade do |t|
-    t.string "answer_image_id"
-    t.integer "memory_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "answers", force: :cascade do |t|
-    t.text "answer_content"
-    t.integer "memory_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "default_stages", force: :cascade do |t|
     t.integer "stage", null: false
     t.integer "period", null: false
@@ -89,6 +75,10 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
   end
 
   create_table "memories", force: :cascade do |t|
+    t.text "problem_content"
+    t.string "problem_image_id"
+    t.text "answer_content"
+    t.string "answer_image_id"
     t.integer "stage", default: 1
     t.integer "correct_num", default: 0
     t.integer "wrong_num", default: 0
@@ -113,20 +103,6 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
     t.integer "stage", null: false
     t.integer "period", null: false
     t.integer "memory_group_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "problem_images", force: :cascade do |t|
-    t.string "problem_image_id"
-    t.integer "memory_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "problems", force: :cascade do |t|
-    t.text "problem_content"
-    t.integer "memory_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

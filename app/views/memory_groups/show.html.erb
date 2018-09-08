@@ -16,9 +16,13 @@
 
 <div class="container">
 	<div class="row headline">
-		<h2><%= link_to memories_path(group: @memory_group) do %><%= @memory_group.title %><% end %></h2>
-		<p><%= @memory_group.content%></p>
-		<%= link_to 'Memory Step', memory_group_memory_stages_path(@memory_group), class: "stage-link" %>
+		<h2><%= @memory_group.title.truncate(19) %></h2>
+		<p><%= @memory_group.content.truncate(20) %></p>
+		<ul>
+			<li><a href="#create-modal" class="new-memory" data-lity="data-lity">new memory</a></li>
+			<li><%= link_to "all memories", memories_path(group: @memory_group) %></li>
+			<li><%= link_to 'memory step', memory_group_memory_stages_path(@memory_group), class: "stage-link" %></li>
+		</ul>
 	</div>
 	<hr>
 	<div class="today-box">
@@ -87,7 +91,6 @@
 				<% end %>
 			</ul>
 		</div>
-		<a href="#create-modal" class="new-memory" data-lity="data-lity"><h3>new memory</h3></a>
 		<div id="create-modal" class="lity-hide">
 		 	<div class="modal-content">
 				<div class="modal-form">
@@ -95,42 +98,34 @@
 				    <hr>
 				    <%= form_for [@memory_group,@memory], html: {name: 'form1'} do |f| %>
 					    <div class="problem-box">
-					    	<%= f.fields_for :problem_image do |p_image| %>
-								<div class="field">
-									<label class="label-box" for="memory_problem_image_attributes_problem_image">
-								      <div class="img-box">
-								        <img class="preview_memory_problem_image_attributes_problem_image" >
-								        <i class="far fa-image"></i>
-								      </div>
-								    </label>
-									<%= p_image.attachment_field :problem_image %>
-								</div>
-							<% end %>
-					    	<%= f.fields_for :problem do |problem| %>
-								<div class="field">
-									<%= problem.label :problem_content %><br />
-									<%= problem.text_area :problem_content %>
-								</div>
-							<% end %>
+							<div class="field">
+								<label class="label-box" for="memory_problem_image">
+							      <div class="img-box">
+							        <img class="preview_memory_problem_image" >
+							        <i class="far fa-image"></i>
+							      </div>
+							    </label>
+								<%= f.attachment_field :problem_image %>
+							</div>
+							<div class="field">
+								<%= f.label :problem_content %><br />
+								<%= f.text_area :problem_content %>
+							</div>
 					    </div>
 					    <div class="answer-box">
-					    	<%= f.fields_for :answer_image do |a_image| %>
-								<div class="field">
-									<label class="label-box" for="memory_answer_image_attributes_answer_image">
-										<div class="img-box">
-											<img class="preview_memory_answer_image_attributes_answer_image" >
-											<i class="far fa-image"></i>
-										</div>
-									</label>
-									<%= a_image.attachment_field :answer_image %>
-								</div>
-							<% end %>
-					    	<%= f.fields_for :answer do |answer| %>
-								<div class="field">
-									<%= answer.label :answer_content %><br />
-									<%= answer.text_area :answer_content %>
-								</div>
-							<% end %>
+							<div class="field">
+								<label class="label-box" for="memory_answer_image">
+									<div class="img-box">
+										<img class="preview_memory_answer_image" >
+										<i class="far fa-image"></i>
+									</div>
+								</label>
+								<%= f.attachment_field :answer_image %>
+							</div>
+							<div class="field">
+								<%= f.label :answer_content %><br />
+								<%= f.text_area :answer_content %>
+							</div>
 					    </div>
 						<div class="actions">
 							<%= f.submit '作成', class: "edit-btn", onClick: "return checkForm();" %>
@@ -208,42 +203,34 @@
 		    <hr>
 		    <%= form_for [@memory_group,@memory], html: {name: 'modal_form'} do |f| %>
 			    <div class="problem-box">
-			    	<%= f.fields_for :problem_image do |p_image| %>
-						<div class="field">
-							<label class="label-box" for="memory_problem_image_attributes_problem_image1">
-						      <div class="img-box">
-						        <img class="preview_memory_problem_image_attributes_problem_image1" >
-						        <i class="far fa-image"></i>
-						      </div>
-						    </label>
-							<%= p_image.attachment_field :problem_image, id: 'memory_problem_image_attributes_problem_image1' %>
-						</div>
-					<% end %>
-			    	<%= f.fields_for :problem do |problem| %>
-						<div class="field">
-							<%= problem.label :problem_content %><br />
-							<%= problem.text_area :problem_content %>
-						</div>
-					<% end %>
+					<div class="field">
+						<label class="label-box" for="memory_problem_image_attributes_problem_image1">
+					      <div class="img-box">
+					        <img class="preview_memory_problem_image_attributes_problem_image1" >
+					        <i class="far fa-image"></i>
+					      </div>
+					    </label>
+						<%= f.attachment_field :problem_image, id: 'memory_problem_image_attributes_problem_image1' %>
+					</div>
+					<div class="field">
+						<%= f.label :problem_content %><br />
+						<%= f.text_area :problem_content %>
+					</div>
 			    </div>
 			    <div class="answer-box">
-			    	<%= f.fields_for :answer_image do |a_image| %>
-						<div class="field">
-							<label class="label-box" for="memory_answer_image_attributes_answer_image1">
-								<div class="img-box">
-									<img class="preview_memory_answer_image_attributes_answer_image1" >
-									<i class="far fa-image"></i>
-								</div>
-							</label>
-							<%= a_image.attachment_field :answer_image, id: 'memory_answer_image_attributes_answer_image1' %>
-						</div>
-					<% end %>
-			    	<%= f.fields_for :answer do |answer| %>
-						<div class="field">
-							<%= answer.label :answer_content %><br />
-							<%= answer.text_area :answer_content %>
-						</div>
-					<% end %>
+					<div class="field">
+						<label class="label-box" for="memory_answer_image_attributes_answer_image1">
+							<div class="img-box">
+								<img class="preview_memory_answer_image_attributes_answer_image1" >
+								<i class="far fa-image"></i>
+							</div>
+						</label>
+						<%= f.attachment_field :answer_image, id: 'memory_answer_image_attributes_answer_image1' %>
+					</div>
+					<div class="field">
+						<%= f.label :answer_content %><br />
+						<%= f.text_area :answer_content %>
+					</div>
 			    </div>
 				<div class="actions">
 					<%= f.submit '作成', class: "edit-btn", onClick: "return checkForm2();" %>
@@ -263,7 +250,7 @@
 	    reader.readAsDataURL(e.target.files[0]);
 	});
 	function checkForm(){
-	    if(document.form1.memory_problem_attributes_problem_content.value == "" && document.form1.memory_problem_image_attributes_problem_image.value == ""){
+	    if(document.form1.memory_problem_content.value == "" && document.form1.memory_problem_image.value == ""){
 	        alert("problemフォームには、最低1項目の入力が必要です。");
 			return false;
 	    }else{
@@ -271,7 +258,7 @@
 	    }
 	};
 	function checkForm2(){
-	    if(document.modal_form.memory_problem_attributes_problem_content.value == "" && document.getElementById("memory_problem_image_attributes_problem_image1").value == ""){
+	    if(document.modal_form.memory_problem_content.value == "" && document.getElementById("memory_problem_image_attributes_problem_image1").value == ""){
 	        alert("problemフォームには、最低1項目の入力が必要です。");
 			return false;
 	    }else{

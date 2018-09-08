@@ -11,23 +11,22 @@
 				<% if @memory.problem_image.present? %>
 					<div class="p-img-box">
 						<a href="#lity" data-lity="data-lity">
-			    			<%= attachment_image_tag @memory.problem_image, :problem_image, format: 'jpeg' %>
+			    			<%= attachment_image_tag @memory, :problem_image, format: 'jpeg' %>
 			    		</a>
 			    		<div id="lity" class="lity-hide preview">
-		    				<%= attachment_image_tag @memory.problem_image, :problem_image, format: 'jpeg' %>
+		    				<%= attachment_image_tag @memory, :problem_image, format: 'jpeg' %>
 		    			</div>
 					</div>
 				<% end %>
 				<div class="p-text-box">
-					<% if @memory.problem.present? %>
-						<p><%= @memory.problem.problem_content %></p>
-					<% end %>
-				</div>
+
+						<p><%= @memory.problem_content %></p>
+					</div>
 			</div>
 
 			<div class="answer-box">
 				<div class="answer1">
-					<% if @memory.answer_image.present? || @memory.answer.present? %>
+					<% if @memory.answer_image.present? || @memory.answer_content.present? %>
 						<p class="open-answer2">答えを見る</p>
 			        <% else %>
 			        	<%= link_to correct_path(@memory, stage: @stage), class: 'correct-btn' do %>
@@ -41,17 +40,16 @@
 					<% if @memory.answer_image.present? %>
 						<div class="p-img-box">
 							<a href="#lity1" data-lity="data-lity">
-				    			<%= attachment_image_tag @memory.answer_image, :answer_image, format: 'jpeg' %>
+				    			<%= attachment_image_tag @memory, :answer_image, format: 'jpeg' %>
 				    		</a>
 				    		<div id="lity1" class="lity-hide preview">
-			    				<%= attachment_image_tag @memory.answer_image, :answer_image, format: 'jpeg' %>
+			    				<%= attachment_image_tag @memory, :answer_image, format: 'jpeg' %>
 			    			</div>
 						</div>
 					<% end %>
 					<div class="p-text-box">
-						<% if @memory.answer.present? %>
-							<p><%= @memory.answer.answer_content %></p>
-						<% end %>
+
+							<p><%= @memory.answer_content %></p>
 					</div>
 					<div class="answer-btn">
 						<%= link_to "◯", correct_path(@memory, stage: @stage), class: 'correct-btn1' %>

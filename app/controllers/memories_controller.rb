@@ -1,6 +1,7 @@
 class MemoriesController < ApplicationController
 	before_action :authenticate_user!
-	before_action :ensure_correct_user, only: [:create]
+	before_action :ensure_correct_user_group, only: [:step_index, :create]
+	before_action :ensure_correct_user, only: [:correct, :wrong, :update, :destroy]
 
 	def index
 		@memory_group = MemoryGroup.find(params[:group])
@@ -17,6 +18,13 @@ class MemoriesController < ApplicationController
 	end
 
 	def step_index
+		@memory_group = MemoryGroup.find(params[:memory_group_id])
+		@stage = params[:stage]
+		if 	@stage != "all"
+			@memories = @memory_group.memories.where(stage: @stage)
+		else
+			@memories = @memory_group.memories
+		end
 	end
 
 	def show
@@ -38,7 +46,7 @@ class MemoriesController < ApplicationController
 		@memory = Memory.new(memory_params)
 		@memory.memory_group_id = @memory_group.id
 		@memory.execution_date = Date.current
-		if params[:memory][:problem_attributes][:problem_content].blank? && (params[:memory][:problem_image_attributes][:problem_image] == "{}")
+		if params[:memory][:problem_content].blank? && (params[:memory][:problem_image] == "{}")
 			flash[:alert] = "入力エラーが発生しました。problemフォームには、最低1項目の入力が必要です。"
 		else
 			@memory.save
@@ -75,31 +83,46 @@ class MemoriesController < ApplicationController
 		redirect_back(fallback_location: homes_path)
 	end
 
-	def edit
-		@memory = Memory.find(params[:id])
-	end
-
 	def update
 		@memory = Memory.find(params[:id])
-		@memory.update(memory_params)
-		redirect_to memory_group_path(@memory.memory_group)
+		if params[:memory][:problem_content].blank? && (params[:memory][:problem_image] == "{}")
+			flash[:alert] = "入力エラーが発生しました。problemフォームには、最低1項目の入力が必要です。"
+		else
+			@memory.update(memory_params)
+			flash[:notice] = "更新されました。"
+		end
+		redirect_back(fallback_location: homes_path)
+	end
+
+	def destroy
+		@memory = Memory.find(params[:id])
+		if  @memory.destroy
+		  	flash[:notice] = "削除されました。"
+		else
+			flash[:alert] = "エラーが発生しました。"
+		end
+		redirect_back(fallback_location: homes_path)
 	end
 
 	private
 
 	def memory_params
 		params.require(:memory).permit(
-		  :stage, :execution_date, :correct_num, :wrong_num, :memory_group_id,
-		  problem_attributes: [:id, :problem_content, :memory_id, :_destroy],
-		  problem_image_attributes: [:id, :problem_image, :memory_id, :_destroy],
-		  answer_attributes: [:id, :answer_content, :memory_id, :_destroy],
-		  answer_image_attributes: [:id, :answer_image, :memory_id, :_destroy]
+		  :problem_content, :problem_image, :answer_content, :answer_image, :stage, :execution_date, :correct_num, :wrong_num, :memory_group_id,
 		)
 	end
 
-	def ensure_correct_user
+	def ensure_correct_user_group
 		@memory_group = MemoryGroup.find_by(id: params[:memory_group_id])
         if current_user.id != @memory_group.user_id
+           flash[:alert] = "アクセス権限がありません。"
+           redirect_back(fallback_location: homes_path)
+        end
+    end
+
+    def ensure_correct_user
+		@memory = Memory.find_by(id: params[:id])
+        if current_user.id != @memory.memory_group.user_id
            flash[:alert] = "アクセス権限がありません。"
            redirect_back(fallback_location: homes_path)
         end

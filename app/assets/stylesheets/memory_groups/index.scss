@@ -40,6 +40,8 @@ h2 {
 
   h4 {
     margin-left: 10px;
+    height: 23px;
+    overflow: auto;
 
     .memory-title {
       font-size: 20px;
@@ -213,6 +215,20 @@ a:focus {
     margin-left: 8%;
   }
 }
+@media screen and (max-width: 550px) {
+  .headline {
+    h2 {
+      margin-bottom: 20px;
+    }
+    .stage-link {
+      position: unset;
+      margin-left: 40px;
+    }
+  }
+  .group-status {
+    margin-top: 30px;
+  }
+}
 @media screen and (max-width: 500px) {
   .modal-content {
     width: 90vw;
@@ -221,11 +237,6 @@ a:focus {
 @media screen and (max-width: 425px) {
   .headline {
     margin-bottom: 30px;
-
-    .stage-link {
-      position: unset;
-      margin-left: 40px;
-    }
   }
   .memory-group {
     width: 90%;
