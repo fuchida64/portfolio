@@ -1,1 +1,124 @@
-ok
+
+<%= stylesheet_link_tag "memories/step_index", :media => "all" %>
+
+<div class="container">
+	<div class="row headline">
+		<h2><%= link_to memory_group_path(@memory_group) do %>
+			<% if @stage == 'all' %>All memories<% elsif @stage == '0' %>Complete<% else %>Step<%= @stage %><% end %> in <%= @memory_group.title %><% end %></h2>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="memory-box">
+			<div class="folder-tabs">
+				<div class="behind-tab"><%= link_to "Index", memories_path(group: @memory_group) %></div>
+  				<div class="<% if @stage == 'all' %>first-tab<% else %>behind-tab<% end %>">
+  					<% if @memory_group.memories.present? %>
+  						<%= link_to "All memories", step_index_path(@memory_group, stage: "all") %>
+  					<% else %>
+  						<p>All memory</p>
+  					<% end %>
+  				</div>
+			    <div class="<% if @stage.to_i == 1 %>first-tab<% else %>behind-tab<% end %>">
+			    	<% if @memory_group.memories.present? && @memory_group.memories.where(stage: 1).present? %>
+			    		<%= link_to "Step1", step_index_path(@memory_group, stage: 1) %>
+			    	<% else %>
+			    		<p>Step1</p>
+			    	<% end %>
+			    </div>
+			    <% @memory_group.memory_stages.where.not(stage: nil).each do |n| %>
+	    			<div class="<% if @stage.to_i == n.stage %>first-tab<% else %>behind-tab<% end %>">
+		    			<% if @memory_group.memories.present? && @memory_group.memories.where(stage: n.stage).present? %>
+		    				<%= link_to step_index_path(@memory_group, stage: n.stage) do %>Step<%= n.stage%><% end %>
+		    			<% else %>
+		    				<p>Step<%= n.stage%></p>
+		    			<% end %>
+		    		</div>
+			    <% end %>
+			    <div class="<% if @stage != 'all' && @stage.to_i == 0 %>first-tab<% else %>behind-tab<% end %>">
+			    	<% if @memory_group.memories.present? && @memory_group.memories.where(stage: 0).present? %>
+			    		<%= link_to "Comp", step_index_path(@memory_group, stage: 0) %>
+			    	<% else %>
+			    		<p>Comp</p>
+			    	<% end %>
+			    </div>
+  			</div>
+
+  			<div class="folder-body">
+  				<% @memories.each do |m| %>
+	  				<div class="card">
+	  					<% if m.problem_image.present? %>
+	  						<div class="problem-img">
+	  							<a href="#lity<%= m.id %>" data-lity="data-lity"><%= attachment_image_tag m, :problem_image, format: 'jpeg' %></a>
+	  						</div>
+				    		<div id="lity<%= m.id %>" class="lity-hide preview">
+				    			<%= attachment_image_tag m, :problem_image, format: 'jpeg' %>
+			    			</div>
+	  						<div class="problem-text"><% if m.problem_content.present? %><%= m.problem_content.truncate(40) %><% end %></div>
+	  					<% else %>
+	  						<div class="problem-text2"><% if m.problem_content.present? %><%= m.problem_content.truncate(55) %><% end %></div>
+	  					<% end %>
+	  					<a href="#edit-modal<%= m.id %>" data-lity="data-lity" class="edit-mark">＊</a>
+					</div>
+					<div id="edit-modal<%= m.id %>" class="lity-hide">
+						<div class="modal-content">
+							<div class="modal-form">
+							    <h3>Memory edit</h3>
+							    <hr>
+							    <%= form_for m, url: memory_path(m) do |f| %>
+								    <div class="problem-box">
+										<div class="field">
+											<label class="label-box" for="memory_problem_image<%= m.id %>">
+										      <div class="img-box">
+										      	<%= attachment_image_tag m, :problem_image, format: 'jpeg', class: 'preview_memory_problem_image'+m.id.to_s %>
+										      	<img class="preview_memory_problem_image<%= m.id %>" >
+										        <i class="far fa-image"></i>
+										      </div>
+										    </label>
+											<%= f.attachment_field :problem_image, id: 'memory_problem_image'+m.id.to_s %>
+										</div>
+										<div class="field">
+											<%= f.label :problem_content %><br />
+											<%= f.text_area :problem_content %>
+										</div>
+								    </div>
+								    <div class="answer-box">
+										<div class="field">
+											<label class="label-box" for="memory_answer_image<%= m.id %>">
+												<div class="img-box">
+													<%= attachment_image_tag m, :answer_image, format: 'jpeg', class: 'preview_memory_answer_image'+m.id.to_s %>
+													<img class="preview_memory_answer_image<%= m.id %>" >
+													<i class="far fa-image"></i>
+												</div>
+											</label>
+											<%= f.attachment_field :answer_image, id: 'memory_answer_image'+m.id.to_s %>
+										</div>
+										<div class="field">
+											<%= f.label :answer_content %><br />
+											<%= f.text_area :answer_content %>
+										</div>
+								    </div>
+									<div class="actions">
+										<%= f.submit '更新', class: "edit-btn" %>
+										<%= link_to "削除", memory_path(m), method: :delete, class: 'delete-btn', "data-confirm" => "本当に削除しますか?" %>
+									</div>
+								<% end %>
+							</div>
+						</div>
+					</div>
+				<% end %>
+			</div>
+  		</div>
+	</div>
+</div>
+
+<script>
+	$('input[type=file]').on('change', function (e) {
+		var str = $(this).attr("id");
+	    var reader = new FileReader();
+	    reader.onload = function (e) {
+	        $(".preview_" + str).attr('src', e.target.result);
+	    }
+	    reader.readAsDataURL(e.target.files[0]);
+	});
+</script>
+

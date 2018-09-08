@@ -26,7 +26,7 @@ a:hover {
 	color: red;
 }
 h2 {
-	font-size: 40px;
+	font-size: 50px;
 	font-weight: 300;
 	font-family: "nagomi";
 	color: black;
@@ -214,11 +214,9 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 @media screen and (max-width: 1024px) {
 	body {
-	  background: url(/images/task_memory.jpg);
-	  background-size: cover;
-	  background-position: center center;
-	  width: 100vw;
-	  height: 100vh;
+		background-color: white;
+		width: 100vw;
+		height: 100vh;
 	}
 	main {
 		display: none;
@@ -229,7 +227,7 @@ input[type="number"]::-webkit-inner-spin-button {
 		margin: 0 auto 40px;
 	}
 	h2 {
-	    font-size: 25px;
+	    font-size: 30px;
 	    margin-top: 30px;
 	    margin-bottom: 30px;
 	    text-align: center;
@@ -258,6 +256,9 @@ input[type="number"]::-webkit-inner-spin-button {
 	    	display: inline-block;
 	    }
 	    form#new_memory_stage {
+		    display: inline-block;
+		}
+		form#edit_memory_group_1 {
 		    display: inline-block;
 		}
 		form#edit_memory_group_2 {

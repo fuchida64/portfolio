@@ -1,6 +1,10 @@
 class CreateMemories < ActiveRecord::Migration[5.2]
   def change
     create_table :memories do |t|
+      t.text :problem_content
+      t.string :problem_image_id
+      t.text :answer_content
+      t.string :answer_image_id
       t.integer :stage, default: 1
       t.integer :correct_num, default: 0
       t.integer :wrong_num, default: 0

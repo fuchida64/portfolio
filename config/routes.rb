@@ -65,7 +65,7 @@ Rails.application.routes.draw do
   get 'memory_groups/:memory_group_id/step/memories' => 'memories#step_index', as:'step_index'
 
   # memory
-  # index create
+  # index create update delete
   resources :memories
   get 'memories/:id/correct' => 'memories#correct', as: 'correct'
   get 'memories/:id/wrong' => 'memories#wrong', as: 'wrong'

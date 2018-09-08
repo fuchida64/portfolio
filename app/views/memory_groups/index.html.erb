@@ -11,7 +11,7 @@
 		<div class="group-status">
 			<% @memory_groups.each do |mg| %>
 				<div id="<%= mg.id %>" class="memory-group">
-					<h4><%= link_to mg.title.truncate(17), memory_group_path(mg), class: "memory-title" %></h4>
+					<h4><%= link_to mg.title.truncate(16), memory_group_path(mg), class: "memory-title" %></h4>
 					<hr>
 					<div class="memory-content">
 						<p class="memory-text"><%= mg.content %></p>

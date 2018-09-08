@@ -27,7 +27,7 @@ class MemoryStagesController < ApplicationController
 	def update
 		@memory_stage = MemoryStage.find(params[:id])
 		if @memory_stage.update(memory_stage_params)
-			flash[:notice] = "更新されました"
+			flash[:notice] = "更新されました。"
 		else
 			flash[:alert] = "入力エラーが発生しました。期間は1日以上に設定して下さい。"
 		end
@@ -36,7 +36,9 @@ class MemoryStagesController < ApplicationController
 
 	def destroy
 		@memory_stage = MemoryStage.find(params[:id])
+		@memories = @memory_stage.memory_group.memories.where(stage: @memory_stage.stage)
 		if  @memory_stage.destroy
+			@memories.update_all(:stage => @memory_stage.stage-1)
 		  	flash[:notice] = "削除されました。"
 		else
 			flash[:alert] = "エラーが発生しました。"

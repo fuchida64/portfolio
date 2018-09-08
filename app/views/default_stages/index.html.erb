@@ -1,4 +1,4 @@
- 
+
 <%= stylesheet_link_tag "default_stages/index", :media => "all" %>
 
 <main>
@@ -6,7 +6,7 @@
 		<h2><%= link_to 'Default Step list', memory_groups_path %></h2>
 		<ul class="chart">
 			<li>
-				<span style="height:10%" title="step1" class="stage-bottom"><p class="stage-period">1日</p></span>
+				<span style="height:10%" title="step1" class="stage-bottom"></span>
 			</li>
 			<% current_user.default_stages.where.not(stage: nil).each do |default| %>
 				<li>

@@ -6,6 +6,9 @@ body {
   width: 100vw;
   height: 100vh;
 }
+a {
+  color: black;
+}
 a:hover {
   color: red;
 }
@@ -19,9 +22,6 @@ a:hover {
 		letter-spacing: 10px;
 		margin-top: 40px;
 		margin-bottom: 15px;
-    a {
-      color: black;
-    }
 	}
 	p {
 		  white-space: pre-line;
@@ -35,17 +35,23 @@ a:hover {
     	margin-bottom: 10px;
     	max-width: 75%;
 	}
-	.stage-link {
-		position: absolute;
-    top: 130px;
-		right: 250px;
-		font-size: 20px;
-		color: #009900;
-		letter-spacing: 2px;
-		font-weight: 400;
-	}
-  .stage-link:hover {
-    color: red;
+  ul {
+    display: flex;
+    li {
+      font-size: 20px;
+      font-weight: 400;
+      margin-right: 50px;
+      letter-spacing: 3px;
+      a {
+        color: #009900;
+      }
+      a:hover {
+        color: red;
+      }
+    }
+    li:nth-child(1) {
+      margin-left: 40px;
+    }
   }
 }
 hr {
@@ -292,16 +298,10 @@ h3 {
   animation: none !important;
   margin: 0 !important;
 }
-.new-memory {
-  letter-spacing: 2px;
-}
 @media screen and (max-width: 1000px) {
   .container {
     width: 90vw;
     margin-left: 3vw;
-  }
-  .headline .stage-link {
-    right: 50px;
   }
 }
 @media screen and (max-width: 768px) {
@@ -322,8 +322,11 @@ h3 {
       margin-top: 30px;
       margin-left: 20px;
     }
-    .stage-link {
-      right: 20px;
+    ul li {
+      margin-right: 5%;
+    }
+    .new-memory {
+      display: none;
     }
   }
   h3 {
@@ -368,16 +371,16 @@ h3 {
     }
   }
 }
-@media screen and (max-width: 700px) {
-  .headline .stage-link {
-    font-size: 15px;
-    top: 150px;
-  }
-}
 @media screen and (max-width: 425px) {
-  .headline .stage-link {
-    top: 110px;
-    right: 0;
+  .headline ul {
+    width: 90%;
+    margin: 0 auto;
+    li {
+      font-size: 15px;
+    }
+    li:nth-child(1) {
+      margin-left: 5%;
+    }
   }
 }
 @media screen and (max-width: 375px) {

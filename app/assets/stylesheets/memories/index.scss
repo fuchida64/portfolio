@@ -4,7 +4,11 @@ body {
   background-size: cover;
   background-position: center center;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+}
+.container {
+  width: 90vw;
+  margin: 0 auto;
 }
 .headline {
     font-family: "nagomi";
@@ -26,7 +30,7 @@ a:hover {
   color: red;
 }
 hr {
-    border-top: 1.5px solid #888888;
+    border-top: 1px solid #888888;
     width: 94vw;
     position: absolute;
     left: 3vw;
@@ -65,6 +69,7 @@ hr {
 }
 .first-tab{ /* カレントのタブ */
   border-color: #CCC #CCC #FFF #CCC;
+  color: red;
 }
 .behind-tab{ /* 背後のタブ */
   border-color: #CCC;
@@ -117,7 +122,6 @@ hr {
       display:block;
       text-align:center;
       content:attr(title);
-      word-wrap: break-word;
     }
     .stage-period {
       width: 50px;
@@ -145,7 +149,18 @@ hr {
 @keyframes draw{
   0%{height:0;}
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1100px) {
+  .folder-tabs > div > a, p{
+    padding: 0.5em 10px 0;
+  }
+  .chart span {
+    margin: 0 5px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  body {
+    background: white;
+  }
   .headline h2 {
     font-size: 40px;
     text-align: center;
@@ -155,12 +170,13 @@ hr {
   }
   .memory-box2 {
     display: block;
+    margin-bottom: 50px;
   }
   hr {
     display: none;
   }
   .table {
-    width: 50%;
+    width: 80%;
     text-align: center;
     margin: 20px auto;
     td {
@@ -171,11 +187,6 @@ hr {
   }
   a {
     line-height: 36px;
-  }
-}
-@media screen and (max-width: 768px) {
-  .table {
-    width: 80%;
   }
 }
 
