@@ -48,7 +48,7 @@ Rails.application.routes.draw do
   patch 'tasks/:task_id/task_details' => 'task_details#update', as: 'update_limit'
 
   # diary
-  # index
+  # index show
   resources :diaries do
     resource :diary_comments, only: [:create]
     resource :favorites, only: [:create, :destroy]
