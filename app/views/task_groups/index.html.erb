@@ -40,7 +40,7 @@
 									  	<%= f.submit '更新', class: "edit-btn" %>
 									</div>
 								<% end %>
-								<%= link_to "delete", task_group_path(task.id), method: :delete, class: 'delete-btn', "data-confirm" => "本当に削除しますか?" %>
+								<%= link_to "delete", task_group_path(task), method: :delete, class: 'delete-btn', "data-confirm" => "本当に削除しますか?" %>
 							</div>
 						</div>
 					</div>

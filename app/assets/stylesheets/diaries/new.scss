@@ -101,11 +101,28 @@ h2 {
     border-radius: 3px;
     transition: .4s;
     font-size: 15px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 .create-btn:hover {
     background: #cbedff;
     color: #FFF;
 }
+ .delete-btn {
+      display: inline-block;
+      padding: 0.5em 1em;
+      text-decoration: none;
+      color: #f65161;
+      border: dashed 1px #f65161;
+      background: #ffeff0;
+      border-radius: 3px;
+      transition: .4s;
+      margin-left: 40px;
+  }
+  .delete-btn:hover {
+      background: #FFDDFF;
+      color: #FFF;
+  }
 .actions {
     margin-bottom: 50px;
 }
@@ -122,6 +139,11 @@ input#diary_diary_date {
 @media screen and (max-width: 1024px) {
     .diary-head {
         text-align: center;
+    }
+}
+@media screen and (max-width: 375px) {
+    h2 {
+        font-size: 40px;
     }
 }
 

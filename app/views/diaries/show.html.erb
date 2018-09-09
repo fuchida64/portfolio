@@ -20,12 +20,12 @@
 			<% if user_signed_in? %>
 				<% if @diary.favorited_by?(current_user) %>
 		    		<%= link_to diary_favorites_path(@diary), method: :delete, class: 'favorite' do %>
-		      			<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+		      			<i class="far fa-thumbs-up" aria-hidden="true" style="color: red;"></i>
 		      			<%= @diary.favorites.count %> いいね
 		    		<% end %>
 				<% else %>
 		    		<%= link_to diary_favorites_path(@diary), method: :post, class: 'favorite' do %>
-		      			<i class="fa fa-heart" aria-hidden="true"></i>
+		      			<i class="far fa-thumbs-up" aria-hidden="true"></i>
 		      			<%= @diary.favorites.count %> いいね
 		    		<% end %>
 				<% end %>
@@ -33,9 +33,12 @@
 			<%= @diary.diary_date.strftime("%Y.%m.%d") %>
 		</p>
 		<div class="user-info">
-			<p class="name"><%= @diary.user.name %></p>
+			<p class="name"><%= link_to @diary.user.name, user_path(@diary.user), class: "btn" %></p>
 			<% if user_signed_in? %>
 				<%= render 'users/follow_form' %>
+			<% end %>
+			<% if current_user == @diary.user %>
+				<%= link_to "edit", edit_diary_path(@diary), class: "btn btn2" %>
 			<% end %>
 		</div>
 		<div class="comment-form">

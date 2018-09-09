@@ -1,5 +1,6 @@
 class DiariesController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show, :search]
+	before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
 	def index
 		@diaries = Diary.all.where(inform_status: '公開').order(id: :desc).page(params[:page]).per(9)
@@ -35,6 +36,31 @@ class DiariesController < ApplicationController
 		end
 	end
 
+	def edit
+		@diary = Diary.find(params[:id])
+	end
+
+	def update
+		@diary = Diary.find(params[:id])
+		if @diary.update(diary_params)
+			flash[:notice] = "更新されました。"
+			redirect_to diary_path(@diary)
+		else
+			render 'edit'
+		end
+	end
+
+	def destroy
+		@diary = Diary.find(params[:id])
+		if  @diary.destroy
+		  	flash[:notice] = "削除されました。"
+		  	redirect_to diaries_path
+		else
+			flash[:alert] = "エラーが発生しました。"
+			redirect_back(fallback_location: homes_path)
+		end
+	end
+
 	private
 
 	def diary_params
@@ -43,4 +69,12 @@ class DiariesController < ApplicationController
 			diary_images_attributes: [:id, :diary_id, :diary_image, :_destroy]
 			)
 	end
+
+	def ensure_correct_user
+		@diary = Diary.find_by(id: params[:id])
+        if current_user.id != @diary.user_id
+           flash[:alert] = "アクセス権限がありません。"
+           redirect_back(fallback_location: homes_path)
+        end
+    end
 end
