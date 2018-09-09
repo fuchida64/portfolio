@@ -1,12 +1,21 @@
 
 <%= stylesheet_link_tag "memories/show", :media => "all" %>
 
+<style type="text/css" media="screen">
+	.p-text-box {
+		<% if @memory.problem_content.length > 50 || @memory.answer_content.length > 50 %>
+			font-size: 20px;
+		<% else %>
+			font-size: 24px;
+		<% end %>
+	}
+</style>
+
 <div class="container">
 	<div class="row">
 		<p class="back-link"><%= link_to @memory_group.title, memory_group_path(@memory_group) %></p>
-		<p>step <%= @stage %>　残り <%= @memories.length %> 個</p>
+		<p class="rest"><% if @stage == "all" %>all step<% elsif @stage == "0" %>complete<% else %>step <%= @stage %><% end %>　残り <%= @memories.length %> 個</p>
 		<div class="memory-box">
-
 			<div class="problem-box">
 				<% if @memory.problem_image.present? %>
 					<div class="p-img-box">
@@ -18,24 +27,23 @@
 		    			</div>
 					</div>
 				<% end %>
-				<div class="p-text-box">
-
-						<p><%= @memory.problem_content %></p>
-					</div>
+				<div class="p-text-box"><p><%= @memory.problem_content %></p></div>
 			</div>
-
 			<div class="answer-box">
 				<div class="answer1">
 					<% if @memory.answer_image.present? || @memory.answer_content.present? %>
-						<p class="open-answer2">答えを見る</p>
+						<a href="#open-answer" class="open-answer">答えを見る</a>
 			        <% else %>
-			        	<%= link_to correct_path(@memory, stage: @stage), class: 'correct-btn' do %>
-			        		<i class="far fa-circle"></i>
-			        	<% end %>
-			        	<%= link_to "×", wrong_path(@memory, stage: @stage), class: 'wrong-btn' %>
+			        	<div class="answer-btn">
+							<%= link_to correct_path(@memory) do %>
+								<div class="correct-btn"></div>
+							<% end %>
+			        		<%= link_to wrong_path(@memory) do %>
+			        			<div class="wrong-btn"></div>
+			        		<% end %>
+						</div>
 					<% end %>
 				</div>
-
 				<div class="answer2 hide">
 					<% if @memory.answer_image.present? %>
 						<div class="p-img-box">
@@ -47,25 +55,110 @@
 			    			</div>
 						</div>
 					<% end %>
-					<div class="p-text-box">
-
-							<p><%= @memory.answer_content %></p>
-					</div>
-					<div class="answer-btn">
-						<%= link_to "◯", correct_path(@memory, stage: @stage), class: 'correct-btn1' %>
-		        		<%= link_to "×", wrong_path(@memory, stage: @stage), class: 'wrong-btn2' %>
+					<div class="p-text-box"><p><%= @memory.answer_content %></p></div>
+					<div class="answer-btn2">
+						<%= link_to correct_path(@memory) do %>
+							<div class="correct-btn"></div>
+						<% end %>
+		        		<%= link_to wrong_path(@memory) do %>
+		        			<div class="wrong-btn"></div>
+		        		<% end %>
 					</div>
 				</div>
 			</div>
-			<p class="try-number">正答率　<%= @memory.correct_num %> / <%= @memory.correct_num + @memory.wrong_num %></p>
+			<p class="try-number">正解率　<%= @memory.correct_num %> / <%= @memory.correct_num + @memory.wrong_num %></p>
+		</div>
+		<div class="memory-box2">
+			
+<div class="folder-tabs">
+	<div class="first-tab tab1"><p>problem</p></div>
+	<% unless @memory.answer_image.blank? && @memory.answer_content.blank? %>
+		<div class="behind-tab tab2"><p>answer</p></div>
+	<% end %>
+</div>
+<div class="folder-body">
+	<div id="panel1">
+		<div class="box-l">
+			<% if @memory.problem_image.present? %>
+				<div class="p-img-box">
+					<a href="#lity" data-lity="data-lity">
+		    			<%= attachment_image_tag @memory, :problem_image, format: 'jpeg' %>
+		    		</a>
+		    		<div id="lity" class="lity-hide preview">
+	    				<%= attachment_image_tag @memory, :problem_image, format: 'jpeg' %>
+	    			</div>
+				</div>
+			<% end %>
+			<div class="p-text-box"><p><%= @memory.problem_content %></p></div>
+		</div>
+		<% if @memory.answer_image.blank? && @memory.answer_content.blank? %>
+			<div class="answer2">
+				<div class="answer-btn2">
+					<%= link_to correct_path(@memory) do %>
+						<div class="correct-btn"></div>
+					<% end %>
+	        		<%= link_to wrong_path(@memory) do %>
+	        			<div class="wrong-btn"></div>
+	        		<% end %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+	<div id="panel2" class="hide">
+		<div class="answer2">
+			<% if @memory.answer_image.present? %>
+				<div class="p-img-box">
+					<a href="#lity1" data-lity="data-lity">
+		    			<%= attachment_image_tag @memory, :answer_image, format: 'jpeg' %>
+		    		</a>
+		    		<div id="lity1" class="lity-hide preview">
+	    				<%= attachment_image_tag @memory, :answer_image, format: 'jpeg' %>
+	    			</div>
+				</div>
+			<% end %>
+			<div class="p-text-box"><p><%= @memory.answer_content %></p></div>
+			<div class="answer-btn2">
+				<%= link_to correct_path(@memory) do %>
+					<div class="correct-btn"></div>
+				<% end %>
+        		<%= link_to wrong_path(@memory) do %>
+        			<div class="wrong-btn"></div>
+        		<% end %>
+			</div>
+		</div>
+		<p class="try-number">正解率　<%= @memory.correct_num %> / <%= @memory.correct_num + @memory.wrong_num %></p>
+	</div>
+</div>
+
 		</div>
 	</div>
 </div>
+
 <script>
 	$(function(){
-		$(".open-answer2").click(function(){
+		$(".open-answer").click(function(){
 			$('.answer1').addClass("hide");
 		  	$('.answer2').removeClass("hide");
+		});
+	});
+	$(function(){
+		$(".tab1").click(function(){
+			$('#panel2').addClass("hide");
+		  	$('#panel1').removeClass("hide");
+		  	$('.tab1').addClass("first-tab");
+		  	$('.tab1').removeClass("behind-tab");
+		  	$('.tab2').addClass("behind-tab");
+		  	$('.tab2').removeClass("first-tab");
+		});
+	});
+	$(function(){
+		$(".tab2").click(function(){
+			$('#panel1').addClass("hide");
+		  	$('#panel2').removeClass("hide");
+		  	$('.tab2').addClass("first-tab");
+		  	$('.tab2').removeClass("behind-tab");
+		  	$('.tab1').addClass("behind-tab");
+		  	$('.tab1').removeClass("first-tab");
 		});
 	});
 </script>

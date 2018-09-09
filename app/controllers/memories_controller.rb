@@ -1,6 +1,6 @@
 class MemoriesController < ApplicationController
 	before_action :authenticate_user!
-	before_action :ensure_correct_user_group, only: [:step_index, :create]
+	before_action :ensure_correct_user_group, only: [:step_index, :show, :create]
 	before_action :ensure_correct_user, only: [:correct, :wrong, :update, :destroy]
 
 	def index
@@ -21,9 +21,9 @@ class MemoriesController < ApplicationController
 		@memory_group = MemoryGroup.find(params[:memory_group_id])
 		@stage = params[:stage]
 		if 	@stage != "all"
-			@memories = @memory_group.memories.where(stage: @stage)
+			@memories = @memory_group.memories.where(stage: @stage).order(execution_date: :asc)
 		else
-			@memories = @memory_group.memories
+			@memories = @memory_group.memories.order(execution_date: :asc)
 		end
 	end
 
@@ -33,7 +33,11 @@ class MemoriesController < ApplicationController
 		if 	@stage != "all"
 			@memories = @memory_group.memories.where(stage: @stage).where("execution_date <= ?", Date.current)
 		else
-			@memories = @memory_group.memories.where.not(stage: 0).where("execution_date <= ?", Date.current)
+			if @memory_group.loop == 1
+				@memories = @memory_group.memories.where("execution_date <= ?", Date.current)
+			else
+				@memories = @memory_group.memories.where.not(stage: 0).where("execution_date <= ?", Date.current)
+			end
 		end
 		if @memories.empty?
 			redirect_to memory_group_path(@memory_group)
@@ -54,24 +58,30 @@ class MemoriesController < ApplicationController
 		end
 		redirect_back(fallback_location: homes_path)
 	end
+
 	def correct
 		@memory = Memory.find(params[:id])
 		@memory_stages = @memory.memory_group.memory_stages
 		correct_num = @memory.correct_num + 1
-		if @memory_stages.present? && (params[:stage] == "all")
-			if @memory.stage < @memory_stages.maximum(:stage)
-				next_stage = (@memory.stage + 1)
+		if @memory_stages.present?
+			if @memory.stage < @memory_stages.maximum(:stage) && @memory.stage > 0
+				next_stage = @memory.stage + 1
 				@memory_stage = @memory_stages.find_by(stage: next_stage)
-				@memory.update(:stage => next_stage, :correct_num => correct_num, :execution_date => Date.current.next_day(@memory_stage.period))
+				if @memory.update(:stage => next_stage, :correct_num => correct_num, :execution_date => Date.current.next_day(@memory_stage.period))
+				else
+					flash[:alert] = "エラーが発生しました。"
+				end
 			else
-				@memory.update(:stage => 0, :correct_num => correct_num)
+				if @memory.update(:stage => 0, :correct_num => correct_num, :execution_date => Date.current.next_day(@memory.memory_group.period))
+				else
+					flash[:alert] = "エラーが発生しました。"
+				end
 			end
-		elsif @memory_stages.present? && (@memory_stages.maximum(:stage) != params[:stage].to_i)
-			next_stage = (params[:stage].to_i + 1)
-			@memory_stage = @memory_stages.find_by(stage: next_stage)
-			@memory.update(:stage => next_stage, :correct_num => correct_num, :execution_date => Date.current.next_day(@memory_stage.period))
 		else
-			@memory.update(:stage => 0, :correct_num => correct_num)
+			if @memory.update(:stage => 0, :correct_num => correct_num, :execution_date => Date.current.next_day(@memory.memory_group.period))
+			else
+				flash[:alert] = "エラーが発生しました。"
+			end
 		end
 		redirect_back(fallback_location: homes_path)
 	end
@@ -79,17 +89,19 @@ class MemoriesController < ApplicationController
 	def wrong
 		@memory = Memory.find(params[:id])
 		wrong_num = @memory.wrong_num + 1
-		@memory.update(:stage => 1, :wrong_num => wrong_num, :execution_date => Date.tomorrow)
+		if @memory.update(:stage => 1, :wrong_num => wrong_num, :execution_date => Date.tomorrow)
+		else
+			flash[:alert] = "エラーが発生しました。"
+		end
 		redirect_back(fallback_location: homes_path)
 	end
 
 	def update
 		@memory = Memory.find(params[:id])
-		if params[:memory][:problem_content].blank? && (params[:memory][:problem_image] == "{}")
-			flash[:alert] = "入力エラーが発生しました。problemフォームには、最低1項目の入力が必要です。"
-		else
-			@memory.update(memory_params)
+		if @memory.update(memory_params)
 			flash[:notice] = "更新されました。"
+		else
+			flash[:alert] = "入力エラーが発生しました。problemフォームには、最低1項目の入力が必要です。"
 		end
 		redirect_back(fallback_location: homes_path)
 	end

@@ -27,8 +27,11 @@ class MemoryGroupsController < ApplicationController
 
 	def show
 		@memory_group = MemoryGroup.find(params[:id])
-		@today_memories = @memory_group.memories.where.not(stage: 0).where("execution_date <= ?", Date.current)
-		@today_memories_loop = @memory_group.memories.where("execution_date <= ?", Date.current)
+		if @memory_group.loop == 1
+			@today_memories = @memory_group.memories.where("execution_date <= ?", Date.current)
+		else
+			@today_memories = @memory_group.memories.where.not(stage: 0).where("execution_date <= ?", Date.current)
+		end
 		@memory = Memory.new
 	end
 
