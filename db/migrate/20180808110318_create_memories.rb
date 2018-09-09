@@ -1,6 +1,6 @@
 class CreateMemories < ActiveRecord::Migration[5.2]
   def change
-    create_table :memories do |t|
+    create_table :memories, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
       t.text :problem_content
       t.string :problem_image_id
       t.text :answer_content
@@ -9,7 +9,7 @@ class CreateMemories < ActiveRecord::Migration[5.2]
       t.integer :correct_num, default: 0
       t.integer :wrong_num, default: 0
       t.date :execution_date
-      t.integer :memory_group_id, null: false
+      t.integer :memory_group_id
 
       t.timestamps
     end
