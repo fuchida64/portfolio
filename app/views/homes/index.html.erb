@@ -3,18 +3,18 @@
 
 <ul class="home-slider">
 	<li>
-		<div class="text-field">
+		<div class="text-field top-page">
 			<h3 class="home-title">One day one step</h3>
 			<p class="subtitle">今日に小さな変化を</p>
 			<p class="home-subtitle">
-				<%= link_to 'login', new_user_session_path, class: "" %>
-				<%= link_to 'sign up', new_user_registration_path, class: "" %>
+				<%= link_to 'login', new_user_session_path %>
+				<%= link_to 'sign up', new_user_registration_path %>
 			</p>
 		</div>
 		<%= image_tag('home4.jpg', :alt => "アイコン") %>
 	</li>
 	<li>
-		<div class="text-field2">
+		<div class="text-field2 top-page2">
 			<h3 class="home-title">Let's controll task</h3>
 			<ul class="task-li">
 				<li>タスクリスト全体の進捗を一目で把握</li>
@@ -22,14 +22,14 @@
 				<li>期限と所要時間でタスクのボリュームも管理</li>
 			</ul>
 			<p class="home-subtitle">
-				<%= link_to 'login', new_user_session_path, class: "" %>
-				<%= link_to 'sign up', new_user_registration_path, class: "" %>
+				<%= link_to 'login', new_user_session_path %>
+				<%= link_to 'sign up', new_user_registration_path %>
 			</p>
 		</div>
 		<%= image_tag('home-task.jpg', :alt => "アイコン") %>
 	</li>
 	<li>
-		<div class="text-field">
+		<div class="text-field top-page3">
 			<h3 class="home-title">Let's memorize</h3>
 			<ul class="memory-li">
 				<li>覚えたいことを文字や画像で管理</li>
@@ -38,22 +38,23 @@
 			</ul>
 			<p class="subtitle">後は、あなたが答えるだけ</p>
 			<p class="home-subtitle">
-				<%= link_to 'login', new_user_session_path, class: "" %>
-				<%= link_to 'sign up', new_user_registration_path, class: "" %>
+				<%= link_to 'login', new_user_session_path %>
+				<%= link_to 'sign up', new_user_registration_path %>
 			</p>
 		</div>
 		<%= image_tag('home-memory.jpg', :alt => "アイコン") %>
 	</li>
 	<li>
-		<div class="text-field2">
+		<div class="text-field2 top-page4">
 			<h3 class="home-title">Let's write a diary</h3>
 			<ul class="task-li">
 				<li>写真と共にあなたの日記を</li>
 				<li>いろいろな人とその日の共有も</li>
 			</ul>
 			<p class="home-subtitle">
-				<%= link_to 'login', new_user_session_path, class: "" %>
-				<%= link_to 'sign up', new_user_registration_path, class: "" %>
+				<%= link_to 'login', new_user_session_path %>
+				<%= link_to 'sign up', new_user_registration_path %>
+				<%= link_to 'diaries', diaries_path %>
 			</p>
 		</div>
 		<%= image_tag('home-diary.jpg', :alt => "アイコン") %>
@@ -65,8 +66,8 @@
 		dots: true,
 		infinite: true,
 		arrows: false,
-		autoplay: true,
-  		autoplaySpeed: 2000,
+		// autoplay: true,
+  // 		autoplaySpeed: 2000,
 		fade: true,
 		speed: 2000,
 	});
