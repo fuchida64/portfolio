@@ -112,10 +112,18 @@ h2 {
 input[type="file"] {
     display: none;
 }
-@media screen and (max-width: 425px) {
+input#diary_diary_date {
+    width: 150px;
+    height: 40px;
+    padding: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+@media screen and (max-width: 1024px) {
     .diary-head {
         text-align: center;
     }
 }
+
 
 

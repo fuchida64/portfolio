@@ -11,28 +11,6 @@ $('input[type=file]').on('change', function (e) {
     reader.readAsDataURL(e.target.files[0]);
 });
 
-$(function() {
-  	$('#public-id').change( function() {
-
-		if($(this).prop('checked')){
-	  		$('.public').removeClass("hide");
-	  		$('.private').addClass("hide");
-		} else {
-	  		$('.public').addClass("hide");
-	  		$('.private').removeClass("hide");
-	    }
-  	});
-  	$('#private-id').change( function() {
-
-		if($(this).prop('checked')){
-	  		$('.public').removeClass("hide");
-	  		$('.private').addClass("hide");
-		} else {
-	  		$('.public').addClass("hide");
-	  		$('.private').removeClass("hide");
-	    }
-  	});
-});
 // show
 $('.slider').slick({
   dots: true,

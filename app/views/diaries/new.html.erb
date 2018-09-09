@@ -63,13 +63,7 @@
             <%= f.check_box :inform_status, {:id => 'private-id'}, "公開", "非公開" %>
           <% end %>
             <div class="state p-success">
-                <label>
-                  <% if current_user.public_setting == 1 %>
-                    <i class="public">公開する</i><i class="private hide">非公開にする</i>
-                  <% else %>
-                    <i class="public hide">公開する</i><i class="private">非公開にする</i>
-                  <% end %>
-                </label>
+                <label>公開する</label>
             </div>
         </div>
       </div>

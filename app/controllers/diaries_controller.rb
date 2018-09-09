@@ -5,6 +5,10 @@ class DiariesController < ApplicationController
 		@diaries = Diary.all.where(inform_status: '公開').order(id: :desc).page(params[:page]).per(9)
 	end
 
+	def search
+		@diaries = Diary.search(params[:search]).order(id: :desc).page(params[:page]).per(9)
+	end
+
 	def new
 		@diary = Diary.new
 		4.times{@diary.diary_images.build}
@@ -14,6 +18,7 @@ class DiariesController < ApplicationController
 		@diary = Diary.new(diary_params)
 		@diary.user_id = current_user.id
 		if 	@diary.save
+			flash[:notice] = "作成されました。"
 			redirect_to diaries_path
 		else
 			render 'new'
@@ -28,10 +33,6 @@ class DiariesController < ApplicationController
 		else
 			redirect_to diaries_path
 		end
-	end
-
-	def search
-		@diaries = Diary.search(params[:search]).order(id: :desc).page(params[:page]).per(9)
 	end
 
 	private
