@@ -93,7 +93,10 @@ a:active, a:hover {
 		margin-top: 40px;
 	}
 	.table {
-		width: 600px;
+		display: inline-block;
+	}
+	.table2 {
+		display: none;
 	}
 	.id-th {
 		width: 40px;
@@ -131,6 +134,12 @@ a:active, a:hover {
 
 		.table {
 			width: auto;
+		}
+		.table1 {
+			display: none;
+		}
+		.table2 {
+			display: block;
 		}
 	}
 }
