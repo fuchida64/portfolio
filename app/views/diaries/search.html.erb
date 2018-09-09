@@ -15,30 +15,32 @@
 		<% if @diaries.length == 0 %>
 			<p>一致するものは見つかりませんでした。</p>
 		<% else %>
-			<% @diaries.each do |d| %>
-				<% if d.diary_images.exists? %>
-					<div class="diary-list">
-						<div class="img-box">
-							<%= attachment_image_tag d.diary_images[0], :diary_image, format: 'jpeg' %>
+			<div class="diary-box">
+				<% @diaries.each do |d| %>
+					<% if d.diary_images.exists? %>
+						<div class="diary-list">
+							<div class="img-box">
+								<%= attachment_image_tag d.diary_images[0], :diary_image, format: 'jpeg' %>
+							</div>
+							<div class="diary-content">
+								<h4><%= d.title.truncate(18) %></h4>
+								<p><%= d.content.truncate(80) %></p>
+							</div>
+							<p class="date"><%= d.diary_date.strftime("%Y.%m.%d") %></p>
+							<%= link_to 'more', diary_path(d), class: "btn" %>
 						</div>
-						<div class="diary-content">
-							<h4><%= d.title.truncate(18) %></h4>
-							<p><%= d.content.truncate(80) %></p>
+					<% else %>
+						<div class="diary-list list2">
+							<div class="diary-content">
+								<h4><%= d.title.truncate(40) %></h4>
+								<p><%= d.content.truncate(300) %></p>
+							</div>
+							<p class="date"><%= d.diary_date.strftime("%Y.%m.%d") %></p>
+							<%= link_to 'more', diary_path(d), class: "btn" %>
 						</div>
-						<p class="date"><%= d.diary_date.strftime("%Y.%m.%d") %></p>
-						<%= link_to 'more', diary_path(d), class: "btn" %>
-					</div>
-				<% else %>
-					<div class="diary-list list2">
-						<div class="diary-content">
-							<h4><%= d.title.truncate(40) %></h4>
-							<p><%= d.content.truncate(300) %></p>
-						</div>
-						<p class="date"><%= d.diary_date.strftime("%Y.%m.%d") %></p>
-						<%= link_to 'more', diary_path(d), class: "btn" %>
-					</div>
+					<% end %>
 				<% end %>
-			<% end %>
+			</div>
 		<% end %>
 	</div>
 	<div class="row paginate-box">
