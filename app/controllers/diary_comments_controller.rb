@@ -6,11 +6,10 @@ class DiaryCommentsController < ApplicationController
 	    @diary_comment = current_user.diary_comments.new(diary_comment_params)
 	    @diary_comment.diary_id = @diary.id
 	    if @diary_comment.save
-	    	redirect_to diary_path(@diary)
 	    else
-	    	flash[:alert] = "エラーが発生しました"
-	    	redirect_to diary_path(@diary)
+	    	flash[:alert] = "入力エラーが発生しました。"
 	    end
+	    redirect_back(fallback_location: homes_path)
 	end
 
 	private

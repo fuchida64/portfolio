@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :homes, only: [:index]
 
   # user
+  # show
   resources :users do
     member do
       get :following, :followers
@@ -48,7 +49,7 @@ Rails.application.routes.draw do
   patch 'tasks/:task_id/task_details' => 'task_details#update', as: 'update_limit'
 
   # diary
-  # index show new create
+  # index show new create edit update delete
   resources :diaries do
     resource :diary_comments, only: [:create]
     resource :favorites, only: [:create, :destroy]

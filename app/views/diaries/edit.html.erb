@@ -3,35 +3,16 @@
 
 <div class="container">
   <div class="row diary-head">
-    <h2>new diary</h2>
-
-    <label class="label-box" for="diary_diary_images_attributes_0_diary_image">
-      <div class="img-box">
-        <img class="preview0" >
-        <i class="far fa-image"></i>
-      </div>
-    </label>
-
-    <label class="label-box" for="diary_diary_images_attributes_1_diary_image">
-      <div class="img-box">
-        <img class="preview1" >
-        <i class="far fa-image"></i>
-      </div>
-    </label>
-
-    <label class="label-box" for="diary_diary_images_attributes_2_diary_image">
-      <div class="img-box">
-        <img class="preview2" >
-        <i class="far fa-image"></i>
-      </div>
-    </label>
-
-    <label class="label-box" for="diary_diary_images_attributes_3_diary_image">
-      <div class="img-box">
-        <img class="preview3" >
-        <i class="far fa-image"></i>
-      </div>
-    </label>
+    <h2>edit diary</h2>
+    <% @diary.diary_images.each.with_index(0) do |g, i| %>
+      <label class="label-box" for="diary_diary_images_attributes_<%= i %>_diary_image">
+        <div class="img-box">
+          <%= attachment_image_tag g, :diary_image, format: 'jpeg', class: 'preview'+i.to_s %>
+          <img class="preview<%= i %>" >
+          <i class="far fa-image"></i>
+        </div>
+      </label>
+    <% end %>
   </div>
   <div class="row">
     <%= form_for @diary do |f| %>
@@ -69,7 +50,8 @@
       </div>
 
       <div class="actions">
-          <%= f.submit 'create', class: "create-btn" %>
+          <%= f.submit 'update', class: "create-btn" %>
+          <%= link_to "delete", diary_path(@diary), method: :delete, class: 'delete-btn', "data-confirm" => "本当に削除しますか?" %>
       </div>
     <% end %>
   </div>
