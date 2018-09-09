@@ -1,43 +1,44 @@
 
+<%= stylesheet_link_tag "users/edit", :media => "all" %>
+
 <div class="container">
 	<div class="row">
-		<h2>プロフィール編集</h2>
-		<div class="link">
-			<%= link_to "詳細", user_path(current_user.id), class: "btn" %>
-		</div>
-	</div>
-	<div class="row">
+		<h2><%= link_to "Profile edit", user_path(current_user.id) %></h2>
 		<%= form_for(@user) do |f| %>
-		 	<div class="col-lg-6">
+		 	<div class="edit-table">
 				<table class='table'>
 					<tr>
-				    	<th><%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "/images/no_image.jpg" %></th>
+				    	<th>
+				    		<label class="label-box" for="user_profile_image">
+        						<div class="img-box">
+          							<%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "/images/no_image.jpg", class: "preview" %>
+						        </div>
+						     </label>
+						     <%= f.attachment_field :profile_image %>
+						</th>
 				  	</tr>
 				  	<tr>
-				   	 	<th><%= f.label :profile_image %></th>
-				    	<th><%= f.attachment_field :profile_image %></th>
-				  	</tr>
-				  	<tr>
-				    	<th><%= f.label :name, "お名前" %></th>
+				    	<th><%= f.label :name, "お名前", class: 'label1' %></th>
 				    	<th><%= f.text_field :name %></th>
 				  	</tr>
 
 				  	<tr>
-				    	<th><%= f.label :email %></th>
+				    	<th><%= f.label :email, class: 'label1' %></th>
 				    	<th><%= f.email_field :email %></th>
 				  	</tr>
 				  	<tr>
+				  		<th><%= f.label :public_setting, "プライベート設定", class: 'label1' %></th>
 				    	<th>
 				    		<div class="pretty p-switch p-fill">
         						<%= f.check_box :public_setting %>
         							<div class="state p-success">
-            							<label><i class="public">投稿を公開</i><i class="private">投稿を非公開</i></label>
+            							<label>diaryを公開する</label>
         							</div>
     						</div>
 				    	</th>
 				  	</tr>
 				</table>
-				<%= f.submit "保存", class: 'btn' %>
+				<%= f.submit "保存", class: 'edit-btn' %>
 			</div>
 		<% end %>
 	</div>

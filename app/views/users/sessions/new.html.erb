@@ -1,33 +1,31 @@
 
 <%= stylesheet_link_tag "users/sessions/new", :media => "all" %>
 
-<main>
-  <div class="materialContainer">
-     <div class="box">
+<div class="materialContainer">
+   <div class="box">
 
-        <div class="title">LOGIN</div>
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <div class="input">
-            <%= f.label :login, "ユーザー名 / メールアドレス" %><br />
-            <%= f.text_field :login %>
-            <span class="spin"></span>
-          </div>
+      <div class="title">LOGIN</div>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="input">
+          <%= f.label :login, "ユーザー名 / メールアドレス" %><br />
+          <%= f.text_field :login %>
+          <span class="spin"></span>
+        </div>
 
-          <div class="input">
-            <%= f.label :password %><br />
-            <%= f.password_field :password, autocomplete: "off" %>
-            <span class="spin"></span>
-          </div>
+        <div class="input">
+          <%= f.label :password %><br />
+          <%= f.password_field :password, autocomplete: "off" %>
+          <span class="spin"></span>
+        </div>
 
-          <div class="button login">
-            <button><span>GO</span><i class="fa fas fa-tasks"></i><%= f.submit "ログイン", class: 'submit-btn' %></button>
-          </div>
-        <% end %>
-        <%= render "users/shared/links" %>
+        <div class="button login">
+          <button><span>GO</span><i class="fa fas fa-tasks"></i><%= f.submit "ログイン", class: 'submit-btn' %></button>
+        </div>
+      <% end %>
+      <%= render "users/shared/links" %>
 
-     </div>
-  </div>
-</main>
+   </div>
+</div>
 
 <script>
   $(function() {

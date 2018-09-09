@@ -1,9 +1,19 @@
 
-<table class="table">
-	<% @user.followers.each do |user| %>
-	<tr>
-		<th><%= user.name %></th>
-		<th><%= link_to '詳細', user_path(user.id) %></th>
-	</tr>
-	<% end %>
-</table>
+<%= stylesheet_link_tag "users/follow", :media => "all" %>
+
+<div class="container">
+	<h2><%= link_to user_path(@user) do %><%= @user.name %> followers<% end %></h2>
+	<div class="card-box">
+		<% @user.followers.each do |user| %>
+			<div class="card">
+			    <div class="box">
+			        <%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: "/images/no_image.jpg", class: 'image' %>
+		            <p class="title"><%= user.name %></p>
+		            <p class="content"><%= link_to 'more', user_path(user) %></p>
+			    </div>
+			</div>
+		<% end %>
+	</div>
+</div>
+
+

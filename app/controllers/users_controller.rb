@@ -1,37 +1,39 @@
 class UsersController < ApplicationController
+	before_action :authenticate_user!, only: [:edit, :update, :password_edit, :password_update]
 
-	# マイページ表示
 	def show
 	  	@user = User.find(params[:id])
-	  	@diaries = @user.diaries
+	  	if user_signed_in? && current_user.id == @user.id
+	  		@diaries = @user.diaries.order(id: :desc)
+	  	else
+	  		@diaries = @user.diaries.where(inform_status: '公開').order(id: :desc)
+	  	end
 	end
 
-	# マイページ編集
 	def edit
 		@user = User.find(current_user.id)
 	end
 
-	# マイページ更新
 	def update
 		@user = User.find(current_user.id)
 	    if @user.update(user_params)
-	    	redirect_to user_path(@user.id)
+	    	flash[:notice] = "更新されました。"
+	    	redirect_to user_path(@user)
 	    else
 	    	render 'edit'
 	    end
 	end
 
-	# パスワード変更
 	def password_edit
-		@user = User.find(params[:id])
+		@user = User.find(current_user.id)
 	end
-	# パスワード更新
+
 	def password_update
-	    @user = User.find(params[:id])
+	    @user = User.find(current_user.id)
 	    if @user.update_with_password(user_params)
 	      	bypass_sign_in(@user)
-			flash[:notice] = "パスワードを変更しました"
-			redirect_to user_path(@user.id)
+			flash[:notice] = "パスワードを変更しました。"
+			redirect_to user_path(@user)
 	    else
 	        render 'password_edit'
 	    end
@@ -40,13 +42,21 @@ class UsersController < ApplicationController
 	def following
 		@user  = User.find(params[:id])
 		@users = @user.followings
-		render 'show_follow'
+		if @users.present?
+			render 'show_follow'
+		else
+			redirect_back(fallback_location: homes_path)
+		end
 	end
 
 	def followers
 		@user  = User.find(params[:id])
 		@users = @user.followers
-		render 'show_follower'
+		if @users.present?
+			render 'show_follower'
+		else
+			redirect_back(fallback_location: homes_path)
+		end
 	end
 
 	private

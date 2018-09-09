@@ -151,6 +151,7 @@
    z-index: 2;
    cursor: pointer;
    line-height: 60px;
+   font-size: 20px !important;
 }
 
 .button.login {
@@ -256,21 +257,17 @@ body {
   width: 100vw;
   height: 100vh;
 }
-main {
-   min-height: 110vh;
-   margin-top: 30px;
-}
-
 
 .materialContainer {
-   width: 100%;
+   width: 90%;
    max-width: 460px;
    position: absolute;
-   top: 55%;
+   top: 450px;
    left: 50%;
    transform: translate(-50%, -50%);
    -webkit-transform: translate(-50%, -50%);
    -ms-transform: translate(-50%, -50%);
+   margin-bottom: 100px;
 }
 
 *,
@@ -302,3 +299,4 @@ main {
       position: relative;
   }
 }
+

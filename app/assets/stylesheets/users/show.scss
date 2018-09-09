@@ -1,0 +1,144 @@
+
+.container {
+	width: 90%;
+}
+h2 {
+  font-size: 50px;
+  font-weight: 300;
+  color: black;
+  letter-spacing: 10px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  a {
+    color: black;
+  }
+  a:hover {
+    color: red;
+  }
+}
+nav a:hover {
+  color: red;
+}
+hr {
+    clear: both;
+    border-top: solid #bebebe;
+    border-width: 1px 0 0;
+    margin: 10px 0 30px;
+    height: 0;
+}
+.box1 {
+	width: 30%;
+	float: left;
+	.table {
+		display: inline-block;
+	}
+	.first-th {
+		border-top: none !important;
+	}
+	th {
+		padding-left: 20px !important;
+	}
+	img {
+		width: 100px;
+		height: 100px;
+		object-fit: cover;
+		border-radius: 50%;
+	}
+}
+.box2 {
+	width: 70%;
+	display: inline-block;
+	h2 {
+	  font-size: 40px;
+	  font-weight: 300;
+	  color: black;
+	  letter-spacing: 10px;
+	  margin-top: 0px;
+	  margin-bottom: 20px;
+	}
+}
+.diary-box {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: space-between;
+	justify-content: space-evenly;
+}
+.diary-list {
+	width: 300px;
+	height: 460px;
+	margin-bottom: 60px;
+	box-shadow: 5px 10px 20px rgba(0,0,0,0.25);
+	position: relative;
+	background-color: white;
+
+	.img-box {
+		margin-bottom: 30px;
+		height: 260px;
+		position: relative;
+		margin: 10px;
+	}
+
+	img {
+		width: 100%;
+		max-height: 260px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		-ms-transform: translate(-50%,-50%);
+		-webkit-transform : translate(-50%,-50%);
+		transform : translate(-50%,-50%);
+	}
+	.diary-content {
+		margin: 10px 20px;
+		height: 120px;
+		overflow: hidden;
+
+		p {
+			white-space: pre-line;
+    		word-wrap: break-word;
+		}
+	}
+	.date {
+		position: absolute;
+		bottom: 20px;
+		right: 10px;
+	}
+	.btn {
+		position: absolute;
+		right: 10px;
+		bottom: 0;
+	}
+}
+#follow_form {
+	width: 100px;
+	margin: 3px;
+	float: left;
+	.btn {
+		color: #00CCFF;
+		border: 1px solid;
+	}
+	.btn1 {
+		color: #FF69A3;
+		border: 1px solid;
+	}
+}
+@media screen and (max-width: 500px) {
+	h2 {
+		font-size: 40px;
+	}
+	.box1 {
+	    width: auto;
+	    float: none;
+	    text-align: center;
+	}
+	.table {
+		width: auto;
+	}
+	.box2 {
+		width: auto;
+		text-align: center;
+		.diary-list {
+			text-align: left;
+		}
+	}
+}
