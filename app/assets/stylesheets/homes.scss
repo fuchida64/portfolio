@@ -24,6 +24,9 @@
 			margin: 0 20px;
 			color: black;
 		}
+		a:hover {
+			color: red;
+		}
 	}
 
 	.text-field {
@@ -71,3 +74,88 @@
 .slick-list, .slick-track {
     height: 100%;
 }
+@media screen and (max-width: 768px) {
+	.home-slider {
+		.top-page {
+			top: 10vh;
+	    	right: 10vw;
+		}
+		.top-page3 {
+			color: #FF6928;
+			a {
+				color: #FF6928;
+			}
+		}
+	}
+}
+@media screen and (max-width: 600px) {
+	.home-slider {
+		.top-page h3 {
+			font-size: 40px;
+		}
+		.top-page2 {
+			left: 0;
+			width: 90%;
+			margin-left: 5%;
+			h3 {
+				font-size: 40px;
+			}
+			.task-li li {
+				font-size: 15px;
+			}
+		}
+		.top-page4 {
+			h3 {
+				font-size: 40px;
+			}
+		}
+	}
+}
+@media screen and (max-width: 500px) {
+	.home-slider {
+		.top-page3 {
+			top: 8vh;
+			right: 8vw;
+			h3 {
+				font-size: 40px;
+			}
+			.memory-li li {
+				font-size: 15px;
+			}
+		}
+	}
+}
+@media screen and (max-width: 425px) {
+	.home-slider {
+		.top-page {
+			color: white;
+			a {
+				color: white;
+			}
+		}
+		.top-page2 {
+			color: #008800;
+			top: 10vh;
+			a {
+				color: #008800;
+			}
+		}
+		.top-page4 {
+			.task-li li {
+				font-size: 15px;
+			}
+		}
+	}
+}
+@media screen and (max-width: 375px) {
+	.home-slider {
+		.top-page4 {
+			.home-subtitle {
+				font-size: 15px;
+			}
+		}
+	}
+}
+
+
+
