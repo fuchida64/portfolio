@@ -1,16 +1,19 @@
 
 <% @user ||= current_user %>
 <div class="stats">
-	<a href="<%= following_user_path(@user) %>">
-		<strong id="following" class="stat">
-	  		<%= @user.followings.count %>
-		</strong>
-		following
-	</a>
-	<a href="<%= followers_user_path(@user) %>">
-		<strong id="followers" class="stat">
-		  	<%= @user.followers.count %>
-		</strong>
-		followers
-	</a>
+	<% if @user.followings.count > 0 %>
+		<a href="<%= following_user_path(@user) %>">
+			<strong id="following" class="stat"><%= @user.followings.count %></strong>
+			フォロー
+		</a>
+	<% else %>
+		<strong id="following" class="stat"><%= @user.followings.count %></strong>フォロー
+	<% end %>
+	<% if @user.followers.count > 0 %>
+		<a href="<%= followers_user_path(@user) %>"><strong id="followers" class="stat">　<%= @user.followers.count %></strong>
+			フォロワー
+		</a>
+	<% else %>
+		<strong id="followers" class="stat">　<%= @user.followers.count %></strong>フォロワー
+	<% end %>
 </div>

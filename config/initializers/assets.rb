@@ -21,6 +21,7 @@ Rails.application.config.assets.precompile += %w( lity.js )
 
 # admins
 Rails.application.config.assets.precompile += %w( admins.scss )
+
 # homes
 Rails.application.config.assets.precompile += %w( homes.css )
 
@@ -31,11 +32,15 @@ Rails.application.config.assets.precompile += %w( users/passwords/new.scss )
 Rails.application.config.assets.precompile += %w( users/passwords/edit.scss )
 Rails.application.config.assets.precompile += %w( users/password_edit.scss )
 Rails.application.config.assets.precompile += %w( users/confirmations/new.scss )
+Rails.application.config.assets.precompile += %w( users/show.scss )
+Rails.application.config.assets.precompile += %w( users/edit.scss )
+Rails.application.config.assets.precompile += %w( users/follow.scss )
 
 # tasks
 Rails.application.config.assets.precompile += %w( task_groups/index.scss )
 Rails.application.config.assets.precompile += %w( task_groups/show.scss )
 Rails.application.config.assets.precompile += %w( task_details/show.scss )
+
 # memories
 Rails.application.config.assets.precompile += %w( memory_groups/index.scss )
 Rails.application.config.assets.precompile += %w( default_stages/index.scss )
@@ -44,6 +49,7 @@ Rails.application.config.assets.precompile += %w( memory_stages/show.scss )
 Rails.application.config.assets.precompile += %w( memories/index.scss )
 Rails.application.config.assets.precompile += %w( memories/step_index.scss )
 Rails.application.config.assets.precompile += %w( memories/show.scss )
+
 # diaries
 Rails.application.config.assets.precompile += %w( diaries/index.scss )
 Rails.application.config.assets.precompile += %w( diaries/new.scss )

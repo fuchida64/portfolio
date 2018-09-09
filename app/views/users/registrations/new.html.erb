@@ -1,46 +1,44 @@
 
 <%= stylesheet_link_tag "users/registrations/new", :media => "all" %>
 
-<main>
-  <div class="materialContainer">
-     <div class="box">
+<div class="materialContainer">
+   <div class="box">
 
-        <div class="title">SIGN UP</div>
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <div class="input">
-            <%= f.label :name, "ユーザー名"%><br />
-            <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-            <span class="spin"></span>
-          </div>
+      <div class="title">SIGN UP</div>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <div class="input">
+          <%= f.label :name, "ユーザー名"%><br />
+          <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+          <span class="spin"></span>
+        </div>
 
-          <div class="input">
-            <%= f.label :email %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-            <span class="spin"></span>
-          </div>
+        <div class="input">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          <span class="spin"></span>
+        </div>
 
-          <div class="input">
-            <%= f.label :password %><br />
-            <%= f.password_field :password, autocomplete: "off" %>
-            <span class="spin"></span>
-            <i class="password-length">パスワードの長さは、最低 6文字です。</i>
-          </div>
+        <div class="input">
+          <%= f.label :password %><br />
+          <%= f.password_field :password, autocomplete: "off" %>
+          <span class="spin"></span>
+          <i class="password-length">パスワードの長さは、最低 6文字です。</i>
+        </div>
 
-          <div class="input">
-            <%= f.label :password_confirmation %><br />
-            <%= f.password_field :password_confirmation, autocomplete: "off" %>
-            <span class="spin"></span>
-          </div>
+        <div class="input">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "off" %>
+          <span class="spin"></span>
+        </div>
 
-          <div class="button login">
-            <button><span>GO</span><i class="fa fas fa-tasks"></i><%= f.submit "登録", class: 'submit-btn' %></button>
-          </div>
-        <% end %>
-        <%= render "users/shared/links" %>
+        <div class="button login">
+          <button><span>GO</span><i class="fa fas fa-tasks"></i><%= f.submit "登録", class: 'submit-btn' %></button>
+        </div>
+      <% end %>
+      <%= render "users/shared/links" %>
 
-     </div>
-  </div>
-</main>
+   </div>
+</div>
 
 <script>
   $(function() {

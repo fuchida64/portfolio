@@ -1,27 +1,25 @@
 
 <%= stylesheet_link_tag "users/confirmations/new", :media => "all" %>
 
-<main>
-  <div class="materialContainer">
-     <div class="box">
+<div class="materialContainer">
+   <div class="box">
 
-        <div class="title">確認メールが届いていない方へ</div>
-        <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-          <div class="input">
-            <%= f.label :email %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
-            <span class="spin"></span>
-          </div>
+      <div class="title">確認メールが届いていない方へ</div>
+      <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+        <div class="input">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+          <span class="spin"></span>
+        </div>
 
-          <div class="button login">
-            <button><span>Resend</span><i class="fa fas fa-tasks"></i><%= f.submit "確認メールをもう一度送る", class: 'submit-btn' %></button>
-          </div>
-        <% end %>
-        <%= render "users/shared/links" %>
+        <div class="button login">
+          <button><span>Resend</span><i class="fa fas fa-tasks"></i><%= f.submit "確認メールをもう一度送る", class: 'submit-btn' %></button>
+        </div>
+      <% end %>
+      <%= render "users/shared/links" %>
 
-     </div>
-  </div>
-</main>
+   </div>
+</div>
 
 <script>
   $(function() {

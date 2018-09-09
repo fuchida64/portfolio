@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   resources :homes, only: [:index]
 
   # user
-  # show
+  # show edit update
   resources :users do
     member do
       get :following, :followers

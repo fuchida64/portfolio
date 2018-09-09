@@ -1,0 +1,83 @@
+
+.container {
+	width: 80%;
+}
+h2 {
+  font-size: 50px;
+  font-weight: 300;
+  color: black;
+  letter-spacing: 10px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  a {
+    color: black;
+  }
+  a:hover {
+    color: red;
+  }
+}
+nav a:hover {
+  color: red;
+}
+input[type="file"] {
+	display: none;
+}
+.preview {
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+.edit-table {
+	max-width: 400px;
+}
+.edit-btn {
+	display: inline-block;
+	padding: 0.5em 1em;
+	text-decoration: none;
+	color: #67c5ff;
+	border: dashed 1px #67c5ff;
+	background: #f2fcff;
+	border-radius: 3px;
+	transition: .4s;
+	margin-top: 10px;
+	margin-left: 5%;
+}
+.edit-btn:hover {
+  background: #cbedff;
+  color: #FFF;
+}
+input[type=text], input[type=email] {
+    background-color: #fff;
+    height: 31px;
+    width: 90%;
+    padding: 3px 7px;
+    border-top-color: #949494;
+    border-radius: 3px;
+    outline: 0;
+    transition: all 100ms linear;
+    font-family: "Hiragino Kaku Gothic Pro W3","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+    color: #111;
+    font-weight: 500;
+    border: 0;
+    box-shadow: 0 0 1px 0 rgba(0,0,0,0.5);
+    font-size: 15px;
+  }
+  input[type="text"]:focus, input[type=email]:focus {
+    box-shadow: 0 0 7px 0 #1dc1d6;
+    outline: 0;
+  }
+tr {
+	height: 40px;
+}
+th {
+	line-height: 40px !important;
+}
+@media screen and (max-width: 425px) {
+	h2 {
+		font-size: 30px;
+	}
+	label.label1 {
+	    font-size: 12px;
+	}
+}

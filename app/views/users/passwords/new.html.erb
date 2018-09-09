@@ -1,27 +1,25 @@
 
 <%= stylesheet_link_tag "users/passwords/new", :media => "all" %>
 
-<main>
-  <div class="materialContainer">
-     <div class="box">
+<div class="materialContainer">
+   <div class="box">
 
-        <div class="title">パスワードをお忘れの方へ</div>
-        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-          <div class="input">
-            <%= f.label :email %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-            <span class="spin"></span>
-          </div>
+      <div class="title">パスワードをお忘れの方へ</div>
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+        <div class="input">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          <span class="spin"></span>
+        </div>
 
-          <div class="button login">
-            <button><span>パスワード再設定メールを送る</span><i class="fa fas fa-tasks"></i><%= f.submit "パスワード", class: 'submit-btn' %></button>
-          </div>
-        <% end %>
-        <%= render "users/shared/links" %>
+        <div class="button login">
+          <button><span>メールを送る</span><i class="fa fas fa-tasks"></i><%= f.submit "パスワード", class: 'submit-btn' %></button>
+        </div>
+      <% end %>
+      <%= render "users/shared/links" %>
 
-     </div>
-  </div>
-</main>
+   </div>
+</div>
 
 <script>
   $(function() {

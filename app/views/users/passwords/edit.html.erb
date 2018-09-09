@@ -1,35 +1,31 @@
 
 <%= stylesheet_link_tag "users/passwords/edit", :media => "all" %>
 
-<main>
-  <div class="materialContainer">
-     <div class="box">
+<div class="materialContainer">
+   <div class="box">
+      <div class="title">新しいパスワードを作成</div>
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= f.hidden_field :reset_password_token %>
+        <div class="input">
+          <%= f.label :password, "新しいパスワード" %><br />
+          <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+          <span class="spin"></span>
+          <i class="password-length">パスワードの長さは最低 6文字です。</i>
+        </div>
 
-        <div class="title">新しいパスワードを作成</div>
-        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-        <%= f.hidden_field :reset_password_token %>
-          <div class="input">
-            <%= f.label :password, "新しいパスワード" %><br />
-            <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
-            <span class="spin"></span>
-            <i class="password-length">パスワードの長さは最低 6文字です。</i>
-          </div>
+        <div class="input">
+          <%= f.label :password_confirmation, "新しいパスワードを再入力" %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "off" %>
+          <span class="spin"></span>
+        </div>
 
-          <div class="input">
-            <%= f.label :password_confirmation, "新しいパスワードを再入力" %><br />
-            <%= f.password_field :password_confirmation, autocomplete: "off" %>
-            <span class="spin"></span>
-          </div>
-
-          <div class="button login">
-            <button><span>Create</span><i class="fa fas fa-tasks"></i><%= f.submit "Change my password", class: 'submit-btn' %></button>
-          </div>
-        <% end %>
-        <%= render "users/shared/links" %>
-
-     </div>
-  </div>
-</main>
+        <div class="button login">
+          <button><span>Create</span><i class="fa fas fa-tasks"></i><%= f.submit "Change my password", class: 'submit-btn' %></button>
+        </div>
+      <% end %>
+      <%= render "users/shared/links" %>
+   </div>
+</div>
 
 <script>
   $(function() {

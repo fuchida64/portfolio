@@ -1,4 +1,5 @@
-// チェックボックス初期表示
+
+// edit
 $( document ).ready(function() {
 
     if($('#user_public_setting').prop('checked')){
@@ -8,15 +9,10 @@ $( document ).ready(function() {
     }
 });
 
-$(function() {
-  	$('#user_public_setting').change( function() {
-
-		if($(this).prop('checked')){
-	  		$('.public').removeClass("hide");
-	  		$('.private').addClass("hide");
-		} else {
-	  		$('.public').addClass("hide");
-	  		$('.private').removeClass("hide");
-	    }
-  	});
+$('input[type=file]').on('change', function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $(".preview").attr('src', e.target.result);
+    }
+    reader.readAsDataURL(e.target.files[0]);
 });
