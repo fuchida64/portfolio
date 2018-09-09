@@ -1,18 +1,27 @@
 
 body {
-  background: url(/images/task_memory.jpg);
+  background: url(/images/home_back.jpg);
   background-size: cover;
   background-position: center center;
   width: 100vw;
   min-height: 100vh;
 }
+.container {
+    width: 96vw;
+    margin: 0 auto;
+}
 .back-link {
 	margin-top: 20px;
-	font-size: 15px;
+	font-size: 20px;
+    a {
+        color: black;
+    }
+}
+a:hover {
+    color: red;
 }
 .memory-box {
 	width: 90vw;
-	min-height: 70vh;
 	background-color: white;
 	margin: 20px auto 60px;
 	flex-direction: row;
@@ -22,7 +31,7 @@ body {
     .try-number {
         position: absolute;
         bottom: 0;
-        right: 10px;
+        right: 15px;
     }
 }
 .problem-box {
@@ -43,7 +52,7 @@ body {
 
 	img {
 		max-width: 90%;
-        height: 90%;
+        max-height: 90%;
 	    border: 5px solid #fff;
 	    display: block;
 	    text-align: center;
@@ -68,36 +77,129 @@ body {
 	}
 }
 .answer1{
-    text-align: center;
-    margin-top: 45%;
-    position: relative;
-    .correct-btn {
-    	font-size: 50px;
-    	position: absolute;
-    	left: 30%;
-    }
-    .wrong-btn {
-    	font-size: 100px;
-    	position: absolute;
-    	top: -48px;
-    }
-}
-.answer-btn {
-    height: 50px;
-    text-align: center;
-    margin-bottom: 90px;
+    height: 100%;
     position: relative;
 
-    .correct-btn1 {
-    	font-size: 40px;
-    	position: absolute;
-    	left: 35%;
-    	top: 50%;
+    .open-answer {
+        width: 100%;
+        padding: 100px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%,-50%);
+        -webkit-transform : translate(-50%,-50%);
+        transform : translate(-50%,-50%);
+        text-align: center;
     }
-    .wrong-btn2 {
-    	font-size: 80px;
-    	position: absolute;
-    	top: -25%;
+    .answer-btn {
+        position: absolute;
+        bottom: 270px;
+        left: 45%;
+        -ms-transform: translate(-50%,-50%);
+        -webkit-transform : translate(-50%,-50%);
+        transform : translate(-50%,-50%);
+        text-align: center;
+
+        .correct-btn {
+            border-radius:20px;
+            -webkit-border-radius:20px;
+            -moz-border-radius:20px;
+            height:35px;
+            width:35px;
+            display:block;
+            border:3px solid #337ab7;
+        }
+        .wrong-btn {
+            margin-left: 80px;
+        }
+        .wrong-btn:before, .wrong-btn:after {
+            content:'';
+            height:5px;
+            width:40px;
+            display:block;
+            background: #337ab7;
+            border-radius:10px;
+            -webkit-border-radius:10px;
+            -moz-border-radius:10px;
+            position:absolute;
+            top:16px;
+            transform:rotate(-45deg);
+            -webkit-transform:rotate(-45deg);
+            -moz-transform:rotate(-45deg);
+            -o-transform:rotate(-45deg);
+            -ms-transform:rotate(-45deg);
+        }
+
+        .wrong-btn:after{
+            transform:rotate(45deg);
+            -webkit-transform:rotate(45deg);
+            -moz-transform:rotate(45deg);
+            -o-transform:rotate(45deg);
+            -ms-transform:rotate(45deg);
+        }
+        .correct-btn:hover {
+            border: 3px solid red;
+        }
+         .wrong-btn:hover:before, .wrong-btn:hover:after {
+            background:red;
+        }
+    }
+}
+.answer2 {
+    position: relative;
+    margin-bottom: 240px;
+    .answer-btn2 {
+        margin-top: 80px;
+        position: absolute;
+        left: 45%;
+        -ms-transform: translate(-50%,-50%);
+        -webkit-transform : translate(-50%,-50%);
+        transform : translate(-50%,-50%);
+        text-align: center;
+
+        .correct-btn {
+            border-radius:20px;
+            -webkit-border-radius:20px;
+            -moz-border-radius:20px;
+            height:35px;
+            width:35px;
+            display:block;
+            border:3px solid #337ab7;
+        }
+        .wrong-btn {
+            margin-left: 80px;
+        }
+        .wrong-btn:before, .wrong-btn:after {
+            content:'';
+            height:5px;
+            width:40px;
+            display:block;
+            background: #337ab7;
+            border-radius:10px;
+            -webkit-border-radius:10px;
+            -moz-border-radius:10px;
+            position:absolute;
+            top:16px;
+            transform:rotate(-45deg);
+            -webkit-transform:rotate(-45deg);
+            -moz-transform:rotate(-45deg);
+            -o-transform:rotate(-45deg);
+            -ms-transform:rotate(-45deg);
+        }
+
+        .wrong-btn:after{
+            transform:rotate(45deg);
+            -webkit-transform:rotate(45deg);
+            -moz-transform:rotate(45deg);
+            -o-transform:rotate(45deg);
+            -ms-transform:rotate(45deg);
+        }
+        .correct-btn:hover {
+            border: 3px solid red;
+        }
+         .wrong-btn:hover:before, .wrong-btn:hover:after {
+            background:red;
+        }
     }
 }
 .preview {
@@ -116,3 +218,99 @@ body {
         text-align: center;
     }
 }
+.circle {
+    width: 3rem;
+    height: 3rem;
+    border: solid 2px black;
+    border-radius: 50%;
+}
+ span{
+    height:40px;
+    width:40px;
+    display:block;
+    position:relative;
+}
+.memory-box2 {
+    display: none;
+}
+#panel2 .try-number {
+    text-align: right;
+    margin-right: 30px;
+}
+.folder-tabs {
+    margin-top: 20px;
+    position: relative;
+    vertical-align: middle;
+    height: 2em;
+    z-index: 1;
+    padding-left: 15px;
+    margin-left: 10%;
+}
+.folder-tabs > div { /* タブ本体 */
+  display:inline-block;
+  position: relative;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px 4px 0 0;
+  font-size: 1em;
+  line-height: 1em;
+  height: 2em;
+  float: left;
+  width: auto;
+  vertical-align: baseline;
+  background-color: white;
+  margin-left: 4px;
+  }
+.first-tab{ /* カレントのタブ */
+  border-color: #CCC #CCC #FFF #CCC;
+  }
+.behind-tab{ /* 背後のタブ */
+  border-color: #CCC;
+  margin-left: 0.2em;
+  }
+.folder-tabs > div > p{ /* タブのリンク文字 */
+  display: inline-block;
+  padding: 0.5em 1em 0;
+  color: #337ab7;
+  }
+  .folder-tabs > .first-tab > p{ /* タブのリンク文字 */
+    color: red;
+  }
+.folder-body {
+    width: 80%;
+    min-height: 60vh;
+    margin: 0 auto;
+    background-color: white;
+    border: 1px solid #CCC;
+    border-radius: 0 4px 4px 4px;
+    clear: both;
+    position: relative;
+    padding: 2em;
+    top: -1px;
+    box-shadow:rgba(0, 0, 0, .2) 2px 5px 10px -3px;
+    margin-bottom: 50px;
+}
+@media screen and (max-width: 900px) {
+    .memory-box {
+        display: none;
+    }
+    .memory-box2 {
+        display: block;
+    }
+    .back-link, .rest {
+        margin-left: 20px;
+    }
+}
+@media screen and (max-width: 420px) {
+    .folder-tabs {
+        margin-left: 5%;
+    }
+    .folder-body {
+        width: 90%;
+    }
+}
+
+
+
+
+

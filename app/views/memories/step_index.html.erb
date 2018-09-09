@@ -57,7 +57,7 @@
 	  					<% else %>
 	  						<div class="problem-text2"><% if m.problem_content.present? %><%= m.problem_content.truncate(55) %><% end %></div>
 	  					<% end %>
-	  					<a href="#edit-modal<%= m.id %>" data-lity="data-lity" class="edit-mark">＊</a>
+	  					<p class="date"><%= m.execution_date.strftime("%Y.%m.%d") %></p><a href="#edit-modal<%= m.id %>" data-lity="data-lity" class="edit-mark">＊</a>
 					</div>
 					<div id="edit-modal<%= m.id %>" class="lity-hide">
 						<div class="modal-content">

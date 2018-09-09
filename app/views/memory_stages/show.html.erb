@@ -3,7 +3,7 @@
 
 <main>
 	<div class="default-stage">
-		<h2><%= link_to memory_group_path(@memory_group) do %><%= @memory_group.title.truncate(15) %> Step list<% end %></h2>
+		<h2><%= link_to memory_group_path(@memory_group) do %><%= @memory_group.title.truncate(15) %> step list<% end %></h2>
 		<ul class="chart">
 			<li>
 				<span style="height:9%" title="step1" class="stage-bottom"></span>
@@ -65,7 +65,7 @@
 							<%= s.check_box :loop, {} %>
 						<% end %>
 						<div class="state p-success">
-			                <label>する
+			                <label>ON
 			                </label>
 			            </div>
 					</div>
