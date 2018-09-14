@@ -23,7 +23,6 @@ Rails.application.routes.draw do
 
   # common
   resources :homes, only: [:index]
-  root "homes#index"
 
   # user
   # show edit update
