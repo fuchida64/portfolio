@@ -6,7 +6,7 @@
 		<h2><% if current_user?(@user) %>My page<% else %><%= @user.name %> page<% end %></h2>
 		<% if current_user?(@user) %>
 			<div class="link">
-				<%= link_to "編集", edit_user_path(current_user.id), class: "btn" %>
+				<%= link_to "設定", edit_user_path(current_user.id), class: "btn" %>
 				<%= link_to "パスワード変更はこちら", edit_password_user_path(current_user.id), class: "btn" %>
 			</div>
 		<% end %>

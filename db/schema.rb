@@ -27,49 +27,46 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
     t.string "admin_image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["admin_name"], name: "index_admins_on_admin_name"
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
   create_table "default_stages", force: :cascade do |t|
-    t.integer "stage", null: false
-    t.integer "period", null: false
+    t.integer "stage"
+    t.integer "period"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "diaries", force: :cascade do |t|
-    t.integer "user_id", null: false
     t.text "title", null: false
-    t.text "content", null: false
-    t.date "diary_date", null: false
+    t.text "content"
+    t.date "diary_date"
     t.string "inform_status", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["content"], name: "index_diaries_on_content"
-    t.index ["title"], name: "index_diaries_on_title"
   end
 
   create_table "diary_comments", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "diary_id", null: false
     t.text "comment", null: false
+    t.integer "diary_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "diary_images", force: :cascade do |t|
-    t.integer "diary_id", null: false
     t.string "diary_image_id", null: false
+    t.integer "diary_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "user_id", null: false
     t.integer "diary_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -100,16 +97,16 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
   end
 
   create_table "memory_stages", force: :cascade do |t|
-    t.integer "stage", null: false
-    t.integer "period", null: false
+    t.integer "stage"
+    t.integer "period"
     t.integer "memory_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.integer "follower_id", null: false
-    t.integer "following_id", null: false
+    t.integer "follower_id"
+    t.integer "following_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["follower_id", "following_id"], name: "index_relationships_on_follower_id_and_following_id", unique: true
@@ -159,13 +156,13 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
-    t.string "name"
+    t.string "name", null: false
     t.string "profile_image_id"
     t.integer "public_setting", default: 0
+    t.integer "notification", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["name"], name: "index_users_on_name", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

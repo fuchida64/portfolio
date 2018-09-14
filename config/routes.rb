@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root "homes#index"
+
   devise_for :admins, controllers: {
 	  sessions:      'admins/sessions',
 	  passwords:     'admins/passwords',
@@ -21,6 +23,7 @@ Rails.application.routes.draw do
 
   # common
   resources :homes, only: [:index]
+  root "homes#index"
 
   # user
   # show edit update

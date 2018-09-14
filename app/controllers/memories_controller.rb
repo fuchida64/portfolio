@@ -40,6 +40,7 @@ class MemoriesController < ApplicationController
 			end
 		end
 		if @memories.empty?
+			flash[:notice] = "clearしました。"
 			redirect_to memory_group_path(@memory_group)
 		end
 		@memory = @memories.shuffle.first

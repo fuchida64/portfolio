@@ -15,6 +15,6 @@ class DiaryCommentsController < ApplicationController
 	private
 
 	def diary_comment_params
-	  params.require(:diary_comment).permit(:user_id,:diary_id,:comment)
+		params.require(:diary_comment).permit(:user_id,:diary_id,:comment)
 	end
 end

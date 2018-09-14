@@ -12,12 +12,11 @@
 //
 //= require rails-ujs
 //= require activestorage
-
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
 
-
+// pull down menu
 $(function() {
 	var nav = $('nav');
 	$('li', nav).mouseover(function(e) {
@@ -30,6 +29,7 @@ $(function() {
 		$('ul', this).stop().slideUp();
 	});
 });
+
 // flash
 $( document ).ready(function() {
 	$('.alert').animate({'marginRight':'103vw'},1000);

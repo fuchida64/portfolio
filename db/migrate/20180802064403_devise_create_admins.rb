@@ -2,7 +2,8 @@
 
 class DeviseCreateAdmins < ActiveRecord::Migration[5.2]
   def change
-    create_table :admins, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
+    # create_table :admins, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
+    create_table :admins do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
@@ -32,7 +33,7 @@ class DeviseCreateAdmins < ActiveRecord::Migration[5.2]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-      t.string :admin_name
+      t.string :admin_name,     null: false
       t.string :admin_image_id
 
       t.timestamps null: false

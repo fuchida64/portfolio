@@ -34,7 +34,7 @@
 			<% end %>
 			<% if @memory_group.loop == 1 %>
 				<li>
-					<span style="height:<%= (@memory_stages.maximum(:stage)+1) * 9 %>%" title="comp" class="stage-bottom"><p class="stage-period"><%= @memory_group.period %>日</p></span>
+					<span style="height:<% if @memory_stages.maximum(:stage).nil? %>18<% else %><%= (@memory_stages.maximum(:stage)+1) * 9 %><% end %>%" title="comp" class="stage-bottom"><p class="stage-period"><%= @memory_group.period %>日</p></span>
 				</li>
 			<% end %>
 		</ul>

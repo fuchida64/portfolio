@@ -37,6 +37,17 @@
     						</div>
 				    	</th>
 				  	</tr>
+				  	<tr>
+				  		<th><%= f.label :notification, "通知設定", class: 'label1' %></th>
+				    	<th>
+				    		<div class="pretty p-switch p-fill">
+        						<%= f.check_box :notification %>
+        							<div class="state p-success">
+            							<label>通知を表示する</label>
+        							</div>
+    						</div>
+				    	</th>
+				  	</tr>
 				</table>
 				<%= f.submit "保存", class: 'edit-btn' %>
 			</div>
