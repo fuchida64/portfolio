@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Portfolio</title>
+    <title>REC change</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -23,7 +23,32 @@
   </head>
 
   <body>
+    <% if user_signed_in? && (current_user.notification == 1) %>
+      <% @task_num = 0 %>
+      <% current_user.task_groups.each do |group| %>
+        <% group.tasks.where(status: [1,2]).each do |task| %>
+          <% if task.task_detail.deadline.present? && (task.task_detail.deadline <= Date.current) %>
+            <% @task_num += 1 %>
+          <% end %>
+        <% end %>
+      <% end %>
 
+      <% @memory_num = 0 %>
+      <% current_user.memory_groups.each do |group| %>
+        <% case group.loop
+           when 0 then
+            memories = group.memories.where.not(stage: 0)
+           when 1 then
+            memories = group.memories
+        end%>
+        <% memories.each do |memory| %>
+          <% if memory.execution_date <= Date.current %>
+            <% @memory_num += 1 %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+    <% end %>
       <% if @header_flag != true %>
 
         <header class="header1">
@@ -43,29 +68,33 @@
                 <li><%= link_to 'logout', destroy_admin_session_path, method: :delete, "data-confirm" => "本当にログアウトしますか？" %></li>
 
               <% elsif user_signed_in? %>
-                <li><%= link_to 'to_do', task_groups_path, class: "menu" %>
+                <li class="icon"><%= link_to 'to_do', task_groups_path %>
+
+                  <% if (current_user.notification == 1) && (@task_num > 0) %>
+                    <span class="badge1"><%= @task_num %></span>
+                  <% end %>
+
                   <% if current_user.task_groups.exists? %>
                     <ul>
-                      <% current_user.task_groups.order(position_id: :asc).each do |task| %>
-                        <% if task.title.length >= 10 %>
-                          <li><%= link_to task.title[0,9]+'...', task_group_path(task) %></li>
-                        <% else %>
-                          <li><%= link_to task.title, task_group_path(task) %></li>
-                        <% end %>
+                      <% current_user.task_groups.order(position_id: :asc).each do |group| %>
+                        <li><%= link_to group.title.truncate(12), task_group_path(group) %></li>
                       <% end %>
                     </ul>
                   <% end %>
                 </li>
-                <li><%= link_to 'memory', memory_groups_path %>
-                  <ul>
-                    <% current_user.memory_groups.order(position_id: :asc).each do |memory| %>
-                      <% if memory.title.length >= 10 %>
-                        <li><%= link_to memory.title[0,9]+'...', memory_group_path(memory) %></li>
-                      <% else %>
-                        <li><%= link_to memory.title, memory_group_path(memory) %></li>
+                <li class="icon"><%= link_to 'memory', memory_groups_path %>
+
+                  <% if (current_user.notification == 1) && (@memory_num > 0) %>
+                    <span class="badge1 m-badge"><%= @memory_num %></span>
+                  <% end %>
+
+                  <% if current_user.memory_groups.exists? %>
+                    <ul>
+                      <% current_user.memory_groups.order(position_id: :asc).each do |group| %>
+                        <li><%= link_to group.title.truncate(12), memory_group_path(group) %></li>
                       <% end %>
-                    <% end %>
-                  </ul>
+                    </ul>
+                  <% end %>
                 </li>
                 <li><%= link_to 'diary', diaries_path %>
                   <ul>
@@ -104,7 +133,7 @@
                   <li><%= link_to 'logout', destroy_admin_session_path, method: :delete, "data-confirm" => "本当にログアウトしますか？", class: "" %></li>
 
                 <% elsif user_signed_in? %>
-                  <li><%= link_to 'to_do', task_groups_path, class: "menu" %>
+                  <li><%= link_to 'to_do', task_groups_path %>
                     <% if current_user.task_groups.exists? %>
                       <ul class="drop-ul">
                         <% current_user.task_groups.order(position_id: :asc).each do |task| %>

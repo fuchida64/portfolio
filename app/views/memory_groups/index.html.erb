@@ -5,7 +5,7 @@
 	<div class="container">
 
 		<div class="row headline">
-			<h2>Memory List</h2>
+			<h2>Memory list</h2>
 			<%= link_to 'Default Step', default_stages_path, class: "stage-link" %>
 		</div>
 		<div class="group-status">
@@ -17,14 +17,18 @@
 						<p class="memory-text"><%= mg.content %></p>
 					</div>
 					<div class="memory-info">
-						<p>today：<%= mg.memories.where.not(stage: 0).where("execution_date <= ?", Date.current).length %> 個</p>
+						<% if mg.loop == 1 %>
+							<p>today：<%= mg.memories.where("execution_date <= ?", Date.current).length %> 個</p>
+						<% else %>
+							<p>today：<%= mg.memories.where.not(stage: 0).where("execution_date <= ?", Date.current).length %> 個</p>
+						<% end %>
 						<p><a href="#edit-modal<%= mg.id %>" data-lity="data-lity">＊</a></p>
 					</div>
 
 					<div id="edit-modal<%= mg.id %>" class="lity-hide">
 						<div class="modal-content">
 							<div class="modal-form">
-							    <h3>Memory list</h3>
+							    <h3>List edit</h3>
 							    <hr>
 								<%= form_for mg, url: memory_group_path(mg)  do |f| %>
 									<div class="field">
@@ -52,7 +56,7 @@
 		<div id="create-modal" class="lity-hide">
 			<div class="modal-content">
 				<div class="modal-form">
-				    <h3>Memory list create</h3>
+				    <h3>List create</h3>
 				    <hr>
 					<%= form_for(@memory_group) do |f| %>
 						<div class="field">

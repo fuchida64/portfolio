@@ -6,13 +6,8 @@ class Admins::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    if user_signed_in?
-      if current_user.id == 1
-        super
-      else
-        redirect_back(fallback_location: homes_path)
-        flash[:alert] = "アクセス権限がありません。"
-      end
+    if user_signed_in? && current_user.id == 1
+      super
     else
       redirect_back(fallback_location: homes_path)
       flash[:alert] = "アクセス権限がありません。"

@@ -249,7 +249,7 @@ nav {
 			li {
 				height: 50px;
 				margin: 0px auto;
-				width: 180px;
+				width: 90%;
 				text-align: center;
 			}
 			li:first-child {
@@ -259,6 +259,7 @@ nav {
 			li:last-child {
 			  	border-radius: 0 0 15px 15px;
 			  	margin-bottom: 10px;
+			  	margin-right: auto;
 			}
 			li a {
 			  	border-bottom: 1px solid #eee;
@@ -274,6 +275,33 @@ nav {
 		color: white;
 	}
 }
+.icon {
+	position: relative;
+
+	.badge1 {
+	    display: block;
+	    position: absolute;
+	    top: 5px;
+	    right: 5px;
+	    margin: 4px;
+	    width: 20px;
+	    height: 20px;
+	    font-size: 12px;
+	    border-radius: 50%;
+	    color: #fff;
+	    line-height: 19px;
+	    text-align: center;
+	    background: -webkit-gradient(linear, left top, left bottom, from(#8EB8FF), to(#4689FF));
+	    background: -webkit-linear-gradient(top, #8EB8FF, #4689FF);
+	    background: linear-gradient(to bottom, #8EB8FF, #4689FF);
+	    background: gradient(linear, center top, center bottom, from(#8EB8FF), to(#4689FF));
+	    border: 1px solid;
+	}
+	.m-badge {
+		right: -5px;
+	}
+}
+
 
 // body
 body {

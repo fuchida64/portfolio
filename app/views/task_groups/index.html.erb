@@ -25,7 +25,7 @@
 					<div id="edit-modal<%= task.id %>" class="lity-hide">
 						<div class="modal-content">
 							<div class="modal-form">
-							    <h3>Task list</h3>
+							    <h3>List edit</h3>
 							    <hr>
 								<%= form_for task, url: task_group_path(task.id)  do |f| %>
 									<div class="field">
@@ -53,7 +53,7 @@
 		<div id="create-modal" class="lity-hide">
 			<div class="modal-content">
 				<div class="modal-form">
-				    <h3> Task list create</h3>
+				    <h3>List create</h3>
 				    <hr>
 					<%= form_for(@task_group) do |f| %>
 						<div class="field">

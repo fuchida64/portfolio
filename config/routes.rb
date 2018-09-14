@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root "homes#index"
+
   devise_for :admins, controllers: {
 	  sessions:      'admins/sessions',
 	  passwords:     'admins/passwords',
