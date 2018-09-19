@@ -1,7 +1,6 @@
 class CreateMemories < ActiveRecord::Migration[5.2]
   def change
-    # create_table :memories, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
-    create_table :memories do |t|
+    create_table :memories, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
       t.text    :problem_content
       t.string  :problem_image_id
       t.text    :answer_content
