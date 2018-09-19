@@ -255,14 +255,14 @@ body {
   background-size: cover;
   background-position: center center;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .materialContainer {
    width: 90%;
    max-width: 460px;
    position: absolute;
-   top: 55%;
+   top: 400px;
    left: 50%;
    transform: translate(-50%, -50%);
    -webkit-transform: translate(-50%, -50%);

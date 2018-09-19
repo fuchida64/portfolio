@@ -70,13 +70,17 @@ h2 {
     display: flex;
     -webkit-justify-content: space-around;
     justify-content: space-around;
+    .status-color {
+      color: red;
+      font-weight: bold;
+    }
   }
   .task-info p:last-child {
     margin-top: 1px;
   }
 }
 .modal-content {
-  width: 440px;
+  width: 400px;
   height: 500px;
   padding: 5px;
   border-top: solid 20px #1dc1d6;

@@ -16,8 +16,8 @@ h2 {
     color: red;
   }
 }
-nav a:hover {
-  color: red;
+nav ul li ul li a:hover {
+    color: white;
 }
 input[type="file"] {
 	display: none;
@@ -72,6 +72,10 @@ tr {
 }
 th {
 	line-height: 40px !important;
+}
+.delete-btn {
+  float: right;
+  margin: 10px 40px 0 0;
 }
 @media screen and (max-width: 425px) {
 	h2 {

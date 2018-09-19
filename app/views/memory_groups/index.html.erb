@@ -6,7 +6,7 @@
 
 		<div class="row headline">
 			<h2>Memory list</h2>
-			<%= link_to 'Default Step', default_stages_path, class: "stage-link" %>
+			<%= link_to 'Default step', default_stages_path, class: "stage-link" %>
 		</div>
 		<div class="group-status">
 			<% @memory_groups.each do |mg| %>
@@ -18,9 +18,9 @@
 					</div>
 					<div class="memory-info">
 						<% if mg.loop == 1 %>
-							<p>today：<%= mg.memories.where("execution_date <= ?", Date.current).length %> 個</p>
+							<p>today：<span class="<% if mg.memories.where("execution_date <= ?", Date.current).size > 0 %>status-color<% end %>"><%= mg.memories.where("execution_date <= ?", Date.current).size %></span> 個</p>
 						<% else %>
-							<p>today：<%= mg.memories.where.not(stage: 0).where("execution_date <= ?", Date.current).length %> 個</p>
+							<p>today：<span class="<% if mg.memories.where.not(stage: 0).where("execution_date <= ?", Date.current).size > 0 %>status-color<% end %>"><%= mg.memories.where.not(stage: 0).where("execution_date <= ?", Date.current).size %></span> 個</p>
 						<% end %>
 						<p><a href="#edit-modal<%= mg.id %>" data-lity="data-lity">＊</a></p>
 					</div>

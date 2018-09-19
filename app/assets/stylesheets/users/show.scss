@@ -16,8 +16,14 @@ h2 {
     color: red;
   }
 }
+.btn:hover {
+	color: red;
+}
 nav a:hover {
-  color: red;
+  color: black;
+}
+nav ul li ul li a:hover {
+    color: white;
 }
 hr {
     clear: both;

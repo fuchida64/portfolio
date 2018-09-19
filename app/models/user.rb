@@ -15,19 +15,17 @@ class User < ApplicationRecord
     end
   end
 
-  validates :name,
-    uniqueness: { case_sensitive: :true },
-    length: { minimum: 3, maximum: 10 }
+  validates :name,  uniqueness: { case_sensitive: :true }, length: { minimum: 3, maximum: 10 }
 
   attachment :profile_image
 
-  has_many :task_groups
-  has_many :diaries
-  has_many :followers
-  has_many :diary_comments
-  has_many :favorites
-  has_many :memory_groups
-  has_many :default_stages
+  has_many :task_groups, dependent: :destroy
+  has_many :diaries, dependent: :destroy
+  has_many :followers, dependent: :destroy
+  has_many :diary_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :memory_groups, dependent: :destroy
+  has_many :default_stages, dependent: :destroy
 
   has_many :following_relationships, foreign_key: "follower_id", class_name: "Relationship", dependent: :destroy
   has_many :followings, through: :following_relationships

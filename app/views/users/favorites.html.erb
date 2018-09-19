@@ -1,0 +1,37 @@
+
+<%= stylesheet_link_tag "diaries/index", :media => "all" %>
+
+<div class="container">
+	<div class="row diary-main">
+		<h2 class="favorite-title">Favorite diaries</h2>
+		<div class="diary-box">
+			<% if @favorites.blank? %>
+				<%= link_to '日記一覧へ', diaries_path, class: "btn" %>
+			<% end %>
+			<% @favorites.each do |f| %>
+				<% if f.diary.diary_images.exists? %>
+					<div class="diary-list">
+						<div class="img-box">
+							<%= attachment_image_tag f.diary.diary_images[0], :diary_image, format: 'jpeg' %>
+						</div>
+						<div class="diary-content">
+							<h4><%= f.diary.title.truncate(18) %></h4>
+							<p><%= f.diary.content.truncate(80) %></p>
+						</div>
+						<p class="date"><%= f.diary.diary_date.strftime("%Y.%m.%d") %></p>
+						<%= link_to 'more', diary_path(f.diary), class: "btn" %>
+					</div>
+				<% else %>
+					<div class="diary-list list2">
+						<div class="diary-content">
+							<h4><%= f.diary.title.truncate(40) %></h4>
+							<p><%= f.diary.content.truncate(300) %></p>
+						</div>
+						<p class="date"><%= f.diary.diary_date.strftime("%Y.%m.%d") %></p>
+						<%= link_to 'more', diary_path(f.diary), class: "btn" %>
+					</div>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+</div>

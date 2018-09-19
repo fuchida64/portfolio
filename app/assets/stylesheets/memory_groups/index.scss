@@ -82,18 +82,22 @@ h2 {
     display: flex;
     -webkit-justify-content: space-around;
     justify-content: space-around;
-  }
-  .memory-info p:last-child {
-    margin-top: 1px;
-    margin-right: 10px;
+    .status-color {
+      color: red;
+      font-weight: bold;
+    }
   }
   .memory-info p:first-child {
     margin: 0 auto;
     margin-left: 30px;
   }
+  .memory-info p:last-child {
+    margin-top: 1px;
+    margin-right: 10px;
+  }
 }
 .modal-content {
-  width: 440px;
+  width: 400px;
   height: 500px;
   padding: 5px;
   border-top: solid 20px #FF9872;
@@ -228,6 +232,9 @@ a:focus {
   .group-status {
     margin-top: 30px;
   }
+  .group2 {
+    margin-bottom: 60px !important;
+  }
 }
 @media screen and (max-width: 500px) {
   .modal-content {
@@ -241,8 +248,12 @@ a:focus {
   .memory-group {
     width: 90%;
   }
-  .group2 {
-    margin-bottom: 50px;
+  .modal-form {
+    width: auto;
+    margin-left: 3%;
+  }
+  .modal-form input[type=text], .modal-form textarea {
+    width: 80vw;
   }
 }
 @media screen and (max-width: 375px) {

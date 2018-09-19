@@ -47,6 +47,9 @@ h2 {
 		font-size: 20px;
 		color: #ff0000; /* タイトル文字色 */
 	}
+  h3:hover {
+    color: black;
+  }
 	.status-field {
 		height: 450px;
 		overflow:auto;
@@ -93,9 +96,9 @@ h2 {
       position: relative;
       .checkbox {
         position: absolute;
-        top: 35%;
-        width: 30px;
-        height: 30px;
+        top: 40%;
+        width: 15px;
+        height: 15px;
       }
     }
   }

@@ -7,10 +7,10 @@ ja:
       diary:
         title: "タイトル"
         content: "コンテンツ"
+        diary_date: "日付"
     errors:
       models:
         memory_group:
           attributes:
             user:
               required: "リクエスト"
-

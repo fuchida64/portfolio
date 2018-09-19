@@ -202,13 +202,14 @@ a:hover {
         }
     }
 }
+
 .preview {
     text-align: center;
     position:relative;
 
     img {
         max-width: 90vw;
-        height: 90vh;
+        max-height: 90vh;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -301,6 +302,12 @@ a:hover {
         margin-left: 20px;
     }
 }
+@media screen and (max-width: 768px) {
+    .preview img {
+        max-width: 96vw;
+        max-height: 96vh;
+    }
+}
 @media screen and (max-width: 420px) {
     .folder-tabs {
         margin-left: 5%;
@@ -309,8 +316,6 @@ a:hover {
         width: 90%;
     }
 }
-
-
 
 
 

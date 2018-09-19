@@ -6,7 +6,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    if user_signed_in? && current_user.id == 1
+    if user_signed_in? && current_user.name == "fuchida"
       super
     else
       redirect_back(fallback_location: homes_path)
