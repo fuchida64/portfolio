@@ -2,7 +2,7 @@ class AdminsController < ApplicationController
 	before_action :authenticate_admin!
 
 	def user_index
-		@users = User.all.order(id: :desc)
+		@users = User.where.not(confirmed_at: nil).order(id: :desc)
 	end
 
 	def index

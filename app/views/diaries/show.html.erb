@@ -8,9 +8,16 @@
 			<div class="img-box">
 				<ul class="slider">
 					<% @diary.diary_images.each do |g| %>
-						<li><%= attachment_image_tag g, :diary_image, format: 'jpeg' %></li>
+						<a href="#lity<%= g.id %>" data-lity="data-lity">
+			    			<li><%= attachment_image_tag g, :diary_image, format: 'jpeg' %></li>
+			    		</a>
 					<% end %>
 				</ul>
+				<% @diary.diary_images.each do |g| %>
+		    		<div id="lity<%= g.id %>" class="lity-hide preview">
+	    				<%= attachment_image_tag g, :diary_image, format: 'jpeg' %>
+	    			</div>
+				<% end %>
 			</div>
 		<% end %>
 		<div class="diary-content">

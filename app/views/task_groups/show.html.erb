@@ -8,7 +8,8 @@
 	</div>
 	<div class="row task-list">
 		<div class="status-box" >
-			<a href="#group1" data-lity="data-lity"><h3>InBox</h3></a>
+			<a href="#group1" data-lity="data-lity"><h3>InBox <% if @tasks.where(status: 1).length > 0 %>
+				<%= @tasks.where(status: 1).length %><% end %></h3></a>
 			<div class="status-field status1">
 				<% @tasks.where(status: 1).order(position_id: :asc).each do |task| %>
 					<%= render 'task_groups/task', task: task %>
@@ -16,7 +17,8 @@
 			</div>
 		</div>
 		<div class="status-box" >
-			<a href="#group2" data-lity="data-lity"><h3>OnGoing</h3></a>
+			<a href="#group2" data-lity="data-lity"><h3>OnGoing <% if @tasks.where(status: 2).length > 0 %>
+				<%= @tasks.where(status: 2).length %><% end %></h3></a>
 			<div class="status-field status2">
 				<% @tasks.where(status: 2).order(position_id: :asc).each do |task| %>
 				<%= render 'task_groups/task', task: task %>
@@ -24,8 +26,9 @@
 			</div>
 		</div>
 		<div class="status-box" >
-			<a href="#group3" data-lity="data-lity"><h3>Done</h3></a>
-			<%= link_to "clear", destroy_all_path(@task_group, status: 3), method: :delete, class: 'clear', "data-confirm" => "本当に削除しますか?" %>
+			<a href="#group3" data-lity="data-lity"><h3>Done <% if @tasks.where(status: 3).length > 0 %>
+				<%= @tasks.where(status: 3).length %><% end %></h3></a>
+			<%= link_to "clear", destroy_all_path(@task_group, status: 3), method: :delete, class: 'clear', "data-confirm" => "まとめてclearしますか?" %>
 			<div class="status-field status3">
 				<% @tasks.where(status: 3).order(position_id: :asc).each do |task| %>
 					<%= render 'task_groups/task', task: task %>

@@ -159,7 +159,6 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
     t.string "name", null: false
     t.string "profile_image_id"
     t.integer "public_setting", default: 0
-    t.integer "notification", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

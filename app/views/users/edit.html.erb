@@ -21,7 +21,6 @@
 				    	<th><%= f.label :name, "お名前", class: 'label1' %></th>
 				    	<th><%= f.text_field :name %></th>
 				  	</tr>
-
 				  	<tr>
 				    	<th><%= f.label :email, class: 'label1' %></th>
 				    	<th><%= f.email_field :email %></th>
@@ -31,25 +30,15 @@
 				    	<th>
 				    		<div class="pretty p-switch p-fill">
         						<%= f.check_box :public_setting %>
-        							<div class="state p-success">
-            							<label>diaryを公開する</label>
-        							</div>
-    						</div>
-				    	</th>
-				  	</tr>
-				  	<tr>
-				  		<th><%= f.label :notification, "通知設定", class: 'label1' %></th>
-				    	<th>
-				    		<div class="pretty p-switch p-fill">
-        						<%= f.check_box :notification %>
-        							<div class="state p-success">
-            							<label>通知を表示する</label>
-        							</div>
+    							<div class="state p-success">
+        							<label>diaryを公開する</label>
+    							</div>
     						</div>
 				    	</th>
 				  	</tr>
 				</table>
 				<%= f.submit "保存", class: 'edit-btn' %>
+				<%= link_to "退会", user_path(current_user.id), method: :delete, class: 'btn delete-btn', "data-confirm" => "本当に退会しますか?" %>
 			</div>
 		<% end %>
 	</div>

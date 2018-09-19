@@ -5,7 +5,7 @@
 	.memory-box {
  	 	min-width: 50vw;
  	 	<% if @memory_group.memory_stages.present? %>
- 	 		width: <%= (@memory_group.memory_stages.length + 2) * 9 %>vw;
+ 	 		width: <%= (@memory_group.memory_stages.size + 2) * 9 %>vw;
  	 	<% end %>
 	}
 </style>
@@ -56,31 +56,31 @@
 				<ul class="chart">
 					<li>
 						<span style="height:<% if @memories.empty? %>0
-							<% else %><%= (100 / @memories.length) * @memories.where(stage: 1).length %><% end %>%" title="step1">
-							<% if @memories.present? && @memories.where(stage: 1).length > 0 %>
-								<p class="period"><%= @memories.where(stage: 1).length %>個</p>
+							<% else %><%= (100 / @memories.size) * @memories.where(stage: 1).size %><% end %>%" title="step1">
+							<% if @memories.present? && @memories.where(stage: 1).size > 0 %>
+								<p class="period"><%= @memories.where(stage: 1).size %>個</p>
 							<% end %>
 						</span>
 					</li>
 					<% @memory_group.memory_stages.where.not(stage: nil).each do |n| %>
 						<li>
 							<span style="height:<% if @memories.empty? %>0
-							<% else %><%= (100 / @memories.length) * @memories.where(stage: n.stage).length %><% end %>%" title="step<%= n.stage %>">
+							<% else %><%= (100 / @memories.size) * @memories.where(stage: n.stage).size %><% end %>%" title="step<%= n.stage %>">
 							<p class="stage-period"><%= n.period %>日</p>
-							<% if @memories.present? && @memories.where(stage: n.stage).length > 0 %>
-								<p class="period"><%= @memories.where(stage: n.stage).length %>個</p>
+							<% if @memories.present? && @memories.where(stage: n.stage).size > 0 %>
+								<p class="period"><%= @memories.where(stage: n.stage).size %>個</p>
 							<% end %>
 							</span>
 						</li>
 					<% end %>
 					<li>
 						<span style="height:<% if @memories.empty? %>0
-							<% else %><%= (100 / @memories.length) * @memories.where(stage: 0).length %><% end %>%" title="Comp">
+							<% else %><%= (100 / @memories.size) * @memories.where(stage: 0).size %><% end %>%" title="Comp">
 							<% if @memory_group.loop == 1 %>
 								<p class="stage-period"><%= @memory_group.period %>日</p>
 							<% end %>
-							<% if @memories.present? && @memories.where(stage: 0).length > 0 %>
-								<p class="period"><%= @memories.where(stage: 0).length %>個</p>
+							<% if @memories.present? && @memories.where(stage: 0).size > 0 %>
+								<p class="period"><%= @memories.where(stage: 0).size %>個</p>
 							<% end %>
 						</span>
 					</li>
@@ -98,7 +98,17 @@
 							<p>All memories</p>
 						<% end %>
 					</td>
-					<td><p><%= @memories.length %> 個</p></td>
+					<td><p><%= @memories.size %> 個</p></td>
+				</tr>
+				<tr>
+					<td>
+						<% if @memories.present? && @memories.where(stage: 1).present? %>
+			    			<%= link_to "Step1", step_index_path(@memory_group, stage: 1) %>
+			    		<% else %>
+			    			<p>Step1</p>
+			    		<% end %>
+					</td>
+					<td><p><%= @memories.where(stage: 1).size %> 個</p></td>
 				</tr>
 				<% @memory_group.memory_stages.where.not(stage: nil).each do |n| %>
 					<tr>
@@ -109,7 +119,7 @@
 		    					<p>Step<%= n.stage%></p>
 		    				<% end %>
 						</td>
-						<td><p><%= @memories.where(stage: n.stage).length %> 個</p></td>
+						<td><p><%= @memories.where(stage: n.stage).size %> 個</p></td>
 					</tr>
 			    <% end %>
 			    <tr>
@@ -120,7 +130,7 @@
 			    			<p>Comp</p>
 			    		<% end %>
 					</td>
-					<td><p><%= @memories.where(stage: 0).length %> 個</p></td>
+					<td><p><%= @memories.where(stage: 0).size %> 個</p></td>
 				</tr>
 			</tbody>
 		</table>

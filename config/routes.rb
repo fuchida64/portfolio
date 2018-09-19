@@ -25,10 +25,11 @@ Rails.application.routes.draw do
   resources :homes, only: [:index]
 
   # user
-  # show edit update
+  # show edit update destroy
   resources :users do
     member do
       get :following, :followers
+      get :favorites
     end
   end
   resources :relationships, only: [:create, :destroy]

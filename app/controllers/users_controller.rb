@@ -10,6 +10,11 @@ class UsersController < ApplicationController
 	  	end
 	end
 
+	def favorites
+		@user = User.find(params[:id])
+		@favorites = @user.favorites.order(id: :desc)
+	end
+
 	def edit
 		@user = User.find(current_user.id)
 	end
@@ -22,6 +27,16 @@ class UsersController < ApplicationController
 	    else
 	    	render 'edit'
 	    end
+	end
+
+	def destroy
+		@user = User.find(current_user.id)
+		if  @user.destroy
+		  	flash[:notice] = "退会しました。"
+		else
+			flash[:alert] = "エラーが発生しました。"
+		end
+		redirect_to homes_path
 	end
 
 	def password_edit
@@ -62,7 +77,7 @@ class UsersController < ApplicationController
 	private
 
 	def user_params
-	    params.require(:user).permit(:email, :name, :profile_image, :email, :password, :password_confirmation, :current_password, :public_setting, :notification)
+	    params.require(:user).permit(:email, :name, :profile_image, :email, :password, :password_confirmation, :current_password, :public_setting)
 	end
 
 end

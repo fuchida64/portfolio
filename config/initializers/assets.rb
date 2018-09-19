@@ -17,6 +17,9 @@ Rails.application.config.assets.precompile += %w( memory_group.js )
 Rails.application.config.assets.precompile += %w( diary.js )
 Rails.application.config.assets.precompile += %w( user.js )
 Rails.application.config.assets.precompile += %w( slick.min.js )
+# flash
+Rails.application.config.assets.precompile += %w( notifIt.js )
+# modal window
 Rails.application.config.assets.precompile += %w( lity.js )
 
 # admins
@@ -54,7 +57,11 @@ Rails.application.config.assets.precompile += %w( memories/show.scss )
 Rails.application.config.assets.precompile += %w( diaries/index.scss )
 Rails.application.config.assets.precompile += %w( diaries/new.scss )
 Rails.application.config.assets.precompile += %w( diaries/show.scss )
+# slide show
 Rails.application.config.assets.precompile += %w( slick.css )
 Rails.application.config.assets.precompile += %w( slick-theme.css )
+# flash
+Rails.application.config.assets.precompile += %w( notifIt.css )
+# modal window
 Rails.application.config.assets.precompile += %w( lity.css )
 

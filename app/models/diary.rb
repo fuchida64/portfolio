@@ -5,8 +5,8 @@ class Diary < ApplicationRecord
 	has_many :diary_images, dependent: :destroy
 	accepts_nested_attributes_for :diary_images, allow_destroy: true
 
-	has_many :diary_comments
-	has_many :favorites
+	has_many :diary_comments, dependent: :destroy
+	has_many :favorites, dependent: :destroy
 
 	validates :title, presence: true, length: { maximum: 30 }
 	validates :content, presence: true
