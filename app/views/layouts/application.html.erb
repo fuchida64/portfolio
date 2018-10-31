@@ -52,7 +52,7 @@
                   <% if current_user.task_groups.exists? %>
                     <ul class="drop-ul">
                       <% current_user.task_groups.order(position_id: :asc).each do |group| %>
-                        <li><%= link_to group.title.truncate(12), task_group_path(group) %></li>
+                        <li><%= link_to group.title.truncate(20), task_group_path(group) %></li>
                       <% end %>
                     </ul>
                   <% end %>
@@ -61,8 +61,9 @@
 
                   <% if current_user.memory_groups.exists? %>
                     <ul class="drop-ul">
+                      <li><%= link_to "All memories", all_memories_path %></li>
                       <% current_user.memory_groups.order(position_id: :asc).each do |group| %>
-                        <li><%= link_to group.title.truncate(12), memory_group_path(group) %></li>
+                        <li><%= link_to group.title.truncate(20), memory_group_path(group) %></li>
                       <% end %>
                     </ul>
                   <% end %>
@@ -120,6 +121,7 @@
                   </li>
                   <li><%= link_to 'memory', memory_groups_path %>
                     <ul class="drop-ul">
+                      <li><%= link_to "All memories", all_memories_path, class: "drop" %></li>
                       <% current_user.memory_groups.order(position_id: :asc).each do |memory| %>
                         <% if memory.title.length >= 9 %>
                           <li><%= link_to memory.title[0,8]+'...', memory_group_path(memory), class: "drop" %></li>

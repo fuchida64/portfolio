@@ -11,6 +11,15 @@ class MemoriesController < ApplicationController
 				flash[:alert] = "アクセス権限がありません。"
 			end
 			@memories = @memory_group.memories
+
+			@maxNum = @memories.where(stage: 1).length
+			@maxStage = 1
+			@memory_group.memory_stages.each do |s|
+				if @memories.where(stage: s.stage).length > @maxNum
+					@maxNum = @memories.where(stage: s.stage).length
+					@maxStage = s.stage
+				end
+			end
 		else
 			redirect_back(fallback_location: homes_path)
 			flash[:alert] = "アクセス権限がありません。"
@@ -25,6 +34,33 @@ class MemoriesController < ApplicationController
 		else
 			@memories = @memory_group.memories.order(execution_date: :asc)
 		end
+	end
+
+	def all_show
+		@memory_groups = current_user.memory_groups
+		@memories = []
+		@memory_groups.each do |mg|
+			if mg.loop == 1
+				if mg.memories.where("execution_date <= ?", Date.current).present?
+					mg.memories.where("execution_date <= ?", Date.current).each do |m|
+						@memories << m.id
+					end
+				end
+			else
+				if mg.memories.where.not(stage: 0).where("execution_date <= ?", Date.current).present?
+					mg.memories.where.not(stage: 0).where("execution_date <= ?", Date.current).each do |m|
+						@memories << m.id
+					end
+				end
+			end
+		end
+		if @memories.empty?
+			flash[:notice] = "clear !"
+			redirect_to memory_groups_path(@memory_group)
+		end
+		@memory_id = @memories.shuffle.first
+		@memory = Memory.find(@memory_id)
+		@memory_group = @memory.memory_group
 	end
 
 	def show
@@ -43,7 +79,11 @@ class MemoriesController < ApplicationController
 			flash[:notice] = "clear !"
 			redirect_to memory_group_path(@memory_group)
 		end
-		@memory = @memories.shuffle.first
+		if @memories.where("perform_date < ?", Date.current).present?
+			@memory = @memories.where("perform_date < ?", Date.current).shuffle.first
+		else
+			@memory = @memories.shuffle.first
+		end
 	end
 
 	def create
@@ -51,6 +91,7 @@ class MemoriesController < ApplicationController
 		@memory = Memory.new(memory_params)
 		@memory.memory_group_id = @memory_group.id
 		@memory.execution_date = Date.current
+		@memory.perform_date = Date.yesterday
 		if params[:memory][:problem_content].blank? && (params[:memory][:problem_image] == "{}")
 			flash[:alert] = "入力エラーが発生しました。problemフォームには、最低1項目の入力が必要です。"
 		else
@@ -68,20 +109,23 @@ class MemoriesController < ApplicationController
 			if @memory.stage < @memory_stages.maximum(:stage) && @memory.stage > 0
 				next_stage = @memory.stage + 1
 				@memory_stage = @memory_stages.find_by(stage: next_stage)
-				if @memory.update(:stage => next_stage, :correct_num => correct_num, :execution_date => Date.current.next_day(@memory_stage.period))
+				if @memory.perform_date == Date.current
+					@memory.update(:execution_date => Date.tomorrow)
 				else
-					flash[:alert] = "エラーが発生しました。"
+					@memory.update(:stage => next_stage, :correct_num => correct_num, :execution_date => Date.current.next_day(@memory_stage.period))
 				end
 			else
-				if @memory.update(:stage => 0, :correct_num => correct_num, :execution_date => Date.current.next_day(@memory.memory_group.period))
+				if @memory.perform_date == Date.current
+					@memory.update(:execution_date => Date.tomorrow)
 				else
-					flash[:alert] = "エラーが発生しました。"
+					@memory.update(:stage => 0, :correct_num => correct_num, :execution_date => Date.current.next_day(@memory.memory_group.period))
 				end
 			end
 		else
-			if @memory.update(:stage => 0, :correct_num => correct_num, :execution_date => Date.current.next_day(@memory.memory_group.period))
+			if @memory.perform_date == Date.current
+				@memory.update(:execution_date => Date.tomorrow)
 			else
-				flash[:alert] = "エラーが発生しました。"
+				@memory.update(:stage => 0, :correct_num => correct_num, :execution_date => Date.current.next_day(@memory.memory_group.period))
 			end
 		end
 		redirect_back(fallback_location: homes_path)
@@ -90,9 +134,11 @@ class MemoriesController < ApplicationController
 	def wrong
 		@memory = Memory.find(params[:id])
 		wrong_num = @memory.wrong_num + 1
-		if @memory.update(:stage => 1, :wrong_num => wrong_num, :execution_date => Date.tomorrow)
-		else
-			flash[:alert] = "エラーが発生しました。"
+		if @memory.memory_group.untie == 0
+			@memory.update(:stage => 1, :wrong_num => wrong_num, :execution_date => Date.tomorrow)
+		end
+		if @memory.perform_date < Date.current
+			@memory.update(:stage => 1, :wrong_num => wrong_num, :perform_date => Date.current)
 		end
 		redirect_back(fallback_location: homes_path)
 	end
@@ -121,7 +167,7 @@ class MemoriesController < ApplicationController
 
 	def memory_params
 		params.require(:memory).permit(
-		  :problem_content, :problem_image, :answer_content, :answer_image, :stage, :execution_date, :correct_num, :wrong_num, :memory_group_id,
+		  :problem_content, :problem_image, :answer_content, :answer_image, :stage, :execution_date, :perform_date, :correct_num, :wrong_num, :memory_group_id,
 		)
 	end
 

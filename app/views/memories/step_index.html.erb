@@ -4,7 +4,7 @@
 <div class="container">
 	<div class="row headline">
 		<h2><%= link_to memory_group_path(@memory_group) do %>
-			<% if @stage == 'all' %>All memories<% elsif @stage == '0' %>Complete<% else %>Step<%= @stage %><% end %> in <%= @memory_group.title %><% end %></h2>
+			<% if @stage == 'all' %>All memories<% elsif @stage == '0' %>Complete<% else %>Step<%= @stage %><% end %> of <%= @memory_group.title %><% end %></h2>
 	</div>
 	<hr>
 	<div class="row">

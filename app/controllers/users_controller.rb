@@ -3,8 +3,12 @@ class UsersController < ApplicationController
 
 	def show
 	  	@user = User.find(params[:id])
-	  	if user_signed_in? && current_user.id == @user.id
-	  		@diaries = @user.diaries.order(id: :desc)
+	  	if user_signed_in?
+			if current_user.id == @user.id
+	  	    	@diaries = @user.diaries.order(id: :desc)
+	  	    else
+	  	    	@diaries = @user.diaries.where(inform_status: '公開').order(id: :desc)
+	  	    end
 	  	else
 	  		@diaries = @user.diaries.where(inform_status: '公開').order(id: :desc)
 	  	end

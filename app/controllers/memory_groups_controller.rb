@@ -4,6 +4,14 @@ class MemoryGroupsController < ApplicationController
 
 	def index
 		@memory_groups = current_user.memory_groups.order(position_id: :asc)
+		@all_memories = 0
+		@memory_groups.each do |mg|
+			if mg.loop == 1
+				@all_memories += mg.memories.where("execution_date <= ?", Date.current).size
+			else
+				@all_memories += mg.memories.where.not(stage: 0).where("execution_date <= ?", Date.current).size
+			end
+		end
 		@memory_group = MemoryGroup.new
 	end
 
@@ -33,6 +41,14 @@ class MemoryGroupsController < ApplicationController
 			@today_memories = @memory_group.memories.where.not(stage: 0).where("execution_date <= ?", Date.current)
 		end
 		@memory = Memory.new
+		@maxNum = @today_memories.where(stage: 1).length
+		@maxStage = 1
+		@memory_group.memory_stages.each do |s|
+			if @today_memories.where(stage: s.stage).length > @maxNum
+				@maxNum = @today_memories.where(stage: s.stage).length
+				@maxStage = s.stage
+			end
+		end
 	end
 
 	def update
@@ -61,9 +77,13 @@ class MemoryGroupsController < ApplicationController
 
 	def position_update
 		result = params[:position]
-		result.each.with_index(1) do |id, i|
-			@memory_group = MemoryGroup.find(id)
-			@memory_group.update(:position_id => i)
+		i = 1
+		result.each do |id|
+			if id != "none"
+				@memory_group = MemoryGroup.find(id)
+				@memory_group.update(:position_id => i)
+				i += 1
+			end
 		end
 	end
 
@@ -71,7 +91,7 @@ class MemoryGroupsController < ApplicationController
 
 	def memory_group_params
 		params.require(:memory_group).permit(
-			:title, :content, :loop, :period, :user_id,
+			:title, :content, :loop, :period, :untie, :user_id,
 			memory_stages_attributes: [:id, :stage, :period, :memory_group_id, :position_id, :_destroy]
 		)
 	end

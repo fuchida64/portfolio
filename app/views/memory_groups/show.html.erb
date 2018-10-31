@@ -12,12 +12,15 @@
  	 		<% end %>
  	 	<% end %>
 	}
+	.modal-form .edit-btn {
+	    margin-bottom: 20px;
+	}
 </style>
 
 <div class="container">
 	<div class="row headline">
 		<h2><%= @memory_group.title.truncate(19) %></h2>
-		<p><%= @memory_group.content.truncate(20) %></p>
+		<p><%= @memory_group.content %></p>
 		<ul>
 			<li><a href="#create-modal" class="new-memory" data-lity="data-lity">new memory</a></li>
 			<li><%= link_to "all memories", memories_path(group: @memory_group) %></li>
@@ -50,42 +53,37 @@
 		<div class="folder-body">
 			<ul class="chart">
 				<li>
-					<% if @memory_group.loop == 1 %>
-						<span style="height:<% if @today_memories.empty? %>0<% else %><%= (100 / @today_memories.size) * @today_memories.where(stage: 1).size %><% end %>%" title="step1">
-							<p class="stage-period">
-								<% if @today_memories.empty? || @today_memories.where(stage: 1).size == 0%><span class="clear">clear</span>
-								<% else %><%= @today_memories.where(stage: 1).size %>個<% end %></p>
-						</span>
-					<% else %>
-						<span style="height:<% if @today_memories.empty? %>0<% else %><%= (100 / @today_memories.size) * @today_memories.where(stage: 1).size %><% end %>%" title="step1">
-							<p class="stage-period">
-								<% if @today_memories.empty? || @today_memories.where(stage: 1).size == 0%><span class="clear">clear</span>
-								<% else %><%= @today_memories.where(stage: 1).size %>個<% end %></p>
-						</span>
-					<% end %>
+					<span style="height:<% if @today_memories.where(stage: 1).empty? %>0
+										<% elsif @maxStage == 1 %>300px
+										<% else %><%= 300 * @today_memories.where(stage: 1).size / @maxNum + 1 %>px
+										<% end %>" title="step1">
+						<p class="stage-period">
+							<% if @today_memories.where(stage: 1).empty? %><span class="clear">clear</span>
+							<% else %><%= @today_memories.where(stage: 1).size %>個<% end %></p>
+					</span>
 				</li>
 				<% @memory_group.memory_stages.where.not(stage: nil).each do |n| %>
 					<li>
-						<% if @memory_group.loop == 1 %>
-							<span style="height:<% if @today_memories.empty? %>0<% else %><%= (100 / @today_memories.size) * @today_memories.where(stage: n.stage).size %><% end %>%" title="step<%= n.stage %>">
-								<p class="stage-period">
-									<% if @today_memories.empty? || @today_memories.where(stage: n.stage).size == 0  %><span class="clear">clear</span>
-									<% else %><%= @today_memories.where(stage: n.stage).size %>個<% end %></p>
-							</span>
-						<% else %>
-							<span style="height:<% if @today_memories.empty? %>0<% else %><%= (100 / @today_memories.size) * @today_memories.where(stage: n.stage).size %><% end %>%" title="step<%= n.stage %>">
-								<p class="stage-period">
-									<% if @today_memories.empty? || @today_memories.where(stage: n.stage).size == 0  %><span class="clear">clear</span>
-									<% else %><%= @today_memories.where(stage: n.stage).size %>個<% end %></p>
-							</span>
-						<% end %>
+						<span style="height:
+									<% if @today_memories.where(stage: n.stage).empty? %>0
+									<% elsif @maxStage == n.stage %>300px
+									<% else %><%= 300 * @today_memories.where(stage: n.stage).size / @maxNum + 1 %>px
+									<% end %>" title="step<%= n.stage %>">
+							<p class="stage-period">
+								<% if @today_memories.where(stage: n.stage).empty? %><span class="clear">clear</span>
+								<% else %><%= @today_memories.where(stage: n.stage).size %>個<% end %></p>
+						</span>
 					</li>
 				<% end %>
 				<% if @memory_group.loop == 1 %>
 					<li>
-						<span style="height:<% if @today_memories.empty? %>0<% else %><%= (100 / @today_memories.size) * @today_memories.where(stage: 0).size %><% end %>%" title="comp">
+						<span style="height:
+									<% if @today_memories.where(stage: 0).empty? %>0
+									<% elsif @maxStage == 0 %>300px
+									<% else %><%= 100 * @today_memories.where(stage: 0).size / @maxNum + 1 %>px
+									<% end %>" title="comp">
 							<p class="stage-period">
-								<% if @today_memories.empty? || @today_memories.where(stage: 0).size == 0%><span class="clear">clear</span>
+								<% if @today_memories.where(stage: 0).empty? %><span class="clear">clear</span>
 								<% else %><%= @today_memories.where(stage: 0).size %>個<% end %></p>
 						</span></li>
 				<% end %>
