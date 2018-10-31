@@ -4,6 +4,7 @@ $(function () {
     $('.group-status').sortable({
         helper: "clone",
         scroll: true,
+        cancel: ".stop",
 
         update: function(){
             var result = $(this).sortable("toArray");

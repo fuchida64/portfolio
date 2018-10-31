@@ -66,6 +66,14 @@ class TasksController < ApplicationController
 		redirect_back(fallback_location: homes_path)
 	end
 
+	def stage_position_update
+		result = params[:position]
+		result.each.with_index(1) do |id, i|
+			@task = Task.find(id)
+			@task.update(:position_id => i)
+		end
+	end
+
 	private
 
 	def task_params

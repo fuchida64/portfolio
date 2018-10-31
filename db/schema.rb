@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
     t.integer "correct_num", default: 0
     t.integer "wrong_num", default: 0
     t.date "execution_date"
+    t.date "perform_date"
     t.integer "memory_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -91,6 +92,7 @@ ActiveRecord::Schema.define(version: 2018_08_20_181944) do
     t.integer "position_id"
     t.integer "loop", default: 0
     t.integer "period", default: 1
+    t.integer "untie", default: 1
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

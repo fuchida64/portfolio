@@ -1,10 +1,17 @@
 
 <%= stylesheet_link_tag "task_groups/show", :media => "all" %>
 
+<style type="text/css" media="screen">
+	.reload {
+		color: red;
+		font-size: 20px;
+		line-height: 24px;
+	}
+</style>
 <div class="container">
 	<div class="row">
 		<h2><%= @task_group.title %></h2>
-		<p class="plus-mark"><a href="#create-modal" data-lity="data-lity">＋</a></p>
+		<p class="plus-mark"><a href="#create-modal" data-lity="data-lity">＋</a>　<span class="reload hide"><i class="fas fa-redo-alt"></i></span></p>
 	</div>
 	<div class="row task-list">
 		<div class="status-box" >
@@ -46,28 +53,34 @@
 
 <div id="group1" class="lity-hide">
 	<div class="tasks-index">
-		<h3>InBox</h3>
-		<% @tasks.where(status: 1).order(position_id: :asc).each do |task| %>
-			<%= render 'task_groups/task', task: task %>
-		<% end %>
+		<h3>InBox <% if @tasks.where(status: 1).length > 0 %><%= @tasks.where(status: 1).length %><% end %></h3>
+		<div class="modal-index">
+			<% @tasks.where(status: 1).order(position_id: :asc).each do |task| %>
+				<%= render 'task_groups/task', task: task %>
+			<% end %>
+		</div>
 	</div>
 </div>
 
 <div id="group2" class="lity-hide">
 	<div class="tasks-index">
-		<h3>OnGoing</h3>
-		<% @tasks.where(status: 2).order(position_id: :asc).each do |task| %>
-			<%= render 'task_groups/task', task: task %>
-		<% end %>
+		<h3>OnGoing <% if @tasks.where(status: 2).length > 0 %><%= @tasks.where(status: 2).length %><% end %></h3>
+		<div class="modal-index">
+			<% @tasks.where(status: 2).order(position_id: :asc).each do |task| %>
+				<%= render 'task_groups/task', task: task %>
+			<% end %>
+		</div>
 	</div>
 </div>
 
 <div id="group3" class="lity-hide">
 	<div class="tasks-index">
-		<h3>Done</h3>
-		<% @tasks.where(status: 3).order(position_id: :asc).each do |task| %>
-			<%= render 'task_groups/task', task: task %>
-		<% end %>
+		<h3>Done <% if @tasks.where(status: 3).length > 0 %><%= @tasks.where(status: 3).length %><% end %></h3>
+		<div class="modal-index">
+			<% @tasks.where(status: 3).order(position_id: :asc).each do |task| %>
+				<%= render 'task_groups/task', task: task %>
+			<% end %>
+		</div>
 	</div>
 </div>
 
@@ -102,6 +115,35 @@
 	</div>
 </div>
 
+<script>
+	$(function(){
+		$(".reload").click(function(){
+			window.location.reload();
+		});
+	});
+	// drag & drop
+$(function () {
+    $('.modal-index').sortable({
+        helper: "clone",
+        scroll: true,
+
+        update: function(){
+            var result = $(this).sortable("toArray");
+
+            $.ajax({
+                url: "/task_groups/stage_positions",
+                type:'POST',
+                dataType: 'json',
+                data : {position : result },
+                timeout:3000,
+            }).done(function(data) {
+            }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+                $(".reload").removeClass('hide');
+            })
+        }
+    });
+});
+</script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <%= javascript_include_tag "task_group.js" %>
 

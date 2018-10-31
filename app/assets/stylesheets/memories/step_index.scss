@@ -1,8 +1,6 @@
 
 body {
-  background: url(/images/task_memory.jpg);
-  background-size: cover;
-  background-position: center center;
+  background-color: #D3D3D3;
   width: 100vw;
   min-height: 100vh;
 }
@@ -174,15 +172,15 @@ hr {
 }
 
 .modal-content {
-  width: 90vw;
-  height: 90vh;
+  width: 94vw;
+  height: 94vh;
   padding: 5px;
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
   background: white;
 }
 
 .modal-form {
-  width: 80vw;
+  width: 90vw;
   margin: 0 auto;
   background-color: white;
   position: relative;
@@ -190,29 +188,31 @@ hr {
   h3 {
     font-size: 40px;
     font-weight: 300;
-    margin-top: 30px;
+    margin-top: 20px;
+    margin-left: 3vw;
   }
   hr {
-    width: 80vw;
+    width: 86vw;
     border-top: 2px solid #AAAAAA;
     margin-top: 15px;
+    margin-left: 2vw;
     position: absolute;
     left: 0;
   }
   .problem-box {
-    margin-top: 50px;
+    margin-top: 30px;
     margin-left: 5%;
     width: 45%;
-    height: 500px;
+    min-height: 500px;
     display: inline-block;
     float: left;
     border-right: 1px dashed;
   }
   .answer-box {
-    margin-top: 50px;
+    margin-top: 30px;
     margin-left: 5%;
     width: 45%;
-    height: 500px;
+    min-height: 500px;
     display: inline-block;
     float: left;
   }
@@ -257,7 +257,7 @@ hr {
   input[type=text], textarea {
     background-color: #fff;
     height: 31px;
-    width: 90%;
+    width: 94%;
     padding: 3px 7px;
     border-top-color: #949494;
     border-radius: 3px;
@@ -272,7 +272,7 @@ hr {
     font-size: 15px;
   }
   textarea {
-    height: 200px;
+    height: 270px;
   }
   input[type="text"]:focus, textarea:focus {
     box-shadow: 0 0 7px 0 #1dc1d6;
@@ -290,7 +290,7 @@ hr {
     background: #f2fcff;
     border-radius: 3px;
     transition: .4s;
-    margin-top: 10px;
+    margin-top: 25px;
     margin-left: 80%;
     margin-right: 30px;
   }
@@ -319,7 +319,7 @@ hr {
 
     img {
       max-width: 80vw;
-      height: 80vh;
+      max-height: 80vh;
       position: absolute;
       top: 50%;
       left: 50%;

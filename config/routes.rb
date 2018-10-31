@@ -49,6 +49,7 @@ Rails.application.routes.draw do
   end
   get 'tasks/:id/clear' => 'tasks#check'
   post 'tasks/position' => 'tasks#position_update', as: 'update_position'
+  post '/task_groups/stage_positions' => 'tasks#stage_position_update'
   patch 'tasks/:task_id/task_details' => 'task_details#update', as: 'update_limit'
 
   # diary
@@ -71,6 +72,7 @@ Rails.application.routes.draw do
   # memory
   # index create update delete
   resources :memories
+  get 'all_memories' => 'memories#all_show', as: 'all_memories'
   get 'memories/:id/correct' => 'memories#correct', as: 'correct'
   get 'memories/:id/wrong' => 'memories#wrong', as: 'wrong'
 

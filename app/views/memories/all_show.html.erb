@@ -13,8 +13,8 @@
 
 <div class="container">
 	<div class="row">
-		<p class="back-link"><%= link_to @memory_group.title, memory_group_path(@memory_group) %></p>
-		<p class="rest"><% if @stage == "all" %>all step > <%= @memory.stage %><% elsif @stage == "0" %>complete<% else %>step <%= @stage %><% end %>　残り <%= @memories.length %> 個</p>
+		<p class="back-link">　<%= link_to @memory_group.title, memory_group_path(@memory_group) %></p>
+		<p class="rest">　　ALL : step <%= @memory.stage %>　残り <%= @memories.length %> 個</p>
 		<div class="memory-box">
 			<div class="problem-box">
 				<% if @memory.problem_image.present? %>

@@ -57,6 +57,8 @@ $(function () {
     });
 });
 
+
+
 // time transfer
 function time_required() {
     var hr = document.task_form.time_required_hr.value;

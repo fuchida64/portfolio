@@ -34,7 +34,9 @@
   display: block;
   clear: both;
 }
-
+.favorite {
+	letter-spacing: 3px;
+}
 ul {
 	list-style: none;
 }
@@ -50,6 +52,9 @@ ul {
 		-webkit-transform : translate(-50%,-50%);
 		transform : translate(-50%,-50%);
 	}
+}
+.modal-content {
+    overflow: auto;
 }
 // home header
 .header-box {
@@ -249,7 +254,9 @@ nav {
 			li {
 				height: 50px;
 				margin: 0px auto;
-				width: 80%;
+				max-width: 90%;
+				min-width: 51%;
+				display: inline-block;
 				text-align: center;
 			}
 			li:first-child {

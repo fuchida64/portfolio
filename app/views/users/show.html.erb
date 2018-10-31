@@ -3,7 +3,7 @@
 
 <div class="container">
 	<div class="row">
-		<h2><% if current_user?(@user) %>My page<% else %><%= @user.name %> page<% end %></h2>
+		<h2><% if current_user?(@user) %>My page<% else %><%= @user.name %> info<% end %></h2>
 		<% if current_user?(@user) %>
 			<div class="link">
 				<%= link_to "設定", edit_user_path(current_user), class: "btn" %>
@@ -42,7 +42,7 @@
 				  	</tr>
 			  	<% end %>
 			  	<tr>
-			    	<th><%= link_to 'favorite diaries', favorites_user_path(current_user), class: "btn" %></th>
+			    	<th><%= link_to 'favorite diaries', favorites_user_path(@user), class: "btn favorite" %></th>
 			  	</tr>
 			</table>
 		</div>

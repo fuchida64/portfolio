@@ -22,7 +22,7 @@
 										<%= s.number_field :period, class: "create-field" %> 日後
 										<%= s.submit '更新', class: "create-btn" %>
 										<% if ms.stage == @memory_stages.maximum(:stage) %>
-											<%= link_to "delete", memory_stage_path(ms), method: :delete, class: 'delete-btn', "data-confirm" => "本当に削除しますか?" %>
+											<%= link_to "削除", memory_stage_path(ms), method: :delete, class: 'delete-btn', "data-confirm" => "本当に削除しますか?" %>
 										<% end %>
 									</div>
 								<% end %>
@@ -47,7 +47,7 @@
 				<% end %>
 				<%= form_for @memory_stage, url: memory_stages_path(memory_group_id: @memory_group) do |s| %>
 					<div class="field">
-						step<%= @memory_stages.maximum(:stage) %> クリア後　<%= s.number_field :period, class: "create-field" %> 日後に復習する
+						step<% if @memory_stages.maximum(:stage).nil? %>1<% else %><%= @memory_stages.maximum(:stage) %><% end %> クリア後　<%= s.number_field :period, class: "create-field" %> 日後に復習する
 						<%= s.submit '追加', class: "create-btn" %>
 					</div>
 				<% end %>
@@ -68,6 +68,18 @@
 			                <label>ON
 			                </label>
 			            </div>
+					</div>
+					/　クリアするまでループ
+					<div class="pretty p-switch p-fill">
+						<% if @memory_group.untie == 1 %>
+							<%= s.check_box :untie, {:checked => true} %>
+						<% else %>
+							<%= s.check_box :untie, {} %>
+						<% end %>
+						<div class="state p-success">
+					        <label>ON
+					        </label>
+					    </div>
 					</div>
 					<%= s.submit '更新', class: "create-btn" %>
 				</div>
@@ -107,6 +119,7 @@
 			<% end %>
 			<%= form_for @memory_stage, url: memory_stages_path(memory_group_id: @memory_group) do |s| %>
 				<div class="field">
+					step<% if @memory_stages.maximum(:stage).nil? %>1<% else %><%= @memory_stages.maximum(:stage) %><% end %>
 					クリア後　<%= s.number_field :period, class: "create-field" %> 日後に復習する
 					<%= s.submit '追加', class: "create-btn" %>
 				</div>
@@ -125,9 +138,28 @@
 						<%= s.check_box :loop, {} %>
 					<% end %>
 					<div class="state p-success">
-		                <label>する
+		                <label>ON
 		                </label>
 		            </div>
+				</div>
+				<%= s.submit '更新', class: "create-btn btn2" %>
+			</div>
+		<% end %>
+	</div>
+	<div class="stage-field field2 <% if @memory_stages.length >= 10 %>field3<% end %>">
+		<%= form_for @memory_group, url: memory_group_path(@memory_group, stage: 'loop') do |s| %>
+			<div class="field loop-field">
+				クリアするまでループ
+				<div class="pretty p-switch p-fill">
+					<% if @memory_group.untie == 1 %>
+						<%= s.check_box :untie, {:checked => true} %>
+					<% else %>
+						<%= s.check_box :untie, {} %>
+					<% end %>
+					<div class="state p-success">
+				        <label>ON
+				        </label>
+				    </div>
 				</div>
 				<%= s.submit '更新', class: "create-btn btn2" %>
 			</div>

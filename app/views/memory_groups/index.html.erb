@@ -6,9 +6,20 @@
 
 		<div class="row headline">
 			<h2>Memory list</h2>
-			<%= link_to 'Default step', default_stages_path, class: "stage-link" %>
+			<%= link_to 'default step', default_stages_path, class: "stage-link" %>
 		</div>
 		<div class="group-status">
+			<div id="none"class="memory-group stop">
+				<h4><%= link_to "All memries", all_memories_path, class: "memory-title" %></h4>
+				<hr>
+				<div class="memory-content">
+						<p class="memory-text"></p>
+					</div>
+				<div class="memory-info">
+					<p>today：<span class="<% if @all_memories > 0 %>status-color<% end %>"><%= @all_memories %></span> 個</p>
+					<p></p>
+				</div>
+			</div>
 			<% @memory_groups.each do |mg| %>
 				<div id="<%= mg.id %>" class="memory-group">
 					<h4><%= link_to mg.title.truncate(16), memory_group_path(mg), class: "memory-title" %></h4>
@@ -43,7 +54,7 @@
 									  	<%= f.submit '更新', class: "edit-btn" %>
 									</div>
 								<% end %>
-								<%= link_to "delete", memory_group_path(mg), method: :delete, class: 'delete-btn', "data-confirm" => "本当に削除しますか?" %>
+								<%= link_to "削除", memory_group_path(mg), method: :delete, class: 'delete-btn', "data-confirm" => "本当に削除しますか?" %>
 							</div>
 						</div>
 					</div>

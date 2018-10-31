@@ -12,7 +12,7 @@
 
 <div class="container">
 	<div class="row headline">
-		<h2><%= link_to memory_group_path(@memory_group) do %>Index in <%= @memory_group.title %><% end %></h2>
+		<h2><%= link_to memory_group_path(@memory_group) do %>Index of <%= @memory_group.title %><% end %></h2>
 	</div>
 	<hr>
 	<div class="row">
@@ -55,8 +55,10 @@
   			<div class="folder-body">
 				<ul class="chart">
 					<li>
-						<span style="height:<% if @memories.empty? %>0
-							<% else %><%= (100 / @memories.size) * @memories.where(stage: 1).size %><% end %>%" title="step1">
+						<span style="height:<% if @memories.where(stage: 1).empty? %>0
+											<% elsif @maxStage == 1 %>300px
+											<% else %><%= 300 * @memories.where(stage: 1).size / @maxNum + 1 %>px
+											<% end %>" title="step1">
 							<% if @memories.present? && @memories.where(stage: 1).size > 0 %>
 								<p class="period"><%= @memories.where(stage: 1).size %>個</p>
 							<% end %>
@@ -64,8 +66,10 @@
 					</li>
 					<% @memory_group.memory_stages.where.not(stage: nil).each do |n| %>
 						<li>
-							<span style="height:<% if @memories.empty? %>0
-							<% else %><%= (100 / @memories.size) * @memories.where(stage: n.stage).size %><% end %>%" title="step<%= n.stage %>">
+							<span style="height:<% if @memories.where(stage: n.stage).empty? %>0
+												<% elsif @maxStage == n.stage %>300px
+												<% else %><%= 300 * @memories.where(stage: n.stage).size / @maxNum + 1 %>px
+												<% end %>" title="step<%= n.stage %>">
 							<p class="stage-period"><%= n.period %>日</p>
 							<% if @memories.present? && @memories.where(stage: n.stage).size > 0 %>
 								<p class="period"><%= @memories.where(stage: n.stage).size %>個</p>
@@ -74,8 +78,10 @@
 						</li>
 					<% end %>
 					<li>
-						<span style="height:<% if @memories.empty? %>0
-							<% else %><%= (100 / @memories.size) * @memories.where(stage: 0).size %><% end %>%" title="Comp">
+						<span style="height:<% if @memories.where(stage: 0).empty? %>0
+											<% elsif @maxStage == 0 %>300px
+											<% else %><%= 300 * @memories.where(stage: 0).size / @maxNum + 1 %>px
+											<% end %>" title="Comp">
 							<% if @memory_group.loop == 1 %>
 								<p class="stage-period"><%= @memory_group.period %>日</p>
 							<% end %>

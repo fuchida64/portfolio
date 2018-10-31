@@ -22,7 +22,7 @@
 										<%= s.number_field :period, class: "create-field" %> 日後
 										<%= s.submit '更新', class: "create-btn" %>
 										<% if default.stage == current_user.default_stages.maximum(:stage) %>
-											<%= link_to "delete", default_stage_path(default), method: :delete, class: 'delete-btn', "data-confirm" => "本当に削除しますか?" %>
+											<%= link_to "削除", default_stage_path(default), method: :delete, class: 'delete-btn', "data-confirm" => "本当に削除しますか?" %>
 										<% end %>
 									</div>
 								<% end %>
